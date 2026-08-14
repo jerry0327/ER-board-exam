@@ -36,7 +36,7 @@ jobs:
       - name: Capture actual player and question chooser
         run: |
           mkdir -p visual-proof
-          cat > /tmp/capture.mjs <<'JS'
+          cat > .capture-audio-sections.mjs <<'JS'
           import { chromium } from 'playwright';
 
           const base = 'http://127.0.0.1:4173/';
@@ -114,7 +114,8 @@ jobs:
 
           await browser.close();
           JS
-          node /tmp/capture.mjs
+          node .capture-audio-sections.mjs
+          rm -f .capture-audio-sections.mjs
       - uses: actions/upload-artifact@v4
         with:
           name: audio-section-real-ui
