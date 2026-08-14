@@ -36,12 +36,16 @@ jobs:
 
           companion = Path("app/components/audio-section-companion.tsx")
           text = companion.read_text()
-          effect = f'''\n  useEffect(() => {{\n    const root = document.documentElement;\n    root.toggleAttribute("{attribute}", Boolean(activeScope));\n    return () => root.removeAttribute("{attribute}");\n  }}, [activeScope]);\n'''
+          effect = f'''\n  useEffect(() => {{\n    const root = document.documentElement;\n    root.toggleAttribute("{attribute}", Boolean(activeScope));\n    return () => {{ root.removeAttribute("{attribute}"); }};\n  }}, [activeScope]);\n'''
           effect_anchor = "  useEffect(() => {\n    sectionOpenRef.current = sectionOpen;\n  }, [sectionOpen]);\n"
-          if effect not in text:
+          if "root.toggleAttribute(\"data-audio-scoped-playback\"" not in text:
               if effect_anchor not in text:
                   raise SystemExit("section scope effect insertion point not found")
               text = text.replace(effect_anchor, effect_anchor + effect, 1)
+          text = text.replace(
+              f'return () => root.removeAttribute("{attribute}");',
+              f'return () => {{ root.removeAttribute("{attribute}"); }};',
+          )
 
           choice_anchor = "  async function chooseQuestionOnly() {\n    if (!questionChoice || !choiceSource || loadingChoice) return;\n    setLoadingChoice(true);\n    setChoiceError(null);\n    try {"
           choice_replacement = f'''  async function chooseQuestionOnly() {{\n    if (!questionChoice || !choiceSource || loadingChoice) return;\n    const hadScopedPlayback = document.documentElement.hasAttribute("{attribute}");\n    setLoadingChoice(true);\n    setChoiceError(null);\n    try {{'''
@@ -87,7 +91,7 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css
-            git commit -m "Align audio section UI with site styles"
+            git commit -m "Fix audio section runtime cleanup"
             git push
           fi
       - uses: actions/setup-node@v4
