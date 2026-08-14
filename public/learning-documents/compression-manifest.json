@@ -1,0 +1,20 @@
+{
+  "schema": "learning-document-compression-v1",
+  "algorithm": "brotli",
+  "quality": 11,
+  "rawBytes": 3070573,
+  "storedBytes": 1552577,
+  "savingsBytes": 1517996,
+  "ratio": 0.505631,
+  "assets": [
+    {
+      "logicalPath": "/learning-documents/emergency-clinical-decision-atlas-9273814f8395.pdf",
+      "storedPath": "/learning-documents/emergency-clinical-decision-atlas-9273814f8395.pdf.brp",
+      "contentType": "application/pdf",
+      "rawBytes": 3070573,
+      "storedBytes": 1552577,
+      "rawSha256": "9273814f839522762ca104170e84238918c6b9afe362974ba70d380ad6576989",
+      "storedSha256": "32231b15e40174ccf2063122432e1fe7a834649d34f3072d85b6577852957bcf"
+    }
+  ]
+}

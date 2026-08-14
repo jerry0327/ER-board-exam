@@ -1,0 +1,335 @@
+@layer legacy {
+.practice-question-workspace {
+  margin: 0 auto;
+  max-width: 980px;
+}
+
+.practice-question-surface {
+  min-width: 0;
+}
+
+.practice-question-surface:not(.tools-locked).option-eliminated-1 .answer-options > button:nth-child(1),
+.practice-question-surface:not(.tools-locked).option-eliminated-2 .answer-options > button:nth-child(2),
+.practice-question-surface:not(.tools-locked).option-eliminated-3 .answer-options > button:nth-child(3),
+.practice-question-surface:not(.tools-locked).option-eliminated-4 .answer-options > button:nth-child(4),
+.practice-question-surface:not(.tools-locked).option-eliminated-5 .answer-options > button:nth-child(5) {
+  border-style: dashed;
+  filter: saturate(.55);
+  opacity: .58;
+}
+
+.practice-question-surface:not(.tools-locked).option-eliminated-1 .answer-options > button:nth-child(1) .option-text,
+.practice-question-surface:not(.tools-locked).option-eliminated-2 .answer-options > button:nth-child(2) .option-text,
+.practice-question-surface:not(.tools-locked).option-eliminated-3 .answer-options > button:nth-child(3) .option-text,
+.practice-question-surface:not(.tools-locked).option-eliminated-4 .answer-options > button:nth-child(4) .option-text,
+.practice-question-surface:not(.tools-locked).option-eliminated-5 .answer-options > button:nth-child(5) .option-text {
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+}
+
+.practice-question-tools {
+  display: grid;
+  gap: 0;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.practice-elimination-tool {
+  display: grid;
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+.practice-elimination-tool > header {
+  align-items: center;
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+}
+
+.practice-tool-title {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+}
+
+.practice-tool-title > svg {
+  color: var(--oxblood);
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.practice-tool-title span,
+.practice-tool-title strong,
+.practice-tool-title small {
+  display: block;
+}
+
+.practice-tool-title strong {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.practice-tool-title small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+  margin-top: 3px;
+}
+
+.practice-tool-shortcuts {
+  color: var(--muted);
+  flex: 0 0 auto;
+  font-size: 12px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.practice-tool-shortcuts kbd {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-bottom-color: color-mix(in srgb, var(--line) 72%, var(--ink));
+  border-radius: 5px;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--line) 76%, transparent);
+  color: var(--ink);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  padding: 2px 5px;
+}
+
+.practice-elimination-buttons {
+  display: grid;
+  gap: 7px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.practice-elimination-buttons .quiet-button {
+  align-items: center;
+  color: var(--muted);
+  display: flex;
+  font-size: 12px;
+  gap: 8px;
+  justify-content: center;
+  min-height: 44px;
+  padding: 7px 9px;
+}
+
+.practice-elimination-buttons button span {
+  align-items: center;
+  background: var(--surface-muted);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  display: inline-flex;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  height: 23px;
+  justify-content: center;
+  width: 23px;
+}
+
+.practice-elimination-buttons button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--oxblood) 8%, var(--surface-raised));
+  border-color: color-mix(in srgb, var(--oxblood) 52%, var(--line));
+  color: var(--oxblood);
+  text-decoration: line-through;
+}
+
+.practice-elimination-buttons button[aria-pressed="true"] span {
+  background: color-mix(in srgb, var(--oxblood) 11%, var(--surface-muted));
+  border-color: color-mix(in srgb, var(--oxblood) 42%, var(--line));
+  color: var(--oxblood);
+}
+
+.practice-elimination-buttons button:focus-visible,
+.practice-scratchpad-toggle:focus-visible,
+.practice-scratchpad-editor textarea:focus-visible,
+.practice-scratchpad-editor footer button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--sage) 34%, transparent);
+  outline-offset: 2px;
+}
+
+.practice-scratchpad-toggle:focus-visible {
+  outline-offset: -3px;
+}
+
+.practice-elimination-buttons button:disabled {
+  cursor: default;
+  opacity: .58;
+}
+
+.practice-tool-locked {
+  color: var(--muted);
+  font-size: 12px;
+  margin: -3px 0 0;
+}
+
+.practice-scratchpad-tool {
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.practice-scratchpad-toggle {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  min-height: 60px;
+  padding: 12px 16px;
+  text-align: left;
+  width: 100%;
+}
+
+.practice-scratchpad-toggle > svg:first-child {
+  color: var(--oxblood);
+}
+
+.practice-scratchpad-toggle > svg:last-child {
+  color: var(--muted);
+  transition: transform .18s ease;
+}
+
+.practice-scratchpad-tool.open .practice-scratchpad-toggle > svg:last-child {
+  transform: rotate(180deg);
+}
+
+.practice-scratchpad-toggle span,
+.practice-scratchpad-toggle strong,
+.practice-scratchpad-toggle small {
+  display: block;
+}
+
+.practice-scratchpad-toggle strong {
+  font-family: var(--serif);
+  font-size: 13px;
+}
+
+.practice-scratchpad-toggle small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 3px;
+}
+
+.practice-scratchpad-editor {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px 15px;
+}
+
+.practice-scratchpad-editor[hidden] {
+  display: none;
+}
+
+.practice-scratchpad-editor > p,
+.practice-scratchpad-editor > label {
+  margin: 0;
+}
+
+.practice-scratchpad-editor > p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.practice-scratchpad-editor > label {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.practice-scratchpad-editor textarea {
+  font: 14px/1.7 var(--sans);
+  min-height: 126px;
+  padding: 11px 12px;
+  resize: vertical;
+  width: 100%;
+}
+
+.practice-scratchpad-editor footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.practice-scratchpad-editor footer small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.practice-scratchpad-editor footer .text-action {
+  color: var(--muted);
+  font-size: 12px;
+  gap: 5px;
+  min-height: 44px;
+  padding: 0 5px;
+}
+
+.practice-scratchpad-editor footer button:not(:disabled):hover {
+  color: var(--oxblood);
+}
+
+.practice-scratchpad-editor footer button:disabled {
+  cursor: default;
+  opacity: .38;
+}
+
+@media (max-width: 760px) {
+  .practice-elimination-tool {
+    padding: 13px;
+  }
+
+  .practice-elimination-tool > header {
+    align-items: flex-start;
+  }
+
+  .practice-tool-shortcuts {
+    display: none;
+  }
+
+  .practice-elimination-buttons {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .practice-elimination-buttons .quiet-button {
+    flex-direction: column;
+    font-size: 12px;
+    gap: 4px;
+    min-height: 52px;
+    padding: 6px 2px;
+  }
+
+  .practice-scratchpad-toggle {
+    padding-inline: 13px;
+  }
+
+  .practice-scratchpad-editor {
+    padding-inline: 13px;
+  }
+}
+
+@media (max-width: 390px) {
+  .practice-elimination-buttons .quiet-button {
+    font-size: 0;
+  }
+
+  .practice-elimination-buttons button span {
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .practice-elimination-buttons button,
+  .practice-scratchpad-toggle > svg:last-child {
+    transition: none;
+  }
+}
+}

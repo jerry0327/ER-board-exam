@@ -1,0 +1,3588 @@
+{
+  "schema": "section-title-locale-bundle-v1",
+  "collection": "board-guides",
+  "entries": {
+    "board-guides/board-guide-10A.src": {
+      "source_sha256": "dc4648a6d013ff1f05e601241abd5912a88a329e267ebee5879c0b0db8349c29",
+      "chapters_sha256": "9a84033aea9ba6520f21eb11be867ada44d7dd70e6dc493c796124c584d8c417",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "初始處置、動態監測與安全轉送",
+          "en": "Initial disposal, dynamic monitoring and safe transfer"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "HazMat、去污與 ABCDE",
+          "en": "HazMat, decontamination and ABCDE"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "延遲惡化與序列監測",
+          "en": "Delayed deterioration and sequence monitoring"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "穩定化與空中轉送風險",
+          "en": "Stabilization and air transfer risks"
+        },
+        "l1-03": {
+          "zh-TW": "凍傷決策與燒傷急救",
+          "en": "Frostbite Decision-Making and Burn First Aid"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "解凍時機與再凍結風險",
+          "en": "Timing of thawing and risk of refreezing"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "TBSA、吸入損傷與火場毒氣",
+          "en": "TBSA, inhalation injuries and fire gases"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "輸液復甦與 fluid creep",
+          "en": "Infusion resuscitation and fluid creep"
+        },
+        "l1-04": {
+          "zh-TW": "化學傷、電擊與雷擊",
+          "en": "Chemical injuries, electric shock and lightning strikes"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "眼部化學傷與氫氟酸",
+          "en": "Chemical eye injuries and hydrofluoric acid"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "交流電傷與雷擊反向檢傷",
+          "en": "AC Injury and Lightning: Reverse Triage"
+        },
+        "l1-05": {
+          "zh-TW": "極端體溫急症",
+          "en": "extreme body temperature emergency"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "熱中暑與運動性低血鈉",
+          "en": "Heat stroke and exercise-induced hyponatremia"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "低體溫急救與凍傷復溫",
+          "en": "Hypothermia first aid and frostbite rewarming"
+        },
+        "l1-06": {
+          "zh-TW": "高山、潛水與水域生物危害",
+          "en": "Mountain, diving and aquatic biohazards"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "高山病與 HACE／HAPE",
+          "en": "Altitude sickness and HACE/HAPE"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "AGE、DCS 與飛行限制",
+          "en": "AGE, DCS and flight restrictions"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "溺水與環境生物毒害",
+          "en": "Drowning and environmental biotoxicity"
+        },
+        "l1-07": {
+          "zh-TW": "輻射、化災防護與爆炸傷",
+          "en": "Radiation, Chemical Incidents, and Blast Injury"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "輻射照射、污染與 ARS",
+          "en": "Radiation Exposure, Pollution and ARS"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "PPE 能力與限制",
+          "en": "PPE Capabilities and Limitations"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "爆炸肺與耳膜陷阱",
+          "en": "Exploding lungs and eardrum traps"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-10B.src": {
+      "source_sha256": "7331cb9933caa094dabe9efe2e6b7d544d53046b973c09ebb81ed85abfef3375",
+      "chapters_sha256": "9d455cf36c8ee0faf90f278f61a9edd58b156431f5a57a6243c0d9948c059316",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "初始復甦與隱匿性休克",
+          "en": "Initial Resuscitation and Occult Shock"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "三條致命路徑與 ABC",
+          "en": "Three Deadly Paths and ABC"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "代償性休克、肩痛與復甦",
+          "en": "Compensated shock, shoulder pain and resuscitation"
+        },
+        "l1-03": {
+          "zh-TW": "驗孕、內診與診斷盲點",
+          "en": "Pregnancy Testing and Pelvic Exam Pitfalls"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "全生育年齡驗孕原則",
+          "en": "Pregnancy test principles for all childbearing ages"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "尿液 hCG 偽陰性與鉤狀效應",
+          "en": "Urinary hCG false negatives and hook effect"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "內診侷限與創傷知情照護",
+          "en": "Limitations of Internal Medicine and Trauma-Informed Care"
+        },
+        "l1-04": {
+          "zh-TW": "PUL 與異位妊娠決策",
+          "en": "PUL and Ectopic Pregnancy Decision Making"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "serial β-hCG 風險分流",
+          "en": "serial β-hCG risk triage"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "超音波真假妊娠囊",
+          "en": "Ultrasound real and fake gestational sac"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "MTX 選擇與內外同時懷孕",
+          "en": "MTX chooses to conceive simultaneously inside and outside"
+        },
+        "l1-05": {
+          "zh-TW": "早期妊娠出血與妊娠劇吐",
+          "en": "Early pregnancy bleeding and hyperemesis gravidarum"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "先兆流產與 anti-D 更新",
+          "en": "Threatened abortion and anti-D update"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "早期流產藥物處置",
+          "en": "Early Abortion Drug Disposal"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "妊娠劇吐與 thiamine",
+          "en": "Hyperemesis gravidarum and thiamine"
+        },
+        "l1-06": {
+          "zh-TW": "非妊娠異常子宮出血",
+          "en": "Non-pregnancy abnormal uterine bleeding"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "PALM–COEIN 與停經後出血",
+          "en": "PALM–COEIN and postmenopausal bleeding"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "vWD 與 TXA 止血",
+          "en": "vWD and TXA to stop bleeding"
+        },
+        "l1-07": {
+          "zh-TW": "卵巢急症與骨盆腔感染",
+          "en": "Ovarian emergencies and pelvic infections"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "卵巢扭轉的血流陷阱",
+          "en": "Blood flow trap in ovarian torsion"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "OHSS 的 third spacing",
+          "en": "third spacing of OHSS"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "PID 與 TOA 經驗性治療",
+          "en": "Empirical treatment of PID and TOA"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-10C.src": {
+      "source_sha256": "aad4c164edfb983bd7cf1490521bfc3e6a86623a507ac08ad4b6dc6a9fe69040",
+      "chapters_sha256": "fdd6be0357faf35170a4f22d8ff1a78079a297f1376a4003e251f257ffefe57a",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "孕期生理與警報閾值",
+          "en": "Pregnancy Physiology and Alarm Thresholds"
+        },
+        "l1-03": {
+          "zh-TW": "子癇前症與 HELLP 急救",
+          "en": "Preeclampsia and HELLP First Aid"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "無蛋白尿的器官損傷診斷",
+          "en": "Diagnosis of organ damage without proteinuria"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "血管內容積、急性降壓與 MgSO₄",
+          "en": "Intravascular volume, acute hypotension and MgSO₄"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "分娩時機與母體優先",
+          "en": "Timing of delivery and maternal priority"
+        },
+        "l1-04": {
+          "zh-TW": "妊娠後半期出血與母體心搏停止",
+          "en": "Late-Pregnancy Bleeding and Maternal Arrest"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "胎盤早期剝離的隱性出血",
+          "en": "Occult bleeding from premature placental detachment"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "前置胎盤與前置血管",
+          "en": "Placenta previa and vasa previa"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "左推子宮與復甦性分娩",
+          "en": "Left-hand push of the uterus and resuscitative delivery"
+        },
+        "l1-05": {
+          "zh-TW": "胎兒監測與分娩急症",
+          "en": "Fetal monitoring and labor emergencies"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "胎心變異性與 Category III",
+          "en": "Fetal heart rate variability and Category III"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "肩難產與 fundal pressure 禁忌",
+          "en": "Shoulder dystocia and fundal pressure contraindications"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "臍帶脫垂減壓與緊急剖腹產",
+          "en": "Cord Prolapse Decompression and Emergency Cesarean"
+        },
+        "l1-06": {
+          "zh-TW": "新生兒復甦",
+          "en": "neonatal resuscitation"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "通氣優先與初始處置",
+          "en": "Ventilation priority and initial management"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "PPV、MR SOPA 與 3:1 壓胸",
+          "en": "PPV, MR SOPA and 3:1 chest press"
+        },
+        "l1-07": {
+          "zh-TW": "產後多系統急症",
+          "en": "Postpartum multisystem emergencies"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "產後出血的 MOTIVE 與 4T",
+          "en": "MOTIVE and 4T for postpartum hemorrhage"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "PPCM、產後子癇與感染性發燒",
+          "en": "PPCM, postpartum eclampsia and infectious fever"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "TRALI 與 TACO 鑑別",
+          "en": "TRALI and TACO identification"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-11A.src": {
+      "source_sha256": "7a32704ef7ccfc1a9b06ccaa65393d6bfc7a154c8f63e94554ff744d4100a5b0",
+      "chapters_sha256": "f1a20b5660c3d907a61095653d56f420e401864fa2357cdc4e05cfeed3b5e10f",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "同步初評與篩檢侷限",
+          "en": "Parallel Assessment and Screening Limits"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "全系統初評與體重客製化",
+          "en": "System-wide initial assessment and weight customization"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "CCHD 與代謝篩檢侷限",
+          "en": "CCHD and limitations of metabolic screening"
+        },
+        "l1-03": {
+          "zh-TW": "出生轉換與新生兒復甦",
+          "en": "Birth transition and neonatal resuscitation"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "通氣優先、PPV 與氧氣滴定",
+          "en": "Ventilation Priority, PPV and Oxygen Titration"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "3:1 壓胸、epinephrine 與 CDH",
+          "en": "3:1 chest compression, epinephrine and CDH"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "Apgar 僅作狀態紀錄",
+          "en": "Apgar is for status logging only"
+        },
+        "l1-04": {
+          "zh-TW": "新生兒感染與代謝危機",
+          "en": "Neonatal infection and metabolic crisis"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "敗血症抗菌與 HSV 經驗治療",
+          "en": "Antimicrobial and empiric treatment of HSV in sepsis"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "失鹽型 CAH",
+          "en": "Salt-losing CAH"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "低血糖與 D10W",
+          "en": "Hypoglycemia and D10W"
+        },
+        "l1-05": {
+          "zh-TW": "導管依賴型心臟病與黃疸",
+          "en": "Catheter-dependent heart disease and jaundice"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "PGE1 與導管依賴型休克",
+          "en": "PGE1 and catheter-dependent shock"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "病理性黃疸與膽道閉鎖",
+          "en": "Pathological jaundice and biliary atresia"
+        },
+        "l1-06": {
+          "zh-TW": "膽汁性與非膽汁性嘔吐",
+          "en": "Bile and non-bilious vomiting"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "腸扭轉：先外科、後影像",
+          "en": "Intestinal volvulus: surgery first, imaging later"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "幽門狹窄：先矯正、後手術",
+          "en": "Pyloric stenosis: Correction first, then surgery"
+        },
+        "l1-07": {
+          "zh-TW": "BRUE 分層與 SIDS 預防",
+          "en": "BRUE Stratification and SIDS Prevention"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "低風險 BRUE 的嚴格條件",
+          "en": "Strict conditions for low risk BRUE"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "安全睡眠與窒息風險",
+          "en": "Safe Sleep and Suffocation Risks"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-11B.src": {
+      "source_sha256": "35645ab6ba9d6b42ec7539e3fc8b3b50830b58c8ee3221ff42e0a368275615e0",
+      "chapters_sha256": "ec24a6c188ef4237b6b4615961bf3199a7d7cd40113f2f55d028ed5afc71a758",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "兒童代償生理與休克復甦",
+          "en": "Pediatric Compensation and Shock Resuscitation"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "狹窄氣道與柔軟胸壁",
+          "en": "Narrow airway and soft chest wall"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "心搏過速與晚期低血壓",
+          "en": "Tachycardia and late hypotension"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "分次輸液與及早升壓",
+          "en": "Fractionated infusion and early pressure increase"
+        },
+        "l1-03": {
+          "zh-TW": "發燒分層與免疫性皮疹",
+          "en": "Fever stratification and immune rash"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "嬰兒日齡與感染風險分層",
+          "en": "Infant age and infection risk stratification"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "單純型熱性痙攣",
+          "en": "simple febrile cramps"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "Kawasaki、IgA 血管炎與 ITP",
+          "en": "Kawasaki, IgA vasculitis and ITP"
+        },
+        "l1-04": {
+          "zh-TW": "兒童呼吸道急症",
+          "en": "Respiratory emergencies in children"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "哮吼、會厭炎與氣道異物",
+          "en": "Croup, epiglottitis and airway foreign bodies"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "細支氣管炎、氣喘與呼吸衰竭",
+          "en": "Bronchiolitis, asthma and respiratory failure"
+        },
+        "l1-05": {
+          "zh-TW": "脫水補液與高血鈉校正",
+          "en": "Dehydration, rehydration and hypernatremia correction"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "ORS 與早期恢復飲食",
+          "en": "ORS and early recovery diet"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "高血鈉慢速校正與腦水腫",
+          "en": "Slow correction of hypernatremia and cerebral edema"
+        },
+        "l1-06": {
+          "zh-TW": "局部感染與頸部腫塊",
+          "en": "Local infection and neck mass"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "急性中耳炎的確診與用藥",
+          "en": "Diagnosis and medication of acute otitis media"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "A 型鏈球菌咽炎檢驗",
+          "en": "Group A strep pharyngitis test"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "頸部腫塊的惡性警訊",
+          "en": "A warning sign of a lump in the neck"
+        },
+        "l1-07": {
+          "zh-TW": "過敏、隔離與安全去向",
+          "en": "Allergies, isolation and where to go safely"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "過敏性休克優先給 epinephrine",
+          "en": "In anaphylactic shock, give epinephrine first"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "麻疹與水痘的公衛隔離",
+          "en": "Public health isolation of measles and chickenpox"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "安全返家與追蹤條件",
+          "en": "Safe return home and tracking conditions"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-11C.src": {
+      "source_sha256": "b486b396127021ff8174d5cfa38d2071a81abe88d2cfc7b9277d5326a4ead4da",
+      "chapters_sha256": "ae9cb32e758b798f63307cc72aa20f156a6a33fee31b71b998e00f7af5f969ce",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "初始穩定與循環式重評估",
+          "en": "Initial Stabilization and Cyclic Reassessment"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "ABC、個人 baseline 與呼吸器排障",
+          "en": "ABC, personal baseline and respirator troubleshooting"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "治療驗收與體重精算",
+          "en": "Treatment Acceptance and Weight Actuarial"
+        },
+        "l1-03": {
+          "zh-TW": "兒童神經急症",
+          "en": "neurological emergencies in children"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "癲癇重積的五分鐘治療時鐘",
+          "en": "The five-minute treatment clock for epilepsy relapse"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "抽搐安全處置與熱性痙攣",
+          "en": "Safe management of convulsions and febrile cramps"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "VP shunt 故障的影像陷阱",
+          "en": "VP shunt glitchy image trap"
+        },
+        "l1-04": {
+          "zh-TW": "血液與腫瘤急症",
+          "en": "Hematology and Oncology Emergencies"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "ITP 依出血表現處置",
+          "en": "ITP is treated according to bleeding manifestations"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "血友病先補因子與輸血反應",
+          "en": "Precompensation factors and transfusion reactions in hemophilia"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "SCD、中性球低下與腫瘤溶解",
+          "en": "SCD, neutropenia and tumor lysis"
+        },
+        "l1-05": {
+          "zh-TW": "程序鎮靜的救援與監測",
+          "en": "Rescue and monitoring of procedural sedation"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "救援能力與 NPO 風險權衡",
+          "en": "Rescue capabilities and NPO risk trade-offs"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "Midazolam 不等於止痛",
+          "en": "Midazolam does not mean pain relief"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "Capnography 早期辨識低通氣",
+          "en": "Capnography for early identification of hypoventilation"
+        },
+        "l1-06": {
+          "zh-TW": "兒少保護辨識與通報",
+          "en": "Identification and notification of child protection"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "TEN-4-FACESp 瘀青警訊",
+          "en": "TEN-4-FACESp Bruise Warning"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "AHT 整合評估與 HIV nPEP",
+          "en": "Integrated assessment of AHT and HIV nPEP"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "合理懷疑即啟動法定通報",
+          "en": "Initiate statutory notification upon reasonable suspicion"
+        },
+        "l1-07": {
+          "zh-TW": "特殊醫療裝置與出院安全",
+          "en": "Special medical devices and discharge safety"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "氣切脫落與前哨出血",
+          "en": "Tracheotomy loss and sentinel bleeding"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "G-tube 脫落與 baclofen 戒斷",
+          "en": "G-tube shedding and baclofen withdrawal"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "回到 baseline 與社會安全門",
+          "en": "Back to baseline and social security gates"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-12A.src": {
+      "source_sha256": "9c7c8681c07c301e7e4bb0e741ca50bdd7bc12da36253d74ffb4e9198257a62a",
+      "chapters_sha256": "28cccdfb96bc7b922396494283f79c66ebc0afd38882f3ecf4df06a8abf732e6",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "到院前派遣與時間關鍵處置",
+          "en": "Pre-hospital dispatch and time-critical treatment"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "零分鐘醫療與 Utstein 生存鏈",
+          "en": "Zero Minute Medical and Utstein Chain of Survival"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "Load and go 的現場取捨",
+          "en": "Load and go on-the-spot trade-offs"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "到院前通報與選擇性脊椎限制",
+          "en": "Prehospital notification and elective spinal restraint"
+        },
+        "l1-03": {
+          "zh-TW": "EMT 權限與空中醫療",
+          "en": "EMT Clearance and Air Medical"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "EMT 分級、處置界線與醫療指導",
+          "en": "EMT Classification, Treatment Boundaries, and Medical Guidance"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "Boyle's law 與高空氣體膨脹",
+          "en": "Boyle's law and high-altitude gas expansion"
+        },
+        "l1-04": {
+          "zh-TW": "災難指揮與後勤韌性",
+          "en": "Disaster Command and Logistics Resilience"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "倒置分流與醫院資源保全",
+          "en": "Inverted triage and hospital resource preservation"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "ICS 管理幅度與指揮交接",
+          "en": "ICS span of management and command transition"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "盲目捐贈的後勤危害",
+          "en": "The logistical dangers of blind donation"
+        },
+        "l1-05": {
+          "zh-TW": "START、SALT 與 JumpSTART 檢傷",
+          "en": "START, SALT and JumpSTART inspection"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "START 與 RPM 生理門檻",
+          "en": "START and RPM Physiological Thresholds"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "SALT expectant 的動態重評",
+          "en": "SALT expectant’s dynamic re-evaluation"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "JumpSTART 兒童救援呼吸",
+          "en": "JumpSTART Children's Rescue Breathing"
+        },
+        "l1-06": {
+          "zh-TW": "化學、神經毒與輻射危害",
+          "en": "Chemical, Neurotoxic and Radiation Hazards"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "HAZMAT 區域管制與選擇性去污",
+          "en": "HAZMAT area control and selective decontamination"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "Atropine 與 hydroxocobalamin",
+          "en": "Atropine and hydroxocobalamin"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "輻射曝露、污染與 ALC 監測",
+          "en": "Radiation exposure, contamination and ALC monitoring"
+        },
+        "l1-07": {
+          "zh-TW": "雷擊、爆炸、壓砸與 TCCC",
+          "en": "Lightning strikes, explosions, crushing and TCCC"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "閃電逆向檢傷與人工通氣",
+          "en": "Lightning reverse injury diagnosis and artificial ventilation"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "爆炸肺與壓砸再灌流",
+          "en": "Explosive lung and compression-reperfusion"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "TCCC 敵火下止血原則",
+          "en": "TCCC Principles of Stopping Bleeding Under Enemy Fire"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-12B.src": {
+      "source_sha256": "f7e9456da2c66476448a132fcf3f7d4009c0d02c0f89e82531a6dba0bed1e0e7",
+      "chapters_sha256": "348f1966afa6e1ee698457c9f1efc0aeb380d9043a20523f6fc063e42525d703",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "眼科檢查禁忌與疼痛性紅眼",
+          "en": "Eye exam contraindications and painful red eye"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "眼灼傷先沖洗與 open globe 禁壓",
+          "en": "For eye burns, rinse first with open globe pressure."
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "前房發炎、HSV 與類固醇禁忌",
+          "en": "Hyphema, HSV and steroid contraindications"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "淋菌性與隱形眼鏡角膜炎",
+          "en": "Gonococcal and contact lens keratitis"
+        },
+        "l1-03": {
+          "zh-TW": "化學性眼灼傷與隅角閉鎖",
+          "en": "Chemical eye burns and angle atresia"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "pH 回測與輪部缺血",
+          "en": "pH backtesting and vertebral ischemia"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "先降眼壓再給 pilocarpine",
+          "en": "Lower intraocular pressure first and then give pilocarpine"
+        },
+        "l1-04": {
+          "zh-TW": "急性視力喪失與眼部炎症",
+          "en": "Acute vision loss and eye inflammation"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "視損定位與 CRAO 中風評估",
+          "en": "Visual impairment localization and CRAO stroke assessment"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "GCA 視力威脅先給類固醇",
+          "en": "GCA vision threat give steroids first"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "HZO 與 SJS/TEN 眼部風險",
+          "en": "HZO and SJS/TEN Eye Risks"
+        },
+        "l1-05": {
+          "zh-TW": "眼眶腔室與 trapdoor 骨折",
+          "en": "Orbital cavity and trapdoor fractures"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "外眥切開緊急減壓",
+          "en": "Lateral canthotomy emergency decompression"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "White-eyed trapdoor 與眼心反射",
+          "en": "White-eyed trapdoor and oculocardiac reflex"
+        },
+        "l1-06": {
+          "zh-TW": "耳鼻喉、氣道與顏面神經急症",
+          "en": "Ear, nose, throat, airway and facial nerve emergencies"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "深頸感染與會厭炎氣道",
+          "en": "Deep neck infection and epiglottitis airway"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "鼻出血與扁桃腺術後出血",
+          "en": "Nosebleeds and post-tonsillar bleeding"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "AOM、突發聽損與 Bell palsy",
+          "en": "AOM, sudden hearing loss and Bell palsy"
+        },
+        "l1-07": {
+          "zh-TW": "牙齒與男性泌尿器官缺血",
+          "en": "Teeth and male urinary organ ischemia"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "恆齒脫落保存與再植界線",
+          "en": "Permanent Tooth Storage and Replantation"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "睪丸扭轉與副睪丸炎",
+          "en": "Testicular torsion and accessory testicularitis"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "缺血性 priapism 緊急減壓",
+          "en": "ischemic priapism emergency decompression"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-12C.src": {
+      "source_sha256": "6476e0bf058f4d6723bc99d32ca1dae95c7387ab1f5b3e8faf28782c70f4c57c",
+      "chapters_sha256": "26e9f51e6dedeb0225c4430d6aadfa06de0455753b0f596dfc953633ec02ac77",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "醫療決策能力與自主權",
+          "en": "Medical decision-making capacity and autonomy"
+        },
+        "l1-03": {
+          "zh-TW": "深部傷口、破傷風與程序鎮靜",
+          "en": "Deep Wounds, Tetanus and Procedural Sedation"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "原姿勢檢查深層結構",
+          "en": "Examine deep structures in original posture"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "沖洗、延遲縫合與破傷風",
+          "en": "Irrigation, delayed suturing and tetanus"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "鎮靜藥物與 EtCO₂ 監測",
+          "en": "Sedative drugs and EtCO₂ monitoring"
+        },
+        "l1-04": {
+          "zh-TW": "單關節炎與晶體性關節病",
+          "en": "Monoarthritis and Crystal Arthropathy"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "關節液排除敗血性關節炎",
+          "en": "Synovial fluid to rule out septic arthritis"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "痛風、假性痛風與 HLA-B*58:01",
+          "en": "Gout, pseudogout, and HLA-B*58:01"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "風濕病頸椎與視力紅旗",
+          "en": "Rheumatism Cervical Spine and Vision Red Flags"
+        },
+        "l1-05": {
+          "zh-TW": "脊髓壓迫與疼痛紅旗",
+          "en": "Spinal cord compression and pain red flags"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "神經根與脊髓病變",
+          "en": "Nerve root and spinal cord lesions"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "肩部測試與轉移痛",
+          "en": "Shoulder Testing and Transferring Pain"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "壓迫性骨折的穩定判斷",
+          "en": "Determination of stability of compression fractures"
+        },
+        "l1-06": {
+          "zh-TW": "精神行為急症、法律與安寧",
+          "en": "Psychiatric behavioral emergencies, law and well-being"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "Medical first 與低活動性 delirium",
+          "en": "Medical first with low activity delirium"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "厭食症與再餵食症候群",
+          "en": "Anorexia and refeeding syndrome"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "強制安置、DNR 與安寧疼痛",
+          "en": "Forced Placement, DNR, and Restless Pain"
+        },
+        "l1-07": {
+          "zh-TW": "高血壓急症與凝血失衡",
+          "en": "Hypertensive emergencies and coagulation imbalances"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "靶器官損傷與漸進降壓",
+          "en": "Target organ damage and progressive blood pressure lowering"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "Warfarin、DIC 與尿毒症出血",
+          "en": "Warfarin, DIC and uremic bleeding"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-12D.src": {
+      "source_sha256": "2b8169f07e4e4c39c6eececfb381c0b6b1cf431a485336e7e01b2163ac1c795c",
+      "chapters_sha256": "51f386db2dec085532dad74ca3661ba4a18162b5e981340ad543595e744c15d4",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "農藥、砷與食源性中毒",
+          "en": "Pesticides, arsenic and foodborne poisoning"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "固殺草與 paraquat 延遲毒性",
+          "en": "Delayed toxicity of paraquat and paraquat"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "殺蟲劑與 glyphosate 製劑",
+          "en": "Pesticides and glyphosate preparations"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "砷與食源性組織胺中毒",
+          "en": "Arsenic and foodborne histamine poisoning"
+        },
+        "l1-03": {
+          "zh-TW": "更新版復甦與災難檢傷",
+          "en": "Updated version of recovery and disaster triage"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "兒童 CPR 與 ROSC 體溫控制",
+          "en": "Pediatric CPR and ROSC Temperature Control"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "START、JumpSTART 與傳染時間軸",
+          "en": "START, JumpSTART and the infection timeline"
+        },
+        "l1-04": {
+          "zh-TW": "脊椎、低血鈉與血流定位",
+          "en": "Spine, hyponatremia and blood flow localization"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "SCIWORA 與兒童頸椎",
+          "en": "SCIWORA and children’s cervical spine"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "症狀性低血鈉安全矯正",
+          "en": "Safe correction of symptomatic hyponatremia"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "鎖骨下動脈竊血",
+          "en": "subclavian artery steal"
+        },
+        "l1-05": {
+          "zh-TW": "胸腹警訊與腸胃急症路由",
+          "en": "Thoracoabdominal Alerts and GI Emergencies"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "轉移痛、出血徵象與鼻出血",
+          "en": "Transferring pain, signs of bleeding and epistaxis"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "食道異物與腸胃阻塞",
+          "en": "Esophageal foreign bodies and gastrointestinal obstruction"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "Dumping、腸套疊與幽門狹窄",
+          "en": "Dumping, intussusception and pyloric stenosis"
+        },
+        "l1-06": {
+          "zh-TW": "藥疹與特殊宿主急症",
+          "en": "Drug eruptions and special host emergencies"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "SJS/TEN 與 DRESS",
+          "en": "SJS/TEN and DRESS"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "心腎移植後急症",
+          "en": "Post-heart-kidney transplant emergencies"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "肺高壓插管、botulism 與 dengue",
+          "en": "Pulmonary hypertension intubation, botulism and dengue"
+        },
+        "l1-07": {
+          "zh-TW": "外傷、泌尿與死亡告知",
+          "en": "Trauma, Urology and Death Notices"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "頸部穿透傷與出血優先",
+          "en": "Penetrating neck injuries and bleeding are preferred"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "Priapism 與膀胱破裂",
+          "en": "Priapism and bladder rupture"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "Medical first 與死亡告知",
+          "en": "Medical first and death notification"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-1A.src": {
+      "source_sha256": "cf3c009aeb37cd2b3ea60b1b86b8eb71c67b3dbab80ce87a93401906b9168547",
+      "chapters_sha256": "9dc4223f4e59f52f7fbffafa8d79e0fcadcd0a1c2b68cedf4093828a640fecd8",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "心跳停止辨識與早期電擊",
+          "en": "Cardiac Arrest Recognition and Early Defibrillation"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "瀕死喘息與十秒脈搏判斷",
+          "en": "Dying gasps and ten-second pulse judgment"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "AED 與電擊後立即壓胸",
+          "en": "AED and chest compression immediately after electric shock"
+        },
+        "l1-03": {
+          "zh-TW": "高品質 CPR 的灌流生理",
+          "en": "Perfusion Physiology for High-Quality CPR"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "壓胸回彈與冠狀灌流壓",
+          "en": "Chest compression rebound and coronary perfusion pressure"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "EtCO₂ 監測灌流品質",
+          "en": "EtCO₂ monitors perfusion quality"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "避免過度通氣與氣道中斷",
+          "en": "Avoid hyperventilation and airway disruption"
+        },
+        "l1-04": {
+          "zh-TW": "節律分流與可逆病因",
+          "en": "Rhythm shunting and reversible causes"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "可電擊節律與藥物時序",
+          "en": "Shockable rhythm and drug timing"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "PEA 與 5H5T",
+          "en": "PEA and 5H5T"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "同步整流與特殊病因",
+          "en": "Synchronous rectification and special causes"
+        },
+        "l1-05": {
+          "zh-TW": "毒物與特殊情境復甦",
+          "en": "Poison and special situation recovery"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Naloxone、TCA 與 LAST",
+          "en": "Naloxone, TCA and LAST"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "溺水與窒息的通氣優先",
+          "en": "Ventilation priority for drowning and asphyxia"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "孕產婦、低體溫與雷擊",
+          "en": "Pregnancy, hypothermia and lightning strikes"
+        },
+        "l1-06": {
+          "zh-TW": "ROSC 後腦心照護",
+          "en": "ROSC Rear Brain Care"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "氧合、通氣、灌流與溫控",
+          "en": "Oxygenation, ventilation, perfusion and temperature control"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "延後神經預後判定",
+          "en": "Delayed neurological prognosis"
+        },
+        "l1-07": {
+          "zh-TW": "兒童與新生兒復甦",
+          "en": "Child and Neonatal Resuscitation"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "兒童通氣與 CPR 門檻",
+          "en": "Pediatric Ventilation and CPR Thresholds"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "新生兒 PPV 與 3:1 壓胸",
+          "en": "Neonatal PPV with 3:1 Chest Compression"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-1B.src": {
+      "source_sha256": "9569da8e204b9ea839ca06986b159c59df150e236e696ee6d71df79f80d7b63b",
+      "chapters_sha256": "6a286a0ec6ef1d76ef48f9732426c102364c84d873876ad6daae308f817eb644",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "呼吸失效定位與組織供氧",
+          "en": "Respiratory failure localization and tissue oxygenation"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "五個呼吸生理失效環節",
+          "en": "Five respiratory physiology failure links"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "DO₂、心輸出量與血紅素",
+          "en": "DO₂, cardiac output and hemoglobin"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "血氧機盲點與異常血紅素",
+          "en": "Blind spots of oximeter and abnormal hemoglobin"
+        },
+        "l1-03": {
+          "zh-TW": "Capnography、氧療與 NIV",
+          "en": "Capnography, Oxygen Therapy and NIV"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "EtCO₂ 數值與波形判讀",
+          "en": "EtCO₂ value and waveform interpretation"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "氧氣滴定與 COPD 目標",
+          "en": "Oxygen Titration and COPD Goals"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "NIV 適應症與失敗門檻",
+          "en": "NIV Indications and Failure Thresholds"
+        },
+        "l1-04": {
+          "zh-TW": "困難氣道規劃與 RSI",
+          "en": "Difficult airway planning and RSI"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "生理困難氣道與備援計畫",
+          "en": "Physiologically difficult airway and backup planning"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "清醒插管與血流動力準備",
+          "en": "Awake intubation and hemodynamic preparation"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "RSI 誘導與肌肉鬆弛劑",
+          "en": "RSI Induction and Muscle Relaxants"
+        },
+        "l1-05": {
+          "zh-TW": "插管後崩潰與保護性通氣",
+          "en": "Post-intubation collapse and protective ventilation"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "DOPES 與手動通氣鑑別",
+          "en": "Differentiation between DOPES and manual ventilation"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "預測體重與阻塞性通氣",
+          "en": "Predicting weight and obstructive ventilation"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "ARDS 與右心衰竭通氣",
+          "en": "ARDS and right heart failure ventilation"
+        },
+        "l1-06": {
+          "zh-TW": "受損氣道與外科救援",
+          "en": "Impaired airway and surgical rescue"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "大量咳血與腐蝕性攝入",
+          "en": "Profuse coughing up blood and corrosive ingestion"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "感染與 bradykinin 血管性水腫",
+          "en": "Infection and bradykinin angioedema"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "SALAD、CICO 與氣切出血",
+          "en": "SALAD, CICO and tracheotomy bleeding"
+        },
+        "l1-07": {
+          "zh-TW": "特殊族群氣道策略",
+          "en": "Airway Strategies for Special Ethnic Groups"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "神經肌肉疾病與孕婦",
+          "en": "Neuromuscular diseases and pregnant women"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "兒科氣道與新生兒通氣",
+          "en": "Pediatric Airway and Neonatal Ventilation"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-1C.src": {
+      "source_sha256": "850c196a32ab7b0188f358aae7448a45660be7a1691c8e0372937f17ed2c43da",
+      "chapters_sha256": "0ff6840be0937217893715565f0188788fd20c9e07928e68fc3dfabd2583c071",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "休克本質與灌流評估",
+          "en": "The nature of shock and perfusion assessment"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "休克非低血壓與 DO₂",
+          "en": "Shock non-hypotension and DO₂"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "休克指數與乳酸陷阱",
+          "en": "Shock index and lactic acid trap"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "PLR、POCUS 與 FAST 限制",
+          "en": "PLR, POCUS and FAST limitations"
+        },
+        "l1-03": {
+          "zh-TW": "輸液策略與特殊生理限制",
+          "en": "Infusion Strategies and Physiologic Constraints"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "ROSE 與敗血症輸液",
+          "en": "ROSE and sepsis infusion"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "出血性休克與慎水族群",
+          "en": "Hemorrhagic shock and water-cautious groups"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "DKA、dengue 與燒傷滴定",
+          "en": "DKA, dengue and burn titration"
+        },
+        "l1-04": {
+          "zh-TW": "升壓、強心與血管通路",
+          "en": "Boost, cardiotonic and vascular access"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "Pressure、flow 與升壓劑",
+          "en": "Pressure, flow and pressure booster"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "HOCM 與 SCAPE 用藥",
+          "en": "HOCM and SCAPE Medication"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "短粗周邊靜脈與 IO",
+          "en": "Short and thick peripheral veins and IO"
+        },
+        "l1-05": {
+          "zh-TW": "分布性休克的病因處置",
+          "en": "Cause and treatment of distributive shock"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Sepsis 與感染源控制",
+          "en": "Sepsis and source control"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "Anaphylaxis 與 epinephrine",
+          "en": "Anaphylaxis and epinephrine"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "神經性休克與隱匿出血",
+          "en": "Neurogenic shock and occult bleeding"
+        },
+        "l1-06": {
+          "zh-TW": "出血、心因性與阻塞性休克",
+          "en": "Hemorrhagic, psychogenic and obstructive shock"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "損傷控制復甦與致死鑽石",
+          "en": "Damage Control Resuscitation and Death Diamonds"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "IABP 禁忌與心包填塞",
+          "en": "IABP contraindications and cardiac tamponade"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "LVAD 的無脈搏灌流判斷",
+          "en": "Determination of pulseless perfusion in LVAD"
+        },
+        "l1-07": {
+          "zh-TW": "特殊急症與族群循環復甦",
+          "en": "Special Emergencies and Community Resuscitation"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "甲狀腺風暴的給藥順序",
+          "en": "Dosing order for thyroid storm"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "Beta-blocker 中毒與 HDI",
+          "en": "Beta-blocker Poisoning and HDI"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "兒童與孕婦的復甦差異",
+          "en": "Differences in resuscitation between children and pregnant women"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-1D.src": {
+      "source_sha256": "ae49d5776bf2503a9709f45b0990f565c5c8138786fbd0c31280b3f1346a6348",
+      "chapters_sha256": "92475d7e1aef7f3044c52f9eb4d5365b279a02f6dc58f64a2f026924cd8026eb",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "病人優先的血流評估與心搏過緩處置",
+          "en": "Perfusion Assessment and Bradycardia Care"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "病人狀態、灌流與 ECG 判讀",
+          "en": "Patient status, perfusion and ECG interpretation"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "Bradycardia 定位、atropine 與 pacing",
+          "en": "Bradycardia positioning, atropine and pacing"
+        },
+        "l1-03": {
+          "zh-TW": "窄 QRS、心房快心律與 AF/WPW",
+          "en": "Narrow QRS, fast atrial rhythm, and AF/WPW"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "規則窄 QRS 與 AV-node-dependent SVT",
+          "en": "Rule-narrow QRS and AV-node-dependent SVT"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "AF、旁路傳導與 rate/rhythm control",
+          "en": "AF, accessory pathway conduction and rate/rhythm control"
+        },
+        "l1-04": {
+          "zh-TW": "寬 QRS 心室心律與電擊藥物治療",
+          "en": "Wide QRS Ventricular Rhythm and Shocking Drug Therapy"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "Wide-complex tachycardia 與 VT",
+          "en": "Wide-complex tachycardia and VT"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "同步電復律、除顫與抗心律不整藥",
+          "en": "Cardioversion, Defibrillation, and Antiarrhythmics"
+        },
+        "l1-05": {
+          "zh-TW": "暈厥、遺傳性心律不整與裝置風險",
+          "en": "Syncope, inherited cardiac arrhythmias, and device risks"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Syncope 與猝死高風險基質",
+          "en": "Syncope and a high-risk matrix for sudden death"
+        },
+        "l1-06": {
+          "zh-TW": "毒物、低體溫、妊娠與兒科心律急症",
+          "en": "Toxins, Hypothermia, Pregnancy, Pediatric Rhythms"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "毒物、中毒與低體溫",
+          "en": "Poisons, Poisoning and Hypothermia"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "妊娠、兒童與新生兒心律處置",
+          "en": "Pregnancy, Pediatric and Neonatal Heart Rhythm Management"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-2A.src": {
+      "source_sha256": "77a6ff073ed0f9949cd0f54204c2d29c2a927544f4ec0ca976c50463b39c6777",
+      "chapters_sha256": "3bac36f7205f342c13ca27c7c1dc9803e05a691080fc593b1be6210085dd8930",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "急性胸痛初評與致命模仿者",
+          "en": "Acute Chest Pain and Lethal Mimics"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "到院最初十分鐘與主動脈剝離辨識",
+          "en": "Aortic Dissection in the First 10 Minutes"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "非典型症狀、疼痛與 nitroglycerin 陷阱",
+          "en": "Atypical symptoms, pain, and the nitroglycerin trap"
+        },
+        "l1-03": {
+          "zh-TW": "ECG、hs-cTn 與缺血診斷證據",
+          "en": "ECG, hs-cTn and ischemic diagnostic evidence"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "Type 1/2 MI 與 serial ECG",
+          "en": "Type 1/2 MI and serial ECG"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "右心室梗塞、LBBB/Sgarbossa 與 CKD troponin",
+          "en": "Right ventricular infarction, LBBB/Sgarbossa and CKD troponin"
+        },
+        "l1-04": {
+          "zh-TW": "初始治療與抗栓風險平衡",
+          "en": "Initial treatment versus antithrombotic risk balance"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "MONA 修正、氧氣、硝酸甘油與 morphine",
+          "en": "MONA correction, oxygen, nitroglycerin and morphine"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "DAPT、三重抗栓與出血風險",
+          "en": "DAPT, triple antithrombotic and bleeding risk"
+        },
+        "l1-05": {
+          "zh-TW": "PCI、纖維蛋白溶解與救援再灌流",
+          "en": "PCI, fibrinolysis and rescue reperfusion"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Primary PCI 與 fibrinolysis 時間窗",
+          "en": "Primary PCI and fibrinolysis time window"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "溶栓判效、轉送與 rescue PCI",
+          "en": "Thrombolytic efficacy, transfer and rescue PCI"
+        },
+        "l1-06": {
+          "zh-TW": "再灌流後泵衰竭、破裂與心律危機",
+          "en": "Post-Reperfusion Pump, Rupture, and Rhythm Failure"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "機械性破裂、tamponade 與 bedside ultrasound",
+          "en": "Mechanical rupture, tamponade and bedside ultrasound"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "AIVR 與再灌流後心律機轉",
+          "en": "AIVR and cardiac rhythm conversion after reperfusion"
+        },
+        "l1-07": {
+          "zh-TW": "特殊宿主、風險分層與二級預防",
+          "en": "Special Populations, Risk, and Secondary Prevention"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "Cocaine、貧血與特殊 ACS 觸發因子",
+          "en": "Cocaine, anemia, and specific ACS triggers"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "HEART/TIMI/GRACE、心衰與二級預防",
+          "en": "HEART/TIMI/GRACE, HF Care, and Secondary Prevention"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-2B.src": {
+      "source_sha256": "d7b5a1d8a14d45fceaa7610620752f6f9bb0a36af8196414b875136110fb8b78",
+      "chapters_sha256": "d7a5efec06c452f2eb696fa331542e461304d8d67c5211e7aa4984ea12499360",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "急性呼吸困難、SCAPE 與去充血策略",
+          "en": "Acute dyspnea, SCAPE, and decongestant strategies"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "Warm/cold、dry/wet 與 SCAPE",
+          "en": "Warm/cold, dry/wet and SCAPE"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "容量過多、loop diuretic 與 POCUS 陷阱",
+          "en": "Overcapacity, loop diuretic and POCUS traps"
+        },
+        "l1-03": {
+          "zh-TW": "心因性休克、右心衰竭與高風險插管",
+          "en": "Cardiogenic Shock, RV Failure, High-Risk Intubation"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "低灌流表型、norepinephrine 與 dobutamine",
+          "en": "Hypoperfusion phenotype, norepinephrine and dobutamine"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "RV failure、PAH crisis 與正壓通氣風險",
+          "en": "RV failure, PAH crisis and positive pressure ventilation risks"
+        },
+        "l1-04": {
+          "zh-TW": "瓣膜急症、HOCM、LVAD 與人工瓣膜",
+          "en": "Valvular emergencies, HOCM, LVADs, and prosthetic valves"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "急性瓣膜逆流、AS 與 HOCM",
+          "en": "Acute valvular regurgitation, AS, and HOCM"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "IABP 禁忌、LVAD、prosthetic valve 與 IE",
+          "en": "IABP contraindications, LVAD, prosthetic valve and IE"
+        },
+        "l1-05": {
+          "zh-TW": "心肌病與全身性心臟風暴",
+          "en": "Cardiomyopathy and systemic cardiac storm"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Takotsubo、LVOTO 與 inotrope 陷阱",
+          "en": "Takotsubo, LVOTO and inotrope traps"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "兒童腸病毒重症與 thyroid storm",
+          "en": "Severe enterovirus disease and thyroid storm in children"
+        },
+        "l1-06": {
+          "zh-TW": "心包膜炎、tamponade 與緊急引流",
+          "en": "Pericarditis, tamponade and emergency drainage"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "Pericarditis、抗發炎與 tamponade 診斷",
+          "en": "Pericarditis, anti-inflammation and tamponade diagnosis"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "避免插管與 definitive drainage",
+          "en": "Avoid intubation and definitive drainage"
+        },
+        "l1-07": {
+          "zh-TW": "精確複習｜數字與生理條件",
+          "en": "Accurate review｜Numbers and physiological conditions"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-2C.src": {
+      "source_sha256": "a76d5929b02c88f0c8f653f2596847833b9fa139dcbfbaeb33d9e7e702333c6e",
+      "chapters_sha256": "588272f1fd4988037f5574fdd7c85b6baa2a9d2caf132b245ea06c34a50e8274",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "血管閉塞機轉與 VTE/DVT 基礎",
+          "en": "Vascular Occlusion Transplantation and VTE/DVT Basics"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "血流機轉、Virchow triad 與抗凝藥理",
+          "en": "Flow, Virchow Triad, and Anticoagulants"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "Wells、compression ultrasound 與肢體保存",
+          "en": "Wells, compression ultrasound and limb preservation"
+        },
+        "l1-03": {
+          "zh-TW": "PE 臨床機率、影像與右心負荷",
+          "en": "PE Clinical Probability, Imaging, and Right Heart Load"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "PE 表現、PERC/Wells 與 D-dimer",
+          "en": "PE Performance, PERC/Wells and D-dimer"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "RV strain、McConnell sign 與嚴重度",
+          "en": "RV strain, McConnell sign and severity"
+        },
+        "l1-04": {
+          "zh-TW": "高風險 PE、休克與再灌流",
+          "en": "High-risk PE, shock and reperfusion"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "阻塞性休克、輸液與插管陷阱",
+          "en": "Obstructive shock, infusion and intubation traps"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "CPR、alteplase 與延長復甦",
+          "en": "CPR, alteplase and extended resuscitation"
+        },
+        "l1-05": {
+          "zh-TW": "特殊族群、HIT 與複雜性血栓",
+          "en": "Special groups, HIT and complex thrombosis"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "荷爾蒙、ART 與 atypical thrombosis",
+          "en": "Hormones, ART and atypical thrombosis"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "HIT、4Ts 與 anticoagulant 替換",
+          "en": "HIT, 4Ts and anticoagulant replacement"
+        },
+        "l1-06": {
+          "zh-TW": "主動脈症候群、AAA 與 REBOA",
+          "en": "Aortic Syndrome, AAA and REBOA"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "AAS、ADD-RS 與 anti-impulse therapy",
+          "en": "AAS, ADD-RS and anti-impulse therapy"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "rAAA、permissive hypotension 與 REBOA",
+          "en": "rAAA, permissive hypotension and REBOA"
+        },
+        "l1-07": {
+          "zh-TW": "周邊與內臟缺血",
+          "en": "Peripheral and visceral ischemia"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "ALI、Rutherford IIb 與 vascular trauma",
+          "en": "ALI, Rutherford IIb and vascular trauma"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "腸繫膜、腎動脈與 GCA",
+          "en": "Mesentery, renal arteries, and GCA"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-3A.src": {
+      "source_sha256": "7eefb5d2003ce3d9bb314d1964fd50a2e13d641cf1a4752032a906d82a144efe",
+      "chapters_sha256": "2733ebf3892dbe13e0e0bdc3aa6b129264c265bff1a3d06f5fffcae143c0adc1",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "呼吸困難第一分鐘與床邊生理判讀",
+          "en": "Dyspnea: First-Minute Bedside Physiology"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "氣道、氧合、通氣與衰竭警訊",
+          "en": "Airway, oxygenation, ventilation and failure warnings"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "POCUS、呼吸支持與插管後 DOPES",
+          "en": "POCUS, respiratory support, and post-intubation DOPES"
+        },
+        "l1-03": {
+          "zh-TW": "Asthma、COPD 與氣流阻塞危機",
+          "en": "Asthma, COPD and the airflow crisis"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "Asthma、SABA、steroid 與重積",
+          "en": "Asthma, SABA, steroids and multiplication"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "COPD、oxygen-induced hypercapnia 與 NIV",
+          "en": "COPD, oxygen-induced hypercapnia and NIV"
+        },
+        "l1-04": {
+          "zh-TW": "社區肺炎、吸入與免疫缺陷感染",
+          "en": "Community Pneumonia, Aspiration, and Immune Deficits"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "Bronchiolitis、CAP、CURB-65 與 MRSA",
+          "en": "Bronchiolitis, CAP, CURB-65 and MRSA"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "Aspiration、PJP 與 TB 隔離/毒性",
+          "en": "Aspiration, PJP and TB isolation/toxicity"
+        },
+        "l1-05": {
+          "zh-TW": "胸膜空氣、血液與複雜胸水",
+          "en": "Pleural air, blood and complex pleural effusion"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Pneumothorax、hemothorax 與 chest tube",
+          "en": "Pneumothorax, hemothorax and chest tube"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "Light criteria、empyema、pH 與 tPA/DNase",
+          "en": "Light criteria, empyema, pH and tPA/DNase"
+        },
+        "l1-06": {
+          "zh-TW": "咳血、ARDS 與呼吸幫浦衰竭",
+          "en": "Hemoptysis, ARDS and respiratory pump failure"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "致命性咳血與氣道保護",
+          "en": "Life-threatening hemoptysis and airway protection"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "ARDS 通氣；NIF/FVC、TRALI/TACO",
+          "en": "ARDS, lung-protective ventilation, NIF/FVC and TRALI/TACO"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-3B.src": {
+      "source_sha256": "9c7241bffe4bf4269611a3261b407939a1175295c2fc0e9579c6396c2c7110fc",
+      "chapters_sha256": "2d8dd87666edf8bf73bee25d6c71df9c2b33fa09be69ff0ba4997d13759784a1",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "生理危機與消化道出血復甦止血",
+          "en": "GI Bleeding: Resuscitation and Hemostasis"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "失代償、出血與宿主改變",
+          "en": "Decompensation, hemorrhage, and host changes"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "輸血、靜脈瘤/PUD 出血與風險分層",
+          "en": "Transfusion, Variceal/PUD Bleeding, and Risk"
+        },
+        "l1-03": {
+          "zh-TW": "異物、腐蝕傷與食道穿孔",
+          "en": "Foreign Body, Corrosive Injury, Esophageal Perforation"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "食道阻塞、鈕扣電池與磁鐵",
+          "en": "Esophageal obstruction, button batteries and magnets"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "Caustic ingestion 與 Boerhaave/縱膈污染",
+          "en": "Caustic ingestion and Boerhaave/mediastinal contamination"
+        },
+        "l1-04": {
+          "zh-TW": "胃十二指腸、潰瘍與術後解剖",
+          "en": "Gastroduodenum, ulcer and postoperative anatomy"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "H. pylori、PUD 與穿孔影像",
+          "en": "H. pylori, PUD and perforation images"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "胃切除/減重手術、內疝與餵食通路",
+          "en": "Bariatric/Gastric Surgery, Hernias, Feeding Access"
+        },
+        "l1-05": {
+          "zh-TW": "急性胰臟炎與膽道感染",
+          "en": "Acute pancreatitis and biliary tract infection"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Lipase、Atlanta 器官衰竭與營養",
+          "en": "Lipase, Atlanta Organ Failure and Nutrition"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "膽囊炎、膽管炎與緊急引流",
+          "en": "Cholecystitis, cholangitis and emergency drainage"
+        },
+        "l1-06": {
+          "zh-TW": "急性肝損傷、毒物與 NAC",
+          "en": "Acute Liver Injury, Toxicants, and NAC"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "Acute liver failure、acetaminophen 與毒菇",
+          "en": "Acute liver failure, acetaminophen and poisonous mushrooms"
+        },
+        "l1-07": {
+          "zh-TW": "肝硬化失代償、SBP、HRS 與 HE",
+          "en": "Decompensated cirrhosis, SBP, HRS and HE"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "腹水、SAAG/PMN、SBP、HRS 與肝性腦病",
+          "en": "Ascites, SAAG/PMN, SBP, HRS and hepatic encephalopathy"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-3C.src": {
+      "source_sha256": "4bf5a41359d5d6480265856fe23ebacdd9d9a1c33fd6ad40925b59e7497924bc",
+      "chapters_sha256": "2b65003ebf5ed1dc2a2baab464750ac23ce1c69eaec2f13b2658fc67557aff2d",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "未分化腹痛第一小時與生理危機",
+          "en": "Undifferentiated Abdominal Pain and Physiologic Crisis"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "Shock index、宿主風險與腹膜徵象",
+          "en": "Shock index, host risk, and peritoneal signs"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "止痛止吐、lactate 陷阱與腸缺血",
+          "en": "Analgesic and antiemetics, lactate trap and intestinal ischemia"
+        },
+        "l1-03": {
+          "zh-TW": "嘔吐、腹瀉與脫水病程",
+          "en": "Vomiting, diarrhea and dehydration course"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "嘔吐型態、嬰兒阻塞與 cannabinoid hyperemesis",
+          "en": "Vomiting, Infant Obstruction, Cannabinoid Hyperemesis"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "脫水、STEC/HUS 與感染性腹瀉",
+          "en": "Dehydration, STEC/HUS, and infectious diarrhea"
+        },
+        "l1-04": {
+          "zh-TW": "結腸炎、HUS、IBD 與局部腹痛",
+          "en": "Colitis, HUS, IBD and localized abdominal pain"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "CDI、HUS、IBD、鉛中毒與便祕",
+          "en": "CDI, HUS, IBD, lead poisoning and constipation"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "闌尾炎、憩室炎與網膜垂炎",
+          "en": "Appendicitis, Diverticulitis, and Epiploic Appendagitis"
+        },
+        "l1-05": {
+          "zh-TW": "腸阻塞、扭轉、疝氣與腸缺血",
+          "en": "Obstruction, Volvulus, Hernia, and Bowel Ischemia"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "SBO、閉鎖迴路、腸缺血與扭轉",
+          "en": "SBO, closed-loop, mesenteric ischemia and volvulus"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "疝氣、Roux-en-Y 與內疝陷阱",
+          "en": "Hernias, Roux-en-Y and internal hernia traps"
+        },
+        "l1-06": {
+          "zh-TW": "嬰幼兒與創傷後腹症",
+          "en": "Infant and Post-Traumatic Abdominal Disease"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "Trauma、seat-belt sign 與延遲性腸傷",
+          "en": "Trauma, seat-belt sign and delayed intestinal injury"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "腸旋轉不良、幽門狹窄、腸套疊與 NEC",
+          "en": "Malrotation, pyloric stenosis, intussusception and NEC"
+        },
+        "l1-07": {
+          "zh-TW": "肛直腸急症、腹內高壓與影像整合",
+          "en": "Anorectal Emergencies, Abdominal Pressure, Imaging"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "痔瘡、肛裂、肛周膿瘍與直腸脫垂",
+          "en": "Hemorrhoid, fissure, perianal abscess and rectal prolapse"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "IAH/ACS、減壓與複雜宿主影像",
+          "en": "IAH/ACS, decompression and complex host imaging"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-4A.src": {
+      "source_sha256": "ce2f72b9de36aa7da9a958a6902b84974aa56730cb30cb6f73e8a5faa421eddc",
+      "chapters_sha256": "619e37303590db8061921a897839af2ac861a4c165675b73bb860cec9f4286e3",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "腎臟代謝急症：電解質三層處置",
+          "en": "Renal and Metabolic Emergencies: Electrolyte Tiers"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "第一小時的器官威脅與電解質評估",
+          "en": "First hour organ threat and electrolyte assessment"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "低鈉、低鉀與高鉀的即時處置框架",
+          "en": "Sodium and Potassium Point-of-Care Framework"
+        },
+        "l1-03": {
+          "zh-TW": "AKI 定位與 rhabdomyolysis",
+          "en": "AKI localization and rhabdomyolysis"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "Creatinine、尿量與 AKI 可逆性定位",
+          "en": "Creatinine, urine output and localization of AKI reversibility"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "Rhabdomyolysis、色素尿與腎損傷",
+          "en": "Rhabdomyolysis, pigmenturia and renal damage"
+        },
+        "l1-04": {
+          "zh-TW": "酸鹼、anion gap 與毒物／酮酸中毒",
+          "en": "Acid-base, anion gap and poison/ketoacidosis"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "呼吸代償、anion gap 與 osmol gap",
+          "en": "Respiratory compensation, anion gap and osmol gap"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "DKA、乳酸中毒與可透析毒物",
+          "en": "DKA, lactic acidosis, and dialyzable poisons"
+        },
+        "l1-05": {
+          "zh-TW": "鈉與鉀的腦／心膜電位危機",
+          "en": "Sodium and potassium brain/cardiac potential crisis"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "鈉失衡、tonicity 與安全校正",
+          "en": "Sodium imbalance, tonicity and safety correction"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "高鉀、低鉀與細胞移位陷阱",
+          "en": "High potassium, low potassium and cell translocation traps"
+        },
+        "l1-06": {
+          "zh-TW": "鈣、鎂、磷與細胞能量危象",
+          "en": "Calcium, Magnesium, Phosphate, and Energy Crisis"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "鈣鎂磷對膜穩定與肌肉收縮的影響",
+          "en": "Calcium, Magnesium, Phosphate: Membrane and Muscle"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "Refeeding 與 tumor lysis 的磷鉀危機",
+          "en": "Phosphorus and potassium crisis in Refeeding and tumor lysis"
+        },
+        "l1-07": {
+          "zh-TW": "KRT、透析通路與可透析毒物",
+          "en": "KRT, dialysis access and dialysable poisons"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "KRT 指徵與透析模式選擇",
+          "en": "KRT indications and dialysis mode selection"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "透析通路、ESRD 與毒物清除",
+          "en": "Dialysis Access, ESRD and Toxic Removal"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-4B.src": {
+      "source_sha256": "63cff7e97296e701964b5ae58eef9a72c0a29e9e0e7b59d93a7e98ea990760a7",
+      "chapters_sha256": "03d43572622e660d6eb90704a2dbca4b671b2ed30945d2be6ce0b537c19a5dd4",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "泌尿急症第一小時：感染與阻塞先救命",
+          "en": "Urinary Emergencies: Infection and Obstruction First"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "Urosepsis 與感染性阻塞的危險訊號",
+          "en": "Danger signs of Urosepsis and infectious obstruction"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "減壓引流與抗生素並行",
+          "en": "Decompression drainage and antibiotics concurrently"
+        },
+        "l1-03": {
+          "zh-TW": "尿液證據：採樣、培養與污染陷阱",
+          "en": "Urine Sampling, Culture, and Contamination"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "正常 creatinine 與止痛後的假安全感",
+          "en": "Normal creatinine vs. false sense of security after pain relief"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "Nitrite、pyuria、培養與採樣品質",
+          "en": "Nitrite, pyuria, culture and sampling quality"
+        },
+        "l1-04": {
+          "zh-TW": "尿路感染：膀胱炎、腎盂腎炎與 ASB",
+          "en": "Ascending UTI: Cystitis, Pyelonephritis, and ASB"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "膀胱炎與腎盂腎炎的臨床定位",
+          "en": "Clinical location of cystitis and pyelonephritis"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "抗生素穿透、ASB 例外與孕婦治療",
+          "en": "Antibiotic Penetration, ASB, and Pregnancy"
+        },
+        "l1-05": {
+          "zh-TW": "血尿定位、血塊滯留與腎梗塞",
+          "en": "Hematuria, Clot Retention, and Renal Infarction"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "血尿來源與血塊滯留處置",
+          "en": "Sources of hematuria and treatment of retained blood clots"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "無血尿的腎動脈梗塞陷阱",
+          "en": "Renal artery infarction trap without hematuria"
+        },
+        "l1-06": {
+          "zh-TW": "急性尿滯留、馬尾症候群與阻塞後利尿",
+          "en": "Retention, Cauda Equina, and Postobstructive Diuresis"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "尿滯留分類、PVR 與馬尾紅旗",
+          "en": "Urinary retention classification, PVR and horsetail red flags"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "BPH 導尿與 post-obstructive diuresis",
+          "en": "BPH Catheterization and post-obstructive diuresis"
+        },
+        "l1-07": {
+          "zh-TW": "尿路結石、復發預防與裝置急症",
+          "en": "Urinary Stones, Recurrence, and Device Emergencies"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "結石止痛與 medical expulsive therapy",
+          "en": "Stone pain relief and medical expulsive therapy"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "鈣結石的飲食與尿量預防",
+          "en": "Diet and urine output prevention of calcium stones"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "支架、Foley 與 ureteroarterial fistula",
+          "en": "Bracket, Foley and ureteroarterial fistula"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-5A.src": {
+      "source_sha256": "5676a0c5aee1545a8416b7eab5f0fec7eadb533c57eb532f9b903913fd67d67c",
+      "chapters_sha256": "2ade634cea1788149da9b3450b81e6604cced8ac00fbe37e8cbc096d49bf959e",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "DKA、HHS 與腦部燃料危機的診斷",
+          "en": "Diagnosis of DKA, HHS and brain fuel crisis"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "低血糖模仿中風與高血糖的病理機轉",
+          "en": "Hypoglycemia mimics the pathogenesis of stroke and hyperglycemia"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "DKA、euglycemic DKA 與 HHS 分類",
+          "en": "DKA, euglycemic DKA and HHS classification"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "陰離子間隙、滲透壓、Winter 公式與酮體",
+          "en": "Anion Gap, Osmolality, Winter Formula, and Ketones"
+        },
+        "l1-03": {
+          "zh-TW": "先灌流補鉀，再用 Insulin",
+          "en": "Restore Perfusion and Potassium Before Insulin"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "補液與 potassium 的先後順序",
+          "en": "The order of fluid rehydration and potassium"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "Insulin、dextrose 與關閉 ketogenesis",
+          "en": "Insulin, dextrose and shutting down ketogenesis"
+        },
+        "l1-04": {
+          "zh-TW": "兒童 DKA：補液、ketone 清除與腦損傷",
+          "en": "Childhood DKA: Fluids, Ketones, and Brain Injury"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "避免腦水腫的兒科治療原則",
+          "en": "Pediatric treatment principles to avoid cerebral edema"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "兒童補糖與 D50 外滲風險",
+          "en": "Sugar supplementation and risk of D50 extravasation in children"
+        },
+        "l1-05": {
+          "zh-TW": "低血糖、AKA 與 MALA 的特殊危象",
+          "en": "Hypoglycemia, specific crises of AKA and MALA"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Sulfonylurea 低血糖與 octreotide",
+          "en": "Sulfonylurea hypoglycemia and octreotide"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "酒精性酮酸中毒與 metformin 乳酸中毒",
+          "en": "Alcoholic ketoacidosis and metformin lactic acidosis"
+        },
+        "l1-06": {
+          "zh-TW": "危象解除、basal insulin 銜接與 EMS",
+          "en": "Crisis relief, basal insulin connection and EMS"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "DKA／HHS 解除標準與皮下胰島素重疊",
+          "en": "DKA/HHS elimination criteria overlap with subcutaneous insulin"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "EMT-1／EMT-2 院前血糖處置",
+          "en": "EMT-1/EMT-2 Pre-hospital blood glucose management"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-5B.src": {
+      "source_sha256": "e5a4d6861dc553a2e3082be444b7dc44ed013fd540cf76595c4ef4963edb0c2d",
+      "chapters_sha256": "d979d2f980e358198598b707d5354b363a3ec46c03fb2f6e08c9876f6fa5ebdf",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "內分泌危象：先救器官再看激素軸",
+          "en": "Endocrine Crisis: Stabilize Organs Before Hormone Axis"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "失代償表型與器官穩定優先",
+          "en": "Decompensated phenotype and organ stability priority"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "Biotin、重症與單一數字的誤導",
+          "en": "Biotin, severe illness and the misleading of single numbers"
+        },
+        "l1-03": {
+          "zh-TW": "甲狀腺毒症至風暴的辨識",
+          "en": "From Thyrotoxicosis to Thyroid Storm"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "Thyrotoxicosis 與 hyperthyroidism 的區分",
+          "en": "The difference between Thyrotoxicosis and hyperthyroidism"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "高輸出到低輸出、BWPS 與孕期用藥",
+          "en": "High to low output, BWPS, and medication during pregnancy"
+        },
+        "l1-04": {
+          "zh-TW": "Thyroid storm 的治療順序與心律處置",
+          "en": "Thyroid Storm: Treatment Sequence and Rhythm Care"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "支持療法、PTU、碘與 hydrocortisone 順序",
+          "en": "Supportive care, PTU, iodine and hydrocortisone sequence"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "不穩定心律、WCT 與 amiodarone 迷思",
+          "en": "Erratic Heart Rhythm, WCT, and Amiodarone Myths"
+        },
+        "l1-05": {
+          "zh-TW": "TPP 與黏液水腫危象：鉀轉移與低代謝",
+          "en": "TPP and Myxedema Crisis: Potassium Shift and Collapse"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Thyrotoxic periodic paralysis 與反彈性高血鉀",
+          "en": "Thyrotoxic periodic paralysis and rebound hyperkalemia"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "Myxedema crisis 與 steroid-first 原則",
+          "en": "Myxedema crisis and steroid-first principles"
+        },
+        "l1-06": {
+          "zh-TW": "Adrenal crisis、類固醇戒斷與兒童 CAH",
+          "en": "Adrenal crisis, steroid withdrawal and CAH in children"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "原發／中樞腎上腺不足與類固醇",
+          "en": "Primary/central adrenal insufficiency and hydrocortisone"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "Steroid withdrawal、stress dosing 與 CAH",
+          "en": "Steroid withdrawal, stress dosing and CAH"
+        },
+        "l1-07": {
+          "zh-TW": "腦下垂體衰竭與鈉水失衡",
+          "en": "Pituitary Failure and Sodium-Water Imbalance"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "Pituitary apoplexy、SIADH／DI 與鋰鹽中毒",
+          "en": "Pituitary apoplexy, SIADH/DI and lithium poisoning"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "ICI、高血鈣、嗜鉻細胞瘤與性別照護",
+          "en": "ICI, Hypercalcemia, Pheochromocytoma, Gender Care"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-6A.src": {
+      "source_sha256": "7af5795cefa433730ef36fa69a615eec826f1399a5c8fd34ee3b55ab76202e22",
+      "chapters_sha256": "0ecd865b60768778c037a19523fc1f762157794297afeed6b9413a6166f99a10",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "Sepsis-3、SOFA 與敗血性休克辨識",
+          "en": "Sepsis-3, SOFA and septic shock identification"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "SIRS 到 Sepsis-3 與 SOFA",
+          "en": "SIRS to Sepsis-3 with SOFA"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "Lactate、EGDT 與動態復甦",
+          "en": "Lactate, EGDT and dynamic resuscitation"
+        },
+        "l1-03": {
+          "zh-TW": "腦膜炎：類固醇與抗生素優先",
+          "en": "Meningitis: Steroids and Antibiotics First"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "CT／LP 延誤與一小時抗生素原則",
+          "en": "CT/LP delay and the one-hour antibiotic principle"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "抗生素前 dexamethasone 的神經保護",
+          "en": "Neuroprotection with preantibiotic dexamethasone"
+        },
+        "l1-04": {
+          "zh-TW": "補液、升壓藥與敗血症抗生素策略",
+          "en": "Fluid, vasopressor, and sepsis antibiotic strategies"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "30 mL/kg、內皮滲漏與 norepinephrine",
+          "en": "30 mL/kg, endothelial leakage, and norepinephrine"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "廣效抗生素、loading dose 與 CoNS 判讀",
+          "en": "Broad Antibiotics, Loading Dose, and CoNS"
+        },
+        "l1-05": {
+          "zh-TW": "感染源控制與 SBP、STEC、CDI",
+          "en": "Source Control, SBP, STEC and CDI Toxin Traps"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "培養、antibiotic timeout 與 source control",
+          "en": "Culture, antibiotic timeout and source control"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "SBP、STEC 與白蛋白／抗生素禁忌",
+          "en": "SBP, STEC and albumin/antibiotic contraindications"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "CDI、毒素性休克與 clindamycin",
+          "en": "CDI, toxic shock, and clindamycin"
+        },
+        "l1-06": {
+          "zh-TW": "特殊宿主：兒童、無脾、中性球低下/HIV",
+          "en": "Special Hosts: Children, Asplenia, Neutropenia, HIV"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "兒童與嬰兒發燒的年齡分層",
+          "en": "Age stratification of fever in children and infants"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "無脾、febrile neutropenia 與移植宿主",
+          "en": "Asplenia, febrile neutropenia, and the transplant host"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "HIV、CD4 閾值與導管感染",
+          "en": "HIV, CD4 Thresholds, and Catheter Infections"
+        },
+        "l1-07": {
+          "zh-TW": "PPE、除污與職業暴露後預防",
+          "en": "PPE, Decontamination, and Postexposure Prophylaxis"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "PPE、化學／輻射除污與麻疹隔離",
+          "en": "PPE, chemical/radiation decontamination and measles isolation"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "HIV PEP 與 HCV 追蹤",
+          "en": "HIV PEP and HCV Tracking"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-6B.src": {
+      "source_sha256": "115012f3856c7a67939579026fb159f36e4221a30a93d67ad3d935012747c626",
+      "chapters_sha256": "b197e32588b9e894440b89d6365e6df35bb5858301ce18fba01bfa07c971489d",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "皮膚深度與壞死性感染警訊",
+          "en": "Skin depth and necrotizing infection red flags"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "不成比例疼痛、麻木與宿主風險",
+          "en": "Disproportionate pain, numbness and host risk"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "影像不能延誤復甦與外科處置",
+          "en": "Imaging cannot delay resuscitation and surgical management"
+        },
+        "l1-03": {
+          "zh-TW": "膿瘍、蜂窩組織炎與咬傷病原",
+          "en": "Abscess, cellulitis and environmental/bite pathogens"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "I&D 與 source control 的酸性碉堡",
+          "en": "Acid bunkers for I&D and source control"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "Cellulitis 抗生素、Vibrio 與 Aeromonas",
+          "en": "Cellulitis Antibiotics, Vibrio and Aeromonas"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "咬傷、穿刺傷與深部侵犯",
+          "en": "Bites, puncture wounds and deep penetration"
+        },
+        "l1-04": {
+          "zh-TW": "糖尿病足、骨髓炎與壞死性筋膜炎",
+          "en": "Diabetic foot, osteomyelitis and necrotizing fasciitis"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "Diabetic-foot colonization 與 osteomyelitis",
+          "en": "Diabetic-foot colonization and osteomyelitis"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "NSTI、LRINEC 與立即清創",
+          "en": "NSTI, LRINEC and immediate debridement"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "Clostridium septicum 與隱藏腸道腫瘤",
+          "en": "Clostridium septicum and hidden intestinal tumors"
+        },
+        "l1-05": {
+          "zh-TW": "狹小解剖空間：Ludwig、眼眶與乳腺炎",
+          "en": "Small anatomical spaces: Ludwig, the orbit and mastitis"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Ludwig angina 與困難氣道",
+          "en": "Ludwig angina and difficult airway"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "Orbital infection、PTA 與 mastitis",
+          "en": "Orbital infection, PTA and mastitis"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "壞死性外耳炎與手部病毒／腱鞘感染",
+          "en": "Necrotizing Otitis and Hand/Tendon Infections"
+        },
+        "l1-06": {
+          "zh-TW": "骨關節感染與脊椎硬膜外膿瘍",
+          "en": "Bone and joint infection and spinal epidural abscess"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "指頭疱疹、Kanavel 徵與敗血性關節炎",
+          "en": "Herpetic whitlow, Kanavel signs and septic arthritis"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "Septic emboli、PJI 與 SEA",
+          "en": "Septic emboli, PJI and SEA"
+        },
+        "l1-07": {
+          "zh-TW": "全身皮疹、傳播途徑與 PPE",
+          "en": "Body rash, transmission and PPE"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "腦膜炎雙球菌紫斑與接觸者預防",
+          "en": "Meningococcal purpura and contact prevention"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "麻疹、水痘、EV-A71 與疥瘡",
+          "en": "Measles, Chickenpox, EV-A71 and Scabies"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "肉毒桿菌與依傳播途徑選 PPE",
+          "en": "Botulism and Route-Based PPE Selection"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-6C.src": {
+      "source_sha256": "6eacb3ca6e2e62a56b3f259ad22e9e42064307e4bca7af321213a84d94d4e416",
+      "chapters_sha256": "a410c98fa5d6997e9558fd2a93c1523d10f3a1f68a30f17225a99912637634fb",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "隔離、ABC 復甦與宿主免疫缺口",
+          "en": "Isolation, ABC resuscitation, and host immune gaps"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "高後果病原與傳播途徑隔離",
+          "en": "Isolation of high-consequence pathogens and transmission routes"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "ABC、培養／經驗治療與免疫缺口",
+          "en": "ABC, culture/empirical therapy, and immune gaps"
+        },
+        "l1-03": {
+          "zh-TW": "中樞神經感染：LP、CSF 與經驗性治療",
+          "en": "CNS Infections: LP, CSF, and Empiric Therapy"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "CT before LP 不等於 CT before treatment",
+          "en": "CT before LP is not equal to CT before treatment"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "CSF 判讀、Listeria 與 HSV 腦炎",
+          "en": "CSF Interpretation, Listeria, and HSV Encephalitis"
+        },
+        "l1-04": {
+          "zh-TW": "腦膜炎雙球菌、隱球菌與顱內壓危機",
+          "en": "Meningococcus, Cryptococcus, and ICP Crisis"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "Meningococcal DIC 與接觸者預防",
+          "en": "Meningococcal DIC and contact prevention"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "Cryptococcal meningitis 與治療性 LP",
+          "en": "Cryptococcal meningitis and therapeutic LP"
+        },
+        "l1-05": {
+          "zh-TW": "感染性心內膜炎與 Duke 診斷",
+          "en": "Infective Endocarditis and Duke Diagnosis"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "IE 贅生物、栓塞與抗凝血陷阱",
+          "en": "IE vegetations, embolism and anticoagulation traps"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "血液培養、TTE／TEE 與外科介入",
+          "en": "Blood Culture, TTE/TEE and Surgical Intervention"
+        },
+        "l1-06": {
+          "zh-TW": "HIV、免疫抑制與伺機性感染",
+          "en": "HIV, immunosuppression and opportunistic infections"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "HIV PEP、CD4 與 PCP／toxoplasmosis／CMV",
+          "en": "HIV PEP, CD4 and PCP/toxoplasmosis/CMV"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "Neutropenia、移植、無脾與 TB",
+          "en": "Neutropenia, transplantation, asplenia and TB"
+        },
+        "l1-07": {
+          "zh-TW": "旅遊感染、神經毒素與暴露史",
+          "en": "Travel infections, neurotoxins and exposure history"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "TB 藥物毒性、登革熱與瘧疾",
+          "en": "TB drug toxicity, dengue fever and malaria"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "恙蟲／Lyme 與破傷風、肉毒、狂犬病",
+          "en": "Scrub typhus/Lyme and tetanus, botulism, rabies"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-7A.src": {
+      "source_sha256": "b6928cb1b04b911613b70147361b8d81cf583900bbac1a536d83ee8e072956ad",
+      "chapters_sha256": "073910aa28cade280bd5527c3a143733ae30c4b48d4202269ff8ff719b69b3f4",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "中風第一小時：LKW、mimics 與平行復甦",
+          "en": "Stroke: First-Hour LKW, Mimics, Resuscitation"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "Last known well 與時間軸",
+          "en": "Last known well and timeline"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "Stroke mimics、低血糖與 Bell palsy",
+          "en": "Stroke mimics, hypoglycemia and Bell palsy"
+        },
+        "l1-03": {
+          "zh-TW": "神經定位、NIHSS 與後循環警訊",
+          "en": "Localization, NIHSS, and Posterior Stroke Warnings"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "Disabling deficit 與血管假說",
+          "en": "Disabling deficit and vascular hypothesis"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "腦幹、locked-in、HINTS 與 CRAO",
+          "en": "Brainstem, locked-in, HINTS and CRAO"
+        },
+        "l1-04": {
+          "zh-TW": "影像、溶栓與機械取栓的時間／組織窗",
+          "en": "Imaging, Thrombolysis, and Thrombectomy Windows"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "NCCT、CTA／CTP 與顯影劑風險",
+          "en": "NCCT, CTA/CTP and developer risks"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "Alteplase、tenecteplase 與橋接取栓",
+          "en": "Alteplase, tenecteplase and bridge thrombectomy"
+        },
+        "l1-05": {
+          "zh-TW": "再灌流後照護、血壓與 TIA 新定義",
+          "en": "Post-Reperfusion Care, BP, and TIA Definitions"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "DOAC 判讀與溶栓後血壓",
+          "en": "DOAC interpretation and post-thrombolysis blood pressure"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "缺血半暗帶、氧氣／輸液與 aspirin",
+          "en": "Ischemic penumbra, oxygen/infusion and aspirin"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "以組織為基礎的 TIA 定義",
+          "en": "Organization-based TIA definition"
+        },
+        "l1-06": {
+          "zh-TW": "ICH、抗凝逆轉與小腦出血減壓",
+          "en": "ICH Reversal and Cerebellar Decompression"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "腦內出血血壓與灌流平衡",
+          "en": "Blood pressure and perfusion balance in intracerebral hemorrhage"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "Warfarin、DOAC、heparin 逆轉與手術指徵",
+          "en": "Warfarin, DOAC, heparin reversal and surgical indications"
+        },
+        "l1-07": {
+          "zh-TW": "雷擊性頭痛、SAH、RCVS 與 CVT",
+          "en": "Thunderclap headache, SAH, RCVS, and CVT"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "Ottawa SAH、PRES／RCVS 與 nimodipine",
+          "en": "Ottawa SAH, PRES/RCVS and nimodipine"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "CVT、出血性靜脈梗塞與抗凝治療",
+          "en": "CVT, hemorrhagic venous infarction and anticoagulation therapy"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-7B.src": {
+      "source_sha256": "1ff9a5d5c2db5c900fe63260c51d9212e3ed2a354cdf772111a39b2fdc2891b3",
+      "chapters_sha256": "085b571cccf415f2ee29e419cdd61148f2e754e7f3915542d173cb7083c88159",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "發作第一小時：ABCDE、癲癇辨識與誘因",
+          "en": "Seizure First Hour: ABCDE, Diagnosis, Triggers"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "低血糖／缺氧與局灶性發作",
+          "en": "Hypoglycemia/hypoxia and focal seizures"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "抽搐性暈厥、誘發性與功能性發作",
+          "en": "Convulsive syncope, induced and functional seizures"
+        },
+        "l1-03": {
+          "zh-TW": "癲癇重積與 NCSE 時間關鍵",
+          "en": "Status Epilepticus and Time-Critical NCSE"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "T1／T2、benzodiazepine 與足量給藥",
+          "en": "T1/T2, benzodiazepine and adequate administration"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "ESETT 第二線藥物與非抽搐性重積",
+          "en": "ESETT Second-line agents and nonconvulsive hyperplasia"
+        },
+        "l1-04": {
+          "zh-TW": "兒童、子癲症與毒物性癲癇",
+          "en": "Children, epilepsy and toxic epilepsy"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "熱痙攣與新生兒發作",
+          "en": "Heat cramps and neonatal seizures"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "子癲症、鎂中毒與解毒",
+          "en": "Epilepsy, magnesium toxicity and detoxification"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "酒精／INH／TCA／phenytoin／valproate 毒性",
+          "en": "Alcohol/INH/TCA/phenytoin/valproate toxicity"
+        },
+        "l1-05": {
+          "zh-TW": "譫妄、昏迷與腦死判定",
+          "en": "Delirium, coma and brain death determination"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Hyperactive／hypoactive delirium 與病因處理",
+          "en": "Hyperactive/hypoactive delirium and treatment of causes"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "FOUR Score、瞳孔定位與腦死 apnea test",
+          "en": "FOUR Score, pupil positioning and brain death apnea test"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "Locked-in syndrome 鑑別",
+          "en": "Locked-in syndrome identification"
+        },
+        "l1-06": {
+          "zh-TW": "神經肌肉呼吸衰竭：MG、GBS 與氣道",
+          "en": "Neuromuscular Respiratory Failure: MG, GBS, Airway"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "FVC／NIF 與插管時機",
+          "en": "FVC/NIF and timing of intubation"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "重症肌無力與 Guillain-Barré syndrome",
+          "en": "Myasthenia gravis and Guillain-Barré syndrome"
+        },
+        "l1-07": {
+          "zh-TW": "神經毒素與氣切管急症",
+          "en": "Neurotoxins and tracheostomy emergencies"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "Botulism、tetrodotoxin 與破傷風",
+          "en": "Botulism, tetrodotoxin and tetanus"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "DOPES、全喉切除與造口通氣",
+          "en": "DOPES, total laryngectomy and stoma ventilation"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-7C.src": {
+      "source_sha256": "49ca8cb20bf40036aeb64bb7154672d3d8937e0063ae16b280519fdc417d73ab",
+      "chapters_sha256": "9c19efa57f26532b3b96f453e9b757864408172667745d5cbcc128c928df5941",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "神經急症初穩與序列檢查",
+          "en": "Neurologic Emergencies: Stabilization and Serial Exam"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "ABC、生理指標與腦灌流",
+          "en": "ABC, physiological indicators and cerebral perfusion"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "止吐／止痛後的動態神經檢查",
+          "en": "Dynamic Neuro Exam After Analgesia/Antiemetics"
+        },
+        "l1-03": {
+          "zh-TW": "頭痛分型、SAH、GCA 與 RCVS",
+          "en": "Headache classification, SAH, GCA and RCVS"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "偏頭痛、叢發性頭痛與孕產婦紅旗",
+          "en": "Migraines, cluster headaches and maternal red flags"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "雷擊性頭痛、Ottawa SAH 與 GCA",
+          "en": "Thunderclap headache, Ottawa SAH, and GCA"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "TBI、HACE、青光眼與 RCVS",
+          "en": "TBI, HACE, Glaucoma and RCVS"
+        },
+        "l1-04": {
+          "zh-TW": "眩暈、HINTS 與中樞性前庭病灶",
+          "en": "Vertigo, HINTS, and central vestibular lesions"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "HINTS／HINTS Plus 的適用前提",
+          "en": "Prerequisites for HINTS/HINTS Plus"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "BPPV、SSNHL 與共濟失調定位",
+          "en": "BPPV, SSNHL and ataxia localization"
+        },
+        "l1-05": {
+          "zh-TW": "Wernicke、顱神經與顏面神經麻痺",
+          "en": "Wernicke, cranial and facial nerve palsies"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Wernicke 與 thiamine／glucose 順序",
+          "en": "Wernicke and thiamine/glucose order"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "第三對腦神經、Bell／Ramsay Hunt 與中樞臉癱",
+          "en": "CN III, Bell/Ramsay Hunt, and Central Facial Palsy"
+        },
+        "l1-06": {
+          "zh-TW": "周邊神經、CES 與脊髓壓迫",
+          "en": "Peripheral Nerves, CES, and Spinal Cord Compression"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "神經定位、AIN／meralgia 與 SLR",
+          "en": "Neurolocalization, AIN/meralgia and SLR"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "頸椎脆弱、馬尾症候群與腫瘤壓迫",
+          "en": "Cervical fragility, cauda equina syndrome and tumor compression"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "橫斷性脊髓炎與笑氣 B12 功能缺乏",
+          "en": "Transverse Myelitis and Laughing Gas B12 Deficiency"
+        },
+        "l1-07": {
+          "zh-TW": "SCI、神經性休克與類固醇證據更新",
+          "en": "SCI, Neurological Shock and Steroids Evidence Update"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "創傷性脊髓症候群與休克分類",
+          "en": "Traumatic spinal cord syndrome and shock classification"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "MAP 目標、MPSS 與 8 小時限制",
+          "en": "MAP Goals, MPSS, and 8-Hour Limit"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-8A.src": {
+      "source_sha256": "6ac650658e62a3609738fcbb33e7378dceb0b9909227a20d86261d763b85775f",
+      "chapters_sha256": "71cb70d000c9b3e434718684daa37956d007fb0732970704434373ef2c86d681",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "現場防護、ABCDE 與中毒生理監測",
+          "en": "Scene Safety, ABCDE, and Toxicologic Monitoring"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "Level A–D 防護與環境安全",
+          "en": "Level A–D Protection and Environmental Safety"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "血糖、體溫、ECG 與真實通氣",
+          "en": "Blood sugar, body temperature, ECG and real ventilation"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "低血壓與輸液反應性",
+          "en": "Hypotension and infusion responsiveness"
+        },
+        "l1-03": {
+          "zh-TW": "毒物性癲癇、高熱與暴露時間軸",
+          "en": "Toxic epilepsy, hyperthermia, and exposure timeline"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "毒物性癲癇與 BZD 優先",
+          "en": "Toxic epilepsy and BZD first"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "核心高熱、主動降溫與延遲吸收",
+          "en": "Core hyperthermia, active cooling and delayed absorption"
+        },
+        "l1-04": {
+          "zh-TW": "毒物症候群：抗膽鹼、交感、膽鹼、鴉片",
+          "en": "Four Toxidromes: Anticholinergic Through Opioid"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "乾熱抗膽鹼與出汗交感中毒",
+          "en": "Dry heat anticholinergic and diaphoretic sympathotoxicity"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "有機磷、低通氣與瞳孔陷阱",
+          "en": "Organophosphorus, hypoventilation, and pupil traps"
+        },
+        "l1-05": {
+          "zh-TW": "心電圖毒性、HIET 與細胞呼吸毒物",
+          "en": "ECG toxicity, HIET and cellular respiratory toxicants"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Serotonin toxicity、NMS 與急性肌張力不全",
+          "en": "Serotonin toxicity, NMS and acute dystonia"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "TCA QRS、sodium bicarbonate 與 HIET／LAST",
+          "en": "TCA QRS, sodium bicarbonate and HIET/LAST"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "高鐵血紅素與氰化物解毒",
+          "en": "Methemoglobinemia, cyanide and hydroxocobalamin"
+        },
+        "l1-06": {
+          "zh-TW": "解毒劑的適應症、劑量與停藥標準",
+          "en": "Antidote Indications, Dosing, and Stop Criteria"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "Naloxone、Flumazenil 等解毒劑",
+          "en": "Naloxone, flumazenil, physostigmine and atropine"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "Acetaminophen、NAC 與 Rumack–Matthew 限制",
+          "en": "Acetaminophen, NAC, and Rumack–Matthew Limitations"
+        },
+        "l1-07": {
+          "zh-TW": "腸胃除污、透析清除與安全去向",
+          "en": "GI Decontamination, Dialysis, and Disposition"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "皮膚／眼睛除污、活性炭與 WBI",
+          "en": "Skin/Eye Decontamination, Activated Charcoal and WBI"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "腐蝕物、毒醇透析與尿液鹼化",
+          "en": "Corrosives, toxic alcohol dialysis and urine alkalization"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "兒童、孕婦與中毒觀察／精神科安置",
+          "en": "Pediatrics, Pregnancy, Observation, Psychiatric Placement"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-8B.src": {
+      "source_sha256": "c7d3ec122e27471784f7ff0540c192c1feffda90090c9cef8ec08bf81a3ecdc5",
+      "chapters_sha256": "32fe5bfb654f282e74c58fccd4026e3b23b6eb63502a071e08e1f97b478b1c37",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "精神科藥物中毒五軸線與 naloxone 優先",
+          "en": "Psychiatric Drug Poisoning: Five Axes, Naloxone First"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "中樞抑制、興奮、傳導、自主與清除軸線",
+          "en": "CNS, Excitation, Conduction, Autonomic, Clearance"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "Opioid 呼吸抑制與解毒劑順序",
+          "en": "Opioid Respiratory Depression and Antidote Sequence"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "高熱、偽篩檢與延遲暴露",
+          "en": "Hyperthermia, pseudo-screening and delayed exposure"
+        },
+        "l1-03": {
+          "zh-TW": "Flumazenil、腸胃除污與中樞抑制陷阱",
+          "en": "Flumazenil, GI Decontamination, and CNS Depression"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "尿液篩檢與 bupropion XL 延遲癲癇",
+          "en": "Urine Screening for Delayed Epilepsy with Bupropion XL"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "Flumazenil 混合中毒風險與洗胃限制",
+          "en": "Flumazenil mixed toxicity risks and gastric lavage limitations"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "Chloral hydrate、barbiturate 與 MDAC／透析",
+          "en": "Chloral hydrate, barbiturate and MDAC/dialysis"
+        },
+        "l1-04": {
+          "zh-TW": "TCA 傳導毒性與碳酸氫鈉",
+          "en": "TCA cardiac conduction toxicity and sodium bicarbonate"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "QRS 風險、鈉通道阻斷與治療終點",
+          "en": "QRS risk, sodium channel blockade, and treatment endpoints"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "BZD、phenytoin／amiodarone 禁忌與 bupropion",
+          "en": "BZD, phenytoin/amiodarone taboos and bupropion"
+        },
+        "l1-05": {
+          "zh-TW": "血清素毒性、NMS 與 MAOI 交互作用",
+          "en": "Serotonin toxicity, NMS and MAOI interactions"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Serotonin toxicity、clonus 與降溫",
+          "en": "Serotonin toxicity, clonus and cooling"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "NMS、多巴胺停藥與 amantadine",
+          "en": "NMS, dopamine withdrawal, and amantadine"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "MAOI tyramine 風暴與 SSRI FINISH",
+          "en": "MAOI tyramine storm with SSRI FINISH"
+        },
+        "l1-06": {
+          "zh-TW": "EPS、clozapine 與躁動鎮靜策略",
+          "en": "EPS, clozapine and agitation-sedation strategies"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "急性肌張力不全、靜坐不能與遲發運動障礙",
+          "en": "Acute dystonia, akathisia, and tardive dyskinesia"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "Clozapine ANC／心肌炎與 REMS 更新",
+          "en": "Clozapine ANC/Myocarditis and REMS Update"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "躁動、酒精中毒／戒斷與劑量紅線",
+          "en": "Agitation, Alcoholism/Withdrawal, and Dosage Redlines"
+        },
+        "l1-07": {
+          "zh-TW": "鋰鹽、VPA 與孕婦毒物決策",
+          "en": "Lithium, VPA, and Toxicology in Pregnancy"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "慢性／急性鋰中毒與 EXTRIP 透析",
+          "en": "Chronic/Acute Lithium Poisoning and EXTRIP Dialysis"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "Valproate、carbamazepine 與孕期風險",
+          "en": "Valproate, carbamazepine and pregnancy risks"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "Methylene blue、digoxin 與 calcium 迷思",
+          "en": "Methylene blue, digoxin and calcium myths"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-8C.src": {
+      "source_sha256": "d1c0e18eafdcbf0d9cc98aee6bcb53f5798953e356b7a7f82653e006f6c10d82",
+      "chapters_sha256": "37c493e50c1167953671253d743fcc93a67b352234c08be48c2c6602bb44c3a1",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "生理穩定與毒物篩檢陷阱",
+          "en": "Physiological Stability and Toxic Screening Traps"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "ABC處置與生理失代償",
+          "en": "ABC disposition and physiological decompensation"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "尿液毒物篩檢限制與觀察",
+          "en": "Urine Toxic Screening Limitations and Observations"
+        },
+        "l1-03": {
+          "zh-TW": "乙醇中毒、兒童低血糖與隱匿創傷",
+          "en": "Alcohol, Hypoglycemia, and Hidden Pediatric Trauma"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "乙醇生理效應與兒童低血糖",
+          "en": "Physiological effects of ethanol and hypoglycemia in children"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "醉酒病人的創傷與頸椎評估",
+          "en": "Trauma and Cervical Spine Assessment of the Intoxicated Patient"
+        },
+        "l1-04": {
+          "zh-TW": "酒精戒斷、癲癇發作與酒精性酮酸中毒",
+          "en": "Alcohol withdrawal, seizures, and alcoholic ketoacidosis"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "戒斷時間軸、癲癇與譫妄震顫",
+          "en": "Withdrawal timeline, epilepsy, and delirium tremors"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "苯二氮平類、硫胺素與酒精性酮酸中毒",
+          "en": "Benzodiazepines, thiamine, and alcoholic ketoacidosis"
+        },
+        "l1-05": {
+          "zh-TW": "鴉片類呼吸衰竭、Naloxone與MOUD",
+          "en": "Opioid Respiratory Failure, Naloxone, and MOUD"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "袋瓣罩通氣與Naloxone滴定",
+          "en": "Bag-valve mask ventilation and Naloxone titration"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "再鎮靜、MOUD與妊娠處置",
+          "en": "Resedation, MOUD and pregnancy management"
+        },
+        "l1-06": {
+          "zh-TW": "興奮劑中毒、體溫過高與Cocaine/MDMA",
+          "en": "Stimulant poisoning, hyperthermia and Cocaine/MDMA"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "興奮劑毒性與高熱處置",
+          "en": "Stimulant toxicity and hyperthermia treatment"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "Cocaine胸痛與MDMA低鈉血症",
+          "en": "Cocaine Chest Pain and MDMA Hyponatremia"
+        },
+        "l1-07": {
+          "zh-TW": "笑氣、體內藏毒與注射藥物併發症",
+          "en": "Nitrous Oxide, Body Packing, and Injection Complications"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "笑氣造成的功能性維生素B12缺乏",
+          "en": "Functional vitamin B12 deficiency caused by laughing gas"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "Body packer/stuffer與影像診斷",
+          "en": "Body packer/stuffer and imaging diagnosis"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "注射藥物感染、心內膜炎與PEP",
+          "en": "Injection drug infections, endocarditis and PEP"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-8D.src": {
+      "source_sha256": "645eed83a346c60a1ad1bcdfdc19adfa9522e143aed67257bdd6ae56db9f2d2d",
+      "chapters_sha256": "867471641ddbfbc7b4d9846433fb552d5572100d522f458371c8f8d45ade1552",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "中毒復甦與未知暴露時間軸",
+          "en": "Poison recovery and unknown exposure timeline"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "ABC、血糖、體溫與通氣監測",
+          "en": "ABC, blood glucose, temperature and ventilation monitoring"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "延遲吸收與未知攝入時間的風險",
+          "en": "Delayed absorption and risk of unknown intake times"
+        },
+        "l1-03": {
+          "zh-TW": "Acetaminophen中毒與NAC治療",
+          "en": "Acetaminophen Poisoning and NAC Treatment"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "NAPQI、四階段病程與Rumack–Matthew列線圖",
+          "en": "NAPQI, four-stage disease course and Rumack–Matthew nomogram"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "NAC停藥條件、晚期效益與透析",
+          "en": "NAC discontinuation conditions, late benefits and dialysis"
+        },
+        "l1-04": {
+          "zh-TW": "Salicylate、NSAID與鐵劑毒性",
+          "en": "Salicylate, NSAIDs and Iron Toxicity"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "Salicylate酸鹼失衡、尿液鹼化與插管陷阱",
+          "en": "Salicylates: Acid-Base, Urine Alkalinization, Intubation"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "NSAID三重打擊與腎損傷",
+          "en": "NSAID triple whammy and kidney damage"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "鐵劑潛伏期、全腸道灌洗與Deferoxamine",
+          "en": "Iron incubation period, whole intestinal lavage and Deferoxamine"
+        },
+        "l1-05": {
+          "zh-TW": "茶鹼／地高辛：濃度與嚴重度",
+          "en": "Theophylline vs Digoxin: Level Versus Severity"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "Theophylline癲癇與多劑量活性碳",
+          "en": "Theophylline Seizures and Multiple-Dose Charcoal"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "Digoxin免疫Fab、高血鉀與濃度判讀",
+          "en": "Digoxin Fab, Hyperkalemia, and Level Interpretation"
+        },
+        "l1-06": {
+          "zh-TW": "Beta-blocker、CCB與HIET處置",
+          "en": "Beta-blocker, CCB and HIET disposal"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "Bradyshock機轉與藥物差異",
+          "en": "Bradyshock Machine and Drug Differences"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "HIET、鈣劑、Glucagon與VA-ECMO",
+          "en": "HIET, calcium, Glucagon and VA-ECMO"
+        },
+        "l1-07": {
+          "zh-TW": "降血糖、抗癲癇與交互作用毒性",
+          "en": "Hypoglycemic, antiepileptic and interaction toxicity"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "Sulfonylurea、Octreotide與Metformin透析門檻",
+          "en": "Sulfonylurea, Octreotide and Metformin dialysis thresholds"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "Phenytoin、Valproate與Isoniazid毒性",
+          "en": "Phenytoin, Valproate and Isoniazid toxicity"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "Ethambutol、Amiodarone與Superwarfarin",
+          "en": "Ethambutol, Amiodarone and Superwarfarin"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-9A.src": {
+      "source_sha256": "3b5bba7e8d8f91e20b926081c158d8ede870ecb5737edc6dee227124a2c05bef",
+      "chapters_sha256": "8e8bb78134e90c7b97ca46069c2c772a5f1f6d856aa479fa478b877444e4bbed",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "現場處置與XABCDE初評",
+          "en": "On-site disposal and preliminary evaluation of XABCDE"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "Load and go、戰術止血與現場安全",
+          "en": "Load and go, tactical hemostasis and on-site safety"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "ISS/RTS限制、XABCDE與頸椎規則",
+          "en": "ISS/RTS limits, XABCDE and cervical spine rules"
+        },
+        "l1-03": {
+          "zh-TW": "休克插管、呼吸處置與隱匿出血",
+          "en": "Shock Intubation, Ventilation, and Occult Bleeding"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "休克病人插管、Ketamine與DOPE",
+          "en": "Intubation, Ketamine and DOPE in shock patients"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "張力性氣胸、過度換氣與循環重評",
+          "en": "Tension Pneumothorax, Hyperventilation, Reassessment"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "代償性休克、Shock Index與FAST陷阱",
+          "en": "Compensated shock, Shock Index and FAST trap"
+        },
+        "l1-04": {
+          "zh-TW": "四肢、骨盆與胸腔出血控制",
+          "en": "Control of bleeding in extremities, pelvis and chest"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "止血帶與創傷性截肢保存",
+          "en": "Tourniquets and Traumatic Amputation Preservation"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "骨盆束帶、胸管與急診開胸",
+          "en": "Pelvic straps, chest tubes and emergency thoracotomy"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "REBOA暫時性主動脈阻斷",
+          "en": "REBOA temporary aortic occlusion"
+        },
+        "l1-05": {
+          "zh-TW": "損傷控制復甦、大量輸血與逆轉",
+          "en": "Damage-Control Resuscitation, Transfusion, Reversal"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "允許性低血壓與損傷控制復甦",
+          "en": "Permissive hypotension and damage control resuscitation"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "MTP、鈣劑與TXA時機",
+          "en": "MTP, calcium and TXA timing"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "Warfarin與Dabigatran抗凝逆轉",
+          "en": "Anticoagulation reversal with Warfarin and Dabigatran"
+        },
+        "l1-06": {
+          "zh-TW": "輸血反應、TRALI/TACO與分期手術",
+          "en": "Transfusion reactions, TRALI/TACO and staged surgery"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "急性輸血反應的立即處置",
+          "en": "Immediate management of acute transfusion reactions"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "TRALI與TACO鑑別",
+          "en": "Identification of TRALI and TACO"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "損傷控制手術與ICU分期重建",
+          "en": "Damage control surgery and ICU staged reconstruction"
+        },
+        "l1-07": {
+          "zh-TW": "兒童、孕婦與擠壓傷特殊族群",
+          "en": "Children, Pregnancy, and Crush-Injury Populations"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "兒童與孕婦創傷復甦",
+          "en": "Trauma Resuscitation for Children and Pregnant Women"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "擠壓症候群與筋膜室症候群",
+          "en": "Squeeze syndrome and compartment syndrome"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-9B1.src": {
+      "source_sha256": "679f6559f5604e2258c709bdf375fa4969808b851e832bcf6b7d2564920c1d39",
+      "chapters_sha256": "d7680d3ba70dd1d9df21076c4c3d387ed8dd7c0c8b627556d85a842cba5137aa",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "頭傷初評、氣道與Ketamine",
+          "en": "Initial evaluation of head injury, airway and Ketamine"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "生理復甦與次發性腦傷預防",
+          "en": "Physiologic Resuscitation and Secondary Brain Injury"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "頸椎保護、插管與休克處置",
+          "en": "Cervical spine protection, intubation and shock management"
+        },
+        "l1-03": {
+          "zh-TW": "輕度頭傷影像規則與抗凝風險",
+          "en": "Mild Head Injury Rules and Anticoagulation Risk"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "GCS與Canadian CT Head Rule",
+          "en": "GCS and Canadian CT Head Rule"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "抗凝病人、兒童PECARN與延遲出血",
+          "en": "Anticoagulated patients, pediatric PECARN and delayed bleeding"
+        },
+        "l1-04": {
+          "zh-TW": "顱內血腫、ICP與CPP管理",
+          "en": "Intracranial hematoma, ICP and CPP management"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "EDH/SDH與代償崩潰",
+          "en": "EDH/SDH and compensatory collapse"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "ICP、CPP與腦疝風險",
+          "en": "ICP, CPP and risk of brain herniation"
+        },
+        "l1-05": {
+          "zh-TW": "過度換氣、癲癇與腦傷後觀察",
+          "en": "Brain Injury: Hyperventilation, Seizure, Observation"
+        },
+        "l1-06": {
+          "zh-TW": "頸椎影像規則與脊髓損傷",
+          "en": "Cervical spine imaging rules and spinal cord injury"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "NEXUS與Canadian C-spine Rule",
+          "en": "NEXUS and Canadian C-spine Rule"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "駝背固定與不完全脊髓症候群",
+          "en": "Fixed kyphosis and incomplete spinal cord syndrome"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-9B2.src": {
+      "source_sha256": "70ed2532f3231f02469963493b2244268a22cb75ab4b9d6d780e8215fd5db401",
+      "chapters_sha256": "2f94dfac8504a417a05311f7480a4a992c7505631b202c050403f91191753216",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "顏面創傷氣道與功能優先",
+          "en": "Facial Trauma Airway and Function Priority"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "顏面腫脹、出血與氣道風險",
+          "en": "Facial swelling, bleeding and airway risks"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "中臉創傷、顱底骨折與外科氣道",
+          "en": "Midface trauma, skull base fractures, and surgical airway"
+        },
+        "l1-03": {
+          "zh-TW": "頭傷影像、GCS與延遲性惡化",
+          "en": "Head injury imaging, GCS and delayed deterioration"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "正常CT與中度頭傷陷阱",
+          "en": "Normal CT and moderate head injury trap"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "EDH/SDH觀察與社會安全",
+          "en": "EDH/SDH observation and social security"
+        },
+        "l1-04": {
+          "zh-TW": "腦灌流、ICP與抗凝逆轉",
+          "en": "Cerebral perfusion, ICP and anticoagulation reversal"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "CPP、ICP與過度換氣限制",
+          "en": "CPP, ICP and hyperventilation restrictions"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "Warfarin/DOAC快速逆轉",
+          "en": "Warfarin/DOAC quick reversal"
+        },
+        "l1-05": {
+          "zh-TW": "眼眶創傷、OCS與眼球破裂",
+          "en": "Orbital trauma, OCS and globe rupture"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "眼眶爆裂、眼心反射與OCS",
+          "en": "Orbital bursting, oculocardiac reflex and OCS"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "Open globe與前房出血",
+          "en": "Open globe and hyphema"
+        },
+        "l1-06": {
+          "zh-TW": "鼻耳牙齒與頸部穿透傷",
+          "en": "Penetrating injuries to nose, ears, teeth and neck"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "牙齒保存與乳齒禁忌",
+          "en": "Tooth preservation and taboos for deciduous teeth"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "穿透性頸傷hard signs與影像",
+          "en": "Penetrating neck injury hard signs and imaging"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "勒頸、上吊與延遲氣道水腫",
+          "en": "Strangulation, hanging and delayed airway edema"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-9C.src": {
+      "source_sha256": "306d6c164584654af668cbd90b098f019e8d8558d6a101278c390089e9836ead",
+      "chapters_sha256": "82a8443c5b796f0098ec5fe5bdb55a79df97aafca81167be866fa34682accccb",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "創傷初評與隱匿失血",
+          "en": "Initial assessment of trauma and hidden blood loss"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "XABCDE與正常生命徵象陷阱",
+          "en": "XABCDE and the normal vital sign trap"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "正常血紅素、FAST與延遲影像",
+          "en": "Normal hemoglobin, FAST and delayed images"
+        },
+        "l1-03": {
+          "zh-TW": "胸部創傷、氣胸與胸管",
+          "en": "Chest trauma, pneumothorax and chest tubes"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "張力性氣胸與肺超音波陷阱",
+          "en": "Tension pneumothorax and lung ultrasound trap"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "連枷胸、氣管支氣管與食道傷",
+          "en": "Flail chest, tracheobronchial and esophageal injuries"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "鈍性心臟傷與胸腔評估",
+          "en": "Blunt Heart Injury and Chest Assessment"
+        },
+        "l1-04": {
+          "zh-TW": "主動脈、腹部與腹腔室症候群",
+          "en": "Aortic, abdominal and abdominal compartment syndrome"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "主動脈傷與TBI灌流衝突",
+          "en": "Aortic injury and TBI perfusion conflict"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "腸道延遲傷與實質器官保守治療",
+          "en": "Delayed Bowel Injury and Solid-Organ Observation"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "腹腔室症候群診斷",
+          "en": "Diagnosis of abdominal compartment syndrome"
+        },
+        "l1-05": {
+          "zh-TW": "骨盆、泌尿生殖與REBOA",
+          "en": "Pelvis, genitourinary and REBOA"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "骨盆出血固定與栓塞",
+          "en": "Fixation and embolization of pelvic bleeding"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "腎臟、尿道與膀胱傷評估",
+          "en": "Assessment of kidney, urethra and bladder injuries"
+        },
+        "l1-06": {
+          "zh-TW": "兒童孕婦創傷與延遲惡化",
+          "en": "Pediatric and Pregnancy Trauma: Delayed Deterioration"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "兒童與孕婦特殊生理",
+          "en": "Special physiology of children and pregnant women"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "出院觀察與延遲併發症",
+          "en": "Discharge observation and delayed complications"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "board-guides/board-guide-9D.src": {
+      "source_sha256": "afd666ec9a57fa41fb43736623cde8940e7caf24ffff89d4f5726f617cee6b96",
+      "chapters_sha256": "cb073465b89e11eb26ffc92b925ad239e795f2749942a377f8f53d2b3f3f1972",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "神經血管評估、疼痛與腔室症候群",
+          "en": "Neurovascular Assessment, Pain and Compartment Syndrome"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "NVI基線與疼痛阻斷",
+          "en": "NVI Baseline and Pain Blockade"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "ACS監測與止血帶風險",
+          "en": "ACS monitoring and tourniquet risks"
+        },
+        "l1-03": {
+          "zh-TW": "止血帶、截肢與開放性骨折",
+          "en": "Tourniquets, amputation and open fractures"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "止血帶解除與再灌流危機",
+          "en": "Tourniquet removal and reperfusion crisis"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "開放骨折抗生素與斷肢保存",
+          "en": "Antibiotics for open fractures and limb preservation"
+        },
+        "l1-04": {
+          "zh-TW": "血管損傷、ABI與膝脫位",
+          "en": "Vascular Injury, ABI and Knee Dislocation"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "動脈hard signs與ABI限制",
+          "en": "Arterial hard signs and ABI limitations"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "膝關節脫位延遲血栓與重建",
+          "en": "Delayed thrombosis and reconstruction in knee dislocation"
+        },
+        "l1-05": {
+          "zh-TW": "腔室症候群與壓砸症候群",
+          "en": "Chamber syndrome and crush syndrome"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "ACS壓力、Delta值與抬高禁忌",
+          "en": "ACS pressure, delta value and elevation contraindications"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "壓砸症候群、再灌流與高鉀",
+          "en": "Crush syndrome, reperfusion and hyperkalemia"
+        },
+        "l1-06": {
+          "zh-TW": "全身併發症與特殊骨折",
+          "en": "Systemic complications and special fractures"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "凝血、脂肪栓塞與爆炸傷",
+          "en": "Coagulation, fat embolism and blast injuries"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "兒童肱骨髁上骨折與神經血管傷",
+          "en": "Supracondylar Fracture and Pediatric Neurovascular Injury"
+        },
+        "l1-07": {
+          "zh-TW": "上肢下肢隱匿骨折與功能保護",
+          "en": "Occult Limb Fractures and Functional Protection"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "舟狀骨、手指腎上腺素與上肢陷阱",
+          "en": "Scaphoid, finger epinephrine and upper limb traps"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "Maisonneuve、跟骨與兒童骨骼",
+          "en": "Maisonneuve, calcaneus and bones of children"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    }
+  }
+}

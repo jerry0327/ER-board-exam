@@ -1,0 +1,2082 @@
+{
+  "schema": "section-title-locale-bundle-v1",
+  "collection": "ems",
+  "entries": {
+    "ems/ems-CH001.src": {
+      "source_sha256": "7e920090359ceea1a4e9c919f5b8ae99533cae7ffeab02b14a12af4c59d8a6fe",
+      "chapters_sha256": "936ca1f35c8ac2967d98297d29863a891a590a579c520731cd08eec4c7a82c7b",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "EMSS 範疇與系統原則",
+          "en": "EMSS Scope and System Principles"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "廣狹義範疇與到院前角色",
+          "en": "Broad and Narrow Categories and Pre-hospital Roles"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "三層防護網與 4R",
+          "en": "Three-layer protective net and 4R"
+        },
+        "l1-03": {
+          "zh-TW": "EMS 歷史與制度化",
+          "en": "EMS History and Institutionalization"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "戰地後送與檢傷起源",
+          "en": "The Origin of Battlefield Evacuation and Wound Trial"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "CPR 興起與 1966 白皮書",
+          "en": "The Rise of CPR and the 1966 White Paper"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "1973 EMS 法與十五項要素",
+          "en": "1973 EMS Act and Fifteen Elements"
+        },
+        "l1-04": {
+          "zh-TW": "國際 EMS 體系與資源配置",
+          "en": "International EMS system and resource allocation"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "英美、法德與混合體系",
+          "en": "Anglo-American, French-German and mixed systems"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "英美體系的成本效益",
+          "en": "The cost-effectiveness of the Anglo-American system"
+        },
+        "l1-05": {
+          "zh-TW": "到院前處置的兩大模式",
+          "en": "Two major modes of pre-hospital treatment"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "創傷：Load and Go",
+          "en": "Trauma: Load and Go"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "心臟與缺氧：Stay and Play",
+          "en": "Heart and hypoxia: Stay and Play"
+        },
+        "l1-06": {
+          "zh-TW": "臺灣 EMS 建制與災難應變",
+          "en": "Taiwan EMS organization and disaster response"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "法源與專業組織",
+          "en": "Legal sources and professional organizations"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "災難驅動的應變網絡",
+          "en": "Disaster-driven resilience network"
+        },
+        "l1-07": {
+          "zh-TW": "資料驅動的 EMS 改革願景",
+          "en": "Data-driven EMS reform vision"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "整合困境與改革方向",
+          "en": "Integration Difficulties and Reform Directions"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "EMSIS 與實證品質改善",
+          "en": "EMSIS and evidence quality improvement"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "無縫整合的 EMS 願景",
+          "en": "A seamlessly integrated EMS vision"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH002.src": {
+      "source_sha256": "a4f72068a05eccc179613bdfc5dcb889f4d0b371d5161417e1b9381796e7e2bb",
+      "chapters_sha256": "341077e0abbcb2bc416791eff460843fdb688e788bb42ed34977dd204df46014",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "EMS 發展條件與治理模式",
+          "en": "EMS development conditions and governance model"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "醫療發展與資源優先序",
+          "en": "Medical Development and Resource Prioritization"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "公私醫療與專業代理人",
+          "en": "Public and Private Medical and Professional Agents"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "行政權責與多元救護人力",
+          "en": "EMS Authority, Responsibilities, and Workforce"
+        },
+        "l1-03": {
+          "zh-TW": "運輸配置與 PA 聯結",
+          "en": "Transport configuration and PA connection"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "地形人口與載具選擇",
+          "en": "Terrain population and vehicle selection"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "PA 聯結與 OHCA 先遣救護",
+          "en": "PA Connect with OHCA First Aid"
+        },
+        "l1-04": {
+          "zh-TW": "英美與法德模式比較",
+          "en": "British-American vs Franco-German EMS Models"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "法德 Stay and Play",
+          "en": "France and Germany Stay and Play"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "英美 Scoop and Run",
+          "en": "British and American Scoop and Run"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "OHCA 與兩大模式融合",
+          "en": "OHCA integrates with two major models"
+        },
+        "l1-05": {
+          "zh-TW": "派遣分流與重症繞道",
+          "en": "Dispatch triage and critical illness bypass"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "集中派遣與法國線上分流",
+          "en": "Centralized dispatch and French online distribution"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "三大重症 Bypass Policy",
+          "en": "Three major serious diseases Bypass Policy"
+        },
+        "l1-06": {
+          "zh-TW": "EMT-P 訓練與專業化",
+          "en": "EMT-P Training and Specialization"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "訓練時數與臺灣 EMT-P",
+          "en": "Training hours and Taiwan EMT-P"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "澳洲大學學位制",
+          "en": "Australian university degree system"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "跨國文獻的外推陷阱",
+          "en": "Extrapolation pitfalls of cross-national literature"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH003.src": {
+      "source_sha256": "21ee8a25e3e37ef02658f25b8cf3cf452d7a64eab27e01a5b831b0d9b806052c",
+      "chapters_sha256": "9961d26f4d1bf38aaec2b8895afc5544afeaade6819eac72c15c6581d7ea2805",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "到院前救護的法制化",
+          "en": "Legalization of pre-hospital care"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "純運送與黃金半小時困境",
+          "en": "Pure Shipping and the Golden Half-Hour Dilemma"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "《醫療法》盲點與 1995 合法化",
+          "en": "Blind Spots of the Medical Act and 1995 Legalization"
+        },
+        "l1-03": {
+          "zh-TW": "法規架構與核心定義",
+          "en": "Regulatory Structure and Core Definitions"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "三大品管與法規體系",
+          "en": "Three major quality control and regulatory systems"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "衛福部與內政部雙主管制",
+          "en": "Dual Oversight: Health and Interior Ministries"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "傷病患類別與十五人門檻",
+          "en": "Injury Categories and the 15-Patient Threshold"
+        },
+        "l1-04": {
+          "zh-TW": "地方 EMS 的法定運作",
+          "en": "Legal Operations of Local EMS"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "119 指揮中心職責",
+          "en": "119 Command Center Responsibilities"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "救護車設置資格",
+          "en": "Ambulance setting qualifications"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "急救責任醫院職責",
+          "en": "Emergency Responsibility Hospital Responsibilities"
+        },
+        "l1-05": {
+          "zh-TW": "EMT 分級與技能授權",
+          "en": "EMT Classification and Skills Licensing"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "EMT-1 呼吸道與協助用藥",
+          "en": "EMT-1 Respiratory and Assisted Medication Administration"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "EMT-2 靜脈輸液",
+          "en": "EMT-2 IV Infusion"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "EMT-P 與預立醫療流程",
+          "en": "EMT-P and advance care procedures"
+        },
+        "l1-06": {
+          "zh-TW": "三層醫療指導制度",
+          "en": "Three-tier medical guidance system"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "前瞻性流程與訓練",
+          "en": "Proactive processes and training"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "即時性 Online Medical Direction",
+          "en": "Immediacy Online Medical Direction"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "回溯性品質改善",
+          "en": "Retrospective quality improvement"
+        },
+        "l1-07": {
+          "zh-TW": "善良撒瑪利亞人法與急救免責",
+          "en": "Good Samaritan Law and First Aid Exemption"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH004.src": {
+      "source_sha256": "f2b84b56dae2df0eb385052fc2d0935d616586406ec4700c9d8b0251af2cfa5c",
+      "chapters_sha256": "1c2ed9d5da97c13c2cb29bd021df53984f7bb57f62fb826b331dc4347c9e8d2a",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "EMS 法源與醫療指導",
+          "en": "EMS legal sources and medical guidance"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "急診專業化的三個里程碑",
+          "en": "Three Milestones in Emergency Specialization"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "MD 職責與預立醫療流程",
+          "en": "MD Responsibilities and Advance Care Process"
+        },
+        "l1-03": {
+          "zh-TW": "EM Model 的急迫性與資源對齊",
+          "en": "EM Model Urgency and Resource Alignment"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "三層急迫性決策矩陣",
+          "en": "Three-level urgency decision matrix"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "STEMI 資源啟動與照護轉移",
+          "en": "STEMI Resource Initiation and Care Transfer"
+        },
+        "l1-04": {
+          "zh-TW": "Milestones 的能力評估",
+          "en": "Milestones Competency Assessment"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "CBME 與動態能力等級",
+          "en": "CBME and dynamic capability levels"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "PC1 與 PC7 臨床能力",
+          "en": "PC1 and PC7 Clinical Competencies"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "ICS2 與 SBP2 系統能力",
+          "en": "ICS2 and SBP2 system capabilities"
+        },
+        "l1-05": {
+          "zh-TW": "EPA 任務與交接風險",
+          "en": "EPA Mission and Transition Risks"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "OHCA 藥物與呼吸道交接",
+          "en": "OHCA drug and respiratory tract handover"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "中毒除污與二次暴露",
+          "en": "Poisoning decontamination and secondary exposure"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "外傷、休克與神經呼吸任務",
+          "en": "Trauma, shock and neurorespiratory tasks"
+        },
+        "l1-06": {
+          "zh-TW": "EMS 學習護照實務訓練",
+          "en": "EMS learning passport practical training"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "救護現場實習",
+          "en": "Rescue field internship"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "指揮中心與 DA-CPR",
+          "en": "Command Center and DA-CPR"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "會議、教學與 MD 實作",
+          "en": "Conferences, Teaching and MD Implementation"
+        },
+        "l1-07": {
+          "zh-TW": "EMS 次專長與極端環境救護",
+          "en": "EMS Sub-Specialty and Extreme Environment Rescue"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "MD 認證與災難搜救",
+          "en": "MD Certification and Disaster Rescue"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "偏遠與空中救護",
+          "en": "Remote and air ambulance"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "TCCC 戰傷救護",
+          "en": "TCCC combat casualty care"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH005.src": {
+      "source_sha256": "8974085a94710d8ff2d2f4bd1ddd0d1ac59fb2d24c3029dca4b035c049d0fbb7",
+      "chapters_sha256": "24091be309c61b3bdab03c2cebceae43b522e93116b26b540f1e0a95e7209b38",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "EMS 風險數據與安全文化",
+          "en": "EMS risk data and safety culture"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "救護勤務的風險熱區",
+          "en": "Risk hot spots for ambulance services"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "系統性安全文化",
+          "en": "systemic safety culture"
+        },
+        "l1-03": {
+          "zh-TW": "TRM 與共同情境意識",
+          "en": "TRM and shared situational awareness"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "隧道視覺與動態風險評估",
+          "en": "Tunnel Vision and Dynamic Risk Assessment"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "檢核表、閉環溝通與衝突管理",
+          "en": "Checklists, closed-loop communication and conflict management"
+        },
+        "l1-04": {
+          "zh-TW": "救護車與道路安全",
+          "en": "Ambulance and road safety"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "緊急模式的風險代價",
+          "en": "The cost of risk in emergency mode"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "分心駕駛與副駕駛防線",
+          "en": "Distracted driving and co-pilot defense"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "現場部署與道路防護",
+          "en": "On-site deployment and road protection"
+        },
+        "l1-05": {
+          "zh-TW": "病人安全事件與暴力風險",
+          "en": "Patient Safety Incidents and Violence Risks"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "安全事件分級與高風險族群",
+          "en": "Security incident classification and high-risk groups"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "攻擊性與疾病機轉判別",
+          "en": "Identification of aggression and disease mechanisms"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "L 型隊形、降階與安全約束",
+          "en": "L-shaped formation, de-escalation and safety constraints"
+        },
+        "l1-06": {
+          "zh-TW": "職業傷害與心理健康",
+          "en": "Occupational Injuries and Mental Health"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "搬運傷害與感染防護",
+          "en": "Handling Injury and Infection Protection"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "PTSD 與同儕支持",
+          "en": "PTSD and peer support"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH006.src": {
+      "source_sha256": "21aabd6d19714010f110571180c12e242d599fbd64485589e61f3a9a1f7b2e94",
+      "chapters_sha256": "e19c20399f580bca2004c49c582243d19965f480178abe4ea4bd17919f0c2453",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "第一反應者的角色與處置順序",
+          "en": "First responder roles and procedures"
+        },
+        "l1-03": {
+          "zh-TW": "創傷與腦中風的時間視窗",
+          "en": "Time window for trauma and stroke"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "創傷死亡模式與白金十分鐘",
+          "en": "Trauma Death Mode and Platinum Ten Minutes"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "中風篩檢與正確送院",
+          "en": "Stroke screening and correct hospital admission"
+        },
+        "l1-04": {
+          "zh-TW": "AMI 與 OHCA 的院前搶救",
+          "en": "Prehospital care of AMI and OHCA"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "FMC2B 與到院前心電圖",
+          "en": "FMC2B and prehospital ECG"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "善良撒瑪利亞人法與 AED 網絡",
+          "en": "Good Samaritan Law and the AED Network"
+        },
+        "l1-05": {
+          "zh-TW": "EMD 派遣與 DA-CPR",
+          "en": "EMD Dispatch and DA-CPR"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "派遣功能與 BLS／ALS 分流",
+          "en": "Dispatch function and BLS/ALS offloading"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "瀕死呼吸辨識與壓胸指導",
+          "en": "Agonal Breathing and CPR Coaching"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "DA-CPR 品質指標",
+          "en": "DA-CPR quality indicators"
+        },
+        "l1-06": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH007.src": {
+      "source_sha256": "ee6357088668e06d16183f751ae703ac16048026a4ca2fad8d43c9457cab5f90",
+      "chapters_sha256": "f4c6086cfa109fefff022a5d19ac05891bb390b1a831c8d830fecf7df37d36f1",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "119 派遣定位與基本流程",
+          "en": "119 Dispatch positioning and basic process"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "First First Responder 與集中派遣",
+          "en": "First First Responder and centralized dispatch"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "地址優先與 CAD 雙重定位",
+          "en": "Address priority and CAD dual positioning"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "四大關鍵問題",
+          "en": "Four key questions"
+        },
+        "l1-03": {
+          "zh-TW": "案件分級與派遣後指導",
+          "en": "Case classification and post-dispatch guidance"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "ECHO 至 Omega 資源分級",
+          "en": "ECHO to Omega Resource Rating"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "DA-CPR 與即時急救指令",
+          "en": "DA-CPR and immediate first aid instructions"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "線上指導迷思與專業要求",
+          "en": "Online Mentoring Myths and Professional Requirements"
+        },
+        "l1-04": {
+          "zh-TW": "疫情派遣與分級防護",
+          "en": "Epidemic dispatch and hierarchical protection"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "TOCC 與發燒門檻",
+          "en": "TOCC and fever threshold"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "三級 PPE 與 OHCA 例外",
+          "en": "Level 3 PPE and OHCA Exceptions"
+        },
+        "l1-05": {
+          "zh-TW": "現場危急檢傷與五級制度",
+          "en": "On-site critical injury assessment and five-level system"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "檢傷原則與歷史",
+          "en": "Principles and History of Injury Trial"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "四類危急條件與數值",
+          "en": "Four types of critical conditions and values"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "五級檢傷與雲端輔助",
+          "en": "Five-level injury inspection and cloud assistance"
+        },
+        "l1-06": {
+          "zh-TW": "大量傷患的 SALT 與 START",
+          "en": "SALT and START for Massive Injuries"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "顏色分級與一分鐘目標",
+          "en": "Color Grading and One Minute Goals"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "SALT 的救命介入",
+          "en": "SALT’s life-saving intervention"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "START 檢傷口訣：30、2、Can Do",
+          "en": "START Wound inspection tips: 30, 2, Can Do"
+        },
+        "l1-07": {
+          "zh-TW": "逆向檢傷與動態例外",
+          "en": "Reverse damage detection and dynamic exceptions"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "雷擊的逆向檢傷",
+          "en": "Reverse diagnosis of lightning strikes"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "燒燙傷與 START 盲點",
+          "en": "Burns and Scalds and START Blind Spots"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH008.src": {
+      "source_sha256": "48e0283110019a67c0177b4b8cc3f10b47e7d47066ffac8abce441898f439c0d",
+      "chapters_sha256": "f53c89f9b70f73f4af88fa29676ffef9f066af3ece7b6bcd185f2f28edce6a25",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "現場安全與 MCI 啟動",
+          "en": "Site Safety and MCI Startup"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "八步環境安全評估",
+          "en": "Eight-step environmental safety assessment"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "傷患規模與 MCI 啟動",
+          "en": "Injury scale and MCI initiation"
+        },
+        "l1-03": {
+          "zh-TW": "創傷 X：致命出血優先",
+          "en": "Trauma X: Fatal hemorrhage priority"
+        },
+        "l1-04": {
+          "zh-TW": "創傷 A–B：呼吸道與通氣",
+          "en": "Trauma A–B: Airway and Ventilation"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "頸椎保護與 HEAVEN",
+          "en": "Cervical Spine Protection with HEAVEN"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "呼吸紅線與 BVM 通氣",
+          "en": "Breathing Red Line and BVM Ventilation"
+        },
+        "l1-05": {
+          "zh-TW": "創傷 C–E：灌流、神經與暴露",
+          "en": "Trauma C–E: Perfusion, Nerves, and Exposure"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "CRT 與灌流評估",
+          "en": "CRT and perfusion assessment"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "GCS、瞳孔與 Drop Test",
+          "en": "GCS, Pupil and Drop Test"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "暴露檢查與骨盆固定",
+          "en": "Exposure examination and pelvic immobilization"
+        },
+        "l1-06": {
+          "zh-TW": "非創傷初評與危急檢傷",
+          "en": "Nontrauma Assessment and Critical Triage"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "十秒呼吸循環與血流動力",
+          "en": "Ten-second respiratory cycle and hemodynamics"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "二分危急檢傷紅線",
+          "en": "Two-point critical injury examination red line"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "二分法限制與五級檢傷",
+          "en": "Dichotomy restriction and five-level injury inspection"
+        },
+        "l1-07": {
+          "zh-TW": "SOP、關鍵思考與低血糖處置",
+          "en": "SOP, key considerations and hypoglycemia treatment"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "SOP 與 EMT-P 權限",
+          "en": "SOP and EMT-P permissions"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "流程護欄與關鍵思考",
+          "en": "Process Guardrails and Key Thoughts"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "低血糖個案處置",
+          "en": "Handling hypoglycemia cases"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH009.src": {
+      "source_sha256": "acbd5db9ba3620635a5b4fcc5fc75029c24e0f553c7b39cf78cafe104bda2a0f",
+      "chapters_sha256": "51418accee637a4e99241becbc4e069750b3ecd8749be148d19bf7b1747409b3",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "院前危急判斷與 XABCDE",
+          "en": "Prehospital critical assessment and XABCDE"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "四層次危急評估",
+          "en": "Four levels of crisis assessment"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "失代償紅旗與高危機轉",
+          "en": "Decompensation red flags and high crisis transition"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "XABCDE 與大出血優先",
+          "en": "XABCDE with major bleeding first"
+        },
+        "l1-03": {
+          "zh-TW": "SMR 與呼吸道輔具",
+          "en": "SMR and respiratory assistive devices"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "頸椎活動限制的效益與傷害",
+          "en": "Benefits and harms of cervical spine movement restriction"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "OPA、NPA 與 SGA 選擇",
+          "en": "OPA, NPA and SGA options"
+        },
+        "l1-04": {
+          "zh-TW": "IO 適應症與 IV 優先原則",
+          "en": "IO indications and IV priority principles"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "IO 建立、位置與禁忌",
+          "en": "IO establishment, location and taboos"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "OHCA 證據與 IV 優先",
+          "en": "OHCA Evidence & IV Priority"
+        },
+        "l1-05": {
+          "zh-TW": "院前 FAST 與創傷分流",
+          "en": "Prehospital FAST and trauma triage"
+        },
+        "l1-06": {
+          "zh-TW": "止血帶的適應症與操作",
+          "en": "Indications and operations of tourniquets"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH010.src": {
+      "source_sha256": "b83078f7990553441dd1fca6842a041e1addd4b6876e83a4e8d13b7b224fade9",
+      "chapters_sha256": "404f11b9404c463ea2a71a20b932e4346a2b6c1512ec8cfdecda52e9a607eb9c",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "社區生命鏈與旁觀者 CPR",
+          "en": "Community Life Chain and Bystander CPR"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "生命鏈啟動與法律免責",
+          "en": "Life chain activation and legal exemption"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "可電擊心律與 AED 機轉",
+          "en": "Shockable Rhythm and AED Switching"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "叫叫壓電與瀕死式呼吸",
+          "en": "Screaming Piezoelectricity and Dying Breathing"
+        },
+        "l1-03": {
+          "zh-TW": "AED 實務與社區急救網絡",
+          "en": "AED Practice and Community First Aid Network"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "AED 操作的三個陷阱",
+          "en": "Three pitfalls of AED operation"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "公共 AED 與志願者通知",
+          "en": "Public AED and Volunteer Notices"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "旁觀者停止 CPR 時機",
+          "en": "When bystanders stop CPR"
+        },
+        "l1-04": {
+          "zh-TW": "現場 ALS 團隊與復甦流程",
+          "en": "On-site ALS team and resuscitation process"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "Stay and Play、PA Pairing 與 TRM",
+          "en": "Stay and Play, PA Pairing and TRM"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "心律分類與復甦用藥",
+          "en": "Cardiac Rhythm Classification and Resuscitation Medication"
+        },
+        "l1-05": {
+          "zh-TW": "復甦管路與品質監測",
+          "en": "Resuscitation pipeline and quality monitoring"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "IO 快速建立給藥通路",
+          "en": "IO quickly establishes drug administration pathways"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "mCPR 架設與中斷風險",
+          "en": "mCPR Setup and Interruption Risks"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "ETCO₂ 與 CPR 品質",
+          "en": "ETCO₂ and CPR Quality"
+        },
+        "l1-06": {
+          "zh-TW": "ECPR 分流與時間策略",
+          "en": "ECPR triage and timing strategies"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "區域化網絡與 ECPR 效益",
+          "en": "Regionalized Networks and ECPR Benefits"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "ECPR 適應症與快速離場",
+          "en": "ECPR Indications and Rapid Departure"
+        },
+        "l1-07": {
+          "zh-TW": "現場死亡與 TOR 決策",
+          "en": "Live Death and TOR Decisions"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "明顯不可逆死亡與 EMT 權限",
+          "en": "Apparent Irreversible Death and EMT Clearance"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "西方 TOR 準則與效益",
+          "en": "Western TOR guidelines and benefits"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "臺灣 TOR 法規限制",
+          "en": "Taiwan TOR regulatory restrictions"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH011.src": {
+      "source_sha256": "30578032116be67e574aac10f18e2197c96c3edd3ce0a26513fecf9f4c64026a",
+      "chapters_sha256": "c6d177eb61ca1848d72213489e8c4c226b319ee803816512eb5a4cdc88c63874",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "XABCDE 與致命大出血",
+          "en": "XABCDE and fatal hemorrhage"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "X 優先於呼吸道的生理邏輯",
+          "en": "Why X Precedes Airway"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "止血帶時機與 High and Tight",
+          "en": "Tourniquet Timing and High and Tight"
+        },
+        "l1-03": {
+          "zh-TW": "出血性休克復甦策略",
+          "en": "Hemorrhagic shock resuscitation strategies"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "允許性低血壓與 TXA",
+          "en": "Permissive hypotension and TXA"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "嚴重 TBI 的灌流例外",
+          "en": "Perfusion Exceptions for Severe TBI"
+        },
+        "l1-04": {
+          "zh-TW": "院前休克辨識",
+          "en": "Prehospital shock identification"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "隱匿失血與躁動警訊",
+          "en": "Hidden warning signs of blood loss and agitation"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "神經性休克與 Shock Index",
+          "en": "Neurogenic Shock and Shock Index"
+        },
+        "l1-05": {
+          "zh-TW": "胸部致命急症與穿刺傷",
+          "en": "Fatal chest emergencies and puncture wounds"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "張力性氣胸與針刺減壓",
+          "en": "Tension pneumothorax and acupuncture decompression"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "開放性氣胸與異物固定",
+          "en": "Open pneumothorax and foreign body fixation"
+        },
+        "l1-06": {
+          "zh-TW": "SMR 與不完全脊髓損傷",
+          "en": "SMR and incomplete spinal cord injury"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "長背板與活動限制",
+          "en": "Long backboard and movement restrictions"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "三類不完全脊髓症候群",
+          "en": "Incomplete spinal cord syndrome type III"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "NEXUS 頸圈排除法則",
+          "en": "NEXUS collar elimination rule"
+        },
+        "l1-07": {
+          "zh-TW": "TBI 腦灌流與 EPIC-TBI",
+          "en": "TBI Cerebral Perfusion and EPIC-TBI"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "CPP、MAP 與 ICP",
+          "en": "CPP, MAP and ICP"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "3H 與過度換氣傷害",
+          "en": "3H and hyperventilation injury"
+        },
+        "l1-07-l2-03": {
+          "zh-TW": "EPIC-TBI 四項處置",
+          "en": "EPIC-TBI four treatments"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH012.src": {
+      "source_sha256": "968f91a01ee99b46cf00ef1ce9feb3213c516465c2a376b0fdd9be89db3be318",
+      "chapters_sha256": "d9bafa2c60c4ec53ace271c77b72cd91382526bfca26e64038174bedd8bc1bd1",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "ACS 臨床辨識",
+          "en": "ACS clinical identification"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "胸痛特質優先於危險因子",
+          "en": "Chest pain traits take precedence over risk factors"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "非典型 ACS 與上腹痛",
+          "en": "Atypical ACS and epigastric pain"
+        },
+        "l1-03": {
+          "zh-TW": "ACS 診斷與再灌流時效",
+          "en": "Diagnosis of ACS and timeliness of reperfusion"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "確診標準與 FMC-to-Balloon",
+          "en": "Diagnosis criteria and FMC-to-Balloon"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "超急性 T 波與 Aspirin",
+          "en": "Hyperacute T waves and Aspirin"
+        },
+        "l1-04": {
+          "zh-TW": "主動脈剝離與肺栓塞",
+          "en": "Aortic dissection and pulmonary embolism"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "主動脈剝離的紅旗與偽裝",
+          "en": "Red flags and camouflage of aortic dissection"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "肺栓塞風險與 S1Q3T3 迷思",
+          "en": "Pulmonary embolism risk and S1Q3T3 myths"
+        },
+        "l1-05": {
+          "zh-TW": "胸腔壓力急症",
+          "en": "chest pressure emergency"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "張力性氣胸與超音波",
+          "en": "Tension pneumothorax and ultrasound"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "心包膜填塞與前負荷支持",
+          "en": "Pericardial tamponade and preload support"
+        },
+        "l1-06": {
+          "zh-TW": "緩脈與頻脈處置",
+          "en": "Treatment of slow and frequent pulses"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "不穩定徵候判斷",
+          "en": "Judgment of unstable symptoms"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "Atropine 禁忌與 TCP",
+          "en": "Atropine Contraindications and TCP"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "同步整流與迷走神經刺激",
+          "en": "Synchronous rectification and vagus nerve stimulation"
+        },
+        "l1-07": {
+          "zh-TW": "社區 AED 與到院前心電圖",
+          "en": "Community AED and pre-hospital ECG"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "急救先鋒與聽見 AED",
+          "en": "First Aid Pioneer and Hearing AED"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "到院前 ECG 的時效成果",
+          "en": "Time-sensitive results of pre-hospital ECG"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH013.src": {
+      "source_sha256": "2e5063f63fff1f244a0860ab263b8efcf5c9e17ba0cc3ed4f0f3adefaca0bd14",
+      "chapters_sha256": "2e9f2162e49d2f64011f74563bc07c1d8d163618d72391f236d82a733a2bd30d",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "意識障礙概念與量表",
+          "en": "Concepts and scales of disorders of consciousness"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "警覺度、意識內容與昏迷",
+          "en": "Alertness, content of consciousness, and coma"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "GCS 的用途與盲區",
+          "en": "The uses and blind spots of GCS"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "FOUR Score 與腦幹評估",
+          "en": "FOUR Score and Brainstem Assessment"
+        },
+        "l1-03": {
+          "zh-TW": "現場 ABC 與病因線索",
+          "en": "Live ABC and clues to the cause"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "現場安全與初步 ABC",
+          "en": "Site Safety and Preliminary ABC"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "AEIOU TIPS 與環境物證",
+          "en": "AEIOU TIPS and environmental evidence"
+        },
+        "l1-04": {
+          "zh-TW": "中風篩檢與顱內壓警訊",
+          "en": "Stroke screening and intracranial pressure warning signs"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "FAST、8D 與 CT 鑑別",
+          "en": "FAST, 8D and CT identification"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "Cushing Triad 生理機轉",
+          "en": "Cushing Triad Physiology"
+        },
+        "l1-05": {
+          "zh-TW": "tPA 與 EVT 分流策略",
+          "en": "tPA and EVT offload strategy"
+        },
+        "l1-06": {
+          "zh-TW": "癲癇現場處置",
+          "en": "Epilepsy on-site treatment"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "發作安全與重積狀態辨識",
+          "en": "Seizure safety and reaccumulation state identification"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "IM Midazolam 與特殊族群",
+          "en": "IM Midazolam and special ethnic groups"
+        },
+        "l1-07": {
+          "zh-TW": "低血糖處置與拒絕送醫",
+          "en": "Hypoglycemia Care and Refusal of Transport"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "低血糖辨識與補糖路徑",
+          "en": "Hypoglycemia identification and sugar supplementation route"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "清醒後拒絕送醫與紀錄",
+          "en": "Post-Recovery Refusal and Documentation"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH014.src": {
+      "source_sha256": "74e33b1dc46fb7df7d0f14c1d871dce38435be469acedea3c78ccb88e7ed9295",
+      "chapters_sha256": "e4bb3dc194ebc6386f74e68f6f088c6896ddc9482fefa0a087453dee171f2291",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "呼吸道解剖陷阱",
+          "en": "Respiratory anatomy trap"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "舌根後墜與右主支氣管插入",
+          "en": "Tongue base retropulsion and right main bronchus insertion"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "吸入性灼傷與提早建置氣道",
+          "en": "Inhalation burns and early airway establishment"
+        },
+        "l1-03": {
+          "zh-TW": "呼吸衰竭快速評估",
+          "en": "Rapid assessment of respiratory failure"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "十秒評估與代償耗竭",
+          "en": "Ten Second Assessment and Compensatory Exhaustion"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "休克時 SpO₂ 的盲點",
+          "en": "Blind spot of SpO₂ in shock"
+        },
+        "l1-04": {
+          "zh-TW": "徒手、SGA 與氣管插管",
+          "en": "Manual, SGA and endotracheal intubation"
+        },
+        "l1-05": {
+          "zh-TW": "ETCO₂ 與院前插管極限",
+          "en": "ETCO₂ and the limits of prehospital intubation"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "插管定位與灌流監測",
+          "en": "Intubation positioning and perfusion monitoring"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "困難插管與降階備援",
+          "en": "Difficult intubation and de-escalation backup"
+        },
+        "l1-06": {
+          "zh-TW": "外傷優先序與 DOPE 排查",
+          "en": "Trauma Prioritization and DOPE Investigation"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "大出血優先與 Load and Go",
+          "en": "Hemorrhage Priority vs. Load and Go"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "正壓通氣與張力性氣胸",
+          "en": "Positive pressure ventilation and tension pneumothorax"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH015.src": {
+      "source_sha256": "d0a1b008eec346a2ac7ce96c1ec94b877443c4ea81945f9c5a7c6ea7ab0ac280",
+      "chapters_sha256": "934440ce060b4c0ca3ca1990dd033391a3ccea05b6cf83140a018afc64e44c7f",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "過敏性休克辨識與現場線索",
+          "en": "Anaphylactic shock identification and on-site clues"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "立即型過敏與跨系統崩潰",
+          "en": "Immediate allergies and cross-system crashes"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "欺騙性主訴與過敏原搜尋",
+          "en": "Deceptive Complaints and Allergen Searches"
+        },
+        "l1-03": {
+          "zh-TW": "過敏性休克急救處置",
+          "en": "Anaphylactic shock first aid treatment"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "危急分級、輸液與 Epinephrine",
+          "en": "Crisis classification, infusion, and epinephrine"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "IM 給藥與大腿外側注射",
+          "en": "IM administration and lateral thigh injection"
+        },
+        "l1-04": {
+          "zh-TW": "毒化災現場安全與壓迫症候群",
+          "en": "Poison disaster site safety and oppression syndrome"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "氣體偵測、防護與安全區",
+          "en": "Gas Detection, Protection and Safety Zone"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "延遲脫困與再灌流高血鉀",
+          "en": "Delayed escape and reperfusion hyperkalemia"
+        },
+        "l1-05": {
+          "zh-TW": "一氧化碳中毒",
+          "en": "carbon monoxide poisoning"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "非特異症狀與 100% 氧氣",
+          "en": "Non-specific symptoms with 100% oxygen"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "潛在患者與火場複合中毒",
+          "en": "Compound poisoning of potential patients and fire scenes"
+        },
+        "l1-06": {
+          "zh-TW": "有機磷毒性與 Atropine",
+          "en": "Organophosphorus toxicity and Atropine"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "膽鹼危象與 Killer B's",
+          "en": "Cholinergic Crisis and Killer B's"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "自我防護與 Atropine 終點",
+          "en": "Self-Protection and Atropine Endpoints"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH016.src": {
+      "source_sha256": "93ab0a810385d424832783c0ef3d50d930c1f2f39d9b6dda41e29b2381b80a85",
+      "chapters_sha256": "3e05e940b1b1ec4bfbf205421e885b6657d4f64a0f3110204c105db548ecd286",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "EMT 現場情報與照護延續",
+          "en": "EMT field intelligence and continuation of care"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "情報遺漏與處置差距",
+          "en": "Intelligence omissions and processing gaps"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "長途與跨縣市轉送",
+          "en": "Long-distance and inter-county transfer"
+        },
+        "l1-03": {
+          "zh-TW": "交班障礙與標準化回讀",
+          "en": "Handover barriers and standardized readback"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "環境、科技與文化障礙",
+          "en": "Environmental, technological and cultural barriers"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "ISBAR、SOAP、DMIST 與回讀",
+          "en": "ISBAR, SOAP, DMIST and readback"
+        },
+        "l1-04": {
+          "zh-TW": "時間急症的預先通知",
+          "en": "Advance notification of time emergencies"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "四大急症與創傷小組啟動",
+          "en": "Four emergency and trauma teams activated"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "中風、STEMI 與反應時間重疊",
+          "en": "Stroke, STEMI and reaction time overlap"
+        },
+        "l1-05": {
+          "zh-TW": "接手後的批判性重評",
+          "en": "Critical reappraisal after taking over"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "長背板移除與重新評估",
+          "en": "Long back panel removal and re-evaluation"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "疼痛掩蓋下的隱藏傷",
+          "en": "Hidden injuries masked by pain"
+        },
+        "l1-06": {
+          "zh-TW": "救護紀錄表的動態解讀",
+          "en": "Dynamic interpretation of the rescue record sheet"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "派遣與處置時間軸",
+          "en": "Dispatch and Disposal Timeline"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "三段生命徵象趨勢",
+          "en": "Three vital sign trends"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "ALS 處置與用藥紀錄",
+          "en": "ALS Disposal and Medication Records"
+        },
+        "l1-07": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH017.src": {
+      "source_sha256": "119ffd0e91222e47a01c8c9592c90577b0243f51fd5e3cddb33e953e5c44e416",
+      "chapters_sha256": "5f9581ac8858d5aa565a6b9d48d50227eb0cc8b92490a87eca1d1536ce50e58d",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "大量傷患定義與功利主義",
+          "en": "Mass injury definitions and utilitarianism"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "事故、多重傷患與災難界定",
+          "en": "Accidents, multiple injuries and disaster definitions"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "有限資源下的檢傷倫理",
+          "en": "Trial ethics under limited resources"
+        },
+        "l1-03": {
+          "zh-TW": "救護車湧入與跨院量能調度",
+          "en": "Ambulance influx and inter-hospital capacity dispatch"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "預先通知與主動部署",
+          "en": "Advance notification and proactive deployment"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "延遲重患與傷害控制後送",
+          "en": "Delayed critical illness and damage control evacuation"
+        },
+        "l1-04": {
+          "zh-TW": "院內檢傷與稀缺資源分配",
+          "en": "In-Hospital Triage and Scarce Resources"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "經驗檢傷與手術室排序",
+          "en": "Experience diagnosis and operating room sequencing"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "TMSS 電子傷票與三 T 追蹤",
+          "en": "TMSS Electronic Injury Ticket and Three T Tracking"
+        },
+        "l1-05": {
+          "zh-TW": "START 檢傷的生理盲點",
+          "en": "START Physiological blind spots in injury diagnosis"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "燒燙傷與吸入傷的假綠色",
+          "en": "Fake green color for burns, scalds and inhalation injuries"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "軀幹穿刺傷的優先辨識",
+          "en": "Prioritized identification of puncture wounds to the torso"
+        },
+        "l1-06": {
+          "zh-TW": "院前處置交班的致命陷阱",
+          "en": "The fatal trap of pre-hospital treatment shift"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "針刺減壓失效與手指胸腔造口術",
+          "en": "Failure of acupuncture decompression and digital thoracostomy"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "止血帶遺漏與禁忌移除",
+          "en": "Tourniquet omission and contraindicated removal"
+        },
+        "l1-06-l2-03": {
+          "zh-TW": "肱骨骨針與胸管操作衝突",
+          "en": "Humeral spicules conflict with chest tube operation"
+        },
+        "l1-07": {
+          "zh-TW": "極端情境解題與現場醫療官",
+          "en": "Extreme-Scenario Decisions and Medical Command"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "門口檢傷、斷指後送與脊椎限制",
+          "en": "Doorway Triage, Amputation Transport, Spine Restriction"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "災難現場醫療官的準備與權責",
+          "en": "Disaster Medical Officer: Preparation and Duties"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH018.src": {
+      "source_sha256": "db87d148e8ef7314004297bad8c89ad80b017d5beff3c6eb2e573503cd2e3176",
+      "chapters_sha256": "30824a30d2f8b5c4694c2d700fd59f07b4fc51eeb70762ca8fc08750750b687b",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "偏遠地區定義與資源落差",
+          "en": "Definition of remote areas and resource gap"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "法規與醫療分級",
+          "en": "Regulations and Medical Classification"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "資源集中造成的偏鄉困境",
+          "en": "Rural dilemma caused by resource concentration"
+        },
+        "l1-03": {
+          "zh-TW": "野外救護層級與安全倫理",
+          "en": "Wilderness rescue levels and safety ethics"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "WFA／WFR／WEMT／WALS 能力",
+          "en": "WFA/WFR/WEMT/WALS capabilities"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "救援者安全與醫療指導",
+          "en": "Rescuer safety and medical guidance"
+        },
+        "l1-04": {
+          "zh-TW": "空中救護的高空物理與適應症",
+          "en": "High Altitude Physics and Indications for Air Ambulance"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "波以耳、道耳頓與亨利定律",
+          "en": "Boyle, Dalton and Henry's Law"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "空中轉送適應症與限制",
+          "en": "Air transfer indications and restrictions"
+        },
+        "l1-05": {
+          "zh-TW": "離島空中轉送決策",
+          "en": "Outlying island air transfer decision"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "一機一載與地面先穩定",
+          "en": "One machine, one load, and the ground are stabilized first"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "VIP 個案與中央審核",
+          "en": "VIP Cases and Central Review"
+        },
+        "l1-06": {
+          "zh-TW": "水域救援與溺水急救",
+          "en": "Water rescue and drowning first aid"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "水域救援安全與 Reach–Wade–Throw–Row",
+          "en": "Water Rescue Safety and Reach–Wade–Throw–Row"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "溺水通氣優先與處置禁忌",
+          "en": "Ventilation priorities and contraindications for drowning"
+        },
+        "l1-07": {
+          "zh-TW": "低體溫處置與復溫原則",
+          "en": "Hypothermia treatment and rewarming principles"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "低體溫分級與心律風險",
+          "en": "Hypothermia classification and cardiac rhythm risk"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "低溫心搏判斷與持續復甦",
+          "en": "Judgment of hypothermic heartbeat and continuous resuscitation"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH019.src": {
+      "source_sha256": "8e2e07bc6213b9d3776160b1afa537c4922dbcef63ccca4447b4c2b39e372971",
+      "chapters_sha256": "1339f19c88a21b1a8f2260fcde7ab036d5183207d50dedfbdf18cc5466dcc502",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "HAZMAT 危害辨識與 ERG 查詢",
+          "en": "HAZMAT hazard identification and ERG query"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "HAZMAT 架構與危害辨識",
+          "en": "HAZMAT architecture and hazard identification"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "ERG 色頁與日夜隔離距離",
+          "en": "ERG color page with day and night isolation distance"
+        },
+        "l1-02-l2-03": {
+          "zh-TW": "SDS、GHS 與毒化物分類",
+          "en": "SDS, GHS and toxicant classification"
+        },
+        "l1-03": {
+          "zh-TW": "化災分區、事件指揮與外部支援",
+          "en": "Disaster zone, incident command and external support"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "紅黃綠區與 HICS 動線",
+          "en": "Red, Yellow, and Green Zones and HICS Movement Lines"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "毒物中心、解毒劑網與技術支援",
+          "en": "Poison Centers, Antidote Network and Technical Support"
+        },
+        "l1-04": {
+          "zh-TW": "化學防護裝備與除污實務",
+          "en": "Chemical PPE and Decontamination Practice"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "PPE A–D 等級選擇",
+          "en": "PPE Grade A–D Selection"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "脫衣與溫水除污",
+          "en": "Stripping and decontamination with warm water"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "遇水反應物的除污禁忌",
+          "en": "Water-Reactive Agents: Decontamination Contraindications"
+        },
+        "l1-05": {
+          "zh-TW": "輻射種類與時間距離屏蔽",
+          "en": "Radiation type and time distance shielding"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "α、β、γ 與中子傷害",
+          "en": "Alpha, beta, gamma and neutron damage"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "時間、距離、屏蔽與劑量上限",
+          "en": "Time, distance, shielding and dose limits"
+        },
+        "l1-06": {
+          "zh-TW": "輻射污染的急救優先與急性症候群",
+          "en": "Radiation Contamination: First Aid and Acute Syndromes"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "先急救後除污的優先順序",
+          "en": "First aid first, then decontamination priority"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "急性輻射症候群與器官劑量",
+          "en": "Acute radiation syndrome and organ dose"
+        },
+        "l1-07": {
+          "zh-TW": "放射性污染藥物與 DTPA 禁忌",
+          "en": "Radiocontamination Drugs and DTPA Contraindications"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH020.src": {
+      "source_sha256": "4862254609f23a59eb4d0a2d8a0f66b019b69c51602d7b21b0cbea89ce54af10",
+      "chapters_sha256": "a442fa23a2a77a65a7d95a3fe76f432f76535d11f5d1d0ee467c7d500c8ce9fd",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "兩段三級與前線 MARCH／PAWS",
+          "en": "Two Stages of Level 3 and the Frontline MARCH/PAWS"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "兩段三級戰傷醫療架構",
+          "en": "Two-stage three-level combat injury medical structure"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "MARCH 與 PAWS 前線流程",
+          "en": "MARCH and PAWS frontline processes"
+        },
+        "l1-03": {
+          "zh-TW": "前進外科小組與損傷控制處置",
+          "en": "Advancing Surgical Teams and Damage Control Treatment"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "FRSD 編制與任務",
+          "en": "FRSD Organization and Mission"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "DCR 與允許性低血壓",
+          "en": "DCR and permissive hypotension"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "DCS 及快速救命手術",
+          "en": "DCS and rapid life-saving surgery"
+        },
+        "l1-04": {
+          "zh-TW": "行動血庫與戰略物資儲備",
+          "en": "Mobile blood bank and strategic material reserve"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "Walking Blood Bank 與院前輸血",
+          "en": "Walking Blood Bank and pre-hospital blood transfusion"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "醫院戰略物資與後勤承載力",
+          "en": "Hospital strategic materials and logistics carrying capacity"
+        },
+        "l1-05": {
+          "zh-TW": "CBRNE 後勤與通訊脆弱性",
+          "en": "CBRNE Logistics and Communications Vulnerability"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "熱區止血、暖區除污與冷區解毒",
+          "en": "Hot-Zone Hemostasis, Warm-Zone Decon, Cold-Zone Antidotes"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "非醫療後勤與通訊中斷",
+          "en": "Non-medical logistics and communication disruptions"
+        },
+        "l1-06": {
+          "zh-TW": "戰傷醫學與災難醫學的差異",
+          "en": "Combat Casualty vs Disaster Medicine"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "任務目標與傷患風險",
+          "en": "Mission objectives and injury risks"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "軍民指揮鏈差異",
+          "en": "Differences in military and civilian chain of command"
+        },
+        "l1-07": {
+          "zh-TW": "軍民整合與醫療韌性",
+          "en": "Military-civilian integration and medical resilience"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "整合軍民系統的必要性",
+          "en": "The need to integrate military and civilian systems"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "由戰傷能力提升整體韌性",
+          "en": "Increase overall resilience through combat damage capabilities"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH021.src": {
+      "source_sha256": "8142338d4f16bbfd9b6e2992d1d268e196b4ac9c75e8e7c4c760784cf1c85b7d",
+      "chapters_sha256": "613c8c6cdefbc2739a69da8c0af8b3667e0fb4dbf18e38c31c2fa45a6cbd76ba",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "燃燒四面體與滅火原則",
+          "en": "Combustion tetrahedron and fire extinguishing principles"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "燃燒四面體",
+          "en": "burning tetrahedron"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "火災分類與燃料毒性",
+          "en": "Fire Classification and Fuel Toxicity"
+        },
+        "l1-03": {
+          "zh-TW": "火場危害、燒傷評估與輸液",
+          "en": "Fire Hazards, Burn Assessment and Infusion"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "濃煙優先與 XABCDE",
+          "en": "Heavy Smoke Priority and XABCDE"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "燒傷深度、面積與 Modified Brooke",
+          "en": "Burn depth, area and Modified Brooke"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "二度以上燒傷的全身液體流失",
+          "en": "Major Burns: Whole-Body Fluid Loss"
+        },
+        "l1-04": {
+          "zh-TW": "吸入性損傷與 CO／氰化物中毒",
+          "en": "Inhalation injury and CO/cyanide poisoning"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "吸入傷警訊與預防性插管",
+          "en": "Inhalation injury warnings and preventive intubation"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "一氧化碳中毒與高壓氧",
+          "en": "Carbon monoxide poisoning and hyperbaric oxygen"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "氰化物經驗性解毒",
+          "en": "Cyanide empiric detoxification"
+        },
+        "l1-05": {
+          "zh-TW": "侷限空間缺氧與硫化氫",
+          "en": "Hypoxia and hydrogen sulfide in confined space"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "缺氧濃度與進入裝備",
+          "en": "Hypoxia concentration and entry equipment"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "硫化氫嗅覺疲勞與解毒",
+          "en": "Hydrogen sulfide olfactory fatigue and detoxification"
+        },
+        "l1-06": {
+          "zh-TW": "壓砸傷症候群與再灌流處置",
+          "en": "Pressure injury syndrome and reperfusion treatment"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "腔室症候群與壓砸傷機轉",
+          "en": "Chamber syndrome and pressure trauma machine transfer"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "脫困前輸液、鹼化與高血鉀處理",
+          "en": "Pre-Extrication Fluids, Alkalinization, Hyperkalemia"
+        },
+        "l1-07": {
+          "zh-TW": "救援團隊安全與 ICS",
+          "en": "Rescue Team Security and ICS"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "四個 S 與安全幕僚",
+          "en": "The Four S’s and Security Staff"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "事故指揮、反英雄主義與心理創傷",
+          "en": "Incident command, anti-heroism and psychological trauma"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH022.src": {
+      "source_sha256": "20d3e2a06254ba6731be6855d50a4460c9390cf5fd970aeadb55ee4f9a1752d6",
+      "chapters_sha256": "c76a63d84b2413116dbfd3d64a075ac06ea4c379cf74eb02fdf4c6aadafd3c31",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "OHCA 存活差異與標準化需求",
+          "en": "OHCA Survival Gaps and Standardization"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "城市存活率的系統性落差",
+          "en": "Systemic gaps in urban survival rates"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "建立共同急救語言",
+          "en": "Establish a common emergency language"
+        },
+        "l1-03": {
+          "zh-TW": "Utstein 資料定義與神經學預後",
+          "en": "Utstein data definitions and neurological prognosis"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "復甦嘗試、病因與目擊狀態",
+          "en": "Resuscitation attempts, etiology, and witnessing status"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "CPC 神經學結局",
+          "en": "CPC neurological outcome"
+        },
+        "l1-04": {
+          "zh-TW": "Utstein 演進與 GRA 復甦聯盟",
+          "en": "Utstein Evolution and GRA Recovery Alliance"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "2004／2014 格式更新與 DACPR",
+          "en": "2004/2014 Format Updates and DACPR"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "Resuscitation Academy 與 GRA",
+          "en": "Resuscitation Academy and GRA"
+        },
+        "l1-05": {
+          "zh-TW": "GRA 十步驟與品質改善落地",
+          "en": "GRA ten steps and quality improvement implementation"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "登錄、電話 CPR 與社區 AED",
+          "en": "Login, Phone CPR and Community AED"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "從先導計畫建立可量測文化",
+          "en": "Build a measurable culture from pilot projects"
+        },
+        "l1-06": {
+          "zh-TW": "全球與臺灣 OHCA 登錄系統",
+          "en": "Global and Taiwan OHCA Login System"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "CARES、EuReCa 與 PAROS",
+          "en": "CARES, EuReCa and PAROS"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "臺灣 OHCA、外傷與 OSEM 串接",
+          "en": "Taiwan OHCA, trauma and OSEM tandem"
+        },
+        "l1-07": {
+          "zh-TW": "QI 方法：PDSA、RCA 與 Benchmarking",
+          "en": "QI methods: PDSA, RCA and Benchmarking"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "PDSA 循環實例",
+          "en": "PDSA loop example"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "根本原因分析與標竿學習",
+          "en": "Root cause analysis and benchmarking"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH023.src": {
+      "source_sha256": "9df81a3451f613a14e24b857ad14b4dcd97e22a785918110f8c24e4352f180fa",
+      "chapters_sha256": "904ddd8b2c455a86f7eed28d5f594ce4d1af5aa279e981f256a5425a6b570ebc",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "EMS 資訊流與自動偵測演進",
+          "en": "EMS information flow and automatic detection evolution"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "1966 白皮書與資訊流",
+          "en": "1966 White Paper and Information Flow"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "穿戴裝置與車禍自動通報",
+          "en": "Wearable devices and automatic notification of car accidents"
+        },
+        "l1-03": {
+          "zh-TW": "感測器驗證、隱私與群眾急救",
+          "en": "Sensor verification, privacy and crowd first aid"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "跌倒演算法與資料隱私",
+          "en": "Fall algorithm and data privacy"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "PSAP、急救先鋒與志願者",
+          "en": "PSAP, First Aid Pioneers and Volunteers"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "好撒瑪利亞人法與 AI 派遣",
+          "en": "Good Samaritan Law and AI Dispatch"
+        },
+        "l1-04": {
+          "zh-TW": "現場微型醫療設備與法定救護範圍",
+          "en": "On-site micro medical equipment and legal rescue scope"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "影像喉頭鏡、超音波與 RFID",
+          "en": "Imaging laryngoscope, ultrasound and RFID"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "遠距醫囑與法規授權",
+          "en": "Remote medical orders and regulatory authorization"
+        },
+        "l1-05": {
+          "zh-TW": "V2X 車聯網與 STEMO 中風救護車",
+          "en": "V2X Internet of Vehicles and STEMO Stroke Ambulance"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "V2X 智慧號誌通行",
+          "en": "V2X smart signal traffic"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "STEMO 車載 CT 與溶栓",
+          "en": "STEMO vehicle-mounted CT and thrombolysis"
+        },
+        "l1-06": {
+          "zh-TW": "零時差院前交接與救護員安全",
+          "en": "Zero-day pre-hospital handover and ambulance safety"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "院前心電圖與自動掛號",
+          "en": "Pre-hospital electrocardiogram and automatic registration"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "車載遙測與交通風險控制",
+          "en": "Vehicle telemetry and traffic risk control"
+        },
+        "l1-07": {
+          "zh-TW": "創新擴散與遠距醫療法規",
+          "en": "Innovation Diffusion and Telemedicine Regulation"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "Rogers 五項創新條件",
+          "en": "Rogers Five Conditions for Innovation"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "臺灣通訊診察治療辦法",
+          "en": "Taiwan Communication Diagnosis and Treatment Methods"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    },
+    "ems/ems-CH024.src": {
+      "source_sha256": "b221094786901b32712b1fcbc91865a65fcfd3ae8f5c33459b989c4fa41f46af",
+      "chapters_sha256": "8a877d5afd57cf89290e33e9526fea8c459ecb2abcab2c2ebc42d92a000c8c6a",
+      "titles": {
+        "l1-01": {
+          "zh-TW": "導論",
+          "en": "Introduction"
+        },
+        "l1-02": {
+          "zh-TW": "EMS 實證醫學的起源與 PASG 教訓",
+          "en": "EMS Evidence-Based Medicine: Origins and PASG Lessons"
+        },
+        "l1-02-l2-01": {
+          "zh-TW": "院前研究反向定義 ACLS",
+          "en": "Prehospital Research Reverse Definition ACLS"
+        },
+        "l1-02-l2-02": {
+          "zh-TW": "抗休克褲的跨場域失敗",
+          "en": "The cross-field failure of anti-shock pants"
+        },
+        "l1-03": {
+          "zh-TW": "研究問題、PICO 與單一主要預後",
+          "en": "Research question, PICO, and single primary prognosis"
+        },
+        "l1-03-l2-01": {
+          "zh-TW": "臨床、系統與教育問題",
+          "en": "Clinical, Systems and Educational Issues"
+        },
+        "l1-03-l2-02": {
+          "zh-TW": "PICO 框架與主要預後",
+          "en": "PICO Framework and Key Prognosis"
+        },
+        "l1-03-l2-03": {
+          "zh-TW": "描述性研究到 RCT",
+          "en": "Descriptive studies to RCTs"
+        },
+        "l1-04": {
+          "zh-TW": "系統性偏差與批判性閱讀",
+          "en": "Systematic bias and critical reading"
+        },
+        "l1-04-l2-01": {
+          "zh-TW": "大樣本仍無法消除系統偏差",
+          "en": "Large samples still cannot eliminate systematic bias"
+        },
+        "l1-04-l2-02": {
+          "zh-TW": "選擇偏差與測量偏差",
+          "en": "Selection bias and measurement bias"
+        },
+        "l1-04-l2-03": {
+          "zh-TW": "干擾因子與因果誤判",
+          "en": "Interfering factors and misjudgment of cause and effect"
+        },
+        "l1-05": {
+          "zh-TW": "ARREST／INCEPTION 的外在效度解讀",
+          "en": "ARREST/INCEPTION External Validity"
+        },
+        "l1-05-l2-01": {
+          "zh-TW": "收案基準與選擇偏差",
+          "en": "Acceptance criteria and selection bias"
+        },
+        "l1-05-l2-02": {
+          "zh-TW": "ECPR 時間與團隊經驗",
+          "en": "ECPR time and team experience"
+        },
+        "l1-05-l2-03": {
+          "zh-TW": "集中化策略與外在效度",
+          "en": "Focusing strategies and external validity"
+        },
+        "l1-06": {
+          "zh-TW": "EMS 研究執行：IRB 與試驗登錄",
+          "en": "EMS Study Execution: IRB and Trial Login"
+        },
+        "l1-06-l2-01": {
+          "zh-TW": "緊急研究與 IRB 免除同意",
+          "en": "Urgent Research and IRB Waiver of Consent"
+        },
+        "l1-06-l2-02": {
+          "zh-TW": "PICO 固定與 ClinicalTrials.gov 登錄",
+          "en": "PICO fixed with ClinicalTrials.gov login"
+        },
+        "l1-07": {
+          "zh-TW": "報告指引、視覺化與前線合作",
+          "en": "Reporting, Visualization, and Frontline Collaboration"
+        },
+        "l1-07-l2-01": {
+          "zh-TW": "CONSORT／STROBE 精準報告",
+          "en": "CONSORT/STROBE accurate reporting"
+        },
+        "l1-07-l2-02": {
+          "zh-TW": "圖表呈現與 EMT 夥伴關係",
+          "en": "Diagram presenting partnership with EMT"
+        },
+        "l1-08": {
+          "zh-TW": "總結",
+          "en": "Summary"
+        }
+      }
+    }
+  }
+}

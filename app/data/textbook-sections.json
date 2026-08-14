@@ -1,0 +1,68 @@
+{
+  "schema": "em-board-textbook-sections-v1",
+  "textbooks": {
+    "tintinalli": {
+      "title": "Tintinalli’s Emergency Medicine: A Comprehensive Study Guide",
+      "sections": [
+        { "id": "1", "label": "Section 1", "title": "Prehospital Care", "firstChapter": 1, "lastChapter": 4 },
+        { "id": "2", "label": "Section 2", "title": "Disaster Management", "firstChapter": 5, "lastChapter": 10 },
+        { "id": "3", "label": "Section 3", "title": "Resuscitation", "firstChapter": 11, "lastChapter": 21 },
+        { "id": "4", "label": "Section 4", "title": "Resuscitative Procedures", "firstChapter": 22, "lastChapter": 34 },
+        { "id": "5", "label": "Section 5", "title": "Analgesia, Anesthesia, and Procedural Sedation", "firstChapter": 35, "lastChapter": 38 },
+        { "id": "6", "label": "Section 6", "title": "Wound Management", "firstChapter": 39, "lastChapter": 47 },
+        { "id": "7", "label": "Section 7", "title": "Cardiovascular Disease", "firstChapter": 48, "lastChapter": 61 },
+        { "id": "8", "label": "Section 8", "title": "Pulmonary Disorders", "firstChapter": 62, "lastChapter": 70 },
+        { "id": "9", "label": "Section 9", "title": "Gastrointestinal Disorders", "firstChapter": 71, "lastChapter": 87 },
+        { "id": "10", "label": "Section 10", "title": "Renal and Genitourinary Disorders", "firstChapter": 88, "lastChapter": 95 },
+        { "id": "11", "label": "Section 11", "title": "Obstetrics and Gynecology", "firstChapter": 96, "lastChapter": 105 },
+        { "id": "12", "label": "Section 12", "title": "Pediatrics", "firstChapter": 106, "lastChapter": 150 },
+        { "id": "13", "label": "Section 13", "title": "Infectious Diseases", "firstChapter": 151, "lastChapter": 163 },
+        { "id": "14", "label": "Section 14", "title": "Neurology", "firstChapter": 164, "lastChapter": 175 },
+        { "id": "15", "label": "Section 15", "title": "Toxicology", "firstChapter": 176, "lastChapter": 207 },
+        { "id": "16", "label": "Section 16", "title": "Environmental Injuries", "firstChapter": 208, "lastChapter": 222 },
+        { "id": "17", "label": "Section 17", "title": "Endocrine Disorders", "firstChapter": 223, "lastChapter": 230 },
+        { "id": "18", "label": "Section 18", "title": "Hematologic and Oncologic Disorders", "firstChapter": 231, "lastChapter": 240 },
+        { "id": "19", "label": "Section 19", "title": "Eye, Ear, Nose, Throat, and Oral Disorders", "firstChapter": 241, "lastChapter": 247 },
+        { "id": "20", "label": "Section 20", "title": "Dermatology", "firstChapter": 248, "lastChapter": 253 },
+        { "id": "21", "label": "Section 21", "title": "Trauma", "firstChapter": 254, "lastChapter": 266 },
+        { "id": "22", "label": "Section 22", "title": "Orthopedics", "firstChapter": 267, "lastChapter": 278 },
+        { "id": "23", "label": "Section 23", "title": "Musculoskeletal Disorders", "firstChapter": 279, "lastChapter": 285 },
+        { "id": "24", "label": "Section 24", "title": "Psychosocial Disorders", "firstChapter": 286, "lastChapter": 292 },
+        { "id": "25", "label": "Section 25", "title": "Abuse and Assault", "firstChapter": 293, "lastChapter": 295 },
+        { "id": "26", "label": "Section 26", "title": "Special Situations", "firstChapter": 296, "lastChapter": 303 }
+      ]
+    },
+    "rosens": {
+      "title": "Rosen’s Emergency Medicine: Concepts and Clinical Practice",
+      "sections": [
+        { "id": "p1-s1", "label": "Part I · Section 1", "title": "Resuscitation and Analgesia", "firstChapter": 1, "lastChapter": 7, "firstGuideChapterId": "001" },
+        { "id": "p1-s2", "label": "Part I · Section 2", "title": "Signs, Symptoms, and Presentations", "firstChapter": 8, "lastChapter": 31, "firstGuideChapterId": "008" },
+        { "id": "p2-s1", "label": "Part II · Section 1", "title": "General Concepts and System Injuries", "firstChapter": 32, "lastChapter": 40, "firstGuideChapterId": "032" },
+        { "id": "p2-s2", "label": "Part II · Section 2", "title": "Orthopedic Injuries", "firstChapter": 41, "lastChapter": 49, "firstGuideChapterId": "041" },
+        { "id": "p2-s3", "label": "Part II · Section 3", "title": "Soft Tissue Injuries", "firstChapter": 50, "lastChapter": 55, "firstGuideChapterId": "050" },
+        { "id": "p3-s1", "label": "Part III · Section 1", "title": "Head and Neck", "firstChapter": 56, "lastChapter": 58, "firstGuideChapterId": "056" },
+        { "id": "p3-s2", "label": "Part III · Section 2", "title": "Pulmonary System", "firstChapter": 59, "lastChapter": 63, "firstGuideChapterId": "059" },
+        { "id": "p3-s3", "label": "Part III · Section 3", "title": "Cardiac System", "firstChapter": 64, "lastChapter": 69, "firstGuideChapterId": "064" },
+        { "id": "p3-s4", "label": "Part III · Section 4", "title": "Vascular System", "firstChapter": 70, "lastChapter": 74, "firstGuideChapterId": "070" },
+        { "id": "p3-s5", "label": "Part III · Section 5", "title": "Gastrointestinal System", "firstChapter": 75, "lastChapter": 82, "firstGuideChapterId": "075" },
+        { "id": "p3-s6", "label": "Part III · Section 6", "title": "Genitourinary and Gynecologic Systems", "firstChapter": 83, "lastChapter": 86, "firstGuideChapterId": "083" },
+        { "id": "p3-s7", "label": "Part III · Section 7", "title": "Neurology", "firstChapter": 87, "lastChapter": 95, "firstGuideChapterId": "087" },
+        { "id": "p3-s8", "label": "Part III · Section 8", "title": "Behavioral Disorders", "firstChapter": 96, "lastChapter": 101, "firstGuideChapterId": "096" },
+        { "id": "p3-s9", "label": "Part III · Section 9", "title": "Immunologic and Inflammatory", "firstChapter": 102, "lastChapter": 107, "firstGuideChapterId": "102" },
+        { "id": "p3-s10", "label": "Part III · Section 10", "title": "Hematology and Oncology", "firstChapter": 108, "lastChapter": 112, "firstGuideChapterId": "108" },
+        { "id": "p3-s11", "label": "Part III · Section 11", "title": "Metabolism and Endocrinology", "firstChapter": 113, "lastChapter": 117, "firstGuideChapterId": "113" },
+        { "id": "p3-s12", "label": "Part III · Section 12", "title": "Infectious Diseases", "firstChapter": 118, "lastChapter": 127, "firstGuideChapterId": "118" },
+        { "id": "p4-s1", "label": "Part IV · Section 1", "title": "Environment", "firstChapter": 128, "lastChapter": 134, "firstGuideChapterId": "128" },
+        { "id": "p4-s2", "label": "Part IV · Section 2", "title": "Toxicology", "firstChapter": 135, "lastChapter": 154, "firstGuideChapterId": "135" },
+        { "id": "p5-s1", "label": "Part V · Section 1", "title": "The Pediatric Patient", "firstChapter": 155, "lastChapter": 172, "firstGuideChapterId": "155" },
+        { "id": "p5-s2", "label": "Part V · Section 2", "title": "The Pregnant Patient", "firstChapter": 173, "lastChapter": 177, "firstGuideChapterId": "173" },
+        { "id": "p5-s3", "label": "Part V · Section 3", "title": "The Geriatric Patient", "firstChapter": 178, "lastChapter": 181, "firstGuideChapterId": "178" },
+        { "id": "p5-s4", "label": "Part V · Section 4", "title": "Special Clinical Circumstances", "firstChapter": 182, "lastChapter": 185, "firstGuideChapterId": "182" },
+        { "id": "p5-s5", "label": "Part V · Section 5", "title": "Underserved Populations", "firstChapter": 186, "lastChapter": 192, "firstGuideChapterId": "186" },
+        { "id": "p5-s6", "label": "Online · Section 6", "title": "Public Health and Humanitarian Emergencies", "firstChapter": 193, "lastChapter": 194, "firstGuideChapterId": "e01" },
+        { "id": "p5-s7", "label": "Online · Section 7", "title": "The Practice of Emergency Medicine", "firstChapter": 195, "lastChapter": 203, "firstGuideChapterId": "e03" },
+        { "id": "p5-s8", "label": "Online · Section 8", "title": "Emergency Medical Services and Disaster Preparedness", "firstChapter": 204, "lastChapter": 208, "firstGuideChapterId": "e12" }
+      ]
+    }
+  }
+}

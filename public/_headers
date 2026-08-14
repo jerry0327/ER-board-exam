@@ -1,0 +1,48 @@
+# Cache content-hashed application assets immutably.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# KaTeX font paths include their package version and can be reused indefinitely.
+/fonts/katex-0.16.22/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Content-addressed packs never change; the small fixed index is revalidated.
+/content-packs/packs/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/content-packs/index.brp
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Runtime entry points are small and mutable. Revalidate them so a decoder
+# update cannot remain paired with an older cached module graph.
+/static-snac/decoder-worker.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/static-snac/snac-output.worklet.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/static-snac/model-manifest.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+/static-snac/ort.webgpu.min.mjs
+  Cache-Control: public, max-age=0, must-revalidate
+
+/static-snac/ort-wasm-simd-threaded.asyncify.mjs
+  Cache-Control: public, max-age=0, must-revalidate
+
+# These fixed build-time manifests are never immutable. Managed audio/model
+# payloads receive their content-aware cache policy from the Worker.
+/static-snac/compression-manifest.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+/audio/snac/compression-manifest.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+/audio/snac/r2-migration-complete.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+/audio/snac/catalog.json
+  Cache-Control: no-cache, must-revalidate
+
+/learning-documents/compression-manifest.json
+  Cache-Control: public, max-age=0, must-revalidate

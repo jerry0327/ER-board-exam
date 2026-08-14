@@ -1,0 +1,17 @@
+{
+  "schema": "sites-managed-audio-migration-v2",
+  "verified": true,
+  "namespace": "managed-audio/v1/",
+  "projectId": "appgprj_6a5767463c1881919b20dc9a5e684ffd",
+  "origin": "https://emergency-board-questions.jerry3627613.chatgpt.site",
+  "verifiedAt": "2026-08-08T15:14:58.468Z",
+  "verification": "authenticated-r2-get-sha256",
+  "manifestSha256": {
+    "/audio/snac/compression-manifest.json": "d6b1cc8c1fecc5fd14f8abd5de611b4192f41a5d8b8cc3fee020a3921cdd47bf",
+    "/static-snac/compression-manifest.json": "9f2e392c75d2c009349a74a97972394e56143fdd14afc6de76692d80e0170a25"
+  },
+  "manifestSetSha256": "0e655693529898bbb5c67d59e0d9e60188a7bcea1e17ddd7850d33483353be83",
+  "assetsMerkleRoot": "059174084e3d15614d34b06eb80fdd48dac80b642e4f6551e62796a25aa76505",
+  "assets": 2875,
+  "storedBytes": 223893374
+}

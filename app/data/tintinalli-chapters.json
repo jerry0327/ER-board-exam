@@ -1,0 +1,1526 @@
+{
+  "schema": "em-board-tintinalli-chapters-v1",
+  "title": "Tintinalli’s Emergency Medicine: A Comprehensive Study Guide",
+  "edition": "9th Edition",
+  "source": "https://www.tintinalliem.com/references_9e.php",
+  "sourceEntryCount": 304,
+  "projectMapping": "CH.29A and CH.29B are combined as project chapter 029.",
+  "chapterCount": 303,
+  "chapters": [
+    {
+      "id": "001",
+      "number": 1,
+      "title": "Emergency Medical Services"
+    },
+    {
+      "id": "002",
+      "number": 2,
+      "title": "Prehospital Equipment"
+    },
+    {
+      "id": "003",
+      "number": 3,
+      "title": "Air Medical Transport"
+    },
+    {
+      "id": "004",
+      "number": 4,
+      "title": "Mass Gatherings"
+    },
+    {
+      "id": "005",
+      "number": 5,
+      "title": "Disaster Preparedness"
+    },
+    {
+      "id": "006",
+      "number": 6,
+      "title": "Natural Disasters"
+    },
+    {
+      "id": "007",
+      "number": 7,
+      "title": "Bomb, Blast, and Crush Injuries"
+    },
+    {
+      "id": "008",
+      "number": 8,
+      "title": "Chemical Disasters"
+    },
+    {
+      "id": "009",
+      "number": 9,
+      "title": "Bioterrorism"
+    },
+    {
+      "id": "010",
+      "number": 10,
+      "title": "Radiation Injuries"
+    },
+    {
+      "id": "011",
+      "number": 11,
+      "title": "Sudden Cardiac Death"
+    },
+    {
+      "id": "012",
+      "number": 12,
+      "title": "Approach to Nontraumatic Shock"
+    },
+    {
+      "id": "013",
+      "number": 13,
+      "title": "Approach to Traumatic Shock"
+    },
+    {
+      "id": "014",
+      "number": 14,
+      "title": "Allergy and Anaphylaxis"
+    },
+    {
+      "id": "015",
+      "number": 15,
+      "title": "Acid-Base Disorders"
+    },
+    {
+      "id": "016",
+      "number": 16,
+      "title": "Blood Gases, Pulse Oximetry, and Capnography"
+    },
+    {
+      "id": "017",
+      "number": 17,
+      "title": "Fluids and Electrolytes"
+    },
+    {
+      "id": "018",
+      "number": 18,
+      "title": "Cardiac Rhythm Disturbances"
+    },
+    {
+      "id": "019",
+      "number": 19,
+      "title": "Pharmacology of Antiarrhythmics and Antihypertensives"
+    },
+    {
+      "id": "020",
+      "number": 20,
+      "title": "Pharmacology of Vasopressors and Inotropes"
+    },
+    {
+      "id": "021",
+      "number": 21,
+      "title": "Hyperbaric Oxygen Therapy"
+    },
+    {
+      "id": "022",
+      "number": 22,
+      "title": "Basic Cardiopulmonary Resuscitation"
+    },
+    {
+      "id": "023",
+      "number": 23,
+      "title": "Defibrillation and Electrical Cardioversion"
+    },
+    {
+      "id": "024",
+      "number": 24,
+      "title": "Cardiac Resuscitation"
+    },
+    {
+      "id": "025",
+      "number": 25,
+      "title": "Resuscitation in Pregnancy"
+    },
+    {
+      "id": "026",
+      "number": 26,
+      "title": "Post–Cardiac Arrest Syndrome"
+    },
+    {
+      "id": "027",
+      "number": 27,
+      "title": "Ethical Issues of Resuscitation"
+    },
+    {
+      "id": "028",
+      "number": 28,
+      "title": "Noninvasive Airway Management and Supraglottic Airways"
+    },
+    {
+      "id": "029",
+      "number": 29,
+      "title": "Tracheal Intubation / Mechanical Ventilation"
+    },
+    {
+      "id": "030",
+      "number": 30,
+      "title": "Surgical Airways"
+    },
+    {
+      "id": "031",
+      "number": 31,
+      "title": "Vascular Access"
+    },
+    {
+      "id": "032",
+      "number": 32,
+      "title": "Hemodynamic Monitoring"
+    },
+    {
+      "id": "033",
+      "number": 33,
+      "title": "Cardiac Pacing and Implanted Defibrillation"
+    },
+    {
+      "id": "034",
+      "number": 34,
+      "title": "Pericardiocentesis"
+    },
+    {
+      "id": "035",
+      "number": 35,
+      "title": "Acute Pain Management"
+    },
+    {
+      "id": "036",
+      "number": 36,
+      "title": "Local and Regional Anesthesia"
+    },
+    {
+      "id": "037",
+      "number": 37,
+      "title": "Procedural Sedation and Analgesia in Adults"
+    },
+    {
+      "id": "038",
+      "number": 38,
+      "title": "Chronic Pain"
+    },
+    {
+      "id": "039",
+      "number": 39,
+      "title": "Wound Evaluation"
+    },
+    {
+      "id": "040",
+      "number": 40,
+      "title": "Wound Preparation"
+    },
+    {
+      "id": "041",
+      "number": 41,
+      "title": "Wound Closure"
+    },
+    {
+      "id": "042",
+      "number": 42,
+      "title": "Face and Scalp Lacerations"
+    },
+    {
+      "id": "043",
+      "number": 43,
+      "title": "Arm, Forearm, and Hand Lacerations"
+    },
+    {
+      "id": "044",
+      "number": 44,
+      "title": "Thigh, Leg, and Foot Lacerations"
+    },
+    {
+      "id": "045",
+      "number": 45,
+      "title": "Soft Tissue Foreign Bodies"
+    },
+    {
+      "id": "046",
+      "number": 46,
+      "title": "Puncture Wounds and Bites"
+    },
+    {
+      "id": "047",
+      "number": 47,
+      "title": "Postrepair Wound Care"
+    },
+    {
+      "id": "048",
+      "number": 48,
+      "title": "Chest Pain"
+    },
+    {
+      "id": "049",
+      "number": 49,
+      "title": "Acute Coronary Syndromes"
+    },
+    {
+      "id": "050",
+      "number": 50,
+      "title": "Cardiogenic Shock"
+    },
+    {
+      "id": "051",
+      "number": 51,
+      "title": "Low-Probability Acute Coronary Syndrome"
+    },
+    {
+      "id": "052",
+      "number": 52,
+      "title": "Syncope"
+    },
+    {
+      "id": "053",
+      "number": 53,
+      "title": "Acute Heart Failure"
+    },
+    {
+      "id": "054",
+      "number": 54,
+      "title": "Valvular Emergencies"
+    },
+    {
+      "id": "055",
+      "number": 55,
+      "title": "Cardiomyopathies and Pericardial Disease"
+    },
+    {
+      "id": "056",
+      "number": 56,
+      "title": "Venous Thromboembolism Including Pulmonary Embolism"
+    },
+    {
+      "id": "057",
+      "number": 57,
+      "title": "Systemic Hypertension"
+    },
+    {
+      "id": "058",
+      "number": 58,
+      "title": "Pulmonary Hypertension"
+    },
+    {
+      "id": "059",
+      "number": 59,
+      "title": "Aortic Dissection and Related Aortic Syndromes"
+    },
+    {
+      "id": "060",
+      "number": 60,
+      "title": "Aneurysmal Disease"
+    },
+    {
+      "id": "061",
+      "number": 61,
+      "title": "Arterial Occlusion"
+    },
+    {
+      "id": "062",
+      "number": 62,
+      "title": "Respiratory Distress"
+    },
+    {
+      "id": "063",
+      "number": 63,
+      "title": "Hemoptysis"
+    },
+    {
+      "id": "064",
+      "number": 64,
+      "title": "Acute Bronchitis and Upper Respiratory Tract Infections"
+    },
+    {
+      "id": "065",
+      "number": 65,
+      "title": "Community-Acquired Pneumonia, Aspiration Pneumonia, and Noninfectious Pulmonary Infiltrates"
+    },
+    {
+      "id": "066",
+      "number": 66,
+      "title": "Lung Empyema and Abscess"
+    },
+    {
+      "id": "067",
+      "number": 67,
+      "title": "Tuberculosis"
+    },
+    {
+      "id": "068",
+      "number": 68,
+      "title": "Pneumothorax"
+    },
+    {
+      "id": "069",
+      "number": 69,
+      "title": "Acute Asthma and Status Asthmaticus"
+    },
+    {
+      "id": "070",
+      "number": 70,
+      "title": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "id": "071",
+      "number": 71,
+      "title": "Acute Abdominal Pain"
+    },
+    {
+      "id": "072",
+      "number": 72,
+      "title": "Nausea and Vomiting"
+    },
+    {
+      "id": "073",
+      "number": 73,
+      "title": "Disorders Presenting Primarily With Diarrhea"
+    },
+    {
+      "id": "074",
+      "number": 74,
+      "title": "Constipation"
+    },
+    {
+      "id": "075",
+      "number": 75,
+      "title": "Upper Gastrointestinal Bleeding"
+    },
+    {
+      "id": "076",
+      "number": 76,
+      "title": "Lower Gastrointestinal Bleeding"
+    },
+    {
+      "id": "077",
+      "number": 77,
+      "title": "Esophageal Emergencies"
+    },
+    {
+      "id": "078",
+      "number": 78,
+      "title": "Peptic Ulcer Disease and Gastritis"
+    },
+    {
+      "id": "079",
+      "number": 79,
+      "title": "Pancreatitis and Cholecystitis"
+    },
+    {
+      "id": "080",
+      "number": 80,
+      "title": "Hepatic Disorders"
+    },
+    {
+      "id": "081",
+      "number": 81,
+      "title": "Acute Appendicitis"
+    },
+    {
+      "id": "082",
+      "number": 82,
+      "title": "Diverticulitis"
+    },
+    {
+      "id": "083",
+      "number": 83,
+      "title": "Bowel Obstruction"
+    },
+    {
+      "id": "084",
+      "number": 84,
+      "title": "Hernias"
+    },
+    {
+      "id": "085",
+      "number": 85,
+      "title": "Anorectal Disorders"
+    },
+    {
+      "id": "086",
+      "number": 86,
+      "title": "Gastrointestinal Procedures and Devices"
+    },
+    {
+      "id": "087",
+      "number": 87,
+      "title": "Complications of General Surgical Procedures"
+    },
+    {
+      "id": "088",
+      "number": 88,
+      "title": "Acute Kidney Injury"
+    },
+    {
+      "id": "089",
+      "number": 89,
+      "title": "Rhabdomyolysis"
+    },
+    {
+      "id": "090",
+      "number": 90,
+      "title": "End-Stage Renal Disease"
+    },
+    {
+      "id": "091",
+      "number": 91,
+      "title": "Urinary Tract Infections and Hematuria"
+    },
+    {
+      "id": "092",
+      "number": 92,
+      "title": "Acute Urinary Retention"
+    },
+    {
+      "id": "093",
+      "number": 93,
+      "title": "Male Genital Problems"
+    },
+    {
+      "id": "094",
+      "number": 94,
+      "title": "Urologic Stone Disease"
+    },
+    {
+      "id": "095",
+      "number": 95,
+      "title": "Complications of Urologic Procedures and Devices"
+    },
+    {
+      "id": "096",
+      "number": 96,
+      "title": "Abnormal Uterine Bleeding"
+    },
+    {
+      "id": "097",
+      "number": 97,
+      "title": "Abdominal and Pelvic Pain in the Nonpregnant Female"
+    },
+    {
+      "id": "098",
+      "number": 98,
+      "title": "Ectopic Pregnancy and Emergencies in the First 20\u00a0Weeks of Pregnancy"
+    },
+    {
+      "id": "099",
+      "number": 99,
+      "title": "Comorbid Disorders in Pregnancy"
+    },
+    {
+      "id": "100",
+      "number": 100,
+      "title": "Maternal Emergencies After 20 Weeks of Pregnancy and in the Peripartum Period"
+    },
+    {
+      "id": "101",
+      "number": 101,
+      "title": "Emergency Delivery"
+    },
+    {
+      "id": "102",
+      "number": 102,
+      "title": "Vulvovaginitis"
+    },
+    {
+      "id": "103",
+      "number": 103,
+      "title": "Pelvic Inflammatory Disease"
+    },
+    {
+      "id": "104",
+      "number": 104,
+      "title": "Breast Disorders"
+    },
+    {
+      "id": "105",
+      "number": 105,
+      "title": "Complications of Gynecologic Procedures"
+    },
+    {
+      "id": "106",
+      "number": 106,
+      "title": "Emergency Care of Children"
+    },
+    {
+      "id": "107",
+      "number": 107,
+      "title": "Neonatal and Pediatric Transport"
+    },
+    {
+      "id": "108",
+      "number": 108,
+      "title": "Resuscitation of Neonates"
+    },
+    {
+      "id": "109",
+      "number": 109,
+      "title": "Resuscitation of Children"
+    },
+    {
+      "id": "110",
+      "number": 110,
+      "title": "Pediatric Trauma"
+    },
+    {
+      "id": "111",
+      "number": 111,
+      "title": "Minor Head Injury and Concussion in Children"
+    },
+    {
+      "id": "112",
+      "number": 112,
+      "title": "Cervical Spine Injury in Infants and Children"
+    },
+    {
+      "id": "113",
+      "number": 113,
+      "title": "Intubation and Ventilation of Infants and Children"
+    },
+    {
+      "id": "114",
+      "number": 114,
+      "title": "Vascular Access in Infants and Children"
+    },
+    {
+      "id": "115",
+      "number": 115,
+      "title": "Pain Management and Procedural Sedation for Infants and Children"
+    },
+    {
+      "id": "116",
+      "number": 116,
+      "title": "Neonatal Emergencies and Common Neonatal Problems"
+    },
+    {
+      "id": "117",
+      "number": 117,
+      "title": "Brief Resolved Unexplained Events and Apparent Life-Threatening Events"
+    },
+    {
+      "id": "118",
+      "number": 118,
+      "title": "Sudden Infant Death Syndrome"
+    },
+    {
+      "id": "119",
+      "number": 119,
+      "title": "Fever and Serious Bacterial Illness in Infants and Children"
+    },
+    {
+      "id": "120",
+      "number": 120,
+      "title": "Meningitis in Infants and Children"
+    },
+    {
+      "id": "121",
+      "number": 121,
+      "title": "Ear and Mastoid Disorders in Infants and Children"
+    },
+    {
+      "id": "122",
+      "number": 122,
+      "title": "Eye Emergencies in Infants and Children"
+    },
+    {
+      "id": "123",
+      "number": 123,
+      "title": "Nose and Sinus Disorders in Infants and Children"
+    },
+    {
+      "id": "124",
+      "number": 124,
+      "title": "Mouth and Throat Disorders in Infants and Children"
+    },
+    {
+      "id": "125",
+      "number": 125,
+      "title": "Neck Masses in Infants and Children"
+    },
+    {
+      "id": "126",
+      "number": 126,
+      "title": "Stridor and Drooling in Infants and Children"
+    },
+    {
+      "id": "127",
+      "number": 127,
+      "title": "Wheezing in Infants and Children"
+    },
+    {
+      "id": "128",
+      "number": 128,
+      "title": "Pneumonia in Infants and Children"
+    },
+    {
+      "id": "129",
+      "number": 129,
+      "title": "Congenital and Acquired Pediatric Heart Disease"
+    },
+    {
+      "id": "130",
+      "number": 130,
+      "title": "Syncope, Dysrhythmias, and ECG Interpretation in Children"
+    },
+    {
+      "id": "131",
+      "number": 131,
+      "title": "Vomiting, Diarrhea, and Dehydration in Infants and Children"
+    },
+    {
+      "id": "132",
+      "number": 132,
+      "title": "Fluid and Electrolyte Therapy in Infants and Children"
+    },
+    {
+      "id": "133",
+      "number": 133,
+      "title": "Acute Abdominal Pain in Infants and Children"
+    },
+    {
+      "id": "134",
+      "number": 134,
+      "title": "Gastrointestinal Bleeding in Infants and Children"
+    },
+    {
+      "id": "135",
+      "number": 135,
+      "title": "Urinary Tract Infection in Infants and Children"
+    },
+    {
+      "id": "136",
+      "number": 136,
+      "title": "Pediatric Urologic and Gynecologic Disorders"
+    },
+    {
+      "id": "137",
+      "number": 137,
+      "title": "Renal Emergencies in Children"
+    },
+    {
+      "id": "138",
+      "number": 138,
+      "title": "Seizures in Infants and Children"
+    },
+    {
+      "id": "139",
+      "number": 139,
+      "title": "Headache in Children"
+    },
+    {
+      "id": "140",
+      "number": 140,
+      "title": "Altered Mental Status in Children"
+    },
+    {
+      "id": "141",
+      "number": 141,
+      "title": "Pediatric Orthopedic Emergencies"
+    },
+    {
+      "id": "142",
+      "number": 142,
+      "title": "Rashes in Infants and Children"
+    },
+    {
+      "id": "143",
+      "number": 143,
+      "title": "Sickle Cell Disease in Children"
+    },
+    {
+      "id": "144",
+      "number": 144,
+      "title": "Hematologic Emergencies in Infants and Children"
+    },
+    {
+      "id": "145",
+      "number": 145,
+      "title": "Oncologic Emergencies in Infants and Children"
+    },
+    {
+      "id": "146",
+      "number": 146,
+      "title": "Metabolic Emergencies in Infants and Children"
+    },
+    {
+      "id": "147",
+      "number": 147,
+      "title": "Diabetes in Children"
+    },
+    {
+      "id": "148",
+      "number": 148,
+      "title": "The Child With Special Healthcare Needs"
+    },
+    {
+      "id": "149",
+      "number": 149,
+      "title": "Behavioral Disorders in Children"
+    },
+    {
+      "id": "150",
+      "number": 150,
+      "title": "Child Abuse and Neglect"
+    },
+    {
+      "id": "151",
+      "number": 151,
+      "title": "Sepsis"
+    },
+    {
+      "id": "152",
+      "number": 152,
+      "title": "Soft Tissue Infections"
+    },
+    {
+      "id": "153",
+      "number": 153,
+      "title": "Sexually Transmitted Infections"
+    },
+    {
+      "id": "154",
+      "number": 154,
+      "title": "Serious Viral Infections"
+    },
+    {
+      "id": "155",
+      "number": 155,
+      "title": "Human Immunodeficiency Virus Infection"
+    },
+    {
+      "id": "156",
+      "number": 156,
+      "title": "Endocarditis"
+    },
+    {
+      "id": "157",
+      "number": 157,
+      "title": "Tetanus"
+    },
+    {
+      "id": "158",
+      "number": 158,
+      "title": "Rabies"
+    },
+    {
+      "id": "159",
+      "number": 159,
+      "title": "Malaria"
+    },
+    {
+      "id": "160",
+      "number": 160,
+      "title": "Food and Waterborne Illnesses"
+    },
+    {
+      "id": "161",
+      "number": 161,
+      "title": "Zoonotic Infections"
+    },
+    {
+      "id": "162",
+      "number": 162,
+      "title": "Global Travelers"
+    },
+    {
+      "id": "163",
+      "number": 163,
+      "title": "Occupational Exposures, Infection Control, and Standard Precautions"
+    },
+    {
+      "id": "164",
+      "number": 164,
+      "title": "Neurologic Examination"
+    },
+    {
+      "id": "165",
+      "number": 165,
+      "title": "Headache"
+    },
+    {
+      "id": "166",
+      "number": 166,
+      "title": "Spontaneous Subarachnoid and Intracerebral Hemorrhage"
+    },
+    {
+      "id": "167",
+      "number": 167,
+      "title": "Stroke Syndromes"
+    },
+    {
+      "id": "168",
+      "number": 168,
+      "title": "Altered Mental Status and Coma"
+    },
+    {
+      "id": "169",
+      "number": 169,
+      "title": "Ataxia and Gait Disturbances"
+    },
+    {
+      "id": "170",
+      "number": 170,
+      "title": "Vertigo"
+    },
+    {
+      "id": "171",
+      "number": 171,
+      "title": "Seizures and Status Epilepticus in Adults"
+    },
+    {
+      "id": "172",
+      "number": 172,
+      "title": "Acute Peripheral Neurologic Disorders"
+    },
+    {
+      "id": "173",
+      "number": 173,
+      "title": "Chronic Neurologic Disorders"
+    },
+    {
+      "id": "174",
+      "number": 174,
+      "title": "Central Nervous System and Spinal Infections"
+    },
+    {
+      "id": "175",
+      "number": 175,
+      "title": "Central Nervous System Procedures and Devices"
+    },
+    {
+      "id": "176",
+      "number": 176,
+      "title": "General Management of Poisoned Patients"
+    },
+    {
+      "id": "177",
+      "number": 177,
+      "title": "Cyclic Antidepressants"
+    },
+    {
+      "id": "178",
+      "number": 178,
+      "title": "Atypical and Serotonergic Antidepressants"
+    },
+    {
+      "id": "179",
+      "number": 179,
+      "title": "Monoamine Oxidase Inhibitors"
+    },
+    {
+      "id": "180",
+      "number": 180,
+      "title": "Antipsychotics"
+    },
+    {
+      "id": "181",
+      "number": 181,
+      "title": "Lithium"
+    },
+    {
+      "id": "182",
+      "number": 182,
+      "title": "Barbiturates"
+    },
+    {
+      "id": "183",
+      "number": 183,
+      "title": "Benzodiazepines"
+    },
+    {
+      "id": "184",
+      "number": 184,
+      "title": "Nonbenzodiazepine Sedatives"
+    },
+    {
+      "id": "185",
+      "number": 185,
+      "title": "Alcohols"
+    },
+    {
+      "id": "186",
+      "number": 186,
+      "title": "Opioids"
+    },
+    {
+      "id": "187",
+      "number": 187,
+      "title": "Cocaine and Amphetamines"
+    },
+    {
+      "id": "188",
+      "number": 188,
+      "title": "Hallucinogens"
+    },
+    {
+      "id": "189",
+      "number": 189,
+      "title": "Salicylates"
+    },
+    {
+      "id": "190",
+      "number": 190,
+      "title": "Acetaminophen"
+    },
+    {
+      "id": "191",
+      "number": 191,
+      "title": "Nonsteroidal Anti-Inflammatory Drugs"
+    },
+    {
+      "id": "192",
+      "number": 192,
+      "title": "Methylxanthines and Nicotine"
+    },
+    {
+      "id": "193",
+      "number": 193,
+      "title": "Digitalis Glycosides"
+    },
+    {
+      "id": "194",
+      "number": 194,
+      "title": "Beta-Blockers"
+    },
+    {
+      "id": "195",
+      "number": 195,
+      "title": "Calcium Channel Blockers"
+    },
+    {
+      "id": "196",
+      "number": 196,
+      "title": "Antihypertensives"
+    },
+    {
+      "id": "197",
+      "number": 197,
+      "title": "Anticonvulsants"
+    },
+    {
+      "id": "198",
+      "number": 198,
+      "title": "Iron"
+    },
+    {
+      "id": "199",
+      "number": 199,
+      "title": "Hydrocarbons and Volatile Substances"
+    },
+    {
+      "id": "200",
+      "number": 200,
+      "title": "Caustic Ingestions"
+    },
+    {
+      "id": "201",
+      "number": 201,
+      "title": "Pesticides"
+    },
+    {
+      "id": "202",
+      "number": 202,
+      "title": "Anticholinergics"
+    },
+    {
+      "id": "203",
+      "number": 203,
+      "title": "Metals and Metalloids"
+    },
+    {
+      "id": "204",
+      "number": 204,
+      "title": "Industrial Toxins"
+    },
+    {
+      "id": "205",
+      "number": 205,
+      "title": "Vitamins and Herbals"
+    },
+    {
+      "id": "206",
+      "number": 206,
+      "title": "Antimicrobials"
+    },
+    {
+      "id": "207",
+      "number": 207,
+      "title": "Dyshemoglobinemias"
+    },
+    {
+      "id": "208",
+      "number": 208,
+      "title": "Cold Injuries"
+    },
+    {
+      "id": "209",
+      "number": 209,
+      "title": "Hypothermia"
+    },
+    {
+      "id": "210",
+      "number": 210,
+      "title": "Heat Emergencies"
+    },
+    {
+      "id": "211",
+      "number": 211,
+      "title": "Bites and Stings"
+    },
+    {
+      "id": "212",
+      "number": 212,
+      "title": "Snakebite"
+    },
+    {
+      "id": "213",
+      "number": 213,
+      "title": "Marine Trauma and Envenomation"
+    },
+    {
+      "id": "214",
+      "number": 214,
+      "title": "Diving Disorders"
+    },
+    {
+      "id": "215",
+      "number": 215,
+      "title": "Drowning"
+    },
+    {
+      "id": "216",
+      "number": 216,
+      "title": "High-Altitude Disorders"
+    },
+    {
+      "id": "217",
+      "number": 217,
+      "title": "Thermal Burns"
+    },
+    {
+      "id": "218",
+      "number": 218,
+      "title": "Chemical Burns"
+    },
+    {
+      "id": "219",
+      "number": 219,
+      "title": "Electrical and Lightning Injuries"
+    },
+    {
+      "id": "220",
+      "number": 220,
+      "title": "Mushroom Poisoning"
+    },
+    {
+      "id": "221",
+      "number": 221,
+      "title": "Poisonous Plants"
+    },
+    {
+      "id": "222",
+      "number": 222,
+      "title": "Carbon Monoxide"
+    },
+    {
+      "id": "223",
+      "number": 223,
+      "title": "Type 1 Diabetes Mellitus"
+    },
+    {
+      "id": "224",
+      "number": 224,
+      "title": "Type 2 Diabetes Mellitus"
+    },
+    {
+      "id": "225",
+      "number": 225,
+      "title": "Diabetic Ketoacidosis"
+    },
+    {
+      "id": "226",
+      "number": 226,
+      "title": "Ketoacidotic Syndromes"
+    },
+    {
+      "id": "227",
+      "number": 227,
+      "title": "Hyperosmolar Hyperglycemic State"
+    },
+    {
+      "id": "228",
+      "number": 228,
+      "title": "Hypothyroidism and Myxedema Crisis"
+    },
+    {
+      "id": "229",
+      "number": 229,
+      "title": "Hyperthyroidism and Thyroid Storm"
+    },
+    {
+      "id": "230",
+      "number": 230,
+      "title": "Adrenal Insufficiency"
+    },
+    {
+      "id": "231",
+      "number": 231,
+      "title": "Anemia and Polycythemia"
+    },
+    {
+      "id": "232",
+      "number": 232,
+      "title": "Hemostasis"
+    },
+    {
+      "id": "233",
+      "number": 233,
+      "title": "Acquired Bleeding Disorders"
+    },
+    {
+      "id": "234",
+      "number": 234,
+      "title": "Clotting Disorders"
+    },
+    {
+      "id": "235",
+      "number": 235,
+      "title": "Hemophilias and von Willebrand's Disease"
+    },
+    {
+      "id": "236",
+      "number": 236,
+      "title": "Sickle Cell Disease and Hereditary Hemolytic Anemias"
+    },
+    {
+      "id": "237",
+      "number": 237,
+      "title": "Acquired Hemolytic Anemia"
+    },
+    {
+      "id": "238",
+      "number": 238,
+      "title": "Transfusion Therapy"
+    },
+    {
+      "id": "239",
+      "number": 239,
+      "title": "Thrombotics and Antithrombotics"
+    },
+    {
+      "id": "240",
+      "number": 240,
+      "title": "Emergency Complications of Malignancy"
+    },
+    {
+      "id": "241",
+      "number": 241,
+      "title": "Eye Emergencies"
+    },
+    {
+      "id": "242",
+      "number": 242,
+      "title": "Ear Disorders"
+    },
+    {
+      "id": "243",
+      "number": 243,
+      "title": "Face and Jaw Emergencies"
+    },
+    {
+      "id": "244",
+      "number": 244,
+      "title": "Nose and Sinuses"
+    },
+    {
+      "id": "245",
+      "number": 245,
+      "title": "Oral and Dental Emergencies"
+    },
+    {
+      "id": "246",
+      "number": 246,
+      "title": "Neck and Upper Airway"
+    },
+    {
+      "id": "247",
+      "number": 247,
+      "title": "Complications of Airway Devices"
+    },
+    {
+      "id": "248",
+      "number": 248,
+      "title": "Initial Evaluation and Management of Skin Disorders"
+    },
+    {
+      "id": "249",
+      "number": 249,
+      "title": "Generalized Skin Disorders"
+    },
+    {
+      "id": "250",
+      "number": 250,
+      "title": "Skin Disorders: Face and Scalp"
+    },
+    {
+      "id": "251",
+      "number": 251,
+      "title": "Skin Disorders: Trunk"
+    },
+    {
+      "id": "252",
+      "number": 252,
+      "title": "Skin Disorders: Groin and Skinfolds"
+    },
+    {
+      "id": "253",
+      "number": 253,
+      "title": "Skin Disorders: Extremities"
+    },
+    {
+      "id": "254",
+      "number": 254,
+      "title": "Trauma in Adults"
+    },
+    {
+      "id": "255",
+      "number": 255,
+      "title": "Trauma in the Elderly"
+    },
+    {
+      "id": "256",
+      "number": 256,
+      "title": "Trauma in Pregnancy"
+    },
+    {
+      "id": "257",
+      "number": 257,
+      "title": "Head Trauma"
+    },
+    {
+      "id": "258",
+      "number": 258,
+      "title": "Spine Trauma"
+    },
+    {
+      "id": "259",
+      "number": 259,
+      "title": "Trauma to the Face"
+    },
+    {
+      "id": "260",
+      "number": 260,
+      "title": "Trauma to the Neck"
+    },
+    {
+      "id": "261",
+      "number": 261,
+      "title": "Pulmonary Trauma"
+    },
+    {
+      "id": "262",
+      "number": 262,
+      "title": "Cardiac Trauma"
+    },
+    {
+      "id": "263",
+      "number": 263,
+      "title": "Abdominal Trauma"
+    },
+    {
+      "id": "264",
+      "number": 264,
+      "title": "Trauma to the Flank and Buttocks"
+    },
+    {
+      "id": "265",
+      "number": 265,
+      "title": "Genitourinary Trauma"
+    },
+    {
+      "id": "266",
+      "number": 266,
+      "title": "Trauma to the Extremities"
+    },
+    {
+      "id": "267",
+      "number": 267,
+      "title": "Initial Evaluation and Management of Orthopedic Injuries"
+    },
+    {
+      "id": "268",
+      "number": 268,
+      "title": "Injuries to the Hand and Digits"
+    },
+    {
+      "id": "269",
+      "number": 269,
+      "title": "Wrist Injuries"
+    },
+    {
+      "id": "270",
+      "number": 270,
+      "title": "Elbow and Forearm Injuries"
+    },
+    {
+      "id": "271",
+      "number": 271,
+      "title": "Shoulder and Humerus Injuries"
+    },
+    {
+      "id": "272",
+      "number": 272,
+      "title": "Pelvis Injuries"
+    },
+    {
+      "id": "273",
+      "number": 273,
+      "title": "Hip and Femur Injuries"
+    },
+    {
+      "id": "274",
+      "number": 274,
+      "title": "Knee Injuries"
+    },
+    {
+      "id": "275",
+      "number": 275,
+      "title": "Leg Injuries"
+    },
+    {
+      "id": "276",
+      "number": 276,
+      "title": "Ankle Injuries"
+    },
+    {
+      "id": "277",
+      "number": 277,
+      "title": "Foot Injuries"
+    },
+    {
+      "id": "278",
+      "number": 278,
+      "title": "Compartment Syndrome"
+    },
+    {
+      "id": "279",
+      "number": 279,
+      "title": "Neck and Back Pain"
+    },
+    {
+      "id": "280",
+      "number": 280,
+      "title": "Shoulder Pain"
+    },
+    {
+      "id": "281",
+      "number": 281,
+      "title": "Hip and Knee Pain"
+    },
+    {
+      "id": "282",
+      "number": 282,
+      "title": "Systemic Rheumatic Diseases"
+    },
+    {
+      "id": "283",
+      "number": 283,
+      "title": "Nontraumatic Disorders of the Hand"
+    },
+    {
+      "id": "284",
+      "number": 284,
+      "title": "Joints and Bursae"
+    },
+    {
+      "id": "285",
+      "number": 285,
+      "title": "Soft Tissue Problems of the Foot"
+    },
+    {
+      "id": "286",
+      "number": 286,
+      "title": "Mental Health Disorders: ED Evaluation and Disposition"
+    },
+    {
+      "id": "287",
+      "number": 287,
+      "title": "Acute Agitation"
+    },
+    {
+      "id": "288",
+      "number": 288,
+      "title": "Mental Health Disorders of the Elderly"
+    },
+    {
+      "id": "289",
+      "number": 289,
+      "title": "Mood and Anxiety Disorders"
+    },
+    {
+      "id": "290",
+      "number": 290,
+      "title": "Psychoses"
+    },
+    {
+      "id": "291",
+      "number": 291,
+      "title": "Eating Disorders"
+    },
+    {
+      "id": "292",
+      "number": 292,
+      "title": "Substance Use Disorders"
+    },
+    {
+      "id": "293",
+      "number": 293,
+      "title": "Female and Male Sexual Assault"
+    },
+    {
+      "id": "294",
+      "number": 294,
+      "title": "Intimate Partner Violence and Abuse"
+    },
+    {
+      "id": "295",
+      "number": 295,
+      "title": "Abuse of the Elderly and Impaired"
+    },
+    {
+      "id": "296",
+      "number": 296,
+      "title": "Injection Drug Users"
+    },
+    {
+      "id": "297",
+      "number": 297,
+      "title": "The Transplant Patient"
+    },
+    {
+      "id": "298",
+      "number": 298,
+      "title": "The Patient with Morbid Obesity"
+    },
+    {
+      "id": "299",
+      "number": 299,
+      "title": "The Transgender Patient"
+    },
+    {
+      "id": "300",
+      "number": 300,
+      "title": "Palliative Care"
+    },
+    {
+      "id": "301",
+      "number": 301,
+      "title": "Death Notification and Advance Directives"
+    },
+    {
+      "id": "302",
+      "number": 302,
+      "title": "Military Medicine"
+    },
+    {
+      "id": "303",
+      "number": 303,
+      "title": "Legal Issues in Emergency Medicine"
+    }
+  ]
+}

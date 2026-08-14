@@ -1,0 +1,1259 @@
+{
+  "schema": "em-board-rosens-chapters-v1",
+  "title": "Rosen’s Emergency Medicine: Concepts and Clinical Practice",
+  "edition": "10th Edition",
+  "isbn": "978-0-323-75789-8",
+  "source": "https://evolve.elsevier.com/cs/product/9780323757898?role=faculty",
+  "sourceModule": "app/lib/rosens-catalog.ts",
+  "chapterCount": 208,
+  "chapters": [
+    {
+      "id": "001",
+      "number": 1,
+      "sourceId": "001",
+      "title": "Airway"
+    },
+    {
+      "id": "002",
+      "number": 2,
+      "sourceId": "002",
+      "title": "Mechanical Ventilation and Noninvasive Ventilatory Support"
+    },
+    {
+      "id": "003",
+      "number": 3,
+      "sourceId": "003",
+      "title": "Shock"
+    },
+    {
+      "id": "004",
+      "number": 4,
+      "sourceId": "004",
+      "title": "Brain Resuscitation"
+    },
+    {
+      "id": "005",
+      "number": 5,
+      "sourceId": "005",
+      "title": "Adult Resuscitation"
+    },
+    {
+      "id": "006",
+      "number": 6,
+      "sourceId": "006",
+      "title": "Pain Management"
+    },
+    {
+      "id": "007",
+      "number": 7,
+      "sourceId": "007",
+      "title": "Procedural Sedation and Analgesia"
+    },
+    {
+      "id": "008",
+      "number": 8,
+      "sourceId": "008",
+      "title": "Fever in the Adult Patient"
+    },
+    {
+      "id": "009",
+      "number": 9,
+      "sourceId": "009",
+      "title": "Weakness"
+    },
+    {
+      "id": "010",
+      "number": 10,
+      "sourceId": "010",
+      "title": "Cyanosis"
+    },
+    {
+      "id": "011",
+      "number": 11,
+      "sourceId": "011",
+      "title": "Syncope"
+    },
+    {
+      "id": "012",
+      "number": 12,
+      "sourceId": "012",
+      "title": "Depressed Consciousness and Coma"
+    },
+    {
+      "id": "013",
+      "number": 13,
+      "sourceId": "013",
+      "title": "Confusion"
+    },
+    {
+      "id": "014",
+      "number": 14,
+      "sourceId": "014",
+      "title": "Seizures"
+    },
+    {
+      "id": "015",
+      "number": 15,
+      "sourceId": "015",
+      "title": "Dizziness and Vertigo"
+    },
+    {
+      "id": "016",
+      "number": 16,
+      "sourceId": "016",
+      "title": "Headache"
+    },
+    {
+      "id": "017",
+      "number": 17,
+      "sourceId": "017",
+      "title": "Diplopia"
+    },
+    {
+      "id": "018",
+      "number": 18,
+      "sourceId": "018",
+      "title": "Red and Painful Eye"
+    },
+    {
+      "id": "019",
+      "number": 19,
+      "sourceId": "019",
+      "title": "Sore Throat"
+    },
+    {
+      "id": "020",
+      "number": 20,
+      "sourceId": "020",
+      "title": "Hemoptysis"
+    },
+    {
+      "id": "021",
+      "number": 21,
+      "sourceId": "021",
+      "title": "Dyspnea"
+    },
+    {
+      "id": "022",
+      "number": 22,
+      "sourceId": "022",
+      "title": "Chest Pain"
+    },
+    {
+      "id": "023",
+      "number": 23,
+      "sourceId": "023",
+      "title": "Abdominal Pain"
+    },
+    {
+      "id": "024",
+      "number": 24,
+      "sourceId": "024",
+      "title": "Jaundice"
+    },
+    {
+      "id": "025",
+      "number": 25,
+      "sourceId": "025",
+      "title": "Nausea and Vomiting"
+    },
+    {
+      "id": "026",
+      "number": 26,
+      "sourceId": "026",
+      "title": "Gastrointestinal Bleeding"
+    },
+    {
+      "id": "027",
+      "number": 27,
+      "sourceId": "027",
+      "title": "Diarrhea"
+    },
+    {
+      "id": "028",
+      "number": 28,
+      "sourceId": "028",
+      "title": "Constipation"
+    },
+    {
+      "id": "029",
+      "number": 29,
+      "sourceId": "029",
+      "title": "Acute Pelvic Pain"
+    },
+    {
+      "id": "030",
+      "number": 30,
+      "sourceId": "030",
+      "title": "Vaginal Bleeding"
+    },
+    {
+      "id": "031",
+      "number": 31,
+      "sourceId": "031",
+      "title": "Back Pain"
+    },
+    {
+      "id": "032",
+      "number": 32,
+      "sourceId": "032",
+      "title": "Multiple Trauma"
+    },
+    {
+      "id": "033",
+      "number": 33,
+      "sourceId": "033",
+      "title": "Head Trauma"
+    },
+    {
+      "id": "034",
+      "number": 34,
+      "sourceId": "034",
+      "title": "Facial Trauma"
+    },
+    {
+      "id": "035",
+      "number": 35,
+      "sourceId": "035",
+      "title": "Spinal Trauma"
+    },
+    {
+      "id": "036",
+      "number": 36,
+      "sourceId": "036",
+      "title": "Neck Trauma"
+    },
+    {
+      "id": "037",
+      "number": 37,
+      "sourceId": "037",
+      "title": "Thoracic Trauma"
+    },
+    {
+      "id": "038",
+      "number": 38,
+      "sourceId": "038",
+      "title": "Abdominal Trauma"
+    },
+    {
+      "id": "039",
+      "number": 39,
+      "sourceId": "039",
+      "title": "Genitourinary Trauma"
+    },
+    {
+      "id": "040",
+      "number": 40,
+      "sourceId": "040",
+      "title": "Peripheral Vascular Trauma"
+    },
+    {
+      "id": "041",
+      "number": 41,
+      "sourceId": "041",
+      "title": "General Principles of Orthopedic Injuries"
+    },
+    {
+      "id": "042",
+      "number": 42,
+      "sourceId": "042",
+      "title": "Hand Injuries"
+    },
+    {
+      "id": "043",
+      "number": 43,
+      "sourceId": "043",
+      "title": "Wrist and Forearm Injuries"
+    },
+    {
+      "id": "044",
+      "number": 44,
+      "sourceId": "044",
+      "title": "Humerus and Elbow Injuries"
+    },
+    {
+      "id": "045",
+      "number": 45,
+      "sourceId": "045",
+      "title": "Shoulder Injuries"
+    },
+    {
+      "id": "046",
+      "number": 46,
+      "sourceId": "046",
+      "title": "Pelvic Injuries"
+    },
+    {
+      "id": "047",
+      "number": 47,
+      "sourceId": "047",
+      "title": "Femur and Hip Injuries"
+    },
+    {
+      "id": "048",
+      "number": 48,
+      "sourceId": "048",
+      "title": "Knee and Lower Leg Injuries"
+    },
+    {
+      "id": "049",
+      "number": 49,
+      "sourceId": "049",
+      "title": "Ankle and Foot Injuries"
+    },
+    {
+      "id": "050",
+      "number": 50,
+      "sourceId": "050",
+      "title": "Wound Management Principles"
+    },
+    {
+      "id": "051",
+      "number": 51,
+      "sourceId": "051",
+      "title": "Foreign Bodies"
+    },
+    {
+      "id": "052",
+      "number": 52,
+      "sourceId": "052",
+      "title": "Mammalian Bites"
+    },
+    {
+      "id": "053",
+      "number": 53,
+      "sourceId": "053",
+      "title": "Venomous Animal Injuries"
+    },
+    {
+      "id": "054",
+      "number": 54,
+      "sourceId": "054",
+      "title": "Thermal Injuries"
+    },
+    {
+      "id": "055",
+      "number": 55,
+      "sourceId": "055",
+      "title": "Chemical Injuries"
+    },
+    {
+      "id": "056",
+      "number": 56,
+      "sourceId": "056",
+      "title": "Oral Medicine"
+    },
+    {
+      "id": "057",
+      "number": 57,
+      "sourceId": "057",
+      "title": "Ophthalmology"
+    },
+    {
+      "id": "058",
+      "number": 58,
+      "sourceId": "058",
+      "title": "Otolaryngology"
+    },
+    {
+      "id": "059",
+      "number": 59,
+      "sourceId": "059",
+      "title": "Asthma"
+    },
+    {
+      "id": "060",
+      "number": 60,
+      "sourceId": "060",
+      "title": "Chronic Obstructive Pulmonary Disease"
+    },
+    {
+      "id": "061",
+      "number": 61,
+      "sourceId": "061",
+      "title": "Upper Respiratory Tract Infections"
+    },
+    {
+      "id": "062",
+      "number": 62,
+      "sourceId": "062",
+      "title": "Pneumonia"
+    },
+    {
+      "id": "063",
+      "number": 63,
+      "sourceId": "063",
+      "title": "Pleural Disease"
+    },
+    {
+      "id": "064",
+      "number": 64,
+      "sourceId": "064",
+      "title": "Acute Coronary Syndromes"
+    },
+    {
+      "id": "065",
+      "number": 65,
+      "sourceId": "065",
+      "title": "Dysrhythmias"
+    },
+    {
+      "id": "066",
+      "number": 66,
+      "sourceId": "066",
+      "title": "Implantable Cardiac Devices"
+    },
+    {
+      "id": "067",
+      "number": 67,
+      "sourceId": "067",
+      "title": "Heart Failure"
+    },
+    {
+      "id": "068",
+      "number": 68,
+      "sourceId": "068",
+      "title": "Pericardial and Myocardial Disease"
+    },
+    {
+      "id": "069",
+      "number": 69,
+      "sourceId": "069",
+      "title": "Infective Endocarditis and Valvular Heart Disease"
+    },
+    {
+      "id": "070",
+      "number": 70,
+      "sourceId": "070",
+      "title": "Hypertension"
+    },
+    {
+      "id": "071",
+      "number": 71,
+      "sourceId": "071",
+      "title": "Aortic Dissection"
+    },
+    {
+      "id": "072",
+      "number": 72,
+      "sourceId": "072",
+      "title": "Abdominal Aortic Aneurysm"
+    },
+    {
+      "id": "073",
+      "number": 73,
+      "sourceId": "073",
+      "title": "Peripheral Arteriovascular Disease"
+    },
+    {
+      "id": "074",
+      "number": 74,
+      "sourceId": "074",
+      "title": "Pulmonary Embolism and Deep Vein Thrombosis"
+    },
+    {
+      "id": "075",
+      "number": 75,
+      "sourceId": "075",
+      "title": "Esophagus, Stomach, and Duodenum"
+    },
+    {
+      "id": "076",
+      "number": 76,
+      "sourceId": "076",
+      "title": "Liver and Biliary Tract Disorders"
+    },
+    {
+      "id": "077",
+      "number": 77,
+      "sourceId": "077",
+      "title": "Pancreas"
+    },
+    {
+      "id": "078",
+      "number": 78,
+      "sourceId": "078",
+      "title": "Small Intestine"
+    },
+    {
+      "id": "079",
+      "number": 79,
+      "sourceId": "079",
+      "title": "Acute Appendicitis"
+    },
+    {
+      "id": "080",
+      "number": 80,
+      "sourceId": "080",
+      "title": "Gastroenteritis"
+    },
+    {
+      "id": "081",
+      "number": 81,
+      "sourceId": "081",
+      "title": "Large Intestine"
+    },
+    {
+      "id": "082",
+      "number": 82,
+      "sourceId": "082",
+      "title": "Anorectum"
+    },
+    {
+      "id": "083",
+      "number": 83,
+      "sourceId": "083",
+      "title": "Renal Failure"
+    },
+    {
+      "id": "084",
+      "number": 84,
+      "sourceId": "084",
+      "title": "Sexually Transmitted Infections"
+    },
+    {
+      "id": "085",
+      "number": 85,
+      "sourceId": "085",
+      "title": "Urologic Disorders"
+    },
+    {
+      "id": "086",
+      "number": 86,
+      "sourceId": "086",
+      "title": "Gynecologic Disorders"
+    },
+    {
+      "id": "087",
+      "number": 87,
+      "sourceId": "087",
+      "title": "Stroke"
+    },
+    {
+      "id": "088",
+      "number": 88,
+      "sourceId": "088",
+      "title": "Seizure"
+    },
+    {
+      "id": "089",
+      "number": 89,
+      "sourceId": "089",
+      "title": "Headache Disorders"
+    },
+    {
+      "id": "090",
+      "number": 90,
+      "sourceId": "090",
+      "title": "Delirium and Dementia"
+    },
+    {
+      "id": "091",
+      "number": 91,
+      "sourceId": "091",
+      "title": "Brain and Cranial Nerve Disorders"
+    },
+    {
+      "id": "092",
+      "number": 92,
+      "sourceId": "092",
+      "title": "Spinal Cord Disorders"
+    },
+    {
+      "id": "093",
+      "number": 93,
+      "sourceId": "093",
+      "title": "Peripheral Nerve Disorders"
+    },
+    {
+      "id": "094",
+      "number": 94,
+      "sourceId": "094",
+      "title": "Neuromuscular Disorders"
+    },
+    {
+      "id": "095",
+      "number": 95,
+      "sourceId": "095",
+      "title": "Central Nervous System Infections"
+    },
+    {
+      "id": "096",
+      "number": 96,
+      "sourceId": "096",
+      "title": "Thought Disorders"
+    },
+    {
+      "id": "097",
+      "number": 97,
+      "sourceId": "097",
+      "title": "Mood Disorders"
+    },
+    {
+      "id": "098",
+      "number": 98,
+      "sourceId": "098",
+      "title": "Anxiety Disorders"
+    },
+    {
+      "id": "099",
+      "number": 99,
+      "sourceId": "099",
+      "title": "Somatic Symptoms and Related Disorders"
+    },
+    {
+      "id": "100",
+      "number": 100,
+      "sourceId": "100",
+      "title": "Factitious Disorders and Malingering"
+    },
+    {
+      "id": "101",
+      "number": 101,
+      "sourceId": "101",
+      "title": "Suicidal Behavior"
+    },
+    {
+      "id": "102",
+      "number": 102,
+      "sourceId": "102",
+      "title": "Arthritis"
+    },
+    {
+      "id": "103",
+      "number": 103,
+      "sourceId": "103",
+      "title": "Tendinopathy and Bursitis"
+    },
+    {
+      "id": "104",
+      "number": 104,
+      "sourceId": "104",
+      "title": "Musculoskeletal Back Pain"
+    },
+    {
+      "id": "105",
+      "number": 105,
+      "sourceId": "105",
+      "title": "Systemic Lupus Erythematosus and the Vasculitides"
+    },
+    {
+      "id": "106",
+      "number": 106,
+      "sourceId": "106",
+      "title": "Allergy, Anaphylaxis, and Angioedema"
+    },
+    {
+      "id": "107",
+      "number": 107,
+      "sourceId": "107",
+      "title": "Dermatologic Presentations"
+    },
+    {
+      "id": "108",
+      "number": 108,
+      "sourceId": "108",
+      "title": "Blood and Blood Components"
+    },
+    {
+      "id": "109",
+      "number": 109,
+      "sourceId": "109",
+      "title": "Anemia and Polycythemia"
+    },
+    {
+      "id": "110",
+      "number": 110,
+      "sourceId": "110",
+      "title": "White Blood Cell Disorders"
+    },
+    {
+      "id": "111",
+      "number": 111,
+      "sourceId": "111",
+      "title": "Disorders of Hemostasis"
+    },
+    {
+      "id": "112",
+      "number": 112,
+      "sourceId": "112",
+      "title": "Oncologic Emergencies"
+    },
+    {
+      "id": "113",
+      "number": 113,
+      "sourceId": "113",
+      "title": "Acid-Base Disorders"
+    },
+    {
+      "id": "114",
+      "number": 114,
+      "sourceId": "114",
+      "title": "Electrolyte Disorders"
+    },
+    {
+      "id": "115",
+      "number": 115,
+      "sourceId": "115",
+      "title": "Diabetes Mellitus and Disorders of Glucose Homeostasis"
+    },
+    {
+      "id": "116",
+      "number": 116,
+      "sourceId": "116",
+      "title": "Rhabdomyolysis"
+    },
+    {
+      "id": "117",
+      "number": 117,
+      "sourceId": "117",
+      "title": "Thyroid and Adrenal Disorders"
+    },
+    {
+      "id": "118",
+      "number": 118,
+      "sourceId": "118",
+      "title": "Bacteria"
+    },
+    {
+      "id": "119",
+      "number": 119,
+      "sourceId": "119",
+      "title": "Viruses"
+    },
+    {
+      "id": "120",
+      "number": 120,
+      "sourceId": "120",
+      "title": "Coronaviruses"
+    },
+    {
+      "id": "121",
+      "number": 121,
+      "sourceId": "121",
+      "title": "HIV"
+    },
+    {
+      "id": "122",
+      "number": 122,
+      "sourceId": "122",
+      "title": "Parasites"
+    },
+    {
+      "id": "123",
+      "number": 123,
+      "sourceId": "123",
+      "title": "Tickborne Illnesses"
+    },
+    {
+      "id": "124",
+      "number": 124,
+      "sourceId": "124",
+      "title": "Tuberculosis"
+    },
+    {
+      "id": "125",
+      "number": 125,
+      "sourceId": "125",
+      "title": "Bone and Joint Infections"
+    },
+    {
+      "id": "126",
+      "number": 126,
+      "sourceId": "126",
+      "title": "Skin and Soft Tissue Infections"
+    },
+    {
+      "id": "127",
+      "number": 127,
+      "sourceId": "127",
+      "title": "Sepsis Syndrome"
+    },
+    {
+      "id": "128",
+      "number": 128,
+      "sourceId": "128",
+      "title": "Hypothermia, Frostbite, and Non-freezing Cold Injuries"
+    },
+    {
+      "id": "129",
+      "number": 129,
+      "sourceId": "129",
+      "title": "Heat Illness"
+    },
+    {
+      "id": "130",
+      "number": 130,
+      "sourceId": "130",
+      "title": "Electrical and Lightning Injuries"
+    },
+    {
+      "id": "131",
+      "number": 131,
+      "sourceId": "131",
+      "title": "Scuba Diving and Dysbarism"
+    },
+    {
+      "id": "132",
+      "number": 132,
+      "sourceId": "132",
+      "title": "High-Altitude Medicine"
+    },
+    {
+      "id": "133",
+      "number": 133,
+      "sourceId": "133",
+      "title": "Drowning"
+    },
+    {
+      "id": "134",
+      "number": 134,
+      "sourceId": "134",
+      "title": "Radiation Injuries"
+    },
+    {
+      "id": "135",
+      "number": 135,
+      "sourceId": "135",
+      "title": "Care of the Poisoned Patient"
+    },
+    {
+      "id": "136",
+      "number": 136,
+      "sourceId": "136",
+      "title": "Toxic Alcohols"
+    },
+    {
+      "id": "137",
+      "number": 137,
+      "sourceId": "137",
+      "title": "Alcohol-Related Disease"
+    },
+    {
+      "id": "138",
+      "number": 138,
+      "sourceId": "138",
+      "title": "Acetaminophen"
+    },
+    {
+      "id": "139",
+      "number": 139,
+      "sourceId": "139",
+      "title": "Aspirin and Nonsteroidal Agents"
+    },
+    {
+      "id": "140",
+      "number": 140,
+      "sourceId": "140",
+      "title": "Anticholinergics"
+    },
+    {
+      "id": "141",
+      "number": 141,
+      "sourceId": "141",
+      "title": "Antidepressants"
+    },
+    {
+      "id": "142",
+      "number": 142,
+      "sourceId": "142",
+      "title": "Cardiovascular Drugs"
+    },
+    {
+      "id": "143",
+      "number": 143,
+      "sourceId": "143",
+      "title": "Caustics"
+    },
+    {
+      "id": "144",
+      "number": 144,
+      "sourceId": "144",
+      "title": "Cocaine and Other Sympathomimetics"
+    },
+    {
+      "id": "145",
+      "number": 145,
+      "sourceId": "145",
+      "title": "THC and Hallucinogens"
+    },
+    {
+      "id": "146",
+      "number": 146,
+      "sourceId": "146",
+      "title": "Iron and Heavy Metals"
+    },
+    {
+      "id": "147",
+      "number": 147,
+      "sourceId": "147",
+      "title": "Hydrocarbons"
+    },
+    {
+      "id": "148",
+      "number": 148,
+      "sourceId": "148",
+      "title": "Inhaled Toxins"
+    },
+    {
+      "id": "149",
+      "number": 149,
+      "sourceId": "149",
+      "title": "Lithium"
+    },
+    {
+      "id": "150",
+      "number": 150,
+      "sourceId": "150",
+      "title": "Antipsychotics"
+    },
+    {
+      "id": "151",
+      "number": 151,
+      "sourceId": "151",
+      "title": "Opioids"
+    },
+    {
+      "id": "152",
+      "number": 152,
+      "sourceId": "152",
+      "title": "Pesticides"
+    },
+    {
+      "id": "153",
+      "number": 153,
+      "sourceId": "153",
+      "title": "Plants, Herbal Medications, and Mushrooms"
+    },
+    {
+      "id": "154",
+      "number": 154,
+      "sourceId": "154",
+      "title": "Sedative-Hypnotics"
+    },
+    {
+      "id": "155",
+      "number": 155,
+      "sourceId": "155",
+      "title": "Care of the Pediatric Patient"
+    },
+    {
+      "id": "156",
+      "number": 156,
+      "sourceId": "156",
+      "title": "Pediatric Airway Management"
+    },
+    {
+      "id": "157",
+      "number": 157,
+      "sourceId": "157",
+      "title": "Pediatric Sedation and Analgesia"
+    },
+    {
+      "id": "158",
+      "number": 158,
+      "sourceId": "158",
+      "title": "Pediatric Resuscitation"
+    },
+    {
+      "id": "159",
+      "number": 159,
+      "sourceId": "159",
+      "title": "Neonatal Resuscitation"
+    },
+    {
+      "id": "160",
+      "number": 160,
+      "sourceId": "160",
+      "title": "Pediatric Trauma"
+    },
+    {
+      "id": "161",
+      "number": 161,
+      "sourceId": "161",
+      "title": "Pediatric Fever"
+    },
+    {
+      "id": "162",
+      "number": 162,
+      "sourceId": "162",
+      "title": "Pediatric Upper Airway Obstruction and Infections"
+    },
+    {
+      "id": "163",
+      "number": 163,
+      "sourceId": "163",
+      "title": "Pediatric Lower Airway Obstruction"
+    },
+    {
+      "id": "164",
+      "number": 164,
+      "sourceId": "164",
+      "title": "Pediatric Lung Disease"
+    },
+    {
+      "id": "165",
+      "number": 165,
+      "sourceId": "165",
+      "title": "Pediatric Cardiac Disorders"
+    },
+    {
+      "id": "166",
+      "number": 166,
+      "sourceId": "166",
+      "title": "Pediatric Gastrointestinal Disorders"
+    },
+    {
+      "id": "167",
+      "number": 167,
+      "sourceId": "167",
+      "title": "Pediatric Infectious Diarrheal Disease and Dehydration"
+    },
+    {
+      "id": "168",
+      "number": 168,
+      "sourceId": "168",
+      "title": "Pediatric Genitourinary and Renal Tract Disorders"
+    },
+    {
+      "id": "169",
+      "number": 169,
+      "sourceId": "169",
+      "title": "Pediatric Neurologic Disorders"
+    },
+    {
+      "id": "170",
+      "number": 170,
+      "sourceId": "170",
+      "title": "Pediatric Musculoskeletal Disorders"
+    },
+    {
+      "id": "171",
+      "number": 171,
+      "sourceId": "171",
+      "title": "Pediatric Drug Therapy"
+    },
+    {
+      "id": "172",
+      "number": 172,
+      "sourceId": "172",
+      "title": "Child Abuse"
+    },
+    {
+      "id": "173",
+      "number": 173,
+      "sourceId": "173",
+      "title": "Complications of Pregnancy"
+    },
+    {
+      "id": "174",
+      "number": 174,
+      "sourceId": "174",
+      "title": "Medical Emergencies During Pregnancy"
+    },
+    {
+      "id": "175",
+      "number": 175,
+      "sourceId": "175",
+      "title": "Drug Therapy in Pregnancy"
+    },
+    {
+      "id": "176",
+      "number": 176,
+      "sourceId": "176",
+      "title": "Labor and Delivery"
+    },
+    {
+      "id": "177",
+      "number": 177,
+      "sourceId": "177",
+      "title": "Trauma in Pregnancy"
+    },
+    {
+      "id": "178",
+      "number": 178,
+      "sourceId": "178",
+      "title": "Care of the Geriatric Patient"
+    },
+    {
+      "id": "179",
+      "number": 179,
+      "sourceId": "179",
+      "title": "Geriatric Trauma"
+    },
+    {
+      "id": "180",
+      "number": 180,
+      "sourceId": "180",
+      "title": "Geriatric Drug Therapy"
+    },
+    {
+      "id": "181",
+      "number": 181,
+      "sourceId": "181",
+      "title": "Geriatric Abuse and Neglect"
+    },
+    {
+      "id": "182",
+      "number": 182,
+      "sourceId": "182",
+      "title": "The Immunocompromised Patient"
+    },
+    {
+      "id": "183",
+      "number": 183,
+      "sourceId": "183",
+      "title": "The Solid Organ Transplant Patient"
+    },
+    {
+      "id": "184",
+      "number": 184,
+      "sourceId": "184",
+      "title": "The Morbidly Obese Patient"
+    },
+    {
+      "id": "185",
+      "number": 185,
+      "sourceId": "185",
+      "title": "The Combative and Difficult Patient"
+    },
+    {
+      "id": "186",
+      "number": 186,
+      "sourceId": "186",
+      "title": "Multiculturalism, Diversity, and Care Delivery"
+    },
+    {
+      "id": "187",
+      "number": 187,
+      "sourceId": "187",
+      "title": "Human Trafficking"
+    },
+    {
+      "id": "188",
+      "number": 188,
+      "sourceId": "188",
+      "title": "Sexual Minority Populations (LGBTQ)"
+    },
+    {
+      "id": "189",
+      "number": 189,
+      "sourceId": "189",
+      "title": "Social Determinants"
+    },
+    {
+      "id": "190",
+      "number": 190,
+      "sourceId": "190",
+      "title": "Community Violence"
+    },
+    {
+      "id": "191",
+      "number": 191,
+      "sourceId": "191",
+      "title": "Sexual Assault"
+    },
+    {
+      "id": "192",
+      "number": 192,
+      "sourceId": "192",
+      "title": "Intimate Partner Violence and Abuse"
+    },
+    {
+      "id": "193",
+      "number": 193,
+      "sourceId": "e01",
+      "title": "Global Emergency Medicine"
+    },
+    {
+      "id": "194",
+      "number": 194,
+      "sourceId": "e02",
+      "title": "Humanitarian Aid in Disaster and Conflict"
+    },
+    {
+      "id": "195",
+      "number": 195,
+      "sourceId": "e03",
+      "title": "Emergency Ultrasound"
+    },
+    {
+      "id": "196",
+      "number": 196,
+      "sourceId": "e04",
+      "title": "The Geriatric Emergency Department"
+    },
+    {
+      "id": "197",
+      "number": 197,
+      "sourceId": "e05",
+      "title": "End of Life"
+    },
+    {
+      "id": "198",
+      "number": 198,
+      "sourceId": "e06",
+      "title": "Bioethics"
+    },
+    {
+      "id": "199",
+      "number": 199,
+      "sourceId": "e07",
+      "title": "Emergency Medical Treatment and Labor Act and Medicolegal Issues"
+    },
+    {
+      "id": "200",
+      "number": 200,
+      "sourceId": "e08",
+      "title": "Quality Improvement and Patient Safety"
+    },
+    {
+      "id": "201",
+      "number": 201,
+      "sourceId": "e09",
+      "title": "Patient Experience in the Emergency Department"
+    },
+    {
+      "id": "202",
+      "number": 202,
+      "sourceId": "e10",
+      "title": "Wellness, Stress, and the Impaired Physician"
+    },
+    {
+      "id": "203",
+      "number": 203,
+      "sourceId": "e11",
+      "title": "Forensic Emergency Medicine"
+    },
+    {
+      "id": "204",
+      "number": 204,
+      "sourceId": "e12",
+      "title": "Emergency Medical Services: Overview and Ground Transport"
+    },
+    {
+      "id": "205",
+      "number": 205,
+      "sourceId": "e13",
+      "title": "Air Medical Transport"
+    },
+    {
+      "id": "206",
+      "number": 206,
+      "sourceId": "e14",
+      "title": "Disaster Preparedness"
+    },
+    {
+      "id": "207",
+      "number": 207,
+      "sourceId": "e15",
+      "title": "Weapons of Mass Destruction"
+    },
+    {
+      "id": "208",
+      "number": 208,
+      "sourceId": "e16",
+      "title": "Tactical Emergency Medical Support and Urban Search and Rescue"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+public/guides/**/*.md text eol=lf -whitespace
+public/data/**/*.br binary
+public/guides/**/*.br binary
+app/components/audio-player-provider.tsx text eol=lf
+public/static-snac/*.js text eol=lf

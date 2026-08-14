@@ -1,0 +1,91 @@
+{
+  "schema": "audio-runtime-compression-v1",
+  "algorithm": "brotli",
+  "quality": 11,
+  "rawBytes": 76974090,
+  "storedBytes": 51871335,
+  "savingsBytes": 25102755,
+  "ratio": 0.67388,
+  "assets": [
+    {
+      "logicalPath": "/static-snac/ort-wasm-simd-threaded.asyncify.wasm",
+      "storedPath": "/static-snac/ort-wasm-simd-threaded.asyncify.wasm.brp",
+      "r2Key": "managed-audio/v1/static-snac/ort-wasm-simd-threaded.asyncify.wasm.brp",
+      "contentType": "application/wasm",
+      "rawBytes": 24254953,
+      "storedBytes": 3556736,
+      "rawSha256": "7e83cd6cee77e478bc96a7e91b198144fb5e4126287daf1f9b54bb195ebcd55a",
+      "storedSha256": "6c5fe7407d41ff782757f346cf86520c6d512ddf757d92da6925e92ed9b2370d"
+    },
+    {
+      "logicalPath": "/static-snac/model/snac24-static.part00",
+      "storedPath": "/static-snac/model/snac24-static.part00.brp",
+      "r2Key": "managed-audio/v1/static-snac/model/snac24-static.part00.brp",
+      "contentType": "application/octet-stream",
+      "rawBytes": 8388608,
+      "storedBytes": 7542214,
+      "rawSha256": "d207b754d9a112b82505623c9d697f6ba126145d4662d376ae99cb8d11f3388e",
+      "storedSha256": "898328cec39ba4308d924097d2505a1351005533628dd67cac7fbf5dab8c83ce"
+    },
+    {
+      "logicalPath": "/static-snac/model/snac24-static.part01",
+      "storedPath": "/static-snac/model/snac24-static.part01.brp",
+      "r2Key": "managed-audio/v1/static-snac/model/snac24-static.part01.brp",
+      "contentType": "application/octet-stream",
+      "rawBytes": 8388608,
+      "storedBytes": 7712524,
+      "rawSha256": "2cf7ef61f736f0a8cb6c98f4d1b5cf9783ce341b911ad705e683d0b81553817d",
+      "storedSha256": "3220416cc14f0e1a37d175bb28a0dfe93a86468f70c52e1e42a158c053594b3a"
+    },
+    {
+      "logicalPath": "/static-snac/model/snac24-static.part02",
+      "storedPath": "/static-snac/model/snac24-static.part02.brp",
+      "r2Key": "managed-audio/v1/static-snac/model/snac24-static.part02.brp",
+      "contentType": "application/octet-stream",
+      "rawBytes": 8388608,
+      "storedBytes": 7712044,
+      "rawSha256": "44299b8b432e1c7ee1e85a5abd350a590c1965da245a80940ab4da4d378dfd3a",
+      "storedSha256": "f7790473796797a32a765ab981b6519f087a89a9c5def274081e24c5bc8ab9fc"
+    },
+    {
+      "logicalPath": "/static-snac/model/snac24-static.part03",
+      "storedPath": "/static-snac/model/snac24-static.part03.brp",
+      "r2Key": "managed-audio/v1/static-snac/model/snac24-static.part03.brp",
+      "contentType": "application/octet-stream",
+      "rawBytes": 8388608,
+      "storedBytes": 7712901,
+      "rawSha256": "349c5cd7db4ceefacb81157045c9e2ee05472102944a6e5d14dc5a35b9435dba",
+      "storedSha256": "8fe03100123d5243ab47660361b8ea6c57bfc7acb40de399d41340a2bbc4f34c"
+    },
+    {
+      "logicalPath": "/static-snac/model/snac24-static.part04",
+      "storedPath": "/static-snac/model/snac24-static.part04.brp",
+      "r2Key": "managed-audio/v1/static-snac/model/snac24-static.part04.brp",
+      "contentType": "application/octet-stream",
+      "rawBytes": 8388608,
+      "storedBytes": 7719892,
+      "rawSha256": "4fd9f6be8360592c89b698fe7efdadaca978a195134a020bbe5af38a6a87a871",
+      "storedSha256": "fce7b30101084546d8f23d7c6b0f80b3f216fa9a0c2be475dc555b1af5b9d1c5"
+    },
+    {
+      "logicalPath": "/static-snac/model/snac24-static.part05",
+      "storedPath": "/static-snac/model/snac24-static.part05.brp",
+      "r2Key": "managed-audio/v1/static-snac/model/snac24-static.part05.brp",
+      "contentType": "application/octet-stream",
+      "rawBytes": 8388608,
+      "storedBytes": 7718615,
+      "rawSha256": "89503bcea8ac3ca1c8500f057ab2ee67c37d508b1772852047bed5a1462551f9",
+      "storedSha256": "a86f53cdcba8f335d1eb4189eecdf9713be8249a371233d2acb31ba75f384c40"
+    },
+    {
+      "logicalPath": "/static-snac/model/snac24-static.part06",
+      "storedPath": "/static-snac/model/snac24-static.part06.brp",
+      "r2Key": "managed-audio/v1/static-snac/model/snac24-static.part06.brp",
+      "contentType": "application/octet-stream",
+      "rawBytes": 2387489,
+      "storedBytes": 2196409,
+      "rawSha256": "3000eca231330449ad8af290f1b00753d57891195f6d1384f9baeb38688cd9e9",
+      "storedSha256": "8ffc5d7b094468755c7cf81b9d101b1e0ff14b63bf0d68527f93978dffe3f4b6"
+    }
+  ]
+}

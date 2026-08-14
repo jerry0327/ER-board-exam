@@ -1,0 +1,22 @@
+{
+  "schema": "em-board-exam-asset-inventory-v1",
+  "version": "1",
+  "semantic_subtitle_pairs": 1433,
+  "section_title_locale_pairs": 1433,
+  "subtitle_timing_sidecars_hxm": 1433,
+  "subtitle_text_bundles_hxt": 74,
+  "subtitle_text_bundle_bytes": 31371708,
+  "subtitle_timing_bytes": 2064689,
+  "subtitle_runtime_manifest_sha256": "10792f9b1c7915654ed0d12f87d3bf7a9023d34485abe7907464dd291f9704b8",
+  "subtitle_runtime_codec": "subtitle-runtime-semantic-hxt-hxm-v2",
+  "audio_chapters": 1433,
+  "managed_audio_assets": 2875,
+  "snac_data_bytes": 173665746,
+  "packed_logical_files": 6525,
+  "packed_logical_breakdown": {
+    "data": 3374,
+    "guides": 3076,
+    "subtitles-runtime": 75
+  },
+  "note": "The project asset family is named SNAC in the source tree."
+}

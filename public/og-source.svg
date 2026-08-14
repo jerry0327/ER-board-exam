@@ -1,0 +1,44 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F1EDE4"/>
+  <path d="M0 42H1200M0 588H1200" stroke="#C8BFB2"/>
+  <path d="M42 0V630M800 0V630" stroke="#C8BFB2"/>
+
+  <image href="data:image/png;base64,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" x="68" y="66" width="68" height="68"/>
+  <text x="158" y="104" fill="#792F32" font-family="Noto Sans TC Thin, sans-serif" font-size="31" font-weight="700">急專補給站</text>
+  <text x="158" y="132" fill="#6F746C" font-family="DejaVu Sans Mono, monospace" font-size="13" letter-spacing="2">EMERGENCY BOARD COMPANION</text>
+
+  <text x="68" y="247" fill="#28312D" font-family="Noto Sans TC Thin, sans-serif" font-size="59" font-weight="700">急診備考，</text>
+  <text x="68" y="322" fill="#28312D" font-family="Noto Sans TC Thin, sans-serif" font-size="59" font-weight="700">把急專重點補齊。</text>
+  <rect x="68" y="358" width="86" height="6" fill="#792F32"/>
+  <text x="68" y="410" fill="#505A54" font-family="Noto Sans TC Thin, sans-serif" font-size="23" font-weight="400">題庫・學習指引・音檔・錯題複習</text>
+  <text x="68" y="445" fill="#6F746C" font-family="Noto Sans TC Thin, sans-serif" font-size="18" font-weight="400">把每天的下一步整理清楚，專心準備急診專科考試。</text>
+
+  <g transform="translate(68 502)">
+    <path d="M0 0H664M0 70H664" stroke="#C8BFB2"/>
+    <path d="M194 0V70M432 0V70" stroke="#C8BFB2"/>
+    <text x="0" y="30" fill="#792F32" font-family="DejaVu Sans Mono, monospace" font-size="24" font-weight="700">3,320</text>
+    <text x="0" y="54" fill="#6F746C" font-family="Noto Sans TC Thin, sans-serif" font-size="13">歷屆題目</text>
+    <text x="222" y="30" fill="#28312D" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="700">Tintinalli 9e</text>
+    <text x="222" y="54" fill="#6F746C" font-family="Noto Sans TC Thin, sans-serif" font-size="13">章節指引</text>
+    <text x="460" y="30" fill="#28312D" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="700">Rosen’s 10e</text>
+    <text x="460" y="54" fill="#6F746C" font-family="Noto Sans TC Thin, sans-serif" font-size="13">指引與音檔</text>
+  </g>
+
+  <rect x="800" width="400" height="630" fill="#121714"/>
+  <g opacity=".7">
+    <path d="M844 62H1158M844 126H1158M844 190H1158M844 254H1158M844 318H1158M844 382H1158M844 446H1158M844 510H1158M844 574H1158" stroke="#2B332E"/>
+    <path d="M844 62V574M907 62V574M970 62V574M1033 62V574M1096 62V574M1159 62V574" stroke="#2B332E"/>
+  </g>
+  <text x="844" y="93" fill="#AAB5AD" font-family="DejaVu Sans Mono, monospace" font-size="13" letter-spacing="2">BOARD PREPARATION</text>
+  <circle cx="1149" cy="88" r="6" fill="#9DB3A0"/>
+  <path d="M844 227H885L899 201L918 266L940 215L958 227H999L1017 175L1037 290L1062 227H1094L1110 211L1122 227H1158" stroke="#9DB3A0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(844 344)">
+    <rect width="314" height="156" rx="14" fill="#1B221E" stroke="#39433D"/>
+    <text x="24" y="36" fill="#AAB5AD" font-family="DejaVu Sans Mono, monospace" font-size="11" letter-spacing="2">TODAY / STUDY SIGNAL</text>
+    <text x="24" y="82" fill="#EDF2ED" font-family="Noto Sans TC Thin, sans-serif" font-size="26" font-weight="700">先救回這一題。</text>
+    <text x="24" y="112" fill="#D3DDD5" font-family="Noto Sans TC Thin, sans-serif" font-size="14">少一點雜訊，多一點臨床判斷。</text>
+    <rect x="24" y="127" width="116" height="4" fill="#913D45"/>
+    <text x="211" y="134" fill="#9DB3A0" font-family="DejaVu Sans Mono, monospace" font-size="10">SYSTEM READY</text>
+  </g>
+  <text x="844" y="553" fill="#AAB5AD" font-family="DejaVu Sans Mono, monospace" font-size="11" letter-spacing="1">EMERGENCY BOARD · STUDY READY</text>
+</svg>

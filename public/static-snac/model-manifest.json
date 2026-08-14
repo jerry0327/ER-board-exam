@@ -1,0 +1,43 @@
+{
+  "format": "split-onnx-v1",
+  "model": "laion/SNAC-24khz-decoder-onnx/snac24_int2wav_static.prefold.onnx",
+  "sha256": "9eafeab0482a4a8b2d03a6d5f710937097b621eff717a510e63274de1a0dccff",
+  "totalBytes": 52719137,
+  "parts": [
+    {
+      "url": "/static-snac/model/snac24-static.part00?v=prefold-fp32-v1",
+      "offset": 0,
+      "bytes": 8388608
+    },
+    {
+      "url": "/static-snac/model/snac24-static.part01?v=prefold-fp32-v1",
+      "offset": 8388608,
+      "bytes": 8388608
+    },
+    {
+      "url": "/static-snac/model/snac24-static.part02?v=prefold-fp32-v1",
+      "offset": 16777216,
+      "bytes": 8388608
+    },
+    {
+      "url": "/static-snac/model/snac24-static.part03?v=prefold-fp32-v1",
+      "offset": 25165824,
+      "bytes": 8388608
+    },
+    {
+      "url": "/static-snac/model/snac24-static.part04?v=prefold-fp32-v1",
+      "offset": 33554432,
+      "bytes": 8388608
+    },
+    {
+      "url": "/static-snac/model/snac24-static.part05?v=prefold-fp32-v1",
+      "offset": 41943040,
+      "bytes": 8388608
+    },
+    {
+      "url": "/static-snac/model/snac24-static.part06?v=prefold-fp32-v1",
+      "offset": 50331648,
+      "bytes": 2387489
+    }
+  ]
+}
