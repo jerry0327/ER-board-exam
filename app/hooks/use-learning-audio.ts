@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useAudioPlayer } from "../components/audio-player-provider";
+import { requestQuestionAudioChoice } from "../lib/audio-player-section-events";
 import {
   audioSummaryDisplayName,
   audioSummaryForLearningResource,
@@ -48,7 +49,12 @@ export function useLearningAudio({
     ? audioSummaryForLearningResource(resource)
     : null;
   const isCurrent = Boolean(source && currentSourceId === source.id);
-  const actionLabel = isCurrent ? "顯示音檔播放器" : `載入本${noun}音檔`;
+  const isQuestionAudio = resource?.kind === "question";
+  const actionLabel = isQuestionAudio
+    ? "選擇播放方式"
+    : isCurrent
+      ? "顯示音檔播放器"
+      : `載入本${noun}音檔`;
 
   const prepare = useCallback(() => {
     if (!contentReady || !source) return;
@@ -60,9 +66,13 @@ export function useLearningAudio({
   const open = useCallback(() => {
     if (!source) return;
     prepare();
+    if (resource?.kind === "question") {
+      requestQuestionAudioChoice({ sourceId: source.id, questionId: resource.questionId });
+      return;
+    }
     if (currentSourceId === source.id) openPlayer();
     else void loadSource(source);
-  }, [currentSourceId, loadSource, openPlayer, prepare, source]);
+  }, [currentSourceId, loadSource, openPlayer, prepare, resource, source]);
 
   return {
     actionLabel,
