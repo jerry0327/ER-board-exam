@@ -553,6 +553,12 @@ export default function AudioSectionCompanion() {
   }, [sectionOpen]);
 
   useEffect(() => {
+    const root = document.documentElement;
+    root.toggleAttribute("data-audio-scoped-playback", Boolean(activeScope));
+    return () => root.removeAttribute("data-audio-scoped-playback");
+  }, [activeScope]);
+
+  useEffect(() => {
     const handleChoice = (event: Event) => {
       const request = (event as CustomEvent<QuestionAudioChoiceRequest>).detail;
       if (!request?.sourceId || !request.questionId) return;
@@ -680,12 +686,14 @@ export default function AudioSectionCompanion() {
 
   async function chooseQuestionOnly() {
     if (!questionChoice || !choiceSource || loadingChoice) return;
+    const hadScopedPlayback = document.documentElement.hasAttribute("data-audio-scoped-playback");
     setLoadingChoice(true);
     setChoiceError(null);
     try {
       const loaded = await loadSectionBundle(choiceSource);
       const nextScope = questionScope(choiceSource, loaded, questionChoice.questionId);
       if (!nextScope) throw new Error("question-section-unavailable");
+      document.documentElement.setAttribute("data-audio-scoped-playback", "true");
       if (player.current?.id === choiceSource.id) {
         if (player.isPlaying) player.pause();
         player.openPlayer();
@@ -698,6 +706,7 @@ export default function AudioSectionCompanion() {
       player.seek(nextScope.startSeconds);
       setQuestionChoice(null);
     } catch {
+      if (!hadScopedPlayback) document.documentElement.removeAttribute("data-audio-scoped-playback");
       setChoiceError("目前無法讀取這一題的精準時間範圍；仍可使用五題完整音檔。");
     } finally {
       setLoadingChoice(false);

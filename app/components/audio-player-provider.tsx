@@ -656,6 +656,7 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
   }
 
   const recordListeningProgress = useCallback((forceCompleted = false) => {
+    if (document.documentElement.hasAttribute("data-audio-scoped-playback")) return;
     const source = currentRef.current;
     if (!source) return;
     const duration = Math.max(0, durationRef.current || source.durationSeconds);
