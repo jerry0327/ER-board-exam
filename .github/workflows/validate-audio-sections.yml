@@ -5,12 +5,73 @@ on:
     branches:
       - agent/audio-sections-question-scope
 
+permissions:
+  contents: write
+
 jobs:
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+      - name: Protect bundle history during scoped playback
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          attribute = "data-audio-scoped-playback"
+
+          provider = Path("app/components/audio-player-provider.tsx")
+          text = provider.read_text()
+          guard = f'    if (document.documentElement.hasAttribute("{attribute}")) return;\n'
+          if guard not in text:
+              needle = "  const recordListeningProgress = useCallback((forceCompleted = false) => {\n    const source = currentRef.current;"
+              replacement = "  const recordListeningProgress = useCallback((forceCompleted = false) => {\n" + guard + "    const source = currentRef.current;"
+              if needle not in text:
+                  raise SystemExit("recordListeningProgress insertion point not found")
+              text = text.replace(needle, replacement, 1)
+              provider.write_text(text)
+
+          companion = Path("app/components/audio-section-companion.tsx")
+          text = companion.read_text()
+          effect = f'''\n  useEffect(() => {{\n    const root = document.documentElement;\n    root.toggleAttribute("{attribute}", Boolean(activeScope));\n    return () => root.removeAttribute("{attribute}");\n  }}, [activeScope]);\n'''
+          effect_anchor = "  useEffect(() => {\n    sectionOpenRef.current = sectionOpen;\n  }, [sectionOpen]);\n"
+          if effect not in text:
+              if effect_anchor not in text:
+                  raise SystemExit("section scope effect insertion point not found")
+              text = text.replace(effect_anchor, effect_anchor + effect, 1)
+
+          choice_anchor = "  async function chooseQuestionOnly() {\n    if (!questionChoice || !choiceSource || loadingChoice) return;\n    setLoadingChoice(true);\n    setChoiceError(null);\n    try {"
+          choice_replacement = f'''  async function chooseQuestionOnly() {{\n    if (!questionChoice || !choiceSource || loadingChoice) return;\n    const hadScopedPlayback = document.documentElement.hasAttribute("{attribute}");\n    setLoadingChoice(true);\n    setChoiceError(null);\n    try {{'''
+          if "const hadScopedPlayback = document.documentElement.hasAttribute" not in text:
+              if choice_anchor not in text:
+                  raise SystemExit("question choice insertion point not found")
+              text = text.replace(choice_anchor, choice_replacement, 1)
+
+          scope_anchor = '      if (!nextScope) throw new Error("question-section-unavailable");\n      if (player.current?.id === choiceSource.id) {'
+          scope_replacement = f'      if (!nextScope) throw new Error("question-section-unavailable");\n      document.documentElement.setAttribute("{attribute}", "true");\n      if (player.current?.id === choiceSource.id) {{'
+          if f'document.documentElement.setAttribute("{attribute}", "true");' not in text:
+              if scope_anchor not in text:
+                  raise SystemExit("question scope arming insertion point not found")
+              text = text.replace(scope_anchor, scope_replacement, 1)
+
+          catch_anchor = '    } catch {\n      setChoiceError("目前無法讀取這一題的精準時間範圍；仍可使用五題完整音檔。");'
+          catch_replacement = f'''    }} catch {{\n      if (!hadScopedPlayback) document.documentElement.removeAttribute("{attribute}");\n      setChoiceError("目前無法讀取這一題的精準時間範圍；仍可使用五題完整音檔。");'''
+          if "if (!hadScopedPlayback) document.documentElement.removeAttribute" not in text:
+              if catch_anchor not in text:
+                  raise SystemExit("question scope cleanup insertion point not found")
+              text = text.replace(catch_anchor, catch_replacement, 1)
+
+          companion.write_text(text)
+          PY
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx
+            git commit -m "Protect scoped question playback history"
+            git push
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: 22.13.0
