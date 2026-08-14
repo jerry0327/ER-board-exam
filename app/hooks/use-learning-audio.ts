@@ -49,7 +49,7 @@ export function useLearningAudio({
     ? audioSummaryForLearningResource(resource)
     : null;
   const isCurrent = Boolean(source && currentSourceId === source.id);
-  const isQuestionAudio = resource?.kind === "question";
+  const isQuestionAudio = resource?.kind === "question" && Boolean(resource.questionId);
   const actionLabel = isQuestionAudio
     ? "選擇播放方式"
     : isCurrent
@@ -66,7 +66,7 @@ export function useLearningAudio({
   const open = useCallback(() => {
     if (!source) return;
     prepare();
-    if (resource?.kind === "question") {
+    if (resource?.kind === "question" && resource.questionId) {
       requestQuestionAudioChoice({ sourceId: source.id, questionId: resource.questionId });
       return;
     }
