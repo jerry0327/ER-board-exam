@@ -210,11 +210,16 @@ export default function AudioSectionCompanion() {
   }, [currentSource]);
 
   useEffect(() => {
-    if (scope && currentSource && scope.sourceId !== currentSource.id) setScope(null);
+    if (!currentSource) {
+      if (scope) setScope(null);
+      return;
+    }
+    if (scope && scope.sourceId !== currentSource.id) setScope(null);
   }, [currentSource, scope]);
 
   useEffect(() => {
     if (!player.expanded || player.stowed || !currentSource) {
+      setSectionOpen(false);
       setDetailsTarget(null);
       setTimelineTarget(null);
       return;
