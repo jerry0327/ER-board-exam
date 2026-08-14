@@ -1,0 +1,122 @@
+name: Capture real audio section UI
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - name: Install browser
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start actual app
+        shell: bash
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/em-board-dev.log 2>&1 &
+          echo $! > /tmp/em-board-dev.pid
+          for attempt in $(seq 1 90); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/em-board-dev.log
+          exit 1
+      - name: Capture actual player and question chooser
+        run: |
+          mkdir -p visual-proof
+          cat > /tmp/capture.mjs <<'JS'
+          import { chromium } from 'playwright';
+
+          const base = 'http://127.0.0.1:4173/';
+          const browser = await chromium.launch({ headless: true });
+
+          async function catalog(page) {
+            return page.evaluate(async () => {
+              const response = await fetch('/audio/snac/catalog.json');
+              if (!response.ok) throw new Error(`catalog ${response.status}`);
+              return (await response.json()).entries;
+            });
+          }
+
+          async function seedPlayer(page, sourceId) {
+            await page.goto(base, { waitUntil: 'domcontentloaded' });
+            await page.evaluate(({ sourceId }) => {
+              localStorage.setItem('em-board-audio-player-v2', JSON.stringify({
+                sourceId,
+                position: 0,
+                rate: 1,
+                expanded: true,
+                stowed: false,
+                continuousPlay: true,
+                queueIds: [],
+                randomReview: false,
+              }));
+            }, { sourceId });
+            await page.reload({ waitUntil: 'domcontentloaded' });
+            await page.locator('.audio-player-dock.is-expanded').waitFor({ state: 'visible', timeout: 30000 });
+            await page.locator('.audio-section-companion').waitFor({ state: 'visible', timeout: 30000 });
+          }
+
+          const desktop = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
+          const desktopPage = await desktop.newPage();
+          await desktopPage.goto(base, { waitUntil: 'domcontentloaded' });
+          const entries = await catalog(desktopPage);
+          const textbook = entries.find((entry) => entry.kind === 'textbook-chapter' || entry.kind === 'textbook-section');
+          const questionSet = entries.find((entry) => entry.kind === 'question-set' && entry.questionStart <= 33 && entry.questionEnd >= 33)
+            ?? entries.find((entry) => entry.kind === 'question-set');
+          if (!textbook || !questionSet) throw new Error('Required audio sources are missing');
+
+          await seedPlayer(desktopPage, textbook.id);
+          await desktopPage.locator('.audio-section-toggle').click();
+          await desktopPage.locator('.audio-section-panel').waitFor({ state: 'visible' });
+          await desktopPage.locator('.audio-player-dock').screenshot({ path: 'visual-proof/desktop-expanded-sections.png' });
+
+          const questionNumber = Math.min(
+            Math.max(33, questionSet.questionStart),
+            questionSet.questionEnd,
+          );
+          const questionId = `${questionSet.questionExam}-Q${String(questionNumber).padStart(3, '0')}`;
+          await desktopPage.evaluate(({ sourceId, questionId }) => {
+            window.dispatchEvent(new CustomEvent('em-board-question-audio-choice', {
+              detail: { sourceId, questionId },
+            }));
+          }, { sourceId: questionSet.id, questionId });
+          await desktopPage.locator('.audio-question-choice').waitFor({ state: 'visible' });
+          await desktopPage.locator('.audio-question-choice').screenshot({ path: 'visual-proof/desktop-question-choice.png' });
+          await desktop.close();
+
+          const mobile = await browser.newContext({ viewport: { width: 412, height: 915 }, deviceScaleFactor: 1 });
+          const mobilePage = await mobile.newPage();
+          await seedPlayer(mobilePage, textbook.id);
+          await mobilePage.locator('.audio-section-toggle').click();
+          await mobilePage.locator('.audio-section-panel').waitFor({ state: 'visible' });
+          await mobilePage.locator('.audio-player-dock').screenshot({ path: 'visual-proof/mobile-expanded-sections.png' });
+          await mobilePage.evaluate(({ sourceId, questionId }) => {
+            window.dispatchEvent(new CustomEvent('em-board-question-audio-choice', {
+              detail: { sourceId, questionId },
+            }));
+          }, { sourceId: questionSet.id, questionId });
+          await mobilePage.locator('.audio-question-choice').waitFor({ state: 'visible' });
+          await mobilePage.screenshot({ path: 'visual-proof/mobile-question-choice.png', fullPage: true });
+          await mobile.close();
+
+          await browser.close();
+          JS
+          node /tmp/capture.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audio-section-real-ui
+          path: visual-proof/*.png
+          if-no-files-found: error
