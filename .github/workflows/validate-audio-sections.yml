@@ -14,24 +14,25 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: Protect bundle history during scoped playback
+      - name: Normalize scoped playback implementation
         shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import re
 
           attribute = "data-audio-scoped-playback"
 
           provider = Path("app/components/audio-player-provider.tsx")
-          text = provider.read_text()
+          provider_text = provider.read_text()
           guard = f'    if (document.documentElement.hasAttribute("{attribute}")) return;\n'
-          if guard not in text:
+          if guard not in provider_text:
               needle = "  const recordListeningProgress = useCallback((forceCompleted = false) => {\n    const source = currentRef.current;"
               replacement = "  const recordListeningProgress = useCallback((forceCompleted = false) => {\n" + guard + "    const source = currentRef.current;"
-              if needle not in text:
+              if needle not in provider_text:
                   raise SystemExit("recordListeningProgress insertion point not found")
-              text = text.replace(needle, replacement, 1)
-              provider.write_text(text)
+              provider_text = provider_text.replace(needle, replacement, 1)
+              provider.write_text(provider_text)
 
           companion = Path("app/components/audio-section-companion.tsx")
           text = companion.read_text()
@@ -63,13 +64,30 @@ jobs:
                   raise SystemExit("question scope cleanup insertion point not found")
               text = text.replace(catch_anchor, catch_replacement, 1)
 
+          site_css = Path("app/site.css")
+          site_text = site_css.read_text()
+          style_marker = "/* Audio Section Companion */"
+          style_match = re.search(r'const STYLES = String\.raw`(.*?)`;\n\n', text, re.S)
+          if style_match:
+              styles = style_match.group(1).strip()
+              if style_marker not in site_text:
+                  site_text = site_text.rstrip() + f'''\n\n@layer site-components {{\n  {style_marker}\n{styles}\n}}\n'''
+                  site_css.write_text(site_text)
+              text = text[:style_match.start()] + text[style_match.end():]
+          elif style_marker not in site_text:
+              raise SystemExit("section styles are missing from both component and site.css")
+
+          text = text.replace("      <style>{STYLES}</style>\n", "")
+          text = text.replace("  useRef,\n", "")
+          text = text.replace("  const sectionOpenRef = useRef(false);\n\n", "")
+          text = text.replace("  useEffect(() => {\n    sectionOpenRef.current = sectionOpen;\n  }, [sectionOpen]);\n\n", "")
           companion.write_text(text)
           PY
           if ! git diff --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx
-            git commit -m "Protect scoped question playback history"
+            git add app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css
+            git commit -m "Align audio section UI with site styles"
             git push
           fi
       - uses: actions/setup-node@v4
