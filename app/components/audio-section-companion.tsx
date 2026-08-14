@@ -166,7 +166,7 @@ export default function AudioSectionCompanion() {
   useEffect(() => {
     const root = document.documentElement;
     root.toggleAttribute("data-audio-scoped-playback", Boolean(activeScope));
-    return () => root.removeAttribute("data-audio-scoped-playback");
+    return () => { root.removeAttribute("data-audio-scoped-playback"); };
   }, [activeScope]);
 
   useEffect(() => {
