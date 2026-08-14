@@ -1,0 +1,51 @@
+name: Repository safety checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  repository-safety:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Reject oversized regular Git files
+        shell: bash
+        run: |
+          set -euo pipefail
+          limit=$((90 * 1024 * 1024))
+          failed=0
+          while IFS= read -r -d '' file; do
+            size=$(wc -c < "$file")
+            if [ "$size" -gt "$limit" ]; then
+              echo "::error file=$file::File exceeds 90 MiB. Use Git LFS, Releases, or external asset storage instead of regular Git."
+              failed=1
+            fi
+          done < <(find . -type f -not -path './.git/*' -print0)
+          exit "$failed"
+
+      - name: Reject tracked environment secret files
+        shell: bash
+        run: |
+          set -euo pipefail
+          bad=$(git ls-files | grep -E '(^|/)\.env($|\.)' | grep -vE '(^|/)\.env\.example$' || true)
+          if [ -n "$bad" ]; then
+            echo "$bad"
+            echo "::error::Tracked .env files are not allowed. Commit only .env.example templates without secrets."
+            exit 1
+          fi
+
+      - name: Basic repository integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f README.md
+          test -f SECURITY.md
+          test -f docs/ASSET_STRATEGY.md

@@ -1,0 +1,44 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Environment / credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Dependencies / generated builds
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+.next/
+out/
+
+# Logs / temporary files
+*.log
+tmp/
+temp/
+*.bak
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Private / raw material
+private/
+content/private/
+media/private/
+media/raw/
+data/private/
+
+# Local release bundles
+releases/
