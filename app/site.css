@@ -9558,7 +9558,7 @@
 .audio-player-dock.is-section-list-open .audio-player-options,
 .audio-player-dock.is-section-list-open .audio-player-queue-panel,
 .audio-player-dock.is-section-list-open .audio-player-retry {
-  display: none !important;
+  display: none;
 }
 .audio-player-dock.is-question-scope .audio-player-timeline > input:first-child,
 .audio-player-dock.is-question-scope .audio-player-timeline > input:first-child + div {
