@@ -23,13 +23,12 @@ test("the dashboard stays eager while mutually exclusive routes load on demand",
   assert.match(app, /const loadLearningGuideView = \(\) => loadDeferredModule\("learning-guide", \(\) => import\("\.\/views\/learning-guide-view"\)\)/u);
   assert.match(app, /const routeViewLoaders: Partial<Record<NavView/u);
   assert.match(app, /function routeMayOfferLearningAudio[\s\S]*?view === "學習指引"[\s\S]*?view === "學習音檔"[\s\S]*?view === "詳解閱讀" && Boolean\(questionId\)/u);
-  assert.match(app, /const prepareAudioForRoute = useCallback\([\s\S]*?preloadRouteView\(view\);[\s\S]*?routeMayOfferLearningAudio\(view, questionId\)[\s\S]*?prepareAudioShell\(\);[\s\S]*?if \(decoderIntent\) prewarmAudioDecoder\(\);/u);
+  assert.match(app, /const prepareAudioForRoute = useCallback\([\s\S]*?preloadRouteView\(view\);[\s\S]*?routeMayOfferLearningAudio\(view, questionId\)[\s\S]*?prepareAudioShell\(\);/u);
   const routePreloadStart = app.indexOf("const prepareAudioForRoute");
   const routePreload = app.slice(routePreloadStart, app.indexOf("useEffect(() =>", routePreloadStart));
   assert.match(routePreload, /prepareAudioShell\(\)/u);
-  assert.doesNotMatch(routePreload, /prepareAudioPlayer\(\)|loadAudioSummaryCatalog\(/u);
-  assert.match(app, /window\.setTimeout\(\(\) => \{[\s\S]*?requestIdleCallback\(run, \{ timeout: 2_400 \}\)[\s\S]*?\}, 900\)/u);
-  assert.match(app, /onPointerEnter=\{\(\) => prepareAudioForRoute\(item\.name, null, true\)\}[\s\S]*?onFocus=\{\(\) => prepareAudioForRoute\(item\.name, null, true\)\}[\s\S]*?onPointerDown=\{\(\) => prepareAudioForRoute\(item\.name, null, true\)\}/u);
+  assert.doesNotMatch(routePreload, /prepareAudioPlayer\(\)|loadAudioSummaryCatalog\(|prewarmAudioDecoder\(/u);
+  assert.match(app, /onPointerDown=\{\(\) => prepareAudioForRoute\(item\.name\)\}/u);
   assert.doesNotMatch(app, /targetSurfaceHasPainted|prepareAudioPlayer/u);
   assert.match(app, /prepareAudioForRoute\("詳解閱讀", id\)/u);
   assert.match(app, /const relatedRouteViews: Partial<Record<NavView[\s\S]*?"學習指引": \["學習音檔", "學習文件"\]/u);

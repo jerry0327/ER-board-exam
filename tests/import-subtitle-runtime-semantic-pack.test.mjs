@@ -14,6 +14,7 @@ import {
 
 const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const builder = path.join(workspaceRoot, "scripts", "build_subtitle_runtime_semantic_pack.py");
+const semanticRuntimeImportFixtureTest = fs.existsSync(builder) ? test : test.skip;
 
 function fixture() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "semantic-runtime-import-"));
@@ -89,7 +90,7 @@ function formalTerminalRegistry() {
   };
 }
 
-test("semantic runtime importer validates each reversible pair and atomically installs only its namespace", async () => {
+semanticRuntimeImportFixtureTest("semantic runtime importer validates each reversible pair and atomically installs only its namespace", async () => {
   const data = fixture();
   try {
     const validated = await validateSemanticRuntimePackage(data.packageRoot);
@@ -116,7 +117,7 @@ test("semantic runtime importer validates each reversible pair and atomically in
   }
 });
 
-test("semantic runtime importer rejects an orphan runtime file before it can install", async () => {
+semanticRuntimeImportFixtureTest("semantic runtime importer rejects an orphan runtime file before it can install", async () => {
   const data = fixture();
   try {
     fs.writeFileSync(path.join(data.packageRoot, "timing", "orphan.hxm"), "not in manifest");
@@ -126,7 +127,7 @@ test("semantic runtime importer rejects an orphan runtime file before it can ins
   }
 });
 
-test("semantic runtime importer rejects terminal-unavailable partitions", async () => {
+semanticRuntimeImportFixtureTest("semantic runtime importer rejects terminal-unavailable partitions", async () => {
   const data = fixture();
   try {
     const registryBytes = Buffer.from(`${JSON.stringify(formalTerminalRegistry(), null, 2)}\n`);

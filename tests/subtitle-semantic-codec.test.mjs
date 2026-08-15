@@ -14,6 +14,7 @@ import {
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const codec = path.join(projectRoot, "scripts", "subtitle_hxt_hxm_codec.py");
+const semanticCodecFixtureTest = fs.existsSync(codec) ? test : test.skip;
 
 function sourceText(cueCount = 71) {
   const lines = [JSON.stringify({
@@ -69,7 +70,7 @@ function encodedFixture() {
   };
 }
 
-test("browser semantic decoder round-trips the Python reference bytes exactly", async () => {
+semanticCodecFixtureTest("browser semantic decoder round-trips the Python reference bytes exactly", async () => {
   const fixture = encodedFixture();
   try {
     const expectedHash = crypto.createHash("sha256").update(fixture.source.bytes).digest("hex");
@@ -83,7 +84,7 @@ test("browser semantic decoder round-trips the Python reference bytes exactly", 
   }
 });
 
-test("semantic cue lookup starts from a bounded checkpoint and preserves 1 ms A/B", () => {
+semanticCodecFixtureTest("semantic cue lookup starts from a bounded checkpoint and preserves 1 ms A/B", () => {
   const fixture = encodedFixture();
   try {
     // Cue 66 is in an odd-numbered speaker run after the 64-cue checkpoint;
@@ -102,7 +103,7 @@ test("semantic cue lookup starts from a bounded checkpoint and preserves 1 ms A/
   }
 });
 
-test("semantic decoder fails closed for corruption or a mixed HXT/HXM generation", async () => {
+semanticCodecFixtureTest("semantic decoder fails closed for corruption or a mixed HXT/HXM generation", async () => {
   const fixture = encodedFixture();
   try {
     const corrupt = new Uint8Array(fixture.hxm);

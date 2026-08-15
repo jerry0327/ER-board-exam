@@ -22,10 +22,7 @@ import {
   playerSecondsForChapter,
   type AudioChapterL1,
 } from "../lib/audio-chapters";
-import {
-  loadRuntimeSemanticAudioChapters,
-  type LoadedRuntimeSemanticAudioChapters,
-} from "../lib/audio-runtime-semantic-package";
+import type { LoadedRuntimeSemanticAudioChapters } from "../lib/audio-runtime-semantic-package";
 import {
   loadSectionTitleLocales,
   localizedSectionTitle,
@@ -75,6 +72,7 @@ function loadSectionBundle(source: AudioSummarySource) {
   const existing = sectionBundleRequests.get(key);
   if (existing) return existing;
   const pending = (async (): Promise<LoadedSectionBundle> => {
+    const { loadRuntimeSemanticAudioChapters } = await import("../lib/audio-runtime-semantic-package");
     const runtime = await loadRuntimeSemanticAudioChapters(source);
     let locales: LoadedSectionTitleLocales | null = null;
     try {
