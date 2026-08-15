@@ -91,17 +91,44 @@ jobs:
           elif style_marker not in site_text:
               raise SystemExit("section styles are missing from both component and site.css")
 
+          current_site_text = site_css.read_text()
+          cleaned_site_text = current_site_text.replace("display: none !important;", "display: none;")
+          if cleaned_site_text != current_site_text:
+              site_css.write_text(cleaned_site_text)
+
           text = text.replace("      <style>{STYLES}</style>\n", "")
           text = text.replace("  useRef,\n", "")
           text = text.replace("  const sectionOpenRef = useRef(false);\n\n", "")
           text = text.replace("  useEffect(() => {\n    sectionOpenRef.current = sectionOpen;\n  }, [sectionOpen]);\n\n", "")
           companion.write_text(text)
+
+          package_json = Path("package.json")
+          package_text = package_json.read_text()
+          old_test_runner = '"test:expanded": "node --test tests/*.test.mjs'
+          new_test_runner = '"test:expanded": "node --experimental-strip-types --test tests/*.test.mjs'
+          if old_test_runner in package_text:
+              package_json.write_text(package_text.replace(old_test_runner, new_test_runner, 1))
+
+          app_file = Path("app/question-bank-app.tsx")
+          app_text = app_file.read_text()
+          helper = '''function routeMayOfferLearningAudio(view: NavView, questionId?: string | null) {\n  return (\n    view === "學習指引"\n    || view === "學習音檔"\n    || (view === "詳解閱讀" && Boolean(questionId))\n  );\n}\n\n'''
+          helper_anchor = "function canWarmFullQuestionIndex() {"
+          if "function routeMayOfferLearningAudio" not in app_text:
+              if helper_anchor not in app_text:
+                  raise SystemExit("learning audio route helper insertion point not found")
+              app_text = app_text.replace(helper_anchor, helper + helper_anchor, 1)
+
+          old_route_logic = '''    const isLearningRoute = view === "學習指引" || view === "學習音檔";\n    const isConcreteReader = view === "詳解閱讀" && Boolean(questionId);\n    if (!isLearningRoute && !isConcreteReader) return;'''
+          new_route_logic = '''    if (!routeMayOfferLearningAudio(view, questionId)) return;'''
+          if old_route_logic in app_text:
+              app_text = app_text.replace(old_route_logic, new_route_logic, 1)
+          app_file.write_text(app_text)
           PY
           if ! git diff --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css
-            git commit -m "Clear stale audio section state"
+            git add app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css package.json app/question-bank-app.tsx
+            git commit -m "Repair audio section validation"
             git push
           fi
       - uses: actions/setup-node@v4
