@@ -1731,6 +1731,7 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
       restorePlaybackTimerRef.current = null;
       restorePlaybackToggledRef.current = true;
       restoreLongPressTriggeredRef.current = true;
+      if (!playingIntentRef.current && phaseRef.current === "paused") updatePhase("buffering");
       void togglePlayback();
     }, RESTORE_PLAYBACK_LONG_PRESS_MS);
     restoreDismissTimerRef.current = window.setTimeout(() => {

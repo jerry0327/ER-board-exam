@@ -278,6 +278,7 @@
   }
 
   .audio-player-dock.is-expanded {
+    overflow: visible;
     width: min(780px, calc(100vw - 32px));
   }
 
@@ -9762,6 +9763,13 @@
   .audio-player-settings-panel .audio-player-option small,
   .audio-player-settings-panel .audio-player-option select {
     font-size: 12px;
+  }
+
+  .audio-player-settings-panel .audio-player-option-select {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    min-height: 44px;
+    width: 100%;
   }
 
   .audio-player-settings-panel .audio-player-option-select select {
