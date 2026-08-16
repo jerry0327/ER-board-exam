@@ -15,16 +15,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Apply player balance refinement
-        run: python scripts/refine-player-balance.py
-      - name: Commit product CSS
         run: |
-          if git diff --quiet -- app/site.css; then
-            echo 'No product CSS diff.'
+          python scripts/refine-player-balance.py
+          python scripts/rebalance-player-secondary-controls.py
+          python scripts/refine-player-balance-v2.py
+      - name: Commit product changes
+        run: |
+          if git diff --quiet -- app/site.css app/components/audio-player-provider.tsx; then
+            echo 'No product diff.'
           else
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add app/site.css
-            git commit -m 'Refine audio player visual balance'
+            git add app/site.css app/components/audio-player-provider.tsx
+            git commit -m 'Balance audio player secondary controls'
             git push origin HEAD:fix/original-player-skeleton-enhancements
           fi
       - uses: actions/setup-node@v4
