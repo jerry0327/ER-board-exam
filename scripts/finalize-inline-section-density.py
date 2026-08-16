@@ -22,52 +22,37 @@ if replacement not in css:
 css_path.write_text(css)
 
 qa = qa_path.read_text()
-metric_old = '''    const title = box(".audio-section-inline-title");
-    const left = box(".audio-player-time-current");
-    const right = box(".audio-player-time-duration");
+anchor = '''  report.mobile[key].expanded = await assertCenterline(page, `mobile-${key}`);
 '''
-metric_new = '''    const title = box(".audio-section-inline-title");
-    const index = box(".audio-section-inline-index");
-    const left = box(".audio-player-time-current");
-    const right = box(".audio-player-time-duration");
-'''
-if metric_new not in qa:
-    if metric_old not in qa:
-        raise SystemExit('inline metric target not found')
-    qa = qa.replace(metric_old, metric_new, 1)
-
-return_old = '''    return { row, title, left, right, bodyWidth: document.documentElement.scrollWidth, viewportWidth: window.innerWidth };
-'''
-return_new = '''    const indexStyle = document.querySelector(".audio-section-inline-index") ? getComputedStyle(document.querySelector(".audio-section-inline-index")) : null;
+assertion = '''  report.mobile[key].expanded = await assertCenterline(page, `mobile-${key}`);
+  const inlineSectionState = await page.locator(".audio-section-inline-control").evaluate((control) => {
+    const index = control.querySelector(".audio-section-inline-index");
+    const title = control.querySelector(".audio-section-inline-title");
+    const indexRect = index?.getBoundingClientRect() ?? null;
+    const titleRect = title?.getBoundingClientRect() ?? null;
+    const style = index ? getComputedStyle(index) : null;
     return {
-      row,
-      title,
-      index,
-      indexText: document.querySelector(".audio-section-inline-index")?.textContent?.trim() ?? "",
-      indexDisplay: indexStyle?.display ?? null,
-      left,
-      right,
-      bodyWidth: document.documentElement.scrollWidth,
+      indexText: index?.textContent?.trim() ?? "",
+      indexDisplay: style?.display ?? null,
+      indexWidth: indexRect?.width ?? 0,
+      titleText: title?.textContent?.trim() ?? "",
+      titleWidth: titleRect?.width ?? 0,
+      documentWidth: document.documentElement.scrollWidth,
       viewportWidth: window.innerWidth,
     };
-'''
-if return_new not in qa:
-    if return_old not in qa:
-        raise SystemExit('inline metric return target not found')
-    qa = qa.replace(return_old, return_new, 1)
-
-assert_old = '''  if (inlineMetrics.bodyWidth > inlineMetrics.viewportWidth + 1) throw new Error(`mobile ${key}: inline Section caused horizontal overflow ${JSON.stringify(inlineMetrics)}`);
-'''
-assert_new = '''  if (inlineMetrics.bodyWidth > inlineMetrics.viewportWidth + 1) throw new Error(`mobile ${key}: inline Section caused horizontal overflow ${JSON.stringify(inlineMetrics)}`);
-  if (!inlineMetrics.index || inlineMetrics.indexDisplay === "none" || !/^\\d+\\/\\d+$/u.test(inlineMetrics.indexText)) {
-    throw new Error(`mobile ${key}: Section index is not visibly preserved ${JSON.stringify(inlineMetrics)}`);
+  });
+  report.mobile[key].inlineSection = inlineSectionState;
+  if (inlineSectionState.indexDisplay === "none" || inlineSectionState.indexWidth <= 0 || !/^\\d+\\/\\d+$/u.test(inlineSectionState.indexText)) {
+    throw new Error(`mobile ${key}: Section index is not visibly preserved ${JSON.stringify(inlineSectionState)}`);
+  }
+  if (inlineSectionState.documentWidth > inlineSectionState.viewportWidth + 1) {
+    throw new Error(`mobile ${key}: inline Section caused horizontal overflow ${JSON.stringify(inlineSectionState)}`);
   }
 '''
-if assert_new not in qa:
-    if assert_old not in qa:
-        raise SystemExit('inline overflow assertion target not found')
-    qa = qa.replace(assert_old, assert_new, 1)
-
+if assertion not in qa:
+    if anchor not in qa:
+        raise SystemExit('mobile QA anchor not found')
+    qa = qa.replace(anchor, assertion, 1)
 qa_path.write_text(qa)
 
 # Report the longest real Traditional-Chinese L1 title from all deployed locale bundles.
