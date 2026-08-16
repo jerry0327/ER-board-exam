@@ -8,7 +8,6 @@ import {
   ChevronUp,
   Headphones,
   ListMusic,
-  Maximize2,
   Pause,
   Play,
   Repeat2,
@@ -19,7 +18,6 @@ import {
   SkipBack,
   SkipForward,
   Timer,
-  Volume2,
   X,
 } from "lucide-react";
 import {
@@ -355,7 +353,6 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
   const [playbackRate, setPlaybackRateState] = useState(1);
-  const [volume, setVolumeState] = useState(1);
   const [subtitlesEnabled, setSubtitlesEnabledState] = useState(false);
   const [continuousPlay, setContinuousPlayState] = useState(true);
   const [randomReview, setRandomReviewState] = useState(false);
@@ -429,7 +426,6 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
   const positionRef = useRef(0);
   const durationRef = useRef(0);
   const playbackRateRef = useRef(1);
-  const volumeRef = useRef(1);
   const continuousPlayRef = useRef(true);
   const randomReviewRef = useRef(false);
   const queueIdsRef = useRef<string[]>([]);
@@ -454,7 +450,6 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
   const workerReadySourceIdRef = useRef<string | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const workletRef = useRef<AudioWorkletNode | null>(null);
-  const gainNodeRef = useRef<GainNode | null>(null);
   const audioOutputPromiseRef = useRef<Promise<void> | null>(null);
   const audioRecoveryPromiseRef = useRef<Promise<void> | null>(null);
   const audioRecoveryFailureCountRef = useRef(0);
@@ -566,8 +561,6 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
   function releaseAudioOutput() {
     workletRef.current?.disconnect();
     workletRef.current = null;
-    gainNodeRef.current?.disconnect();
-    gainNodeRef.current = null;
     detachAudioContextStateListener();
     const context = audioContextRef.current;
     audioContextRef.current = null;
@@ -855,28 +848,6 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
     updateQueue(next);
   }
 
-  function updateVolume(value: number) {
-    const next = Math.max(0, Math.min(1, value));
-    volumeRef.current = next;
-    setVolumeState(next);
-    const context = audioContextRef.current;
-    const gain = gainNodeRef.current;
-    if (context && gain) gain.gain.setTargetAtTime(next, context.currentTime, 0.015);
-  }
-
-  function connectWorkletToOutput(worklet: AudioWorkletNode, context: AudioContext) {
-    let gain = gainNodeRef.current;
-    if (!gain || gain.context !== context) {
-      gain?.disconnect();
-      gain = context.createGain();
-      gain.gain.value = volumeRef.current;
-      gain.connect(context.destination);
-      gainNodeRef.current = gain;
-    }
-    worklet.disconnect();
-    worklet.connect(gain);
-  }
-
   function updateSleepTimer(setting: AudioSleepTimer) {
     if (sleepTimerRef.current !== null) clearTimeout(sleepTimerRef.current);
     sleepTimerRef.current = null;
@@ -1065,7 +1036,7 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
       numberOfOutputs: 1,
       outputChannelCount: [1],
     });
-    connectWorkletToOutput(worklet, context);
+    worklet.connect(context.destination);
     worklet.addEventListener("processorerror", () => {
       if (
         lifecycle !== playerLifecycleRef.current
@@ -2277,7 +2248,7 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
       if (context && worklet && audioContextIsRunning(context)) {
         try {
           worklet.disconnect();
-          connectWorkletToOutput(worklet, context);
+          worklet.connect(context.destination);
         } catch {
           // A later hard-recovery pass replaces a graph that cannot reconnect.
         }
@@ -2766,8 +2737,8 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                   <button type="button" className="audio-player-chapter-control" aria-label={randomReview ? "隨機播放下一章" : "播放下一章"} disabled={phase === "loading" || !canPlayNext} onClick={() => void playNextSource()}>
                     <SkipForward aria-hidden="true" />
                   </button>
-                  <button type="button" className="audio-player-skip" aria-label="快進 15 秒" disabled={phase === "loading"} onClick={() => jumpBy(15)}>
-                    <span>15</span><RotateCw aria-hidden="true" />
+                  <button type="button" className="audio-player-skip" aria-label="快進 30 秒" disabled={phase === "loading"} onClick={() => jumpBy(30)}>
+                    <span>30</span><RotateCw aria-hidden="true" />
                   </button>
                 </div>
 
@@ -2779,10 +2750,6 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                 </label>
 
                 <div className="audio-player-utilities">
-                  <label className="audio-player-volume">
-                    <Volume2 aria-hidden="true" />
-                    <input type="range" min="0" max="1" step="0.05" value={volume} aria-label="音量" onChange={(event) => updateVolume(Number(event.target.value))} />
-                  </label>
                   <details
                     ref={settingsDetailsRef}
                     className="audio-player-settings"
@@ -2822,9 +2789,6 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                       <div className="audio-player-settings-actions"><button type="button" disabled={phase === "loading"} onClick={() => seekTo(0)}>回到開頭</button><button type="button" onClick={dismissPlayer}>關閉播放器</button></div>
                     </div>
                   </details>
-                  <button type="button" className="audio-player-utility audio-player-fullscreen" aria-label="切換播放器全螢幕" onClick={() => { const dock = playerDockRef.current; if (!dock) return; if (document.fullscreenElement) void document.exitFullscreen(); else if (dock.requestFullscreen) void dock.requestFullscreen(); }}>
-                    <Maximize2 aria-hidden="true" />
-                  </button>
                 </div>
               </div>
 

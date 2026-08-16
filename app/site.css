@@ -9936,22 +9936,6 @@
     position: relative;
   }
 
-  .audio-player-volume {
-    align-items: center;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    color: var(--site-muted);
-    display: flex;
-    flex: 1 1 96px;
-    gap: 8px;
-    max-width: 120px;
-    min-height: 0;
-    min-width: 80px;
-    outline: 0;
-    padding: 0;
-  }
-
   .audio-player-volume:focus-within {
     outline: 0;
   }
@@ -10468,16 +10452,6 @@
       margin-left: 0;
       order: 3;
       width: 100%;
-    }
-
-    .audio-player-volume {
-      max-width: none;
-      min-width: 0;
-      width: 100%;
-    }
-
-    .audio-player-fullscreen {
-      display: none;
     }
 
     .audio-player-settings-panel {
