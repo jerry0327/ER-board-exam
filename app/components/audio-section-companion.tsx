@@ -18,6 +18,7 @@ import {
   level1AudioChapterMarkers,
   playerSecondsForChapter,
   type AudioChapterL1,
+  type AudioChapterL2,
   type SubtitleCue,
 } from "../lib/audio-chapters";
 import type { LoadedRuntimeSemanticAudioChapters } from "../lib/audio-runtime-semantic-package";
@@ -156,7 +157,7 @@ function questionScope(
 
 function sectionLabel(
   bundle: LoadedSectionBundle,
-  chapter: AudioChapterL1,
+  chapter: AudioChapterL1 | AudioChapterL2,
 ) {
   return localizedSectionTitle(bundle.locales, chapter.id, chapter.title, "zh-TW");
 }
@@ -295,7 +296,7 @@ export default function AudioSectionCompanion() {
         setTimelineTarget(null);
         return;
       }
-      setDetailsTarget(document.querySelector<HTMLElement>(".audio-section-slot"));
+      setDetailsTarget(document.querySelector<HTMLElement>(".audio-section-inline-slot"));
       setTimelineTarget(document.querySelector<HTMLElement>(".audio-player-timeline"));
     });
     return () => {
@@ -387,10 +388,13 @@ export default function AudioSectionCompanion() {
     () => activeBundle ? level1AudioChapterMarkers(activeBundle.runtime.metadata) : [],
     [activeBundle],
   );
-  const currentChapter = activeBundle
-    ? currentAudioChapterAt(activeBundle.runtime.metadata, player.position)?.l1 ?? null
+  const currentPositionChapter = activeBundle
+    ? currentAudioChapterAt(activeBundle.runtime.metadata, player.position)
     : null;
+  const currentChapter = currentPositionChapter?.l1 ?? null;
+  const currentL2 = currentPositionChapter?.l2 ?? null;
   const currentIndex = currentChapter ? chapters.findIndex((chapter) => chapter.id === currentChapter.id) : -1;
+  const l2Count = chapters.reduce((total, chapter) => total + chapter.children.length, 0);
   const currentTitle = activeScope?.title
     ?? (activeBundle && currentChapter ? sectionLabel(activeBundle, currentChapter) : null);
   const currentSubtitleCue = activeBundle && player.subtitlesEnabled
@@ -452,7 +456,7 @@ export default function AudioSectionCompanion() {
     player.seek(siteSecondsFromSourceSeconds(cue.startSourceSeconds));
   }
 
-  function seekChapter(chapter: AudioChapterL1) {
+  function seekChapter(chapter: AudioChapterL1 | AudioChapterL2) {
     setScope(null);
     setSectionOpen(false);
     player.seek(playerSecondsForChapter(chapter));
@@ -498,24 +502,21 @@ export default function AudioSectionCompanion() {
 
   const sectionPortal = activeBundle && detailsTarget
     ? createPortal(
-      <div className="audio-section-companion">
-        <div className="audio-section-summary">
-          <div className="audio-section-current">
-            <small>{activeScope ? "只播放本題" : `目前段落 ${currentIndex >= 0 ? currentIndex + 1 : 1} / ${Math.max(1, chapters.length)}`}</small>
-            {currentTitle && <strong title={currentTitle}>{currentTitle}</strong>}
-          </div>
-          <button
-            ref={sectionToggleRef}
-            type="button"
-            className="audio-section-toggle"
-            aria-expanded={sectionOpen}
-            aria-haspopup="dialog"
-            aria-controls="audio-player-section-panel"
-            onClick={toggleSectionPanel}
-          >
-            <span>段落</span><ChevronDown aria-hidden="true" />
-          </button>
-        </div>
+      <div className="audio-section-companion audio-section-companion-inline">
+        <button
+          ref={sectionToggleRef}
+          type="button"
+          className="audio-section-toggle audio-section-inline-control"
+          aria-expanded={sectionOpen}
+          aria-haspopup="dialog"
+          aria-controls="audio-player-section-panel"
+          aria-label={`目前段落 ${currentIndex >= 0 ? currentIndex + 1 : 1} / ${Math.max(1, chapters.length)}：${currentTitle ?? "段落"}；開啟段落選單`}
+          onClick={toggleSectionPanel}
+        >
+          <span className="audio-section-inline-index">{activeScope ? "本題" : `${currentIndex >= 0 ? currentIndex + 1 : 1}/${Math.max(1, chapters.length)}`}</span>
+          <strong className="audio-section-inline-title">{currentTitle ?? "段落"}</strong>
+          <ChevronDown aria-hidden="true" />
+        </button>
       </div>,
       detailsTarget,
     )
@@ -532,17 +533,17 @@ export default function AudioSectionCompanion() {
       >
         <header>
           <span id="audio-player-section-panel-title">段落</span>
-          <span>{chapters.length} 段</span>
+          <span>{chapters.length} 主段 · {l2Count} 子段</span>
         </header>
         <ol className="audio-section-list">
           {chapters.map((chapter, index) => {
             const startSeconds = markers[index]?.playerStartSeconds ?? playerSecondsForChapter(chapter);
             const isCurrent = chapter.id === currentChapter?.id;
             return (
-              <li key={chapter.id}>
+              <li key={chapter.id} className="audio-section-l1-item">
                 <button
                   type="button"
-                  className={isCurrent ? "is-current" : undefined}
+                  className={`audio-section-list-l1 ${isCurrent ? "is-current" : ""}`.trim()}
                   aria-current={isCurrent ? "true" : undefined}
                   onClick={() => seekChapter(chapter)}
                 >
@@ -550,6 +551,27 @@ export default function AudioSectionCompanion() {
                   <strong>{sectionLabel(activeBundle, chapter)}</strong>
                   <time>{formatTime(startSeconds)}</time>
                 </button>
+                {chapter.children.length > 0 && (
+                  <ol className="audio-section-sublist" aria-label={`${sectionLabel(activeBundle, chapter)} 子段落`}>
+                    {chapter.children.map((child) => {
+                      const isCurrentL2 = child.id === currentL2?.id;
+                      return (
+                        <li key={child.id}>
+                          <button
+                            type="button"
+                            className={`audio-section-list-l2 ${isCurrentL2 ? "is-current-l2" : ""}`.trim()}
+                            aria-current={isCurrentL2 ? "location" : undefined}
+                            onClick={() => seekChapter(child)}
+                          >
+                            <span className="audio-section-list-branch" aria-hidden="true">↳</span>
+                            <strong>{sectionLabel(activeBundle, child)}</strong>
+                            <time>{formatTime(playerSecondsForChapter(child))}</time>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                )}
               </li>
             );
           })}

@@ -6993,6 +6993,187 @@
 }
 
 @layer site-utilities {
+  /* Audio player density: timeline owns Section context; controls keep touch targets without ornamental frames. */
+  .audio-player-timeline > input[type="range"] {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    margin: 0;
+    min-height: 18px;
+    padding: 0;
+  }
+
+  .audio-player-timeline > input[type="range"]:focus-visible {
+    outline: 0;
+  }
+
+  .audio-player-time-row {
+    align-items: center;
+    display: grid;
+    gap: 7px;
+    grid-template-columns: max-content minmax(0, 1fr) max-content;
+    margin-top: 1px;
+    min-height: 30px;
+    padding: 0;
+  }
+
+  .audio-player-time-row > :is(.audio-player-time-current, .audio-player-time-duration) {
+    color: var(--site-muted);
+    font-family: var(--site-mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .audio-section-inline-slot,
+  .audio-section-companion-inline {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .audio-section-inline-control {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: var(--site-radius);
+    color: var(--site-ink);
+    display: grid;
+    gap: 5px;
+    grid-template-columns: max-content minmax(0, 1fr) 14px;
+    min-height: 28px;
+    padding: 2px 5px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .audio-section-inline-control:hover,
+  .audio-section-inline-control:focus-visible,
+  .audio-section-inline-control[aria-expanded="true"] {
+    background: var(--site-surface-hover);
+  }
+
+  .audio-section-inline-index {
+    color: var(--site-primary);
+    font-family: var(--site-mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 760;
+    white-space: nowrap;
+  }
+
+  .audio-section-inline-title {
+    color: var(--site-ink-soft);
+    font-size: 12px;
+    font-weight: 690;
+    line-height: 1.22;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+    white-space: normal;
+  }
+
+  .audio-section-inline-control > svg {
+    color: var(--site-primary);
+    height: 13px;
+    width: 13px;
+  }
+
+  .audio-player-utility {
+    background: transparent;
+    border: 0;
+    border-radius: var(--site-radius);
+    box-shadow: none;
+    color: var(--site-ink-soft);
+  }
+
+  .audio-player-utility:hover:not(:disabled),
+  .audio-player-utility:focus-visible,
+  .audio-player-settings[open] > .audio-player-utility {
+    background: var(--site-surface-hover);
+    border: 0;
+    color: var(--site-primary);
+  }
+
+  .audio-section-l1-item + .audio-section-l1-item {
+    border-top: 1px solid var(--site-line);
+  }
+
+  .audio-section-list > .audio-section-l1-item > .audio-section-list-l1 {
+    border-bottom: 0;
+  }
+
+  .audio-section-sublist {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 5px;
+  }
+
+  .audio-section-sublist .audio-section-list-l2 {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--site-ink-soft);
+    display: grid;
+    gap: 7px;
+    grid-template-columns: 18px minmax(0, 1fr) max-content;
+    min-height: 38px;
+    padding: 5px 12px 5px 27px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .audio-section-sublist .audio-section-list-l2:hover,
+  .audio-section-sublist .audio-section-list-l2:focus-visible,
+  .audio-section-sublist .audio-section-list-l2.is-current-l2 {
+    background: var(--site-surface-hover);
+    color: var(--site-ink);
+  }
+
+  .audio-section-list-branch {
+    color: var(--site-line-strong);
+    font-family: var(--site-mono);
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .audio-section-sublist strong {
+    font-size: 12px;
+    font-weight: 620;
+    line-height: 1.35;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .audio-section-sublist time {
+    color: var(--site-muted);
+    font-family: var(--site-mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 600px) {
+    .audio-player-time-row {
+      gap: 5px;
+      min-height: 30px;
+    }
+
+    .audio-section-inline-control {
+      gap: 4px;
+      padding-inline: 3px;
+    }
+
+    .audio-section-inline-title {
+      font-size: 12px;
+      line-height: 1.18;
+    }
+
+    .audio-section-sublist .audio-section-list-l2 {
+      padding-left: 22px;
+    }
+  }
+
   html[data-theme-mode="black"] body,
   html[data-theme-mode="black"] .loading-page,
   html[data-theme-mode="black"] .topbar,

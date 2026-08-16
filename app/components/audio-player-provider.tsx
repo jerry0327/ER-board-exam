@@ -2718,13 +2718,12 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                   onKeyUp={commitSeekPreview}
                   onBlur={commitSeekPreview}
                 />
-                <div>
-                  <span>{formatTime(position)}</span>
-                  <span>{formatTime(duration)}</span>
+                <div className="audio-player-time-row">
+                  <span className="audio-player-time-current">{formatTime(position)}</span>
+                  <div className="audio-section-inline-slot" />
+                  <span className="audio-player-time-duration">{formatTime(duration)}</span>
                 </div>
               </div>
-
-              <div className="audio-section-slot" />
 
               <div className="audio-player-controls">
                 <label className="audio-player-rate">
