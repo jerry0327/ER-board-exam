@@ -21,11 +21,7 @@ jobs:
           else
             python scripts/rebuild-player-on-original-skeleton.py
           fi
-          if grep -q 'audio-player-dock\\.is-stowed \\.audio-player-mini' tests/audio-player-dock-contract.test.mjs; then
-            python scripts/fix-original-skeleton-contract-regex.py
-          else
-            echo 'Focused contract regex repairs already applied.'
-          fi
+          python scripts/fix-original-skeleton-contract-regex.py
       - name: Commit product and contract changes
         run: |
           if git diff --quiet -- app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css tests/audio-player-dock-contract.test.mjs tests/audio-player-section-subtitle-contract.test.mjs; then
