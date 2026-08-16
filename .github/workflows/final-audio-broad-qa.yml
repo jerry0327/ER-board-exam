@@ -1,0 +1,41 @@
+name: Final audio broad QA
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/final-audio-broad-qa-trigger
+
+permissions:
+  contents: read
+
+jobs:
+  broad-qa:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Type check
+        run: npx tsc --noEmit
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Run standalone test suite
+        shell: bash
+        run: |
+          mapfile -t TESTS < <(find tests -maxdepth 1 -type f -name '*.test.mjs' ! -name 'audio-runtime-semantic-package.test.mjs' -print | sort)
+          printf 'Running %s standalone tests\n' "${#TESTS[@]}"
+          node --experimental-strip-types --test "${TESTS[@]}"
+      - name: Audit deployed audio runtime
+        run: npm run audit:audio-runtime
+      - name: Guard subtitle deployment
+        run: npm run guard:subtitle-deployment
