@@ -30,6 +30,7 @@ jobs:
           fi
           python scripts/refine-mobile-audio-overlays.py
           python scripts/refine-audio-player-density.py
+          python scripts/refine-question-audio-menu.py
       - name: Commit product and contract changes
         run: |
           if git diff --quiet -- app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css tests/audio-player-dock-contract.test.mjs tests/audio-player-section-subtitle-contract.test.mjs; then
@@ -38,7 +39,7 @@ jobs:
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css tests/audio-player-dock-contract.test.mjs tests/audio-player-section-subtitle-contract.test.mjs
-            git commit -m 'Refine player density and Section hierarchy'
+            git commit -m 'Refine player density and audio menus'
             git push origin HEAD:fix/original-player-skeleton-enhancements
           fi
       - uses: actions/setup-node@v4
