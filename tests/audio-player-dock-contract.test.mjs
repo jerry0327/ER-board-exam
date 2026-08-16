@@ -192,7 +192,7 @@ test("audio warmup separates shell, decoder, and revisioned source prefetch", ()
   assert.match(provider, /const prepareShell = useCallback\(\(\) => \{[\s\S]*?Promise\.all\(AUDIO_SHELL_URLS\.map/u);
   assert.match(provider, /const preparePlayer = useCallback\(\(\) => \{[\s\S]*?prepareShell\(\);[\s\S]*?ensureWorker\(\)\.postMessage\(\{ kind: "warm" \}\)/u);
   assert.match(provider, /const prefetchAudioSource = useCallback\(\(source: AudioSummarySource\) => \{[\s\S]*?const revision = `\?v=\$\{encodeURIComponent\(source\.revision\)\}`;[\s\S]*?force-cache/u);
-  assert.match(provider, /sourcePrefetchesRef\.current = useRef\(new Map<string, Promise<void>>\(\)\)/u);
+  assert.match(provider, /const sourcePrefetchesRef = useRef\(new Map<string, Promise<void>>\(\)\);/u);
 });
 
 test("high-capability readers can predecode one bounded 3.4 second audio head after explicit intent", () => {

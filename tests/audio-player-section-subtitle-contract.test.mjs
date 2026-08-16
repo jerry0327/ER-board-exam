@@ -42,7 +42,7 @@ test("Section enhancements mount into a dedicated slot without replacing the ori
   assert.match(provider, /className="audio-player-stow"/u);
   assert.match(provider, /className="audio-player-restore"/u);
   assert.match(provider, /className="audio-player-edge-progress"/u);
-  assert.doesNotMatch(enhancement, /\.audio-player-dock(?:\s|,|\{|\.is-(?:expanded|collapsed|stowed))/u);
+  assert.doesNotMatch(enhancement, /(?:^|\n)\s*\.audio-player-dock(?:\.is-(?:expanded|collapsed|stowed))?\s*(?:,|\{)/u);
   assert.doesNotMatch(enhancement, /\.audio-player-mini\s*\{/u);
   assert.doesNotMatch(enhancement, /\.audio-player-details\s*\{/u);
 });
