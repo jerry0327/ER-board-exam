@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { existsSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
@@ -8,6 +9,11 @@ import {
   sanitizeGoldfrankGuideMarkdown,
   sanitizeGoldfrankProductionNotes,
 } from "../scripts/lib/goldfrank-guide-markdown.mjs";
+
+const goldfrankSourceRoot = new URL("../../../outputs/02_learning_guides/goldfrank/", import.meta.url);
+const goldfrankSourceCorpusTestOptions = {
+  skip: existsSync(goldfrankSourceRoot) ? false : "external Goldfrank authoring corpus is not present in this standalone checkout",
+};
 
 function sha256(bytes) {
   return createHash("sha256").update(bytes).digest("hex");
@@ -26,8 +32,8 @@ function findBareFormulaLines(markdown) {
   });
 }
 
-test("Goldfrank direct sanitizer preserves all 420 chapters and repairs clinical Markdown invariants", async () => {
-  const sourceRoot = new URL("../../../outputs/02_learning_guides/goldfrank/", import.meta.url);
+test("Goldfrank direct sanitizer preserves all 420 chapters and repairs clinical Markdown invariants", goldfrankSourceCorpusTestOptions, async () => {
+  const sourceRoot = goldfrankSourceRoot;
   const sourceNames = (await readdir(sourceRoot))
     .filter((name) => /^goldfrank-CH\d{3}-(?:full|standard|quick)\.md$/u.test(name))
     .sort((left, right) => left.localeCompare(right, "en", { numeric: true }));

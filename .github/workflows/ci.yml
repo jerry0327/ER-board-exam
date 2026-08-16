@@ -1,0 +1,118 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Quality gate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript
+        run: npx tsc --noEmit
+
+      - name: ESLint
+        run: npm run lint
+
+  build-contracts:
+    name: Build and contracts
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build verified production artifact
+        run: npm run build
+
+      - name: Contract and unit tests
+        run: node scripts/with-uncompressed-static-content.mjs -- node --experimental-strip-types --test tests/*.test.mjs
+
+  browser-smoke:
+    name: Browser smoke
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install isolated Chromium QA runtime
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start real application
+        run: |
+          npm run dev -- --host 127.0.0.1 > /tmp/em-board-ci-dev.log 2>&1 &
+          echo $! > /tmp/em-board-ci-dev.pid
+          for i in $(seq 1 120); do
+            if curl --fail --silent http://127.0.0.1:5173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/em-board-ci-dev.log
+          exit 1
+
+      - name: Chromium smoke validation
+        env:
+          CI_BASE_URL: http://127.0.0.1:5173
+          CI_SMOKE_OUT_DIR: qa-ci-smoke
+        run: node scripts/ci-browser-smoke.mjs
+
+      - name: Print app log on failure
+        if: failure()
+        run: tail -n 200 /tmp/em-board-ci-dev.log || true
+
+      - name: Upload browser smoke evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: ci-browser-smoke-${{ github.run_id }}
+          path: qa-ci-smoke
+          if-no-files-found: error
+          retention-days: 14

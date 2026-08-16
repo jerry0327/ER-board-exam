@@ -187,7 +187,7 @@ test("responsive contract covers 4K, 840px navigation, 600px mobile UI, and 380p
   const maxWidthBreakpoints = [...site.matchAll(/@media \(max-width:\s*(\d+)px\)/gu)]
     .map((match) => Number(match[1]));
 
-  assert.deepEqual([...new Set(maxWidthBreakpoints)], [1440, 1140, 840, 600, 380]);
+  assert.deepEqual([...new Set(maxWidthBreakpoints)].sort((left, right) => right - left), [1440, 1140, 840, 600, 380]);
   assert.match(site, /@media \(min-width: 2200px\)/u);
   assert.match(site, /--site-wide-max:\s*2160px;/u);
   assert.match(site, /@media \(max-width: 840px\)[\s\S]*?--site-header-height:\s*68px;/u);

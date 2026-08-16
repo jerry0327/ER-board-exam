@@ -14,6 +14,9 @@ import {
 
 const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const builder = path.join(workspaceRoot, "scripts", "build_subtitle_runtime_semantic_pack.py");
+const semanticBuilderTestOptions = {
+  skip: fs.existsSync(builder) ? false : "external semantic builder is not present in this standalone checkout",
+};
 
 function timestamp(milliseconds) {
   const hours = Math.floor(milliseconds / 3_600_000);
@@ -77,7 +80,7 @@ function fetchFrom(files, requests) {
   };
 }
 
-test("semantic runtime loader fetches only HXT bundle/HXM and rebuilds the standard player pair", async () => {
+test("semantic runtime loader fetches only HXT bundle/HXM and rebuilds the standard player pair", semanticBuilderTestOptions, async () => {
   const data = fixture();
   try {
     const requests = [];
@@ -97,7 +100,7 @@ test("semantic runtime loader fetches only HXT bundle/HXM and rebuilds the stand
   }
 });
 
-test("semantic runtime loader fails closed for a changed HXM sidecar or an extra manifest field", async () => {
+test("semantic runtime loader fails closed for a changed HXM sidecar or an extra manifest field", semanticBuilderTestOptions, async () => {
   const data = fixture();
   try {
     const mutated = new Map(data.files);
@@ -117,7 +120,7 @@ test("semantic runtime loader fails closed for a changed HXM sidecar or an extra
   }
 });
 
-test("runtime manifest rejects terminal-unavailable placeholders", async () => {
+test("runtime manifest rejects terminal-unavailable placeholders", semanticBuilderTestOptions, async () => {
   const data = fixture();
   try {
     const registry = {
