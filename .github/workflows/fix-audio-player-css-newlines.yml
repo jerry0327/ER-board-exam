@@ -1,0 +1,41 @@
+name: Repair audio player CSS serialization
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Normalize appended CSS newlines
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          css = Path('app/site.css')
+          text = css.read_text()
+          needle = r'\n\n@layer site-components {\n  /* Audio Player 2026 Section Redesign */'
+          index = text.find(needle)
+          if index < 0:
+              raise SystemExit('serialized audio player CSS block not found')
+          text = text[:index] + text[index:].replace(r'\n', '\n')
+          css.write_text(text)
+
+          workflow = Path('.github/workflows/fix-audio-player-css-newlines.yml')
+          if workflow.exists():
+              workflow.unlink()
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/site.css .github/workflows/fix-audio-player-css-newlines.yml
+          git commit -m "Fix audio player CSS newlines"
+          git push
