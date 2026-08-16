@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Captions,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -71,6 +72,7 @@ const OUTPUT_WORKLET_REVISION = "e91e50c7014b";
 const PLAYER_STORAGE_KEY = "em-board-audio-player-v2";
 const LEGACY_PLAYER_STORAGE_KEY = "em-board-audio-player-v1";
 const LISTENING_HISTORY_STORAGE_KEY = "em-board-audio-listening-history-v1";
+const SUBTITLE_PREFERENCE_KEY = "em-board-audio-subtitles-v1";
 const AUDIO_SHELL_URLS = [
   `/static-snac/decoder-worker.js?v=${DECODER_WORKER_REVISION}`,
   "/static-snac/ort.webgpu.min.mjs?v=46988a5a025f",
@@ -238,6 +240,8 @@ type AudioPlayerContextValue = {
   setExpanded: (expanded: boolean) => void;
   stowed: boolean;
   queueOpen: boolean;
+  subtitlesEnabled: boolean;
+  setSubtitlesEnabled: (enabled: boolean) => void;
 };
 
 function readListeningHistory(): AudioListeningHistory {
@@ -351,6 +355,7 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
   const [duration, setDuration] = useState(0);
   const [playbackRate, setPlaybackRateState] = useState(1);
   const [volume, setVolumeState] = useState(1);
+  const [subtitlesEnabled, setSubtitlesEnabledState] = useState(false);
   const [continuousPlay, setContinuousPlayState] = useState(true);
   const [randomReview, setRandomReviewState] = useState(false);
   const [queueIds, setQueueIds] = useState<string[]>([]);
@@ -368,6 +373,15 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
   );
   const [queueOpen, setQueueOpen] = useState(false);
   const [randomNextId, setRandomNextId] = useState<string | null>(null);
+
+
+  useEffect(() => {
+    try {
+      setSubtitlesEnabledState(window.localStorage.getItem(SUBTITLE_PREFERENCE_KEY) === "true");
+    } catch {
+      // Subtitle preference is optional when storage is unavailable.
+    }
+  }, []);
 
   const currentRef = useRef<AudioSummarySource | null>(null);
   const listeningHistoryRef = useRef<AudioListeningHistory>({});
@@ -2390,6 +2404,16 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+  function updateSubtitlesEnabled(enabled: boolean) {
+    setSubtitlesEnabledState(enabled);
+    try {
+      window.localStorage.setItem(SUBTITLE_PREFERENCE_KEY, enabled ? "true" : "false");
+    } catch {
+      // Keep the in-memory preference when storage is unavailable.
+    }
+  }
+
   const queuedSources = queueIds
     .map((id) => audioSummaryForId(id))
     .filter((source): source is AudioSummarySource => Boolean(source));
@@ -2439,6 +2463,8 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
     setExpanded,
     stowed,
     queueOpen,
+    subtitlesEnabled,
+    setSubtitlesEnabled: updateSubtitlesEnabled,
   };
 
   const progressPercent = Math.min(100, Math.max(0, Math.round(loadProgress * 100)));
@@ -2727,6 +2753,9 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                             <option value="">睡眠計時</option><option value="chapter-end">本章播完</option><option value="15">15 分鐘</option><option value="30">30 分鐘</option><option value="45">45 分鐘</option><option value="60">60 分鐘</option>
                           </select>
                         </label>
+                        <button type="button" className={`audio-player-option audio-player-subtitle-option ${subtitlesEnabled ? "is-active" : ""}`.trim()} aria-pressed={subtitlesEnabled} onClick={() => updateSubtitlesEnabled(!subtitlesEnabled)}>
+                          <Captions aria-hidden="true" /><span><strong>字幕</strong><small>{subtitlesEnabled ? "開" : "關"}</small></span>
+                        </button>
                         <button type="button" className={`audio-player-option ${continuousPlay ? "is-active" : ""}`.trim()} aria-pressed={continuousPlay} onClick={() => updateContinuousPlay(!continuousPlay)}>
                           <Repeat2 aria-hidden="true" /><span><strong>連續播放</strong><small>{continuousPlay ? "開" : "關"}</small></span>
                         </button>

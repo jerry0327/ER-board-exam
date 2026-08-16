@@ -13,11 +13,14 @@ import {
 import { useAudioPlayer } from "./audio-player-provider";
 import {
   currentAudioChapterAt,
+  currentSubtitleCueAt,
   level1AudioChapterMarkers,
   playerSecondsForChapter,
   type AudioChapterL1,
+  type SubtitleCue,
 } from "../lib/audio-chapters";
 import type { LoadedRuntimeSemanticAudioChapters } from "../lib/audio-runtime-semantic-package";
+import { siteSecondsFromSourceSeconds } from "../lib/audio-playback";
 import {
   loadSectionTitleLocales,
   localizedSectionTitle,
@@ -149,6 +152,7 @@ export default function AudioSectionCompanion() {
   const [loadingChoice, setLoadingChoice] = useState(false);
   const [detailsTarget, setDetailsTarget] = useState<HTMLElement | null>(null);
   const [timelineTarget, setTimelineTarget] = useState<HTMLElement | null>(null);
+  const [dockTarget, setDockTarget] = useState<HTMLElement | null>(null);
   const currentSource = player.current;
   const activeBundle = bundle?.sourceId === currentSource?.id ? bundle : null;
   const activeScope = scope?.sourceId === currentSource?.id ? scope : null;
@@ -206,6 +210,21 @@ export default function AudioSectionCompanion() {
     }
     if (scope && scope.sourceId !== currentSource.id) setScope(null);
   }, [currentSource, scope]);
+
+
+  useEffect(() => {
+    if (player.stowed || !currentSource) {
+      setDockTarget(null);
+      return;
+    }
+    let frame = window.requestAnimationFrame(() => {
+      frame = 0;
+      setDockTarget(document.querySelector<HTMLElement>(".audio-player-dock"));
+    });
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [currentSource, player.stowed]);
 
   useEffect(() => {
     if (!player.expanded || player.stowed || !currentSource) {
@@ -272,6 +291,16 @@ export default function AudioSectionCompanion() {
   const currentIndex = currentChapter ? chapters.findIndex((chapter) => chapter.id === currentChapter.id) : -1;
   const currentTitle = activeScope?.title
     ?? (activeBundle && currentChapter ? sectionLabel(activeBundle, currentChapter) : null);
+  const currentSubtitleCue = activeBundle && player.subtitlesEnabled
+    ? currentSubtitleCueAt(activeBundle.runtime.subtitle, player.position)
+    : null;
+  const subtitleCueIndex = currentSubtitleCue ? currentSubtitleCue.index - 1 : -1;
+  const subtitleWindow = activeBundle && subtitleCueIndex >= 0
+    ? activeBundle.runtime.subtitle.cues.slice(
+      Math.max(0, subtitleCueIndex - 1),
+      Math.min(activeBundle.runtime.subtitle.cues.length, subtitleCueIndex + 2),
+    )
+    : [];
 
   const choiceSource = questionChoice ? audioSummaryForId(questionChoice.sourceId) : null;
 
@@ -316,11 +345,41 @@ export default function AudioSectionCompanion() {
     }
   }
 
+  function seekSubtitleCue(cue: SubtitleCue) {
+    setScope(null);
+    player.seek(siteSecondsFromSourceSeconds(cue.startSourceSeconds));
+  }
+
   function seekChapter(chapter: AudioChapterL1) {
     setScope(null);
     setSectionOpen(false);
     player.seek(playerSecondsForChapter(chapter));
   }
+
+  const subtitlePortal = player.subtitlesEnabled && activeBundle && dockTarget && currentSubtitleCue
+    ? createPortal(
+      <aside className="audio-subtitle-float" aria-label="同步字幕">
+        <div className="audio-subtitle-lines">
+          {subtitleWindow.map((cue) => {
+            const isCurrent = cue.index === currentSubtitleCue.index;
+            return (
+              <button
+                key={cue.index}
+                type="button"
+                className={`audio-subtitle-line ${isCurrent ? "is-current" : cue.index < currentSubtitleCue.index ? "is-previous" : "is-next"}`}
+                aria-current={isCurrent ? "true" : undefined}
+                onClick={() => seekSubtitleCue(cue)}
+              >
+                <span>{cue.text}</span>
+              </button>
+            );
+          })}
+        </div>
+        <span className="sr-only" aria-live="polite">{currentSubtitleCue.text}</span>
+      </aside>,
+      dockTarget,
+    )
+    : null;
 
   const sectionPortal = activeBundle && detailsTarget
     ? createPortal(
@@ -433,6 +492,7 @@ export default function AudioSectionCompanion() {
 
   return (
     <>
+      {subtitlePortal}
       {sectionPortal}
       {timelinePortal}
       {scopeTimelinePortal}
