@@ -10514,3 +10514,37 @@
   }
 }
 
+@layer site-utilities {
+  /* Balanced secondary control groups */
+  .audio-player-secondary-left {
+    align-items: center;
+    display: inline-flex;
+    gap: 0;
+    justify-self: start;
+    min-width: 0;
+  }
+
+  .audio-player-secondary-left .audio-player-reset {
+    flex: 0 0 44px;
+  }
+
+  .audio-player-utilities {
+    align-items: center;
+    display: inline-flex;
+    gap: 0;
+    justify-self: end;
+  }
+
+  @media (max-width: 600px) {
+    .audio-player-secondary-left {
+      grid-area: rate;
+      justify-self: start;
+    }
+
+    .audio-player-utilities {
+      grid-area: utilities;
+      justify-self: end;
+    }
+  }
+}
+

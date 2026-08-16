@@ -2726,8 +2726,9 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
               </div>
 
               <div className="audio-player-controls">
-                <label className="audio-player-rate">
-                  <span>速度</span>
+                <div className="audio-player-secondary-left">
+                  <label className="audio-player-rate">
+                    <span>速度</span>
                   <select
                     className="field-control"
                     value={playbackRate}
@@ -2737,8 +2738,18 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                     {AUDIO_PLAYBACK_RATES.map((rate) => (
                       <option key={rate} value={rate}>{rate}×</option>
                     ))}
-                  </select>
-                </label>
+                    </select>
+                  </label>
+                  <button
+                    type="button"
+                    className="audio-player-utility audio-player-reset"
+                    aria-label="回到開頭"
+                    disabled={phase === "loading"}
+                    onClick={() => seekTo(0)}
+                  >
+                    <RotateCcw aria-hidden="true" />
+                  </button>
+                </div>
 
                 <div className="audio-player-transport" role="group" aria-label="播放控制">
                   <button
@@ -2789,15 +2800,6 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                 </div>
 
                 <div className="audio-player-utilities">
-                  <button
-                    type="button"
-                    className="audio-player-utility"
-                    aria-label="回到開頭"
-                    disabled={phase === "loading"}
-                    onClick={() => seekTo(0)}
-                  >
-                    <RotateCcw aria-hidden="true" />
-                  </button>
                   <details
                     ref={settingsDetailsRef}
                     className="audio-player-settings"
