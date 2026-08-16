@@ -1,6 +1,7 @@
 from pathlib import Path
 
 reader_path = Path("app/views/reader-view.tsx")
+companion_path = Path("app/components/audio-section-companion.tsx")
 contract_path = Path("tests/audio-player-section-subtitle-contract.test.mjs")
 
 reader = reader_path.read_text()
@@ -11,6 +12,15 @@ if old in reader:
 elif "openQuestionAudioPlayer(event);" not in reader:
     raise SystemExit("reader question audio wrapper target not found")
 reader_path.write_text(reader)
+
+# The earlier refinement helper may be re-run by Actions. Keep this import exactly once.
+companion = companion_path.read_text()
+type_line = "  type QuestionAudioChoiceEventDetail,\n"
+while companion.count(type_line) > 1:
+    first = companion.find(type_line)
+    duplicate = companion.find(type_line, first + len(type_line))
+    companion = companion[:duplicate] + companion[duplicate + len(type_line):]
+companion_path.write_text(companion)
 
 contract = contract_path.read_text()
 if "readerView" not in contract.split("const [", 1)[1].split("]", 1)[0]:
