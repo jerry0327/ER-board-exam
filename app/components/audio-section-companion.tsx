@@ -34,6 +34,7 @@ import {
   QUESTION_AUDIO_CHOICE_EVENT,
   type QuestionAudioChoiceEventDetail,
   type QuestionAudioChoiceEventDetail,
+  type QuestionAudioChoiceEventDetail,
   type QuestionAudioChoiceRequest,
 } from "../lib/audio-player-section-events";
 

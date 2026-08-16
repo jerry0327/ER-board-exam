@@ -2,12 +2,13 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const [companion, provider, events, css, learningAudio] = await Promise.all([
+const [companion, provider, events, css, learningAudio, readerView] = await Promise.all([
   readFile(new URL("../app/components/audio-section-companion.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/audio-player-provider.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/lib/audio-player-section-events.ts", import.meta.url), "utf8"),
   readFile(new URL("../app/site.css", import.meta.url), "utf8"),
   readFile(new URL("../app/hooks/use-learning-audio.ts", import.meta.url), "utf8"),
+  readFile(new URL("../app/views/reader-view.tsx", import.meta.url), "utf8"),
 ]);
 
 const marker = "/* Original player skeleton: Section, subtitle and Settings enhancements only. */";
@@ -89,6 +90,10 @@ test("Settings and anchored question-choice menu support dismissal and focus lif
   assert.match(learningAudio, /event\?\.currentTarget instanceof HTMLElement/u);
   assert.match(learningAudio, /requestQuestionAudioChoice\([\s\S]*?clickedTrigger/u);
   assert.match(companion, /request\.trigger instanceof HTMLElement/u);
+  assert.match(readerView, /function openQuestionAudio\(event: ReactMouseEvent<HTMLButtonElement>\)/u);
+  assert.match(readerView, /openQuestionAudioPlayer\(event\)/u);
+  assert.match(readerView, /className="reading-toolbar-audio"[\s\S]*?onClick=\{openQuestionAudio\}/u);
+  assert.match(readerView, /className="guide-audio-action"[\s\S]*?onClick=\{openQuestionAudio\}/u);
   assert.match(companion, /preferredLeft = anchor\.left \+ anchor\.width \/ 2 - menuBox\.width \/ 2/u);
   assert.match(companion, /const top = anchor\.bottom \+ gap/u);
   assert.match(companion, /questionChoiceTriggerRef\.current\?\.focus\(\)/u);
