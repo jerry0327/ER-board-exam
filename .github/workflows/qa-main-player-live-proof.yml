@@ -15,7 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Apply player visual refinement
-        run: python scripts/refine-player-visual-language.py
+        run: |
+          if grep -q 'className="audio-section-playhead"' app/components/audio-section-companion.tsx; then
+            echo "Visual refinement already applied."
+          else
+            python scripts/refine-player-visual-language.py
+          fi
       - name: Commit refined product code
         run: |
           if git diff --quiet -- app/site.css app/components/audio-section-companion.tsx; then
