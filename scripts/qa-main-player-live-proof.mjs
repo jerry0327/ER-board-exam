@@ -82,7 +82,36 @@ async function shot(name) {
   report.screenshots.push(name);
 }
 
+async function measureTimelineGeometry() {
+  return page.evaluate(() => {
+    const centerY = (element) => {
+      const rect = element?.getBoundingClientRect();
+      return rect ? rect.top + rect.height / 2 : null;
+    };
+    const track = document.querySelector(".audio-section-track-base");
+    const playhead = document.querySelector(".audio-section-playhead");
+    const nodes = [...document.querySelectorAll(".audio-section-node")];
+    const trackCenterY = centerY(track);
+    const playheadCenterY = centerY(playhead);
+    const nodeCenterYs = nodes.map(centerY).filter((value) => typeof value === "number");
+    const deltas = [
+      ...(playheadCenterY !== null && trackCenterY !== null ? [Math.abs(playheadCenterY - trackCenterY)] : []),
+      ...nodeCenterYs.map((value) => Math.abs(value - trackCenterY)),
+    ];
+    return {
+      trackCenterY,
+      playheadCenterY,
+      nodeCenterYs,
+      maxCenterlineDeltaPx: deltas.length ? Math.max(...deltas) : null,
+    };
+  });
+}
+
 await shot("00-expanded-initial.png");
+report.timelineGeometryInitial = await measureTimelineGeometry();
+if (report.timelineGeometryInitial.maxCenterlineDeltaPx === null || report.timelineGeometryInitial.maxCenterlineDeltaPx > 0.5) {
+  throw new Error(`Timeline centerline mismatch: ${JSON.stringify(report.timelineGeometryInitial)}`);
+}
 
 await page.locator(".audio-section-toggle").click();
 await page.locator(".audio-section-panel-floating").waitFor({ state: "visible" });
@@ -120,6 +149,7 @@ for (let selectionNumber = 0; selectionNumber < chosen.length; selectionNumber +
   const subtitleAria = await page.locator(".audio-subtitle-line.is-current").getAttribute("aria-label").catch(() => null);
   const playerTimes = ((await page.locator(".audio-player-timeline").innerText()) ?? "").trim().split(/\s+/u).filter(Boolean);
   const errorSeconds = Number.isFinite(expectedSeconds) ? Math.abs(rangeValue - expectedSeconds) : null;
+  const geometry = await measureTimelineGeometry();
 
   report.selections.push({
     sectionIndex,
@@ -131,20 +161,21 @@ for (let selectionNumber = 0; selectionNumber < chosen.length; selectionNumber +
     currentSection,
     currentSubtitleAriaLabel: subtitleAria,
     timelineTextTokens: playerTimes,
+    geometry,
   });
 
-  // Section labels intentionally display whole seconds while the canonical marker may contain fractions.
-  // Therefore any delta below one second is display quantization, not timeline drift.
   if (Number.isFinite(expectedSeconds) && errorSeconds >= 1) {
-    throw new Error(`Section seek mismatch for ${label}: expected display second ${expectedSeconds}, got ${rangeValue}`);
+    throw new Error(`Section seek mismatch for ${label}: expected display-second ${expectedSeconds}, got ${rangeValue}`);
   }
   if (currentSection && currentSection !== label) {
     throw new Error(`Current Section label mismatch: clicked ${label}, UI shows ${currentSection}`);
   }
+  if (geometry.maxCenterlineDeltaPx === null || geometry.maxCenterlineDeltaPx > 0.5) {
+    throw new Error(`Timeline centerline drift after ${label}: ${JSON.stringify(geometry)}`);
+  }
   await shot(`${String(selectionNumber + 2).padStart(2, "0")}-selected-section-${sectionIndex + 1}.png`);
 }
 
-// Prove the timeline Section node itself is interactive, not only the list.
 const nodeCount = await page.locator(".audio-section-node").count();
 if (nodeCount > 2) {
   const nodeIndex = Math.min(nodeCount - 1, Math.max(1, chosen[0] ?? 1));
@@ -158,32 +189,26 @@ if (nodeCount > 2) {
     index: nodeIndex,
     ariaLabel: nodeLabel,
     actualRangeSeconds: Number(await page.locator(".audio-player-timeline > input[type=range]").inputValue()),
+    geometry: await measureTimelineGeometry(),
   };
 }
 
-// Capture compact/collapsed and stowed ranges from the real component.
 await page.locator(".audio-player-expand").click();
 await page.locator(".audio-player-details").waitFor({ state: "hidden" });
 await page.waitForTimeout(150);
 await shot("06-collapsed-player.png");
 
-await page.locator(".audio-player-stow").click();
-await page.locator(".audio-player-restore").waitFor({ state: "visible" });
-await page.waitForTimeout(150);
-await shot("07-stowed-player.png");
-
-// Restore and capture subtitles after a real Section seek.
-await page.locator(".audio-player-restore").click();
-await page.locator(".audio-player-title").click();
+// Restore expanded state and capture subtitles after a real Section seek.
+await page.locator(".audio-player-expand").click();
 await page.locator(".audio-player-details").waitFor({ state: "visible" });
 await page.waitForTimeout(250);
-await shot("08-restored-expanded-with-subtitle.png");
+await shot("07-restored-expanded-with-subtitle.png");
 
 report.finalPlayerState = {
   expanded: await page.locator(".audio-player-details").isVisible(),
-  stowedRestoreVisible: await page.locator(".audio-player-restore").isVisible().catch(() => false),
   rangeSeconds: Number(await page.locator(".audio-player-timeline > input[type=range]").inputValue()),
   subtitleVisible: await page.locator(".audio-subtitle-float").isVisible().catch(() => false),
+  geometry: await measureTimelineGeometry(),
 };
 
 await fs.writeFile(path.join(outDir, "verification.json"), `${JSON.stringify(report, null, 2)}\n`);
