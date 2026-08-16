@@ -21,6 +21,10 @@ test("Section and subtitle runtime stays revision-safe and shares player-time se
   assert.match(companion, /while \(sectionBundleRequests\.size > SECTION_BUNDLE_CACHE_LIMIT\)/u);
   assert.match(companion, /rememberSectionBundleRequest\(key, existing\)/u);
   assert.match(companion, /rememberSectionBundleRequest\(key, pending\)/u);
+  assert.match(companion, /scopeHasPlaybackIntent = player\.isPlaying/u);
+  assert.match(companion, /scopeIsRendering = player\.phase === "playing"/u);
+  assert.match(companion, /if \(!activeScope \|\| !scopeIsRendering\) return;/u);
+  assert.doesNotMatch(companion, /scopeIsPlaying/u);
   assert.match(companion, /bundle\.sourceRevision === currentSource\.revision/u);
   assert.match(companion, /scope\.sourceRevision === currentSource\.revision/u);
   assert.match(companion, /currentSubtitleCueAt\(activeBundle\.runtime\.subtitle, player\.position\)/u);

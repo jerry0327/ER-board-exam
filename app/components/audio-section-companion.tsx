@@ -349,7 +349,8 @@ export default function AudioSectionCompanion() {
   }, [activeBundle, sectionOpen]);
 
   const scopePosition = player.position;
-  const scopeIsPlaying = player.isPlaying;
+  const scopeHasPlaybackIntent = player.isPlaying;
+  const scopeIsRendering = player.phase === "playing";
   const scopePlaybackRate = player.playbackRate;
   const scopePause = player.pause;
   const scopeSeek = player.seek;
@@ -362,15 +363,15 @@ export default function AudioSectionCompanion() {
       return;
     }
     if (scopePosition >= activeScope.endSeconds - tolerance) {
-      if (scopeIsPlaying) scopePause();
+      if (scopeHasPlaybackIntent) scopePause();
       if (Math.abs(scopePosition - activeScope.endSeconds) > tolerance) {
         scopeSeek(activeScope.endSeconds);
       }
     }
-  }, [activeScope, scopeIsPlaying, scopePause, scopePosition, scopeSeek]);
+  }, [activeScope, scopeHasPlaybackIntent, scopePause, scopePosition, scopeSeek]);
 
   useEffect(() => {
-    if (!activeScope || !scopeIsPlaying) return;
+    if (!activeScope || !scopeIsRendering) return;
     const remaining = activeScope.endSeconds - scopePosition;
     if (remaining <= 0.06) return;
     const milliseconds = Math.max(20, remaining / Math.max(0.25, scopePlaybackRate) * 1000 + 20);
@@ -379,7 +380,7 @@ export default function AudioSectionCompanion() {
       scopeSeek(activeScope.endSeconds);
     }, milliseconds);
     return () => window.clearTimeout(timer);
-  }, [activeScope, scopeIsPlaying, scopePause, scopePlaybackRate, scopePosition, scopeSeek]);
+  }, [activeScope, scopeIsRendering, scopePause, scopePlaybackRate, scopePosition, scopeSeek]);
 
   const chapters = activeBundle?.runtime.metadata.chapters ?? [];
   const markers = useMemo(
