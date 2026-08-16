@@ -1,0 +1,84 @@
+name: Finalize audio player
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/workflows/finalize-audio-player.yml
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply last visual corrections
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('app/site.css')
+          s = p.read_text()
+          marker = '/* Audio Player final input reset */'
+          if marker not in s:
+              s += '''\n\n@layer site-features {\n  /* Audio Player final input reset */\n  .audio-player-volume input[type="range"] {\n    background: transparent;\n    border: 0;\n    border-radius: 0;\n    box-shadow: none;\n    min-height: 0;\n    outline: 0;\n    padding-inline: 0;\n  }\n  .audio-player-volume input[type="range"]:focus {\n    border: 0;\n    box-shadow: none;\n    outline: 0;\n  }\n  .audio-player-dock.is-collapsed:not(.is-stowed) .audio-player-edge-progress { bottom: 25px; }\n}\n'''
+          p.write_text(s)
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/site.css
+          git commit -m "Finalize audio player visual polish"
+          git push
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start actual app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/final-player.log 2>&1 &
+          for attempt in $(seq 1 120); do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/final-player.log
+          exit 1
+      - name: Final interaction verification and screenshots
+        run: |
+          mkdir -p visual-proof
+          cat > .capture-final-player.mjs <<'JS'
+          import assert from 'node:assert/strict';
+          import { chromium } from 'playwright';
+          const browser=await chromium.launch({headless:true});const base='http://127.0.0.1:4173/';
+          async function cat(p){return p.evaluate(async()=> (await (await fetch('/audio/snac/catalog.json')).json()).entries)}
+          async function seed(p,id,expanded){await p.goto(base,{waitUntil:'domcontentloaded'});await p.evaluate(({id,expanded})=>localStorage.setItem('em-board-audio-player-v2',JSON.stringify({sourceId:id,position:0,rate:1,expanded,stowed:false,continuousPlay:true,queueIds:[],randomReview:false})),{id,expanded});await p.reload({waitUntil:'domcontentloaded'});await p.locator('.audio-player-dock').waitFor({state:'visible',timeout:30000});if(expanded)await p.locator('.audio-section-companion').waitFor({state:'visible',timeout:30000});await p.waitForTimeout(300)}
+          const d=await browser.newContext({viewport:{width:1440,height:900}});const p=await d.newPage();await p.goto(base,{waitUntil:'domcontentloaded'});const entries=await cat(p);const t=entries.find(e=>e.kind==='textbook-chapter'||e.kind==='textbook-section');const q=entries.find(e=>e.kind==='question-set');assert.ok(t);await seed(p,t.id,true);const dock=p.locator('.audio-player-dock');const volumeBox=await p.locator('.audio-player-volume input').evaluate(el=>{const c=getComputedStyle(el);return {border:c.borderTopWidth,radius:c.borderRadius,shadow:c.boxShadow}});assert.equal(volumeBox.border,'0px');assert.equal(volumeBox.radius,'0px');assert.equal(volumeBox.shadow,'none');const nodes=p.locator('.audio-section-node');const input=p.locator('.audio-player-timeline > input[type="range"]');assert.ok(await nodes.count()>1);const before=Number(await input.inputValue());await nodes.nth(1).click();await p.waitForTimeout(80);assert.ok(Number(await input.inputValue())>before+0.2);assert.ok(await p.locator('.audio-player-options').evaluate(el=>Boolean(el.closest('.audio-player-settings-panel'))));await dock.screenshot({path:'visual-proof/desktop-expanded.png'});await p.locator('.audio-section-toggle').click();await p.waitForTimeout(120);await dock.screenshot({path:'visual-proof/desktop-sections-open.png'});await p.locator('.audio-section-toggle').click();await p.locator('.audio-player-settings > summary').click();await p.waitForTimeout(100);await p.screenshot({path:'visual-proof/desktop-settings.png',fullPage:false});if(q){const qn=Number(q.questionStart??1);const qid=`${q.questionExam}-Q${String(qn).padStart(3,'0')}`;await p.evaluate(({sourceId,qid})=>window.dispatchEvent(new CustomEvent('em-board-question-audio-choice',{detail:{sourceId,questionId:qid}})),{sourceId:q.id,qid});await p.locator('.audio-question-choice').waitFor({state:'visible'});await p.locator('.audio-question-choice').screenshot({path:'visual-proof/question-choice.png'});}await seed(p,t.id,false);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-collapsed.png'});await d.close();const m=await browser.newContext({viewport:{width:412,height:915}});const mp=await m.newPage();await seed(mp,t.id,true);assert.ok(await mp.locator('.audio-player-title').evaluate(el=>el.getBoundingClientRect().width)>260);await mp.locator('.audio-player-dock').screenshot({path:'visual-proof/mobile-expanded.png'});await mp.locator('.audio-section-toggle').click();await mp.waitForTimeout(100);await mp.locator('.audio-player-dock').screenshot({path:'visual-proof/mobile-sections-open.png'});await m.close();await browser.close();
+          JS
+          node .capture-final-player.mjs
+          rm -f .capture-final-player.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: final-audio-player-proof
+          path: visual-proof/*.png
+          if-no-files-found: error
+      - name: Remove temporary refinement infrastructure
+        run: |
+          git rm -f \
+            .github/workflows/refine-audio-player-to-spec.yml \
+            .github/workflows/run-audio-player-refinement.yml \
+            .github/workflows/run-audio-player-visual-pass2.yml \
+            .github/workflows/run-audio-player-visual-pass3.yml \
+            .github/workflows/run-audio-player-visual-pass4.yml \
+            .github/workflows/validate-audio-sections.yml \
+            .github/workflows/finalize-audio-player.yml \
+            .github/scripts/refine_audio_player_to_spec.py \
+            .github/scripts/refine_audio_player_visual_pass2.py \
+            .github/scripts/refine_audio_player_visual_pass3.py \
+            .github/scripts/refine_audio_player_visual_pass4.py
+          git commit -m "Remove temporary audio player refinement helpers"
+          git push
