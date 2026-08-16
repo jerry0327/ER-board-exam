@@ -1,0 +1,136 @@
+name: Final clean audio player branch
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/workflows/final-clean-audio-player-branch.yml
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore unrelated runner workarounds
+        run: |
+          git fetch origin main
+          git checkout origin/main -- \
+            package.json \
+            tests/goldfrank-guide-contract.test.mjs \
+            tests/audio-runtime-semantic-package.test.mjs \
+            tests/import-subtitle-runtime-semantic-pack.test.mjs \
+            tests/subtitle-semantic-codec.test.mjs
+      - name: Consolidate intermediate player CSS
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('app/site.css')
+          text = path.read_text()
+
+          def remove_layer_containing(text, marker):
+              while marker in text:
+                  pos = text.index(marker)
+                  start = text.rfind('@layer ', 0, pos)
+                  if start < 0:
+                      raise SystemExit(f'layer start not found for {marker}')
+                  brace = text.find('{', start, pos)
+                  if brace < 0:
+                      raise SystemExit(f'layer brace not found for {marker}')
+                  depth = 0
+                  end = None
+                  quote = None
+                  escape = False
+                  for i in range(brace, len(text)):
+                      ch = text[i]
+                      if quote:
+                          if escape:
+                              escape = False
+                          elif ch == '\\':
+                              escape = True
+                          elif ch == quote:
+                              quote = None
+                          continue
+                      if ch in ('"', "'"):
+                          quote = ch
+                          continue
+                      if ch == '{':
+                          depth += 1
+                      elif ch == '}':
+                          depth -= 1
+                          if depth == 0:
+                              end = i + 1
+                              break
+                  if end is None:
+                      raise SystemExit(f'layer end not found for {marker}')
+                  while end < len(text) and text[end] in '\r\n':
+                      end += 1
+                  text = text[:start] + text[end:]
+              return text
+
+          for marker in (
+              '/* Audio Player 2026 Section Redesign */',
+              '/* Audio Player final design-spec alignment */',
+              '/* Audio Player visual verification pass 2 */',
+          ):
+              text = remove_layer_containing(text, marker)
+
+          marker = '/* Audio Player final companion finishing rules */'
+          if marker not in text:
+              text += '''\n\n@layer site-features {\n  /* Audio Player final companion finishing rules */\n  .audio-player-mark,\n  .audio-player-stow {\n    display: none;\n  }\n\n  .audio-section-list-dot {\n    background: var(--site-paper);\n    border: 1px solid var(--site-line-strong);\n    border-radius: 50%;\n    height: 7px;\n    width: 7px;\n  }\n  .audio-section-list button.is-current .audio-section-list-dot {\n    background: var(--site-primary);\n    border-color: var(--site-primary);\n    box-shadow: 0 0 0 3px color-mix(in srgb, var(--site-primary) 10%, transparent);\n  }\n  .audio-section-number {\n    display: none;\n  }\n\n  .audio-question-choice {\n    max-width: 330px;\n    padding: 14px;\n  }\n  .audio-question-choice > header {\n    align-items: center;\n    display: grid;\n    gap: 10px;\n    grid-template-columns: minmax(0, 1fr) 34px;\n    margin-bottom: 9px;\n  }\n  .audio-question-choice > header > strong {\n    font-family: var(--site-display);\n    font-size: 17px;\n    line-height: 1.35;\n  }\n  .audio-question-choice-close {\n    height: 34px;\n    width: 34px;\n  }\n  .audio-question-source {\n    display: none;\n  }\n  .audio-question-choice-options {\n    display: grid;\n    gap: 7px;\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n  .audio-question-choice-option {\n    align-items: center;\n    background: var(--site-surface-muted);\n    border: 1px solid var(--site-line);\n    border-radius: 7px;\n    display: flex;\n    font-size: 12px;\n    font-weight: 760;\n    justify-content: center;\n    min-height: 34px;\n    padding: 0 10px;\n    text-align: center;\n    width: 100%;\n  }\n  .audio-question-choice-option:first-child {\n    background: var(--site-primary-fill);\n    border-color: var(--site-primary-fill);\n    color: var(--site-on-primary);\n  }\n  .audio-question-choice-option:hover {\n    background: color-mix(in srgb, var(--site-primary) 7%, var(--site-paper));\n    border-color: color-mix(in srgb, var(--site-primary) 42%, var(--site-line));\n  }\n  .audio-question-choice-option:first-child:hover {\n    background: var(--site-primary-fill-strong);\n    border-color: var(--site-primary-fill-strong);\n  }\n}\n'''
+
+          path.write_text(text)
+          PY
+      - name: Commit clean product diff
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json tests app/site.css
+          git commit -m "Consolidate final audio player product diff"
+          git push
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start actual app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/consolidated-player.log 2>&1 &
+          for attempt in $(seq 1 120); do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/consolidated-player.log
+          exit 1
+      - name: Screenshot consolidated result
+        run: |
+          mkdir -p visual-proof
+          cat > .capture-consolidated.mjs <<'JS'
+          import assert from 'node:assert/strict';
+          import { chromium } from 'playwright';
+          const browser=await chromium.launch({headless:true});const base='http://127.0.0.1:4173/';
+          async function cat(p){return p.evaluate(async()=> (await (await fetch('/audio/snac/catalog.json')).json()).entries)}
+          async function seed(p,id,expanded){await p.goto(base,{waitUntil:'domcontentloaded'});await p.evaluate(({id,expanded})=>localStorage.setItem('em-board-audio-player-v2',JSON.stringify({sourceId:id,position:0,rate:1,expanded,stowed:false,continuousPlay:true,queueIds:[],randomReview:false})),{id,expanded});await p.reload({waitUntil:'domcontentloaded'});await p.locator('.audio-player-dock').waitFor({state:'visible',timeout:30000});if(expanded)await p.locator('.audio-section-companion').waitFor({state:'visible',timeout:30000});await p.waitForTimeout(300)}
+          const d=await browser.newContext({viewport:{width:1440,height:900}});const p=await d.newPage();await p.goto(base,{waitUntil:'domcontentloaded'});const entries=await cat(p);const t=entries.find(e=>e.kind==='textbook-chapter'||e.kind==='textbook-section');const q=entries.find(e=>e.kind==='question-set');assert.ok(t);await seed(p,t.id,true);const dock=p.locator('.audio-player-dock');const nodes=p.locator('.audio-section-node');const input=p.locator('.audio-player-timeline > input[type="range"]');assert.ok(await nodes.count()>1);const before=Number(await input.inputValue());await nodes.nth(1).click();await p.waitForTimeout(70);assert.ok(Number(await input.inputValue())>before+0.2);assert.ok(await p.locator('.audio-player-options').evaluate(el=>Boolean(el.closest('.audio-player-settings-panel'))));await dock.screenshot({path:'visual-proof/desktop-expanded.png'});await p.locator('.audio-section-toggle').click();await p.waitForTimeout(100);await dock.screenshot({path:'visual-proof/desktop-sections-open.png'});await p.locator('.audio-section-toggle').click();await p.locator('.audio-player-settings > summary').click();await p.waitForTimeout(80);await p.screenshot({path:'visual-proof/desktop-settings.png',fullPage:false});if(q){const qn=Number(q.questionStart??1);const qid=`${q.questionExam}-Q${String(qn).padStart(3,'0')}`;await p.evaluate(({sourceId,qid})=>window.dispatchEvent(new CustomEvent('em-board-question-audio-choice',{detail:{sourceId,questionId:qid}})),{sourceId:q.id,qid});await p.locator('.audio-question-choice').waitFor({state:'visible'});await p.locator('.audio-question-choice').screenshot({path:'visual-proof/question-choice.png'});}await seed(p,t.id,false);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-collapsed.png'});await d.close();const m=await browser.newContext({viewport:{width:412,height:915}});const mp=await m.newPage();await seed(mp,t.id,true);assert.ok(await mp.locator('.audio-player-title').evaluate(el=>el.getBoundingClientRect().width)>260);await mp.locator('.audio-player-dock').screenshot({path:'visual-proof/mobile-expanded.png'});await mp.locator('.audio-section-toggle').click();await mp.waitForTimeout(80);await mp.locator('.audio-player-dock').screenshot({path:'visual-proof/mobile-sections-open.png'});await m.close();await browser.close();
+          JS
+          node .capture-consolidated.mjs
+          rm -f .capture-consolidated.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: consolidated-final-audio-player-proof
+          path: visual-proof/*.png
+          if-no-files-found: error
+      - name: Remove final temporary workflow
+        run: |
+          git rm -f .github/workflows/final-clean-audio-player-branch.yml
+          git commit -m "Remove final audio player cleanup workflow"
+          git push
