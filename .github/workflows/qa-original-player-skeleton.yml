@@ -34,8 +34,8 @@ jobs:
           else
             python scripts/refine-audio-player-density.py
           fi
-          python scripts/repair-section-hierarchy-duplication.py
           python scripts/refine-question-audio-menu.py
+          python scripts/rewrite-section-list-portal.py
       - name: Commit product and contract changes
         run: |
           if git diff --quiet -- app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css tests/audio-player-dock-contract.test.mjs tests/audio-player-section-subtitle-contract.test.mjs; then
