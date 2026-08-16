@@ -1,0 +1,112 @@
+name: Final audio player QA pass 3
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/workflows/final-audio-qa-pass3.yml
+
+permissions:
+  contents: write
+
+jobs:
+  final-audio-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fix revision guard narrowing
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('app/components/audio-section-companion.tsx')
+          text = p.read_text()
+          text, n1 = re.subn(
+              r'  const activeBundle = bundle\?\.sourceId === currentSource\?\.id && bundle\.sourceRevision === currentSource\.revision \? bundle : null;',
+              '  const activeBundle = bundle && currentSource && bundle.sourceId === currentSource.id && bundle.sourceRevision === currentSource.revision ? bundle : null;',
+              text,
+              count=1,
+          )
+          text, n2 = re.subn(
+              r'  const activeScope = scope\?\.sourceId === currentSource\?\.id && scope\.sourceRevision === currentSource\.revision \? scope : null;',
+              '  const activeScope = scope && currentSource && scope.sourceId === currentSource.id && scope.sourceRevision === currentSource.revision ? scope : null;',
+              text,
+              count=1,
+          )
+          if n1 != 1 or n2 != 1:
+              raise SystemExit(f'revision guard replacements failed: {n1}, {n2}')
+          p.write_text(text)
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/components/audio-section-companion.tsx
+          git commit -m "Fix audio runtime revision guard narrowing"
+          git push
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - run: npm ci
+      - name: Type check
+        run: npx tsc --noEmit
+      - name: Lint
+        run: npm run lint
+      - name: Run focused audio regression tests
+        run: |
+          node --test \
+            tests/audio-player-section-subtitle-contract.test.mjs \
+            tests/audio-player-dock-contract.test.mjs \
+            tests/audio-chapters.test.mjs \
+            tests/audio-runtime-semantic-package.test.mjs
+      - name: Run full project test suite
+        run: npm test
+      - name: Audit deployed audio runtime
+        run: npm run audit:audio-runtime
+      - name: Guard subtitle deployment
+        run: npm run guard:subtitle-deployment
+
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+          git show d8196e43a11ae988a87fc28d83f5a93b85a3d8a4:.github/verify-final-audio-qa.mjs > .github/verify-final-audio-qa.mjs
+
+      - name: Start actual app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/final-audio-qa.log 2>&1 &
+          for attempt in $(seq 1 120); do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/final-audio-qa.log
+          exit 1
+
+      - name: Run browser interaction and visual QA
+        run: |
+          mkdir -p visual-proof
+          node .github/verify-final-audio-qa.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: final-audio-player-qa-proof
+          path: visual-proof/*
+          if-no-files-found: warn
+
+      - name: Cleanup temporary QA helper
+        if: always()
+        run: |
+          git pull --rebase
+          rm -f .github/verify-final-audio-qa.mjs
+          git rm -f .github/workflows/final-audio-qa-pass3.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Remove final audio QA pass 3 helper"
+          git push
