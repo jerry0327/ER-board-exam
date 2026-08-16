@@ -432,9 +432,11 @@ test("view keeps evidence collapsed after completion and uses the account-backed
   assert.match(css, /@media \(max-width: 520px\)[\s\S]*?\.remoc-progress-grid\[data-count\]\s*\{[^}]*grid-template-columns:\s*1fr;/su);
   const mobileUnifiedCss = siteCss.slice(siteCss.indexOf("@media (max-width: 600px)"));
   assert.match(mobileUnifiedCss, /\.board-prep-intro\s*\{[^}]*margin-bottom:\s*0;/su);
-  assert.match(mobileUnifiedCss, /\.board-prep-workspace-tabs\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\);[^}]*overflow-x:\s*hidden;/su);
+  const mobileWorkspaceTabRules = [...mobileUnifiedCss.matchAll(/\.board-prep-workspace-tabs\s*\{[^}]*\}/gsu)].map(([rule]) => rule);
+  const finalMobileWorkspaceTabRule = mobileWorkspaceTabRules.at(-1) ?? "";
+  assert.match(finalMobileWorkspaceTabRule, /grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\);[^}]*overflow-x:\s*hidden;/su);
   assert.match(mobileUnifiedCss, /\.board-prep-workspace-tabs > button\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\);[^}]*min-width:\s*0;/su);
-  assert.doesNotMatch(mobileUnifiedCss.match(/\.board-prep-workspace-tabs\s*\{[^}]*\}/su)?.[0] ?? "", /overflow-x:\s*auto/u);
+  assert.doesNotMatch(finalMobileWorkspaceTabRule, /overflow-x:\s*auto/u);
   assert.doesNotMatch(recognizedCss, /\.board-prep-workspace-tabs/u, "tab layout must have a single CSS owner");
   assert.match(css, /\.board-prep-occurrence/u);
   assert.match(css, /\.board-prep-passport-confirmation/u);
