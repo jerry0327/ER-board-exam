@@ -1,0 +1,62 @@
+name: Finalize audio player layout
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/workflows/finalize-audio-layout.yml
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply final product correction
+        run: |
+          python3 .github/final-audio-layout-patch.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/components/audio-section-companion.tsx app/site.css
+          git commit -m "Detach Section popover and finalize subtitle layout"
+          git push
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start actual app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/final-audio-layout.log 2>&1 &
+          for attempt in $(seq 1 120); do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/final-audio-layout.log
+          exit 1
+      - name: Verify final runtime layouts
+        run: |
+          mkdir -p visual-proof
+          node .github/final-audio-layout-verify.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: final-audio-player-subtitle-layout
+          path: visual-proof/*.png
+          if-no-files-found: error
+      - name: Remove temporary helpers
+        if: always()
+        run: |
+          git pull --rebase
+          git rm -f .github/final-audio-layout-patch.py .github/final-audio-layout-verify.mjs .github/workflows/finalize-audio-layout.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Remove final audio layout verification helpers"
+          git push
