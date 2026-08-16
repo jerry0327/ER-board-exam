@@ -33,8 +33,6 @@ import {
   AUDIO_PLAYER_SETTINGS_OPEN_EVENT,
   QUESTION_AUDIO_CHOICE_EVENT,
   type QuestionAudioChoiceEventDetail,
-  type QuestionAudioChoiceEventDetail,
-  type QuestionAudioChoiceEventDetail,
   type QuestionAudioChoiceRequest,
 } from "../lib/audio-player-section-events";
 
