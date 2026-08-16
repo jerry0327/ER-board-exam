@@ -387,7 +387,7 @@ export default function AudioSectionCompanion() {
             <button
               key={marker.id}
               type="button"
-              className={`audio-section-node ${isCurrent ? "is-current" : ""} ${isPast ? "is-past" : ""}`.trim()}
+              className={`audio-section-node ${isCurrent ? "is-current" : ""} ${isPast ? "is-past" : ""} ${index <= 1 ? "is-edge-start" : ""} ${index >= markers.length - 2 ? "is-edge-end" : ""}`.trim()}
               style={{ left: `${left}%` }}
               aria-label={`從 ${formatTime(marker.playerStartSeconds)} 播放：${label}`}
               onClick={(event) => {
