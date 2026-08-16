@@ -163,8 +163,8 @@ export default function AudioSectionCompanion() {
   const questionDialogRef = useRef<HTMLElement | null>(null);
   const questionChoiceTriggerRef = useRef<HTMLElement | null>(null);
   const currentSource = player.current;
-  const activeBundle = bundle?.sourceId === currentSource?.id && bundle.sourceRevision === currentSource.revision ? bundle : null;
-  const activeScope = scope?.sourceId === currentSource?.id && scope.sourceRevision === currentSource.revision ? scope : null;
+  const activeBundle = bundle && currentSource && bundle.sourceId === currentSource.id && bundle.sourceRevision === currentSource.revision ? bundle : null;
+  const activeScope = scope && currentSource && scope.sourceId === currentSource.id && scope.sourceRevision === currentSource.revision ? scope : null;
 
   useEffect(() => {
     const root = document.documentElement;
