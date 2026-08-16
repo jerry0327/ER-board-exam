@@ -1,0 +1,64 @@
+name: Run audio player refinement
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/workflows/run-audio-player-refinement.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply refinement
+        run: python3 .github/scripts/refine_audio_player_to_spec.py
+      - name: Commit refinement
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css
+          git commit -m "Refine audio player to final design spec"
+          git push
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/refine-player.log 2>&1 &
+          for attempt in $(seq 1 120); do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/refine-player.log
+          exit 1
+      - name: Capture runtime
+        run: |
+          mkdir -p visual-proof
+          cat > .capture-refined-player.mjs <<'JS'
+          import { chromium } from 'playwright';
+          const browser = await chromium.launch({headless:true});
+          const base='http://127.0.0.1:4173/';
+          async function catalog(page){return page.evaluate(async()=> (await (await fetch('/audio/snac/catalog.json')).json()).entries);}
+          async function seed(page,id){await page.goto(base,{waitUntil:'domcontentloaded'});await page.evaluate(({id})=>localStorage.setItem('em-board-audio-player-v2',JSON.stringify({sourceId:id,position:0,rate:1,expanded:true,stowed:false,continuousPlay:true,queueIds:[],randomReview:false})),{id});await page.reload({waitUntil:'domcontentloaded'});await page.locator('.audio-player-dock.is-expanded').waitFor({state:'visible',timeout:30000});await page.locator('.audio-section-companion').waitFor({state:'visible',timeout:30000});await page.waitForTimeout(400);}
+          const d=await browser.newContext({viewport:{width:1440,height:900}});const p=await d.newPage();await p.goto(base,{waitUntil:'domcontentloaded'});const entries=await catalog(p);const textbook=entries.find(e=>e.kind==='textbook-chapter'||e.kind==='textbook-section');const qset=entries.find(e=>e.kind==='question-set');await seed(p,textbook.id);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-expanded.png'});const nodes=p.locator('.audio-section-node');if(await nodes.count()>1){await nodes.nth(1).hover();await p.waitForTimeout(180);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-hover.png'});}await p.locator('.audio-section-toggle').click();await p.waitForTimeout(150);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-sections-open.png'});await p.locator('.audio-section-toggle').click();await p.locator('.audio-player-settings > summary').click();await p.waitForTimeout(120);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-settings-open.png'});if(qset){const qn=Number(qset.questionStart??1);const qid=`${qset.questionExam}-Q${String(qn).padStart(3,'0')}`;await p.evaluate(({sourceId,qid})=>window.dispatchEvent(new CustomEvent('em-board-question-audio-choice',{detail:{sourceId,questionId:qid}})),{sourceId:qset.id,qid});await p.locator('.audio-question-choice').waitFor({state:'visible'});await p.locator('.audio-question-choice').screenshot({path:'visual-proof/desktop-question-choice.png'});}await d.close();const m=await browser.newContext({viewport:{width:412,height:915}});const mp=await m.newPage();await seed(mp,textbook.id);await mp.screenshot({path:'visual-proof/mobile-expanded.png',fullPage:true});await mp.locator('.audio-section-toggle').click();await mp.waitForTimeout(120);await mp.locator('.audio-player-dock').screenshot({path:'visual-proof/mobile-sections-open.png'});await m.close();await browser.close();
+          JS
+          node .capture-refined-player.mjs
+          rm -f .capture-refined-player.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: refined-player-proof
+          path: visual-proof/*.png
+          if-no-files-found: error
