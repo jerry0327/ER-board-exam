@@ -36,6 +36,7 @@ jobs:
           fi
           python scripts/refine-question-audio-menu.py
           python scripts/rewrite-section-list-portal.py
+          python scripts/finalize-inline-section-density.py
       - name: Commit product and contract changes
         run: |
           if git diff --quiet -- app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css tests/audio-player-dock-contract.test.mjs tests/audio-player-section-subtitle-contract.test.mjs; then
@@ -78,10 +79,13 @@ jobs:
         env:
           QA_BASE_URL: http://127.0.0.1:5173
           QA_OUT_DIR: qa-original-player-proof
-        run: node scripts/qa-original-player-skeleton.mjs
+        run: |
+          node scripts/qa-original-player-skeleton.mjs
+          cp qa-longest-l1.json qa-original-player-proof/longest-l1.json
       - name: Print verification
         if: always()
         run: |
+          test -f qa-longest-l1.json && cat qa-longest-l1.json || true
           test -f qa-original-player-proof/verification.json && cat qa-original-player-proof/verification.json || true
           echo '--- dev log tail ---'
           tail -n 100 /tmp/em-board-dev.log || true
