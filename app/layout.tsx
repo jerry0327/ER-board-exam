@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import AppErrorBoundary from "./components/app-error-boundary";
 import AudioPlayerProvider from "./components/audio-player-provider";
+import AudioSectionCompanion from "./components/audio-section-companion";
 import { THEME_INIT_SCRIPT } from "./lib/theme";
 import "./site.css";
 
@@ -68,7 +69,10 @@ export default function RootLayout({
       </head>
       <body>
         <AppErrorBoundary>
-          <AudioPlayerProvider>{children}</AudioPlayerProvider>
+          <AudioPlayerProvider>
+            <AudioSectionCompanion />
+            {children}
+          </AudioPlayerProvider>
         </AppErrorBoundary>
       </body>
     </html>

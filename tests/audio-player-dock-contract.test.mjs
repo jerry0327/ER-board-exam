@@ -141,7 +141,7 @@ test("audio output recovery follows real render progress across mobile interrupt
   assert.match(provider, /window\.addEventListener\("pageshow", resyncWhenActive\)/u);
   assert.match(provider, /try \{\s*mediaDevices = navigator\.mediaDevices;[\s\S]*?mediaDevices\.addEventListener\("devicechange", resyncWhenActive\);[\s\S]*?mediaDevicesSubscribed = true;/u);
   assert.match(provider, /if \(mediaDevicesSubscribed && typeof mediaDevices\?\.removeEventListener === "function"\) \{\s*try \{/u);
-  assert.match(provider, /worklet\.disconnect\(\);\s*worklet\.connect\(context\.destination\);/u);
+  assert.match(provider, /function connectWorkletToOutput\(worklet: AudioWorkletNode, context: AudioContext\)[\s\S]*?gain = context\.createGain\(\);[\s\S]*?gain\.connect\(context\.destination\);[\s\S]*?worklet\.disconnect\(\);[\s\S]*?worklet\.connect\(gain\);/u);
   assert.match(provider, /const failPlayback = useCallback\(\(\) => \{[\s\S]*?playingIntentRef\.current = false;[\s\S]*?kind: "pause"[\s\S]*?phaseRef\.current = "error";/u);
   assert.match(provider, /console\.error\("Learning audio decoder error", message\.message\);\s*failPlayback\(\);/u);
   assert.match(provider, /detachAudioContextStateListener\(\);[\s\S]{0,180}const context = audioContextRef\.current/u);

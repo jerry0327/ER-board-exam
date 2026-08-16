@@ -155,16 +155,13 @@ test("manifest rejects traversal, duplicate runtime fields, and inconsistent cou
 });
 
 test("the audio player lazily loads subtitle navigation without blocking SNAC", async () => {
-  const provider = await readFile(new URL(
-    "../app/components/audio-player-provider.tsx",
-    import.meta.url,
-  ), "utf8");
-  assert.match(provider, /import\("\.\.\/lib\/audio-runtime-semantic-package"\)/u);
-  assert.match(provider, /loadRuntimeSemanticAudioChapters\(current\)/u);
-  assert.doesNotMatch(provider, /import\("\.\.\/lib\/audio-chapter-package"\)/u);
-  assert.doesNotMatch(provider, /loadAudioChapterPackage\(current\)/u);
-  assert.doesNotMatch(provider, /isTerminalUnavailableAudioChapterError|runtimeTerminalUnavailableForAudioSource/u);
-  assert.match(provider, /HXT2\/HXM2 is the only deployed subtitle path/u);
-  assert.match(provider, /chapterPackagePhase:\s*AudioChapterPackagePhase/u);
-  assert.match(provider, /must never block the existing SNAC decoder/u);
+  const [provider, companion] = await Promise.all([
+    readFile(new URL("../app/components/audio-player-provider.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/audio-section-companion.tsx", import.meta.url), "utf8"),
+  ]);
+  assert.match(companion, /await import\("\.\.\/lib\/audio-runtime-semantic-package"\)/u);
+  assert.match(companion, /loadRuntimeSemanticAudioChapters\(source\)/u);
+  assert.doesNotMatch(companion, /import \{[\s\S]*?loadRuntimeSemanticAudioChapters[\s\S]*?\} from "\.\.\/lib\/audio-runtime-semantic-package"/u);
+  assert.doesNotMatch(provider, /audio-runtime-semantic-package/u);
+  assert.doesNotMatch(companion, /audio-chapter-package/u);
 });

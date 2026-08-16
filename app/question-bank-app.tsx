@@ -164,6 +164,14 @@ const fullQuestionIndexViews = new Set<NavView>([
   "學習分析",
 ]);
 
+function routeMayOfferLearningAudio(view: NavView, questionId?: string | null) {
+  return (
+    view === "學習指引"
+    || view === "學習音檔"
+    || (view === "詳解閱讀" && Boolean(questionId))
+  );
+}
+
 function canWarmFullQuestionIndex() {
   if (document.visibilityState !== "visible") return false;
   const connection = (navigator as Navigator & { connection?: { effectiveType?: string; saveData?: boolean } }).connection;
@@ -415,9 +423,7 @@ function QuestionBankAppContent() {
   const prepareAudioForRoute = useCallback((view: NavView, questionId?: string | null) => {
     preloadRouteView(view);
     if (fullQuestionIndexViews.has(view)) void ensureFullQuestionBank().catch(() => undefined);
-    const isLearningRoute = view === "學習指引" || view === "學習音檔";
-    const isConcreteReader = view === "詳解閱讀" && Boolean(questionId);
-    if (!isLearningRoute && !isConcreteReader) return;
+    if (!routeMayOfferLearningAudio(view, questionId)) return;
     // Pointer intent may fetch the small worker/module shell, but the ~52 MB
     // decoder runtime must not compete with the destination's first frame.
     prepareAudioShell();

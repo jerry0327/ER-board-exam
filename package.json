@@ -26,7 +26,7 @@
     "import:subtitle-sections": "node scripts/with-uncompressed-static-content.mjs -- node scripts/import-subtitle-section-pack.mjs",
     "import:subtitle-runtime-semantic": "node scripts/with-uncompressed-static-content.mjs -- node scripts/import-subtitle-runtime-semantic-pack.mjs",
     "import:section-title-locales": "node scripts/with-uncompressed-static-content.mjs -- node scripts/import-section-title-locale-pack.mjs",
-    "guard:subtitle-deployment": "node scripts/guard-subtitle-deployment-readiness.mjs",
+    "guard:subtitle-deployment": "node --experimental-strip-types scripts/guard-subtitle-deployment-readiness.mjs",
     "audit:learning-documents": "node scripts/audit-learning-documents.mjs",
     "compress:learning-documents": "node scripts/compress-learning-documents.mjs",
     "audit:markdown": "node scripts/with-uncompressed-static-content.mjs -- node --experimental-strip-types scripts/audit-markdown.mjs",
