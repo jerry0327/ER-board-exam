@@ -1,0 +1,66 @@
+name: Run audio player visual pass 3
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/workflows/run-audio-player-visual-pass3.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/scripts/refine_audio_player_visual_pass3.py
+      - name: Commit pass 3
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/site.css
+          git commit -m "Finalize verified audio player feature styles"
+          git push
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/pass3.log 2>&1 &
+          for attempt in $(seq 1 120); do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/pass3.log
+          exit 1
+      - name: Verify interaction and capture pass 3
+        run: |
+          mkdir -p visual-proof
+          cat > .capture-pass3.mjs <<'JS'
+          import assert from 'node:assert/strict';
+          import { chromium } from 'playwright';
+          const browser=await chromium.launch({headless:true});const base='http://127.0.0.1:4173/';
+          async function cat(p){return p.evaluate(async()=> (await (await fetch('/audio/snac/catalog.json')).json()).entries)}
+          async function seed(p,id,expanded=true){await p.goto(base,{waitUntil:'domcontentloaded'});await p.evaluate(({id,expanded})=>localStorage.setItem('em-board-audio-player-v2',JSON.stringify({sourceId:id,position:0,rate:1,expanded,stowed:false,continuousPlay:true,queueIds:[],randomReview:false})),{id,expanded});await p.reload({waitUntil:'domcontentloaded'});await p.locator('.audio-player-dock').waitFor({state:'visible',timeout:30000});if(expanded)await p.locator('.audio-section-companion').waitFor({state:'visible',timeout:30000});await p.waitForTimeout(350)}
+          const d=await browser.newContext({viewport:{width:1440,height:900}});const p=await d.newPage();await p.goto(base,{waitUntil:'domcontentloaded'});const entries=await cat(p);const t=entries.find(e=>e.kind==='textbook-chapter'||e.kind==='textbook-section');assert.ok(t);await seed(p,t.id,true);
+          const dock=p.locator('.audio-player-dock');const bg=await dock.evaluate(el=>{const cs=getComputedStyle(el);return {background:cs.backgroundColor,opacity:cs.opacity,backdrop:cs.backdropFilter}});assert.equal(bg.opacity,'1');assert.notEqual(bg.background,'rgba(0, 0, 0, 0)');assert.notEqual(bg.background,'transparent');
+          const input=p.locator('.audio-player-timeline > input[type="range"]');const nodes=p.locator('.audio-section-node');assert.ok(await nodes.count()>1);const before=Number(await input.inputValue());await nodes.nth(1).click();await p.waitForTimeout(80);const afterNode=Number(await input.inputValue());assert.ok(afterNode>before+0.2,`section node did not seek: ${before} -> ${afterNode}`);
+          await p.evaluate(()=>{const el=document.querySelector('.audio-player-timeline > input[type="range"]');const max=Number(el.max);el.value=String(max*0.43);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));el.dispatchEvent(new PointerEvent('pointerup',{bubbles:true}));});await p.waitForTimeout(100);const afterRange=Number(await input.inputValue());assert.ok(afterRange>Number(await input.getAttribute('max'))*0.35,'range seek did not update');
+          const settingsParents=await p.locator('.audio-player-options').evaluateAll(els=>els.map(el=>Boolean(el.closest('.audio-player-settings-panel'))));assert.ok(settingsParents.length===1&&settingsParents[0]===true,'options are not contained by settings panel');
+          await dock.screenshot({path:'visual-proof/desktop-expanded.png'});await nodes.nth(1).hover();await p.waitForTimeout(140);await dock.screenshot({path:'visual-proof/desktop-hover.png'});await p.locator('.audio-section-toggle').click();await p.waitForTimeout(120);await dock.screenshot({path:'visual-proof/desktop-sections-open.png'});await p.locator('.audio-section-toggle').click();await p.locator('.audio-player-settings > summary').click();await p.waitForTimeout(100);await p.screenshot({path:'visual-proof/desktop-settings-page.png',fullPage:false});await seed(p,t.id,false);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-collapsed.png'});await d.close();
+          const m=await browser.newContext({viewport:{width:412,height:915}});const mp=await m.newPage();await seed(mp,t.id,true);const titleWidth=await mp.locator('.audio-player-title').evaluate(el=>el.getBoundingClientRect().width);assert.ok(titleWidth>260,`mobile title too narrow: ${titleWidth}`);await mp.locator('.audio-player-dock').screenshot({path:'visual-proof/mobile-expanded-player.png'});await mp.locator('.audio-section-toggle').click();await mp.waitForTimeout(100);await mp.locator('.audio-player-dock').screenshot({path:'visual-proof/mobile-sections-open.png'});await m.close();await browser.close();
+          JS
+          node .capture-pass3.mjs
+          rm -f .capture-pass3.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: refined-player-proof-pass3
+          path: visual-proof/*.png
+          if-no-files-found: error
