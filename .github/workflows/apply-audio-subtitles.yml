@@ -1,0 +1,72 @@
+name: Apply audio subtitles
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/workflows/apply-audio-subtitles.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply product patch
+        run: |
+          python3 .github/audio-subtitle-patch.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css
+          git commit -m "Add synchronized player subtitles and finalize timeline layout"
+          git push
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start actual app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/audio-subtitles.log 2>&1 &
+          for attempt in $(seq 1 120); do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/audio-subtitles.log
+          exit 1
+
+      - name: Browser verification
+        run: |
+          mkdir -p visual-proof
+          node .github/audio-subtitle-verify.mjs
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audio-player-subtitles-final-proof
+          path: visual-proof/*.png
+          if-no-files-found: error
+
+      - name: Remove temporary implementation files
+        if: always()
+        run: |
+          git pull --rebase
+          git rm -f .github/audio-subtitle-patch.py .github/audio-subtitle-verify.mjs .github/workflows/apply-audio-subtitles.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Remove audio subtitle implementation helpers"
+          git push
