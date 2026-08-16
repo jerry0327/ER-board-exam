@@ -1,0 +1,79 @@
+name: QA compact stowed mobile player
+
+on:
+  push:
+    branches:
+      - fix/restore-player-compact-stowed-mobile
+
+permissions:
+  contents: write
+
+jobs:
+  qa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore original compact and stowed presentation
+        run: |
+          if grep -q 'grid-template-columns: 36px minmax(0, 1fr) auto 40px 36px 36px' app/site.css; then
+            echo 'Compact restoration already applied.'
+          else
+            python scripts/restore-player-compact-stowed-mobile.py
+          fi
+      - name: Commit product CSS
+        run: |
+          if git diff --quiet -- app/site.css; then
+            echo 'No product diff.'
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add app/site.css
+            git commit -m 'Restore compact and stowed player states'
+            git push origin HEAD:fix/restore-player-compact-stowed-mobile
+          fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: TypeScript lint and focused contracts
+        run: |
+          npx tsc --noEmit
+          npm run lint
+          node --test tests/audio-player-dock-contract.test.mjs tests/audio-player-section-subtitle-contract.test.mjs
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start real app
+        run: |
+          npm run dev -- --host 127.0.0.1 > /tmp/em-board-dev.log 2>&1 &
+          echo $! > /tmp/em-board-dev.pid
+          for i in $(seq 1 120); do
+            if curl --fail --silent http://127.0.0.1:5173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/em-board-dev.log
+          exit 1
+      - name: Live desktop and mobile interaction QA
+        env:
+          QA_BASE_URL: http://127.0.0.1:5173
+          QA_OUT_DIR: qa-compact-player-proof
+        run: node scripts/qa-player-compact-stowed-mobile.mjs
+      - name: Print verification
+        if: always()
+        run: |
+          test -f qa-compact-player-proof/verification.json && cat qa-compact-player-proof/verification.json || true
+          echo '--- dev log tail ---'
+          tail -n 100 /tmp/em-board-dev.log || true
+      - name: Upload real runtime screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compact-stowed-mobile-proof
+          path: qa-compact-player-proof
+          if-no-files-found: error
