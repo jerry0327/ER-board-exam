@@ -7204,6 +7204,10 @@
   }
 
   @media (max-width: 600px) {
+    .audio-section-inline-control .audio-section-inline-index {
+      display: inline;
+    }
+
     .audio-player-time-row {
       gap: 5px;
       min-height: 30px;
