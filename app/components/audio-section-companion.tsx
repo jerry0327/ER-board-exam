@@ -227,10 +227,13 @@ export default function AudioSectionCompanion() {
   }, [questionChoice]);
 
   useEffect(() => {
-    setSectionOpen(false);
+    const closeFrame = window.requestAnimationFrame(() => setSectionOpen(false));
     if (!currentSource) {
-      setBundle(null);
-      return;
+      const clearFrame = window.requestAnimationFrame(() => setBundle(null));
+      return () => {
+        window.cancelAnimationFrame(closeFrame);
+        window.cancelAnimationFrame(clearFrame);
+      };
     }
     let active = true;
     void loadSectionBundle(currentSource)
@@ -242,26 +245,24 @@ export default function AudioSectionCompanion() {
       });
     return () => {
       active = false;
+      window.cancelAnimationFrame(closeFrame);
     };
   }, [currentSource]);
 
   useEffect(() => {
-    if (!currentSource) {
-      if (scope) setScope(null);
-      return;
-    }
-    if (scope && (scope.sourceId !== currentSource.id || scope.sourceRevision !== currentSource.revision)) setScope(null);
+    if (!scope) return;
+    if (currentSource && scope.sourceId === currentSource.id && scope.sourceRevision === currentSource.revision) return;
+    const frame = window.requestAnimationFrame(() => setScope(null));
+    return () => window.cancelAnimationFrame(frame);
   }, [currentSource, scope]);
 
 
   useEffect(() => {
-    if (player.stowed || !currentSource) {
-      setDockTarget(null);
-      return;
-    }
     let frame = window.requestAnimationFrame(() => {
       frame = 0;
-      setDockTarget(document.querySelector<HTMLElement>(".audio-player-dock"));
+      setDockTarget(player.stowed || !currentSource
+        ? null
+        : document.querySelector<HTMLElement>(".audio-player-dock"));
     });
     return () => {
       if (frame) window.cancelAnimationFrame(frame);
@@ -269,14 +270,14 @@ export default function AudioSectionCompanion() {
   }, [currentSource, player.stowed]);
 
   useEffect(() => {
-    if (!player.expanded || player.stowed || !currentSource) {
-      setSectionOpen(false);
-      setDetailsTarget(null);
-      setTimelineTarget(null);
-      return;
-    }
     let frame = window.requestAnimationFrame(() => {
       frame = 0;
+      if (!player.expanded || player.stowed || !currentSource) {
+        setSectionOpen(false);
+        setDetailsTarget(null);
+        setTimelineTarget(null);
+        return;
+      }
       setDetailsTarget(document.querySelector<HTMLElement>(".audio-player-details"));
       setTimelineTarget(document.querySelector<HTMLElement>(".audio-player-timeline"));
     });
@@ -330,32 +331,38 @@ export default function AudioSectionCompanion() {
     };
   }, [activeBundle, sectionOpen]);
 
+  const scopePosition = player.position;
+  const scopeIsPlaying = player.isPlaying;
+  const scopePlaybackRate = player.playbackRate;
+  const scopePause = player.pause;
+  const scopeSeek = player.seek;
+
   useEffect(() => {
     if (!activeScope) return;
     const tolerance = 0.06;
-    if (player.position < activeScope.startSeconds - tolerance) {
-      player.seek(activeScope.startSeconds);
+    if (scopePosition < activeScope.startSeconds - tolerance) {
+      scopeSeek(activeScope.startSeconds);
       return;
     }
-    if (player.position >= activeScope.endSeconds - tolerance) {
-      if (player.isPlaying) player.pause();
-      if (Math.abs(player.position - activeScope.endSeconds) > tolerance) {
-        player.seek(activeScope.endSeconds);
+    if (scopePosition >= activeScope.endSeconds - tolerance) {
+      if (scopeIsPlaying) scopePause();
+      if (Math.abs(scopePosition - activeScope.endSeconds) > tolerance) {
+        scopeSeek(activeScope.endSeconds);
       }
     }
-  }, [activeScope, player.isPlaying, player.pause, player.position, player.seek]);
+  }, [activeScope, scopeIsPlaying, scopePause, scopePosition, scopeSeek]);
 
   useEffect(() => {
-    if (!activeScope || !player.isPlaying) return;
-    const remaining = activeScope.endSeconds - player.position;
+    if (!activeScope || !scopeIsPlaying) return;
+    const remaining = activeScope.endSeconds - scopePosition;
     if (remaining <= 0.06) return;
-    const milliseconds = Math.max(20, remaining / Math.max(0.25, player.playbackRate) * 1000 + 20);
+    const milliseconds = Math.max(20, remaining / Math.max(0.25, scopePlaybackRate) * 1000 + 20);
     const timer = window.setTimeout(() => {
-      player.pause();
-      player.seek(activeScope.endSeconds);
+      scopePause();
+      scopeSeek(activeScope.endSeconds);
     }, milliseconds);
     return () => window.clearTimeout(timer);
-  }, [activeScope, player.isPlaying, player.pause, player.playbackRate, player.position, player.seek]);
+  }, [activeScope, scopeIsPlaying, scopePause, scopePlaybackRate, scopePosition, scopeSeek]);
 
   const chapters = activeBundle?.runtime.metadata.chapters ?? [];
   const markers = useMemo(

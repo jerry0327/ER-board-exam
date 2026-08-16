@@ -22,7 +22,7 @@ test("Section and subtitle runtime stays revision-safe and shares player-time se
   assert.match(companion, /currentSubtitleCueAt\(activeBundle\.runtime\.subtitle, player\.position\)/u);
   assert.match(companion, /siteSecondsFromSourceSeconds\(cue\.startSourceSeconds\)/u);
   assert.match(companion, /playerSecondsForChapter\(chapter\)/u);
-  assert.match(companion, /setSectionOpen\(false\);\s*if \(!currentSource\)/u);
+  assert.match(companion, /requestAnimationFrame\(\(\) => setSectionOpen\(false\)\)/u);
 });
 
 test("Section popover has explicit ownership, dismissal, focus return, and Settings exclusion", () => {

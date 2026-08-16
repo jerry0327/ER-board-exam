@@ -378,11 +378,14 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
 
 
   useEffect(() => {
-    try {
-      setSubtitlesEnabledState(window.localStorage.getItem(SUBTITLE_PREFERENCE_KEY) === "true");
-    } catch {
-      // Subtitle preference is optional when storage is unavailable.
-    }
+    const frame = window.requestAnimationFrame(() => {
+      try {
+        setSubtitlesEnabledState(window.localStorage.getItem(SUBTITLE_PREFERENCE_KEY) === "true");
+      } catch {
+        // Subtitle preference is optional when storage is unavailable.
+      }
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
 
