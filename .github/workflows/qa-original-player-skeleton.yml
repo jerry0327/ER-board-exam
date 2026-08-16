@@ -21,14 +21,11 @@ jobs:
           else
             python scripts/rebuild-player-on-original-skeleton.py
           fi
-          python scripts/fix-original-skeleton-contract-regex.py
-          python - <<'PY'
-          from pathlib import Path
-          path = Path('scripts/qa-original-player-skeleton.mjs')
-          text = path.read_text()
-          text = text.replace('(await tooltip.innerText()).trim()', '(await tooltip.textContent()).trim()')
-          path.write_text(text)
-          PY
+          if grep -q 'async function overlayMetrics' scripts/qa-original-player-skeleton.mjs; then
+            echo 'Mobile overlay QA is already current; skip legacy QA rewrite helper.'
+          else
+            python scripts/fix-original-skeleton-contract-regex.py
+          fi
       - name: Commit product and contract changes
         run: |
           if git diff --quiet -- app/components/audio-player-provider.tsx app/components/audio-section-companion.tsx app/site.css tests/audio-player-dock-contract.test.mjs tests/audio-player-section-subtitle-contract.test.mjs; then
