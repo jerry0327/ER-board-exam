@@ -1,0 +1,68 @@
+name: Fix consolidated section node styling
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/workflows/fix-consolidated-player-nodes.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add complete section-node primitives
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('app/site.css')
+          s=p.read_text()
+          marker='/* Audio Player section-node primitives */'
+          if marker not in s:
+              s += '''\n\n@layer site-features {\n  /* Audio Player section-node primitives */\n  .audio-section-node-layer {\n    height: 24px;\n    left: 0;\n    pointer-events: none;\n    position: absolute;\n    right: 0;\n    top: 0;\n    z-index: 6;\n  }\n  .audio-section-track-base,\n  .audio-section-track-progress {\n    border-radius: 1px;\n    height: 2px;\n    left: 0;\n    position: absolute;\n    top: 11px;\n  }\n  .audio-section-track-base {\n    background: color-mix(in srgb, var(--site-line-strong) 54%, var(--site-paper));\n    right: 0;\n  }\n  .audio-section-track-progress {\n    background: var(--site-primary);\n  }\n  .audio-section-node {\n    background: var(--site-paper);\n    border: 1.5px solid color-mix(in srgb, var(--site-line-strong) 78%, var(--site-paper));\n    border-radius: 50%;\n    cursor: pointer;\n    height: 7px;\n    padding: 0;\n    pointer-events: auto;\n    position: absolute;\n    top: 7.5px;\n    transform: translateX(-50%);\n    transition: transform 150ms var(--site-ease), box-shadow 150ms var(--site-ease), background-color 150ms var(--site-ease), border-color 150ms var(--site-ease);\n    width: 7px;\n  }\n  .audio-section-node::before {\n    content: "";\n    inset: -8px;\n    position: absolute;\n  }\n  .audio-section-node.is-past {\n    border-color: var(--site-primary);\n  }\n  .audio-section-node.is-current {\n    background: var(--site-primary);\n    border-color: var(--site-primary);\n  }\n  .audio-section-node:hover,\n  .audio-section-node:focus-visible {\n    background: var(--site-primary);\n    border-color: var(--site-primary);\n    box-shadow: 0 0 0 5px color-mix(in srgb, var(--site-primary) 12%, transparent), 0 0 18px color-mix(in srgb, var(--site-primary) 28%, transparent);\n    outline: 0;\n    transform: translateX(-50%) scale(1.35);\n    z-index: 8;\n  }\n  .audio-section-node-tooltip {\n    background: linear-gradient(135deg, var(--site-primary-strong), color-mix(in srgb, var(--site-primary) 84%, var(--site-ink)));\n    border-radius: 8px;\n    bottom: calc(100% + 11px);\n    box-shadow: 0 12px 30px color-mix(in srgb, var(--site-ink) 24%, transparent);\n    color: var(--site-on-primary);\n    display: grid;\n    gap: 2px;\n    left: 50%;\n    max-width: 190px;\n    min-width: 118px;\n    opacity: 0;\n    padding: 6px 8px;\n    pointer-events: none;\n    position: absolute;\n    transform: translate(-50%, 5px);\n    transition: opacity 140ms var(--site-ease), transform 140ms var(--site-ease);\n    visibility: hidden;\n    white-space: normal;\n  }\n  .audio-section-node-tooltip strong {\n    font-size: 11px;\n    line-height: 1.35;\n  }\n  .audio-section-node-tooltip time {\n    font-family: var(--site-mono);\n    font-size: 9px;\n    opacity: .78;\n  }\n  .audio-section-node:hover .audio-section-node-tooltip,\n  .audio-section-node:focus-visible .audio-section-node-tooltip {\n    opacity: 1;\n    transform: translate(-50%, 0);\n    visibility: visible;\n  }\n  .audio-section-node.is-edge-start .audio-section-node-tooltip {\n    left: -8px;\n    transform: translate(0, 5px);\n  }\n  .audio-section-node.is-edge-start:hover .audio-section-node-tooltip,\n  .audio-section-node.is-edge-start:focus-visible .audio-section-node-tooltip {\n    transform: translate(0, 0);\n  }\n  .audio-section-node.is-edge-end .audio-section-node-tooltip {\n    left: auto;\n    right: -8px;\n    transform: translate(0, 5px);\n  }\n  .audio-section-node.is-edge-end:hover .audio-section-node-tooltip,\n  .audio-section-node.is-edge-end:focus-visible .audio-section-node-tooltip {\n    transform: translate(0, 0);\n  }\n}\n'''
+          p.write_text(s)
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/site.css
+          git commit -m "Restore consolidated section node primitives"
+          git push
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/node-fix.log 2>&1 &
+          for attempt in $(seq 1 120); do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/node-fix.log
+          exit 1
+      - name: Verify screenshots
+        run: |
+          mkdir -p visual-proof
+          cat > .capture-node-fix.mjs <<'JS'
+          import assert from 'node:assert/strict';import{chromium}from'playwright';const b=await chromium.launch({headless:true});const base='http://127.0.0.1:4173/';async function cat(p){return p.evaluate(async()=> (await(await fetch('/audio/snac/catalog.json')).json()).entries)}async function seed(p,id){await p.goto(base,{waitUntil:'domcontentloaded'});await p.evaluate(({id})=>localStorage.setItem('em-board-audio-player-v2',JSON.stringify({sourceId:id,position:0,rate:1,expanded:true,stowed:false,continuousPlay:true,queueIds:[],randomReview:false})),{id});await p.reload({waitUntil:'domcontentloaded'});await p.locator('.audio-section-companion').waitFor({state:'visible',timeout:30000});await p.waitForTimeout(300)}const d=await b.newContext({viewport:{width:1440,height:900}});const p=await d.newPage();await p.goto(base);const e=await cat(p);const t=e.find(x=>x.kind==='textbook-chapter'||x.kind==='textbook-section');await seed(p,t.id);const nodes=p.locator('.audio-section-node');assert.ok(await nodes.count()>1);const tooltip=nodes.nth(1).locator('.audio-section-node-tooltip');assert.equal(await tooltip.evaluate(el=>getComputedStyle(el).visibility),'hidden');await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-expanded.png'});await nodes.nth(1).hover();await p.waitForTimeout(120);assert.equal(await tooltip.evaluate(el=>getComputedStyle(el).visibility),'visible');await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-hover.png'});await p.locator('.audio-section-toggle').click();await p.waitForTimeout(80);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-sections-open.png'});await d.close();const m=await b.newContext({viewport:{width:412,height:915}});const mp=await m.newPage();await seed(mp,t.id);await mp.locator('.audio-player-dock').screenshot({path:'visual-proof/mobile-expanded.png'});await m.close();await b.close();
+          JS
+          node .capture-node-fix.mjs
+          rm -f .capture-node-fix.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: final-clean-audio-player-proof
+          path: visual-proof/*.png
+          if-no-files-found: error
+      - name: Remove temporary workflow
+        run: |
+          git rm -f .github/workflows/fix-consolidated-player-nodes.yml
+          git commit -m "Remove section node verification workflow"
+          git push
