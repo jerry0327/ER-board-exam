@@ -104,6 +104,10 @@ test("incremental presentation follows the design contract without redefining th
   assert.match(enhancement, /\.audio-section-node\s*\{[\s\S]*?pointer-events: auto;/u);
   assert.match(enhancement, /@media \(pointer: coarse\)[\s\S]*?\.audio-section-node::before\s*\{[^}]*inset: -18px -21px;/u);
   assert.doesNotMatch(enhancement, /audio-player-(?:volume|fullscreen)/u);
-  assert.match(enhancement, /\.audio-player-settings-panel\s+\.audio-player-options\s*\{[\s\S]*?display:\s*grid;/u);
+  const settingsOptionsStart = enhancement.indexOf(".audio-player-settings-panel .audio-player-options");
+  assert.ok(settingsOptionsStart >= 0, "Settings options selector must exist");
+  const settingsOptionsEnd = enhancement.indexOf("}", settingsOptionsStart);
+  const settingsOptionsBlock = enhancement.slice(settingsOptionsStart, settingsOptionsEnd + 1);
+  assert.match(settingsOptionsBlock, /display:\s*grid;/u);
   assert.match(enhancement, /\.audio-subtitle-float\s*\{/u);
 });
