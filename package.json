@@ -26,7 +26,7 @@
     "import:subtitle-sections": "node scripts/with-uncompressed-static-content.mjs -- node scripts/import-subtitle-section-pack.mjs",
     "import:subtitle-runtime-semantic": "node scripts/with-uncompressed-static-content.mjs -- node scripts/import-subtitle-runtime-semantic-pack.mjs",
     "import:section-title-locales": "node scripts/with-uncompressed-static-content.mjs -- node scripts/import-section-title-locale-pack.mjs",
-    "guard:subtitle-deployment": "node scripts/guard-subtitle-deployment-readiness.mjs",
+    "guard:subtitle-deployment": "node --experimental-strip-types scripts/guard-subtitle-deployment-readiness.mjs",
     "audit:learning-documents": "node scripts/audit-learning-documents.mjs",
     "compress:learning-documents": "node scripts/compress-learning-documents.mjs",
     "audit:markdown": "node scripts/with-uncompressed-static-content.mjs -- node --experimental-strip-types scripts/audit-markdown.mjs",
@@ -78,18 +78,14 @@
     "@vitejs/plugin-react": "6.0.2",
     "@vitejs/plugin-rsc": "0.5.26",
     "drizzle-kit": "0.31.10",
-    "eslint": "9.39.4",
+    "eslint": "9.32.0",
     "eslint-config-next": "16.2.6",
-    "parse5": "^7.3.0",
-    "react-server-dom-webpack": "19.2.6",
-    "remark-parse": "^11.0.0",
-    "tailwindcss": "4.2.1",
+    "framer-motion": "12.23.12",
+    "lightningcss": "1.30.1",
+    "tsx": "4.20.6",
     "typescript": "5.9.3",
-    "unified": "^11.0.5",
-    "vinext": "0.0.50",
-    "vite": "8.0.13",
-    "wrangler": "4.92.0"
-  },
-  "type": "module",
-  "displayName": "急專補給站"
+    "vite": "7.3.1",
+    "vinext": "0.0.21",
+    "wrangler": "4.27.0"
+  }
 }
