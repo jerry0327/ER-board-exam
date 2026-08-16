@@ -9,11 +9,11 @@ const [companion, provider, events, css] = await Promise.all([
   readFile(new URL("../app/site.css", import.meta.url), "utf8"),
 ]);
 
-const marker = "/* Audio Player consolidated Section + subtitle presentation */";
+const marker = "/* Original player skeleton: Section, subtitle and Settings enhancements only. */";
 const markerIndex = css.indexOf(marker);
-assert.ok(markerIndex >= 0, "consolidated player CSS marker must exist");
-const consolidatedStart = css.lastIndexOf("@layer site-features", markerIndex);
-const consolidated = css.slice(consolidatedStart);
+assert.ok(markerIndex >= 0, "original-skeleton enhancement CSS marker must exist");
+const enhancementStart = css.lastIndexOf("@layer site-features", markerIndex);
+const enhancement = css.slice(enhancementStart);
 
 test("Section and subtitle runtime stays revision-safe and shares player-time seek helpers", () => {
   assert.match(companion, /sourceRevision: string;/u);
@@ -33,6 +33,18 @@ test("Section and subtitle runtime stays revision-safe and shares player-time se
   assert.match(companion, /requestAnimationFrame\(\(\) => setSectionOpen\(false\)\)/u);
   assert.match(companion, /questions\.find\(\(chapter\) => questionNumber\(chapter\.title\) === number\)/u);
   assert.match(companion, /\{currentTitle && <strong title=\{currentTitle\}>\{currentTitle\}<\/strong>\}/u);
+});
+
+test("Section enhancements mount into a dedicated slot without replacing the original player skeleton", () => {
+  assert.match(provider, /<div className="audio-player-timeline">[\s\S]*?<div className="audio-section-slot" \/>[\s\S]*?<div className="audio-player-controls">/u);
+  assert.match(companion, /document\.querySelector<HTMLElement>\("\.audio-section-slot"\)/u);
+  assert.match(provider, /<label className="audio-player-rate">[\s\S]*?<div className="audio-player-transport" role="group" aria-label="播放控制">[\s\S]*?<div className="audio-player-utilities">/u);
+  assert.match(provider, /className="audio-player-stow"/u);
+  assert.match(provider, /className="audio-player-restore"/u);
+  assert.match(provider, /className="audio-player-edge-progress"/u);
+  assert.doesNotMatch(enhancement, /\.audio-player-dock(?:\s|,|\{|\.is-(?:expanded|collapsed|stowed))/u);
+  assert.doesNotMatch(enhancement, /\.audio-player-mini\s*\{/u);
+  assert.doesNotMatch(enhancement, /\.audio-player-details\s*\{/u);
 });
 
 test("Section popover has explicit ownership, dismissal, focus return, and Settings exclusion", () => {
@@ -70,25 +82,28 @@ test("subtitle preference is durable and cue buttons expose a meaningful seek la
   assert.doesNotMatch(provider, /(?:Volume2|Maximize2|gainNodeRef|updateVolume)/u);
 });
 
-test("player presentation is one feature layer and follows the player design contract", () => {
-  assert.equal((css.match(/Audio Player consolidated Section \+ subtitle presentation/gu) ?? []).length, 1);
-  for (const oldMarker of [
-    "Audio Section Companion",
-    "Audio Player final verified feature-layer styling",
-    "Audio Player final screenshot polish",
-    "Audio Player final input reset",
-    "Audio Player final companion finishing rules",
-    "Audio Player section-node primitives",
-    "Audio Player final runtime presentation",
-  ]) assert.doesNotMatch(css, new RegExp(oldMarker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "u"));
-  assert.doesNotMatch(consolidated, /!important/u);
-  assert.doesNotMatch(consolidated, /(?:min|max)-width:\s*(?:700|701|1200)px/u);
-  const fontSizes = [...consolidated.matchAll(/font-size:\s*(\d+)px/gu)].map((match) => Number(match[1]));
-  assert.ok(fontSizes.length > 0 && fontSizes.every((size) => size >= 12), `sub-12px player text found: ${fontSizes.filter((size) => size < 12).join(",")}`);
-  assert.match(consolidated, /@media \(max-width: 600px\)/u);
-  assert.match(consolidated, /@media \(pointer: coarse\)/u);
-  assert.match(consolidated, /\.audio-section-node,[\s\S]*?pointer-events: none;/u);
-  assert.match(consolidated, /\.audio-subtitle-line\s*\{\s*min-height: 44px;/u);
-  assert.doesNotMatch(consolidated, /audio-player-(?:volume|fullscreen)/u);
-  assert.match(consolidated, /@media \(max-width: 600px\)[\s\S]*?\.audio-player-utilities \{[\s\S]*?display: flex;[\s\S]*?justify-content: flex-end;/u);
+test("advanced playback options live only in Settings while the original transport remains visible", () => {
+  const detailsStart = provider.indexOf('<div id="learning-audio-details" className="audio-player-details">');
+  const detailsEnd = provider.indexOf('{error && (', detailsStart);
+  const details = provider.slice(detailsStart, detailsEnd);
+  assert.match(details, /<details[\s\S]*?className="audio-player-settings"/u);
+  assert.match(details, /className="audio-player-settings-panel"[\s\S]*?睡眠計時[\s\S]*?字幕[\s\S]*?連續播放[\s\S]*?隨機複習[\s\S]*?接下來/u);
+  assert.doesNotMatch(details, /<div className="audio-player-options" role="group" aria-label="播放選項">[\s\S]*?<\/div>\s*<\/div>\s*\{error/u);
+  assert.match(details, /aria-label="播放上一章"[\s\S]*?aria-label="倒退 15 秒"[\s\S]*?audio-player-main-toggle[\s\S]*?aria-label="快進 30 秒"[\s\S]*?"播放下一章"/u);
+});
+
+test("incremental presentation follows the design contract without redefining the player shell", () => {
+  assert.equal((css.match(/Original player skeleton: Section, subtitle and Settings enhancements only\./gu) ?? []).length, 1);
+  assert.doesNotMatch(css, /Audio Player consolidated Section \+ subtitle presentation/u);
+  assert.doesNotMatch(enhancement, /!important/u);
+  assert.doesNotMatch(enhancement, /(?:min|max)-width:\s*(?:700|701|1200)px/u);
+  const fontSizes = [...enhancement.matchAll(/font-size:\s*(\d+)px/gu)].map((match) => Number(match[1]));
+  assert.ok(fontSizes.length > 0 && fontSizes.every((size) => size >= 12), `sub-12px enhancement text found: ${fontSizes.filter((size) => size < 12).join(",")}`);
+  assert.match(enhancement, /@media \(max-width: 600px\)/u);
+  assert.match(enhancement, /@media \(pointer: coarse\)/u);
+  assert.match(enhancement, /\.audio-section-node\s*\{[\s\S]*?pointer-events: auto;/u);
+  assert.match(enhancement, /@media \(pointer: coarse\)[\s\S]*?\.audio-section-node::before\s*\{[^}]*inset: -18px -21px;/u);
+  assert.doesNotMatch(enhancement, /audio-player-(?:volume|fullscreen)/u);
+  assert.match(enhancement, /\.audio-player-settings-panel \.audio-player-options\s*\{[^}]*display: grid;/u);
+  assert.match(enhancement, /\.audio-subtitle-float\s*\{/u);
 });
