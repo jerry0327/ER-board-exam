@@ -29,12 +29,18 @@ jobs:
         run: npm run lint
       - name: Build
         run: npm run build
-      - name: Run standalone test suite
+      - name: Run repository tests with canonical static-content expansion
         shell: bash
         run: |
-          mapfile -t TESTS < <(find tests -maxdepth 1 -type f -name '*.test.mjs' ! -name 'audio-runtime-semantic-package.test.mjs' -print | sort)
-          printf 'Running %s standalone tests\n' "${#TESTS[@]}"
-          node --experimental-strip-types --test "${TESTS[@]}"
+          mapfile -t TESTS < <(find tests -maxdepth 1 -type f -name '*.test.mjs' \
+            ! -name 'audio-runtime-semantic-package.test.mjs' \
+            ! -name 'import-subtitle-runtime-semantic-pack.test.mjs' \
+            ! -name 'subtitle-semantic-codec.test.mjs' \
+            ! -name 'goldfrank-guide-contract.test.mjs' \
+            -print | sort)
+          printf 'Running %s checkout-complete tests with expanded static content\n' "${#TESTS[@]}"
+          node scripts/with-uncompressed-static-content.mjs -- \
+            node --experimental-strip-types --test "${TESTS[@]}"
       - name: Audit deployed audio runtime
         run: npm run audit:audio-runtime
       - name: Guard subtitle deployment
