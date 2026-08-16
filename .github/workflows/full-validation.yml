@@ -26,8 +26,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: full-validation-${{ github.ref }}
-  cancel-in-progress: false
+  group: full-validation-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   full-validation:
