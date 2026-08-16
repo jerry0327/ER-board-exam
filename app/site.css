@@ -10911,3 +10911,23 @@
     .audio-player-volume input[type="range"] { height: 14px; }
   }
 }
+
+
+@layer site-features {
+  /* Audio Player final input reset */
+  .audio-player-volume input[type="range"] {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 0;
+    outline: 0;
+    padding-inline: 0;
+  }
+  .audio-player-volume input[type="range"]:focus {
+    border: 0;
+    box-shadow: none;
+    outline: 0;
+  }
+  .audio-player-dock.is-collapsed:not(.is-stowed) .audio-player-edge-progress { bottom: 25px; }
+}
