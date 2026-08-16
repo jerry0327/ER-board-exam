@@ -49,7 +49,7 @@ test("the app shell only reserves mobile footer clearance for an expanded player
 test("desktop and mobile both expose a compact left restore handle", () => {
   assert.match(css, /\.audio-player-stow,\s*\.audio-player-expand\s*\{[^}]*display: inline-flex;[^}]*min-height: 44px;[^}]*min-width: 44px;/u);
   assert.match(css, /\.audio-player-dock\.is-stowed\s*\{[^}]*left: max\(18px, env\(safe-area-inset-left\)\);[^}]*max-width: 52px;[^}]*width: 52px;/u);
-  assert.match(css, /\.audio-player-dock\.is-stowed \.audio-player-mini,\s*\.audio-player-dock\.is-stowed \.audio-player-details\s*\{\s*display: none;/u);
+  assert.match(css, /\.audio-player-dock\.is-stowed \.audio-player-edge-progress,\s*\.audio-player-dock\.is-stowed \.audio-player-mini,\s*\.audio-player-dock\.is-stowed \.audio-player-details\s*\{\s*display: none;/u);
   assert.match(css, /\.audio-player-dock\.is-stowed \.audio-player-restore\s*\{[^}]*min-height: 50px;[^}]*min-width: 50px;/u);
   assert.match(css, /@media \(max-width: 840px\)[\s\S]*?\.audio-player-dock\.is-stowed\s*\{[^}]*left: max\(12px, env\(safe-area-inset-left\)\);[^}]*max-width: 52px;[^}]*width: 52px;/u);
   assert.match(css, /@media \(max-width: 600px\)[\s\S]*?\.site-shell\.audio-player-active\.audio-player-stowed \.route-stage\s*\{\s*padding-bottom: 0;/u);
