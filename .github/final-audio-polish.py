@@ -47,7 +47,6 @@ if old_mobile_util not in css:
     raise SystemExit("Mobile utilities CSS block not found")
 css = css.replace(old_mobile_util, new_mobile_util, 1)
 
-# Volume/fullscreen were reverted from product scope; remove all now-dead styling rules.
 css = re.sub(r"(?ms)^\s*\.audio-player-volume[^\{]*\{[^{}]*\}\n?", "", css)
 css = re.sub(r"(?ms)^\s*\.audio-player-fullscreen[^\{]*\{[^{}]*\}\n?", "", css)
 if "audio-player-volume" in css or "audio-player-fullscreen" in css:
@@ -74,3 +73,4 @@ test = test.replace(anchor3, replacement3, 1)
 test_path.write_text(test)
 
 print("Applied final Section/player scope polish")
+# trigger=1
