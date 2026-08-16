@@ -1,0 +1,62 @@
+name: Consolidate audio player CSS
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/workflows/consolidate-audio-player-css.yml
+
+permissions:
+  contents: write
+
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Consolidate player presentation CSS
+        run: |
+          python3 .github/consolidate-audio-player-css.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/site.css
+          git commit -m "Consolidate final audio player presentation CSS"
+          git push
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start actual app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/consolidated-audio-player.log 2>&1 &
+          for attempt in $(seq 1 120); do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/consolidated-audio-player.log
+          exit 1
+      - name: Verify consolidated runtime
+        run: |
+          mkdir -p visual-proof
+          node .github/verify-consolidated-audio-player.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: consolidated-audio-player-final-proof
+          path: visual-proof/*.png
+          if-no-files-found: error
+      - name: Cleanup temporary helpers
+        if: always()
+        run: |
+          git pull --rebase
+          git rm -f .github/consolidate-audio-player-css.py .github/verify-consolidated-audio-player.mjs .github/workflows/consolidate-audio-player-css.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Remove audio player CSS consolidation helpers"
+          git push
