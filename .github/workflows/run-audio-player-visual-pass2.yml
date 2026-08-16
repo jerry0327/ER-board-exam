@@ -1,0 +1,60 @@
+name: Run audio player visual pass 2
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/workflows/run-audio-player-visual-pass2.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/scripts/refine_audio_player_visual_pass2.py
+      - name: Commit pass 2
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/components/audio-section-companion.tsx app/site.css
+          git commit -m "Refine verified audio player visuals"
+          git push
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/pass2.log 2>&1 &
+          for attempt in $(seq 1 120); do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/pass2.log
+          exit 1
+      - name: Capture pass 2
+        run: |
+          mkdir -p visual-proof
+          cat > .capture-pass2.mjs <<'JS'
+          import { chromium } from 'playwright';
+          const browser=await chromium.launch({headless:true});const base='http://127.0.0.1:4173/';
+          async function cat(p){return p.evaluate(async()=> (await (await fetch('/audio/snac/catalog.json')).json()).entries)}
+          async function seed(p,id,expanded=true){await p.goto(base,{waitUntil:'domcontentloaded'});await p.evaluate(({id,expanded})=>localStorage.setItem('em-board-audio-player-v2',JSON.stringify({sourceId:id,position:0,rate:1,expanded,stowed:false,continuousPlay:true,queueIds:[],randomReview:false})),{id,expanded});await p.reload({waitUntil:'domcontentloaded'});await p.locator('.audio-player-dock').waitFor({state:'visible',timeout:30000});if(expanded)await p.locator('.audio-section-companion').waitFor({state:'visible',timeout:30000});await p.waitForTimeout(350)}
+          const d=await browser.newContext({viewport:{width:1440,height:900}});const p=await d.newPage();await p.goto(base,{waitUntil:'domcontentloaded'});const entries=await cat(p);const t=entries.find(e=>e.kind==='textbook-chapter'||e.kind==='textbook-section');await seed(p,t.id,true);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-expanded.png'});const nodes=p.locator('.audio-section-node');if(await nodes.count()>1){await nodes.nth(1).hover();await p.waitForTimeout(160);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-hover.png'});}await p.locator('.audio-section-toggle').click();await p.waitForTimeout(130);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-sections-open.png'});await p.locator('.audio-section-toggle').click();await p.locator('.audio-player-settings > summary').click();await p.waitForTimeout(100);await p.screenshot({path:'visual-proof/desktop-settings-page.png',fullPage:false});await seed(p,t.id,false);await p.locator('.audio-player-dock').screenshot({path:'visual-proof/desktop-collapsed.png'});await d.close();
+          const m=await browser.newContext({viewport:{width:412,height:915}});const mp=await m.newPage();await seed(mp,t.id,true);await mp.locator('.audio-player-dock').screenshot({path:'visual-proof/mobile-expanded-player.png'});await mp.locator('.audio-section-toggle').click();await mp.waitForTimeout(100);await mp.locator('.audio-player-dock').screenshot({path:'visual-proof/mobile-sections-open.png'});await m.close();await browser.close();
+          JS
+          node .capture-pass2.mjs
+          rm -f .capture-pass2.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: refined-player-proof-pass2
+          path: visual-proof/*.png
+          if-no-files-found: error
