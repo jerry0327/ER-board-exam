@@ -10403,3 +10403,202 @@
     transform: translate(0, 0);
   }
 }
+
+@layer site-features {
+  /* Audio Player floating-section + timeline geometry correction */
+  .audio-player-dock.is-expanded {
+    overflow: visible;
+  }
+
+  .audio-player-details,
+  .audio-section-companion {
+    overflow: visible;
+    position: relative;
+  }
+
+  /* Section list is a popover. It never participates in player sizing. */
+  .audio-section-panel {
+    background: var(--site-paper);
+    border: 1px solid var(--site-line);
+    border-radius: 11px;
+    box-shadow: 0 18px 46px color-mix(in srgb, var(--site-ink) 18%, transparent);
+    left: auto;
+    margin: 0;
+    max-height: min(390px, calc(100vh - 32px));
+    overflow: auto;
+    position: absolute;
+    right: 0;
+    top: auto;
+    bottom: calc(100% + 58px);
+    width: min(290px, calc(100vw - 32px));
+    z-index: 120;
+  }
+
+  @media (min-width: 1200px) {
+    .audio-section-panel {
+      bottom: auto;
+      left: calc(100% + 12px);
+      right: auto;
+      top: 0;
+      width: 264px;
+    }
+  }
+
+  /* Undo the former section-open layout expansion. */
+  @media (min-width: 701px) {
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) {
+      min-height: 0;
+      width: min(640px, calc(100vw - 28px));
+    }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-details {
+      min-height: 0;
+      padding-right: 14px;
+    }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-controls {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .audio-section-panel {
+      bottom: calc(100% + 54px);
+      left: 0;
+      max-height: min(44vh, 330px);
+      right: 0;
+      top: auto;
+      width: 100%;
+    }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-timeline {
+      display: block;
+    }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-controls {
+      display: grid;
+    }
+  }
+
+  /* One coordinate system for range, section track, nodes, and time labels. */
+  .audio-player-timeline {
+    height: 40px;
+    isolation: isolate;
+    overflow: visible;
+    padding: 0;
+    position: relative;
+  }
+
+  .audio-player-dock.has-audio-sections .audio-player-timeline > input[type="range"] {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    height: 18px;
+    inset: 0 0 auto 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 8;
+  }
+
+  .audio-player-dock.has-audio-sections .audio-player-timeline > input[type="range"]::-webkit-slider-runnable-track {
+    background: transparent;
+    border: 0;
+    height: 2px;
+  }
+  .audio-player-dock.has-audio-sections .audio-player-timeline > input[type="range"]::-moz-range-track {
+    background: transparent;
+    border: 0;
+    height: 2px;
+  }
+
+  /* Playback position is the only prominent circular marker. */
+  .audio-player-dock.has-audio-sections .audio-player-timeline > input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: var(--site-primary);
+    border: 2px solid var(--site-paper);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--site-primary), 0 2px 7px color-mix(in srgb, var(--site-primary) 24%, transparent);
+    height: 11px;
+    margin-top: -4.5px;
+    width: 11px;
+  }
+  .audio-player-dock.has-audio-sections .audio-player-timeline > input[type="range"]::-moz-range-thumb {
+    background: var(--site-primary);
+    border: 2px solid var(--site-paper);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--site-primary), 0 2px 7px color-mix(in srgb, var(--site-primary) 24%, transparent);
+    height: 11px;
+    width: 11px;
+  }
+
+  .audio-section-node-layer {
+    height: 18px;
+    inset: 0 0 auto 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 9;
+  }
+  .audio-section-track-base,
+  .audio-section-track-progress {
+    border-radius: 1px;
+    height: 2px;
+    left: 0;
+    position: absolute;
+    top: 8px;
+  }
+  .audio-section-track-base {
+    background: color-mix(in srgb, var(--site-line-strong) 54%, var(--site-paper));
+    right: 0;
+  }
+  .audio-section-track-progress {
+    background: var(--site-primary);
+  }
+
+  /* Section points stay intentionally subordinate to the playhead. */
+  .audio-section-node,
+  .audio-section-node.is-current {
+    background: var(--site-paper);
+    border: 1px solid color-mix(in srgb, var(--site-line-strong) 86%, var(--site-paper));
+    border-radius: 50%;
+    box-shadow: none;
+    height: 5px;
+    padding: 0;
+    pointer-events: auto;
+    position: absolute;
+    top: 6.5px;
+    transform: translateX(-50%);
+    width: 5px;
+  }
+  .audio-section-node.is-past,
+  .audio-section-node.is-current {
+    background: color-mix(in srgb, var(--site-primary) 76%, var(--site-paper));
+    border-color: var(--site-primary);
+  }
+  .audio-section-node:hover,
+  .audio-section-node:focus-visible {
+    background: var(--site-primary);
+    border-color: var(--site-primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--site-primary) 10%, transparent);
+    transform: translateX(-50%) scale(1.35);
+  }
+
+  .audio-section-node-tooltip {
+    bottom: 12px;
+    z-index: 130;
+  }
+
+  .audio-player-timeline > div:last-child {
+    inset: 22px 0 auto 0;
+    margin: 0;
+    position: absolute;
+    z-index: 2;
+  }
+
+  /* Settings floats above everything without changing timeline geometry. */
+  .audio-player-settings[open] {
+    z-index: 140;
+  }
+  .audio-player-settings-panel {
+    background: var(--site-paper);
+    z-index: 150;
+  }
+}
