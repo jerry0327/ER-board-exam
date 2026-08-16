@@ -8,6 +8,7 @@ export type QuestionAudioChoiceRequest = {
 // Keep question-level playback selection decoupled from the SNAC decoder/provider.
 // The section companion resolves the requested question into the canonical time range.
 // Timeline section-node clicks and the question chooser converge on the same player seek API.
+// Node hit targets sit above the range track while the remaining track stays draggable.
 export function requestQuestionAudioChoice(request: QuestionAudioChoiceRequest) {
   if (typeof window === "undefined") return;
   window.dispatchEvent(new CustomEvent<QuestionAudioChoiceRequest>(QUESTION_AUDIO_CHOICE_EVENT, {
