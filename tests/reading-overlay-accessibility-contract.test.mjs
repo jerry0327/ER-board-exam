@@ -28,6 +28,21 @@ function cssRuleContaining(source, selector, startAt = 0) {
   return source.slice(source.lastIndexOf("}", selectorIndex) + 1, closingBrace + 1);
 }
 
+function cssRuleMatching(source, selector, declarations) {
+  let startAt = 0;
+  while (startAt < source.length) {
+    const selectorIndex = source.indexOf(selector, startAt);
+    if (selectorIndex === -1) break;
+    const openingBrace = source.indexOf("{", selectorIndex);
+    const closingBrace = source.indexOf("}", openingBrace);
+    if (openingBrace === -1 || closingBrace === -1) break;
+    const rule = source.slice(source.lastIndexOf("}", selectorIndex) + 1, closingBrace + 1);
+    if (declarations.every((pattern) => pattern.test(rule))) return rule;
+    startAt = closingBrace + 1;
+  }
+  assert.fail(`missing CSS rule for ${selector} with required declarations`);
+}
+
 test("long-form readers share one complete overlay focus lifecycle", () => {
   assert.match(focusHook, /export function useOverlayFocusManagement/u);
   assert.match(focusHook, /event\.key === "Escape"/u);
@@ -139,13 +154,18 @@ test("mobile reading-tool sheets let their scrim receive dismissal taps without 
     );
   }
 
-  const mobileBreakpoint = siteCss.indexOf("@media (max-width: 600px)");
-  assert.notEqual(mobileBreakpoint, -1);
-  const outerRule = cssRuleContaining(siteCss, ".reader-utility-panel.mobile-open", mobileBreakpoint);
+  const outerRule = cssRuleMatching(siteCss, ".reader-utility-panel.mobile-open", [
+    /\.guide-utility-panel\.mobile-open/u,
+    /pointer-events:\s*none;/u,
+    /position:\s*fixed;/u,
+  ]);
   assert.ok(outerRule.includes(".guide-utility-panel.mobile-open"));
   assert.match(outerRule, /pointer-events:\s*none;/u);
 
-  const innerRule = cssRuleContaining(siteCss, ".reader-utility-inner", mobileBreakpoint);
+  const innerRule = cssRuleMatching(siteCss, ".reader-utility-inner", [
+    /\.guide-utility-inner/u,
+    /pointer-events:\s*auto;/u,
+  ]);
   assert.ok(innerRule.includes(".guide-utility-inner"));
   assert.match(innerRule, /pointer-events:\s*auto;/u);
 
@@ -218,10 +238,12 @@ test("reader, guide, and mobile panels always stack above their backdrops", () =
     /@media \(max-width: 1140px\)[\s\S]*?z-index:\s*(?:65|70);/u,
   );
 
-  const mobileBreakpoint = siteCss.indexOf("@media (max-width: 600px)");
-  assert.notEqual(mobileBreakpoint, -1);
-  const mobilePanelRule = cssRuleContaining(siteCss, ".reader-utility-panel", mobileBreakpoint);
-  assert.ok(mobilePanelRule.includes(".guide-utility-panel"));
+  const mobilePanelRule = cssRuleMatching(siteCss, ".reader-utility-panel.mobile-open", [
+    /\.guide-utility-panel\.mobile-open/u,
+    /position:\s*fixed;/u,
+    /z-index:\s*var\(--site-z-overlay-panel\);/u,
+  ]);
+  assert.ok(mobilePanelRule.includes(".guide-utility-panel.mobile-open"));
   assert.match(mobilePanelRule, /position:\s*fixed;/u);
   assert.match(mobilePanelRule, /z-index:\s*var\(--site-z-overlay-panel\);/u);
 
