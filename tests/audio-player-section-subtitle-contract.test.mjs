@@ -2,11 +2,12 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const [companion, provider, events, css] = await Promise.all([
+const [companion, provider, events, css, learningAudio] = await Promise.all([
   readFile(new URL("../app/components/audio-section-companion.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/audio-player-provider.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/lib/audio-player-section-events.ts", import.meta.url), "utf8"),
   readFile(new URL("../app/site.css", import.meta.url), "utf8"),
+  readFile(new URL("../app/hooks/use-learning-audio.ts", import.meta.url), "utf8"),
 ]);
 
 const marker = "/* Original player skeleton: Section, subtitle and Settings enhancements only. */";
@@ -84,8 +85,32 @@ test("Settings and anchored question-choice menu support dismissal and focus lif
   assert.match(companion, /audio-question-choice-popover/u);
   assert.match(companion, /role="menu"/u);
   assert.match(companion, /window\.addEventListener\("scroll", handleViewportChange, true\)/u);
+  assert.match(events, /type QuestionAudioChoiceEventDetail/u);
+  assert.match(learningAudio, /event\?\.currentTarget instanceof HTMLElement/u);
+  assert.match(learningAudio, /requestQuestionAudioChoice\([\s\S]*?clickedTrigger/u);
+  assert.match(companion, /request\.trigger instanceof HTMLElement/u);
+  assert.match(companion, /preferredLeft = anchor\.left \+ anchor\.width \/ 2 - menuBox\.width \/ 2/u);
+  assert.match(companion, /const top = anchor\.bottom \+ gap/u);
   assert.match(companion, /questionChoiceTriggerRef\.current\?\.focus\(\)/u);
   assert.match(companion, /ref=\{questionDialogRef\}/u);
+});
+
+test("mobile player uses one symmetric control rail and moves destructive close into Settings", () => {
+  assert.match(css, /Player finishing pass v3/u);
+  assert.match(css, /grid-template-columns:\s*44px 50px 56px 50px 44px;/u);
+  assert.match(css, /\.audio-player-rate\s*\{[^}]*grid-column:\s*2;/u);
+  assert.match(css, /\.audio-player-secondary-left \.audio-player-reset\s*\{[^}]*grid-column:\s*3;/u);
+  assert.match(css, /\.audio-player-settings\s*\{[^}]*grid-column:\s*4;/u);
+  assert.match(css, /\.audio-player-close\s*\{\s*display:\s*none;/u);
+  assert.match(provider, /className="audio-player-settings-dismiss"[\s\S]*?<span>關閉播放器<\/span>/u);
+});
+
+test("expanded timeline is a clean progress surface without permanent chapter ticks", () => {
+  assert.doesNotMatch(companion, /audio-section-node-tooltip/u);
+  assert.doesNotMatch(companion, /className=\{`audio-section-node/u);
+  assert.match(companion, /audio-section-track-base/u);
+  assert.match(companion, /audio-section-track-progress/u);
+  assert.match(companion, /audio-section-playhead/u);
 });
 
 test("subtitle preference is durable and cue buttons expose a meaningful seek label", () => {
@@ -117,8 +142,9 @@ test("incremental presentation follows the design contract without redefining th
   assert.ok(fontSizes.length > 0 && fontSizes.every((size) => size >= 12), `sub-12px enhancement text found: ${fontSizes.filter((size) => size < 12).join(",")}`);
   assert.match(enhancement, /@media \(max-width: 600px\)/u);
   assert.match(enhancement, /@media \(pointer: coarse\)/u);
-  assert.match(enhancement, /\.audio-section-node\s*\{[\s\S]*?pointer-events: auto;/u);
-  assert.match(enhancement, /@media \(pointer: coarse\)[\s\S]*?\.audio-section-node::before\s*\{[^}]*inset: -18px -21px;/u);
+  assert.doesNotMatch(companion, /className=\{`audio-section-node/u);
+  assert.match(companion, /className="audio-section-node-layer" aria-hidden="true"/u);
+  assert.match(enhancement, /\.audio-section-track-base,\s*\.audio-section-track-progress/u);
   assert.doesNotMatch(enhancement, /audio-player-(?:volume|fullscreen)/u);
   const settingsOptionsStart = enhancement.indexOf(".audio-player-settings-panel .audio-player-options");
   assert.ok(settingsOptionsStart >= 0, "Settings options selector must exist");

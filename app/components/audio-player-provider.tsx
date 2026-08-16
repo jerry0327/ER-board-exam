@@ -2899,6 +2899,14 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                           {!continuousPlay && <small className="audio-player-queue-note">連續播放已關閉，本章播完後會停下。</small>}
                         </section>
                       )}
+                      <button
+                        type="button"
+                        className="audio-player-settings-dismiss"
+                        onClick={dismissPlayer}
+                      >
+                        <X aria-hidden="true" />
+                        <span>關閉播放器</span>
+                      </button>
                     </div>
                   </details>
                   <button

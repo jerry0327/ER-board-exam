@@ -32,6 +32,7 @@ import {
 import {
   AUDIO_PLAYER_SETTINGS_OPEN_EVENT,
   QUESTION_AUDIO_CHOICE_EVENT,
+  type QuestionAudioChoiceEventDetail,
   type QuestionAudioChoiceRequest,
 } from "../lib/audio-player-section-events";
 
@@ -186,15 +187,19 @@ export default function AudioSectionCompanion() {
 
   useEffect(() => {
     const handleChoice = (event: Event) => {
-      const request = (event as CustomEvent<QuestionAudioChoiceRequest>).detail;
+      const request = (event as CustomEvent<QuestionAudioChoiceEventDetail>).detail;
       if (!request?.sourceId || !request.questionId) return;
       setChoiceError(null);
       setLoadingChoice(false);
       setSectionOpen(false);
       const settings = document.querySelector<HTMLDetailsElement>(".audio-player-settings[open]");
       if (settings) settings.open = false;
-      questionChoiceTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-      setQuestionChoice(request);
+      questionChoiceTriggerRef.current = request.trigger instanceof HTMLElement
+        ? request.trigger
+        : document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null;
+      setQuestionChoice({ sourceId: request.sourceId, questionId: request.questionId });
     };
     window.addEventListener(QUESTION_AUDIO_CHOICE_EVENT, handleChoice as EventListener);
     return () => window.removeEventListener(QUESTION_AUDIO_CHOICE_EVENT, handleChoice as EventListener);
@@ -211,20 +216,28 @@ export default function AudioSectionCompanion() {
       const anchor = trigger.getBoundingClientRect();
       const menuBox = menu.getBoundingClientRect();
       const gutter = 8;
-      const gap = 6;
+      const gap = 8;
       const maxLeft = Math.max(gutter, window.innerWidth - menuBox.width - gutter);
-      const preferredLeft = anchor.left + anchor.width - menuBox.width;
+      const preferredLeft = anchor.left + anchor.width / 2 - menuBox.width / 2;
       const left = Math.min(maxLeft, Math.max(gutter, preferredLeft));
-      const roomBelow = window.innerHeight - anchor.bottom - gutter;
-      const top = roomBelow >= menuBox.height + gap
-        ? anchor.bottom + gap
-        : Math.max(gutter, anchor.top - menuBox.height - gap);
+      const top = anchor.bottom + gap;
+      const maxHeight = Math.max(88, window.innerHeight - top - gutter);
+      const caretX = Math.min(menuBox.width - 18, Math.max(18, anchor.left + anchor.width / 2 - left));
       menu.style.left = `${Math.round(left)}px`;
       menu.style.top = `${Math.round(top)}px`;
+      menu.style.maxHeight = `${Math.round(maxHeight)}px`;
+      menu.style.setProperty("--audio-question-caret-x", `${Math.round(caretX)}px`);
     };
 
     const focusFrame = window.requestAnimationFrame(() => {
-      positionMenu();
+      const anchor = trigger.getBoundingClientRect();
+      const roomBelow = window.innerHeight - anchor.bottom - 16;
+      if (roomBelow < Math.min(112, menu.scrollHeight + 8)) {
+        trigger.scrollIntoView({ block: "center", inline: "nearest", behavior: "auto" });
+        window.requestAnimationFrame(positionMenu);
+      } else {
+        positionMenu();
+      }
       menu.querySelector<HTMLButtonElement>("button:not([disabled])")?.focus();
     });
     const handlePointerDown = (event: PointerEvent) => {
@@ -592,7 +605,7 @@ export default function AudioSectionCompanion() {
 
   const timelinePortal = activeBundle && timelineTarget && !activeScope
     ? createPortal(
-      <div className="audio-section-node-layer">
+      <div className="audio-section-node-layer" aria-hidden="true">
         <span className="audio-section-track-base" aria-hidden="true" />
         <span
           className="audio-section-track-progress"
@@ -604,33 +617,6 @@ export default function AudioSectionCompanion() {
           aria-hidden="true"
           style={{ left: `${Math.min(100, Math.max(0, player.position / Math.max(1, player.duration) * 100))}%` }}
         />
-        {markers.map((marker, index) => {
-          const chapter = chapters[index];
-          if (!chapter) return null;
-          const left = Math.min(100, Math.max(0, marker.playerStartSeconds / Math.max(1, player.duration) * 100));
-          const isCurrent = chapter.id === currentChapter?.id;
-          const isPast = marker.playerStartSeconds <= player.position;
-          const label = sectionLabel(activeBundle, chapter);
-          return (
-            <button
-              key={marker.id}
-              type="button"
-              className={`audio-section-node ${isCurrent ? "is-current" : ""} ${isPast ? "is-past" : ""} ${index <= 1 ? "is-edge-start" : ""} ${index >= markers.length - 2 ? "is-edge-end" : ""}`.trim()}
-              style={{ left: `${left}%` }}
-              aria-label={`從 ${formatTime(marker.playerStartSeconds)} 播放：${label}`}
-              onClick={(event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                seekChapter(chapter);
-              }}
-            >
-              <span className="audio-section-node-tooltip" role="tooltip">
-                <strong>{label}</strong>
-                <time>{formatTime(marker.playerStartSeconds)}</time>
-              </span>
-            </button>
-          );
-        })}
       </div>,
       timelineTarget,
     )
