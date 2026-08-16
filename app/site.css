@@ -9789,7 +9789,6 @@
     width: min(390px, calc(100vw - 24px));
   }
 
-  .audio-player-edge-progress,
   .audio-player-mark,
   .audio-player-stow {
     display: none;
@@ -10078,6 +10077,12 @@
     width: 8px;
   }
 
+  .audio-section-node::after {
+    content: "";
+    inset: -8px;
+    position: absolute;
+  }
+
   .audio-section-node.is-past {
     border-color: var(--site-primary);
   }
@@ -10264,7 +10269,7 @@
     font-size: 12px;
     font-weight: 760;
     justify-content: center;
-    min-height: 42px;
+    min-height: 36px;
     padding: 0 10px;
     text-align: center;
   }
