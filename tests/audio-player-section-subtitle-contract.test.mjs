@@ -32,12 +32,14 @@ test("Section and subtitle runtime stays revision-safe and shares player-time se
   assert.match(companion, /playerSecondsForChapter\(chapter\)/u);
   assert.match(companion, /requestAnimationFrame\(\(\) => setSectionOpen\(false\)\)/u);
   assert.match(companion, /questions\.find\(\(chapter\) => questionNumber\(chapter\.title\) === number\)/u);
-  assert.match(companion, /\{currentTitle && <strong title=\{currentTitle\}>\{currentTitle\}<\/strong>\}/u);
+  assert.match(companion, /audio-section-inline-title/u);
+  assert.match(companion, /currentTitle \?\? "段落"/u);
 });
 
 test("Section enhancements mount into a dedicated slot without replacing the original player skeleton", () => {
-  assert.match(provider, /<div className="audio-player-timeline">[\s\S]*?<div className="audio-section-slot" \/>[\s\S]*?<div className="audio-player-controls">/u);
-  assert.match(companion, /document\.querySelector<HTMLElement>\("\.audio-section-slot"\)/u);
+  assert.match(provider, /audio-player-time-current[\s\S]*?audio-section-inline-slot[\s\S]*?audio-player-time-duration/u);
+  assert.match(companion, /document\.querySelector<HTMLElement>\("\.audio-section-inline-slot"\)/u);
+  assert.doesNotMatch(provider, /className="audio-section-slot"/u);
   assert.match(provider, /<label className="audio-player-rate">[\s\S]*?<div className="audio-player-transport" role="group" aria-label="播放控制">[\s\S]*?<div className="audio-player-utilities">/u);
   assert.match(provider, /className="audio-player-stow"/u);
   assert.match(provider, /className="audio-player-restore"/u);
@@ -45,6 +47,16 @@ test("Section enhancements mount into a dedicated slot without replacing the ori
   assert.doesNotMatch(enhancement, /(?:^|\n)\s*\.audio-player-dock(?:\.is-(?:expanded|collapsed|stowed))?\s*(?:,|\{)/u);
   assert.doesNotMatch(enhancement, /\.audio-player-mini\s*\{/u);
   assert.doesNotMatch(enhancement, /\.audio-player-details\s*\{/u);
+});
+
+test("Section menu renders canonical L1 and nested L2 navigation", () => {
+  assert.match(companion, /chapter\.children\.map\(\(child\) =>/u);
+  assert.match(companion, /audio-section-list-l1/u);
+  assert.match(companion, /audio-section-list-l2/u);
+  assert.match(companion, /audio-section-sublist/u);
+  assert.match(companion, /seekChapter\(child\)/u);
+  assert.match(companion, /playerSecondsForChapter\(child\)/u);
+  assert.match(companion, /currentPositionChapter\?\.l2/u);
 });
 
 test("Section popover has explicit ownership, dismissal, focus return, and Settings exclusion", () => {
@@ -61,13 +73,17 @@ test("Section popover has explicit ownership, dismissal, focus return, and Setti
   assert.match(provider, /window\.dispatchEvent\(new Event\(AUDIO_PLAYER_SETTINGS_OPEN_EVENT\)\)/u);
 });
 
-test("Settings and question-choice overlays support keyboard dismissal and focus lifecycle", () => {
+test("Settings and anchored question-choice menu support dismissal and focus lifecycle", () => {
   assert.match(provider, /settingsDetailsRef/u);
   assert.match(provider, /details\.open = false/u);
   assert.match(provider, /event\.key !== "Escape"/u);
   assert.match(provider, /document\.addEventListener\("pointerdown", handlePointerDown\)/u);
-  assert.match(companion, /document\.body\.style\.overflow = "hidden"/u);
-  assert.match(companion, /event\.key !== "Tab"/u);
+  assert.doesNotMatch(companion, /document\.body\.style\.overflow = "hidden"/u);
+  assert.doesNotMatch(companion, /event\.key !== "Tab"/u);
+  assert.doesNotMatch(companion, /audio-question-choice-backdrop/u);
+  assert.match(companion, /audio-question-choice-popover/u);
+  assert.match(companion, /role="menu"/u);
+  assert.match(companion, /window\.addEventListener\("scroll", handleViewportChange, true\)/u);
   assert.match(companion, /questionChoiceTriggerRef\.current\?\.focus\(\)/u);
   assert.match(companion, /ref=\{questionDialogRef\}/u);
 });

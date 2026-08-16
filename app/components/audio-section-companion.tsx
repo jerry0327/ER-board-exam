@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  ChevronDown,
-  X,
-} from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { createPortal } from "react-dom";
 import {
   useEffect,
@@ -204,42 +201,54 @@ export default function AudioSectionCompanion() {
   }, []);
 
   useEffect(() => {
+    // The question audio menu stays anchored without locking page scroll.
     if (!questionChoice) return;
-    const dialog = questionDialogRef.current;
-    if (!dialog) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const focusableSelector = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-    const focusFrame = window.requestAnimationFrame(() => {
-      dialog.querySelector<HTMLElement>(focusableSelector)?.focus();
-    });
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        setQuestionChoice(null);
-        return;
-      }
-      if (event.key !== "Tab") return;
-      const focusable = [...dialog.querySelectorAll<HTMLElement>(focusableSelector)];
-      if (!focusable.length) {
-        event.preventDefault();
-        return;
-      }
-      const first = focusable[0];
-      const last = focusable.at(-1) ?? first;
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
+    const menu = questionDialogRef.current;
+    const trigger = questionChoiceTriggerRef.current;
+    if (!menu || !trigger) return;
+
+    const positionMenu = () => {
+      const anchor = trigger.getBoundingClientRect();
+      const menuBox = menu.getBoundingClientRect();
+      const gutter = 8;
+      const gap = 6;
+      const maxLeft = Math.max(gutter, window.innerWidth - menuBox.width - gutter);
+      const preferredLeft = anchor.left + anchor.width - menuBox.width;
+      const left = Math.min(maxLeft, Math.max(gutter, preferredLeft));
+      const roomBelow = window.innerHeight - anchor.bottom - gutter;
+      const top = roomBelow >= menuBox.height + gap
+        ? anchor.bottom + gap
+        : Math.max(gutter, anchor.top - menuBox.height - gap);
+      menu.style.left = `${Math.round(left)}px`;
+      menu.style.top = `${Math.round(top)}px`;
     };
-    document.addEventListener("keydown", onKeyDown);
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      positionMenu();
+      menu.querySelector<HTMLButtonElement>("button:not([disabled])")?.focus();
+    });
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node) || menu.contains(target) || trigger.contains(target)) return;
+      setQuestionChoice(null);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      setQuestionChoice(null);
+    };
+    const handleViewportChange = () => positionMenu();
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleViewportChange);
+    window.addEventListener("scroll", handleViewportChange, true);
     return () => {
       window.cancelAnimationFrame(focusFrame);
-      document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleViewportChange);
+      window.removeEventListener("scroll", handleViewportChange, true);
       window.requestAnimationFrame(() => questionChoiceTriggerRef.current?.focus());
     };
   }, [questionChoice]);
@@ -581,6 +590,11 @@ export default function AudioSectionCompanion() {
             );
           })}
         </ol>
+                )}
+              </li>
+            );
+          })}
+        </ol>
       </section>,
       dockTarget,
     )
@@ -663,53 +677,33 @@ export default function AudioSectionCompanion() {
       {timelinePortal}
       {scopeTimelinePortal}
       {questionChoice && (
-        <div
-          className="audio-question-choice-backdrop"
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setQuestionChoice(null);
-          }}
+        <section
+          ref={questionDialogRef}
+          className="audio-question-choice audio-question-choice-popover"
+          role="menu"
+          aria-label="選擇播放方式"
         >
-          <section
-            ref={questionDialogRef}
-            className="audio-question-choice"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="question-audio-choice-title"
+          <button
+            type="button"
+            role="menuitem"
+            className="audio-question-choice-option"
+            disabled={!choiceSource || loadingChoice}
+            onClick={() => void chooseFullQuestionSet()}
           >
-            <header>
-              <strong id="question-audio-choice-title">選擇播放方式</strong>
-              <button
-                type="button"
-                className="audio-question-choice-close"
-                aria-label="關閉"
-                onClick={() => setQuestionChoice(null)}
-              >
-                <X aria-hidden="true" />
-              </button>
-            </header>
-            <div className="audio-question-choice-options">
-              <button
-                type="button"
-                className="audio-question-choice-option"
-                disabled={!choiceSource || loadingChoice}
-                onClick={() => void chooseFullQuestionSet()}
-              >
-                <span>完整音檔</span>
-              </button>
-              <button
-                type="button"
-                className="audio-question-choice-option"
-                disabled={!choiceSource || loadingChoice}
-                aria-busy={loadingChoice || undefined}
-                onClick={() => void chooseQuestionOnly()}
-              >
-                <span>{loadingChoice ? "載入中…" : "只播放本題"}</span>
-              </button>
-            </div>
-            {choiceError && <p className="audio-question-choice-error">{choiceError}</p>}
-          </section>
-        </div>
+            完整音檔
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            className="audio-question-choice-option"
+            disabled={!choiceSource || loadingChoice}
+            aria-busy={loadingChoice || undefined}
+            onClick={() => void chooseQuestionOnly()}
+          >
+            {loadingChoice ? "載入中…" : "只播放本題"}
+          </button>
+          {choiceError && <p className="audio-question-choice-error">{choiceError}</p>}
+        </section>
       )}
     </>
   );
