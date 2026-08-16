@@ -10602,3 +10602,21 @@
     z-index: 150;
   }
 }
+
+@layer site-features {
+  /* Portal-safe timeline selectors: never treat the Section layer as the time row. */
+  .audio-player-timeline > input[type="range"] + div {
+    inset: 22px 0 auto 0;
+    margin: 0;
+    position: absolute;
+    z-index: 2;
+  }
+
+  .audio-player-timeline > div.audio-section-node-layer {
+    height: 18px;
+    inset: 0 0 auto 0;
+    margin: 0;
+    position: absolute;
+    z-index: 9;
+  }
+}
