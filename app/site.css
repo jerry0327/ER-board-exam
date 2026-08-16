@@ -10096,9 +10096,9 @@
   }
 
   @media (min-width: 701px) {
-    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) { min-height: 334px; }
-    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-details { min-height: 276px; }
-    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-section-panel { max-height: 274px; }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) { min-height: 354px; }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-details { min-height: 296px; }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-section-panel { max-height: 294px; }
   }
 
   .audio-player-dock.is-collapsed:not(.is-stowed) .audio-player-mini {
