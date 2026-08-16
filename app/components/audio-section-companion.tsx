@@ -393,36 +393,40 @@ export default function AudioSectionCompanion() {
             <span>段落</span><ChevronDown aria-hidden="true" />
           </button>
         </div>
-        {sectionOpen && (
-          <section className="audio-section-panel" aria-label="音檔段落">
-            <header>
-              <span>段落</span>
-              <span>{chapters.length} 段</span>
-            </header>
-            <ol className="audio-section-list">
-              {chapters.map((chapter, index) => {
-                const startSeconds = markers[index]?.playerStartSeconds ?? playerSecondsForChapter(chapter);
-                const isCurrent = chapter.id === currentChapter?.id;
-                return (
-                  <li key={chapter.id}>
-                    <button
-                      type="button"
-                      className={isCurrent ? "is-current" : undefined}
-                      aria-current={isCurrent ? "true" : undefined}
-                      onClick={() => seekChapter(chapter)}
-                    >
-                      <span className="audio-section-list-dot" aria-hidden="true" />
-                      <strong>{sectionLabel(activeBundle, chapter)}</strong>
-                      <time>{formatTime(startSeconds)}</time>
-                    </button>
-                  </li>
-                );
-              })}
-            </ol>
-          </section>
-        )}
       </div>,
       detailsTarget,
+    )
+    : null;
+
+  const sectionListPortal = activeBundle && dockTarget && sectionOpen
+    ? createPortal(
+      <section className="audio-section-panel audio-section-panel-floating" aria-label="音檔段落">
+        <header>
+          <span>段落</span>
+          <span>{chapters.length} 段</span>
+        </header>
+        <ol className="audio-section-list">
+          {chapters.map((chapter, index) => {
+            const startSeconds = markers[index]?.playerStartSeconds ?? playerSecondsForChapter(chapter);
+            const isCurrent = chapter.id === currentChapter?.id;
+            return (
+              <li key={chapter.id}>
+                <button
+                  type="button"
+                  className={isCurrent ? "is-current" : undefined}
+                  aria-current={isCurrent ? "true" : undefined}
+                  onClick={() => seekChapter(chapter)}
+                >
+                  <span className="audio-section-list-dot" aria-hidden="true" />
+                  <strong>{sectionLabel(activeBundle, chapter)}</strong>
+                  <time>{formatTime(startSeconds)}</time>
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+      </section>,
+      dockTarget,
     )
     : null;
 
@@ -494,6 +498,7 @@ export default function AudioSectionCompanion() {
     <>
       {subtitlePortal}
       {sectionPortal}
+      {sectionListPortal}
       {timelinePortal}
       {scopeTimelinePortal}
       {questionChoice && (

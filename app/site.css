@@ -10851,3 +10851,103 @@
     }
   }
 }
+
+
+@layer site-features {
+  /* Audio Player final portal geometry correction */
+
+  /* Opening a Section list must never alter player layout. */
+  .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) {
+    min-height: 0;
+    width: min(640px, calc(100vw - 28px));
+  }
+  .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-details {
+    min-height: 0;
+    padding: 0 16px 14px;
+  }
+  .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-controls {
+    margin-top: 0;
+  }
+
+  /* The list is portaled directly into the dock and positioned independently. */
+  .audio-player-dock > .audio-section-panel-floating {
+    background: var(--site-paper);
+    border: 1px solid var(--site-line);
+    border-radius: 11px;
+    box-shadow: 0 18px 46px color-mix(in srgb, var(--site-ink) 18%, transparent);
+    left: auto;
+    margin: 0;
+    max-height: min(360px, calc(100vh - 32px));
+    overflow: auto;
+    position: absolute;
+    right: 0;
+    top: auto;
+    bottom: calc(100% + 10px);
+    width: min(290px, calc(100vw - 32px));
+    z-index: 160;
+  }
+
+  @media (min-width: 1200px) {
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) > .audio-section-panel-floating {
+      bottom: 0;
+      left: calc(100% + 14px);
+      max-height: min(360px, calc(100vh - 32px));
+      right: auto;
+      top: auto;
+      width: 264px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) {
+      width: calc(100vw - 24px);
+    }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-details {
+      padding: 0 12px 12px;
+    }
+    .audio-player-dock > .audio-section-panel-floating {
+      bottom: calc(100% + 10px);
+      left: 0;
+      max-height: min(44vh, 330px);
+      right: 0;
+      top: auto;
+      width: 100%;
+    }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-timeline,
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-controls {
+      display: inherit;
+    }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-timeline {
+      display: block;
+    }
+    .audio-player-dock.is-expanded:has(.audio-section-toggle[aria-expanded="true"]) .audio-player-controls {
+      display: grid;
+    }
+  }
+
+  /* Solid burgundy playhead; Section ticks are the only other timeline marks. */
+  .audio-player-dock.has-audio-sections .audio-player-timeline > input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: var(--site-primary) !important;
+    border: 0 !important;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px color-mix(in srgb, var(--site-primary) 28%, transparent) !important;
+    height: 10px;
+    margin-top: -4px;
+    width: 10px;
+  }
+  .audio-player-dock.has-audio-sections .audio-player-timeline > input[type="range"]::-moz-range-thumb {
+    background: var(--site-primary) !important;
+    border: 0 !important;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px color-mix(in srgb, var(--site-primary) 28%, transparent) !important;
+    height: 10px;
+    width: 10px;
+  }
+
+  /* Secondary context remains readable without competing with the active cue. */
+  .audio-subtitle-line:not(.is-current) {
+    color: var(--site-ink-soft);
+    opacity: .7;
+  }
+}
