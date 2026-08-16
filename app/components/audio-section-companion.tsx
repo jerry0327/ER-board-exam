@@ -295,7 +295,7 @@ export default function AudioSectionCompanion() {
         setTimelineTarget(null);
         return;
       }
-      setDetailsTarget(document.querySelector<HTMLElement>(".audio-player-details"));
+      setDetailsTarget(document.querySelector<HTMLElement>(".audio-section-slot"));
       setTimelineTarget(document.querySelector<HTMLElement>(".audio-player-timeline"));
     });
     return () => {

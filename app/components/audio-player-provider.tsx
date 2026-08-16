@@ -2723,33 +2723,81 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                 </div>
               </div>
 
-              <div className="audio-player-controls">
-                <div className="audio-player-transport" role="group" aria-label="播放控制">
-                  <button type="button" className="audio-player-skip" aria-label="倒退 15 秒" disabled={phase === "loading"} onClick={() => jumpBy(-15)}>
-                    <RotateCcw aria-hidden="true" /><span>15</span>
-                  </button>
-                  <button type="button" className="audio-player-chapter-control" aria-label="播放上一章" disabled={phase === "loading" || !adjacentAudioSummary(current.id, -1)} onClick={() => void playAdjacentSource(-1)}>
-                    <SkipBack aria-hidden="true" />
-                  </button>
-                  <button type="button" className="audio-player-main-toggle" aria-label={isPlaybackActive ? "暫停" : "播放"} disabled={phase === "loading"} onClick={() => void togglePlayback()}>
-                    {isPlaybackActive ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
-                  </button>
-                  <button type="button" className="audio-player-chapter-control" aria-label={randomReview ? "隨機播放下一章" : "播放下一章"} disabled={phase === "loading" || !canPlayNext} onClick={() => void playNextSource()}>
-                    <SkipForward aria-hidden="true" />
-                  </button>
-                  <button type="button" className="audio-player-skip" aria-label="快進 30 秒" disabled={phase === "loading"} onClick={() => jumpBy(30)}>
-                    <span>30</span><RotateCw aria-hidden="true" />
-                  </button>
-                </div>
+              <div className="audio-section-slot" />
 
+              <div className="audio-player-controls">
                 <label className="audio-player-rate">
                   <span>速度</span>
-                  <select className="field-control" value={playbackRate} aria-label="播放速度" onChange={(event) => updatePlaybackRate(Number(event.target.value))}>
-                    {AUDIO_PLAYBACK_RATES.map((rate) => <option key={rate} value={rate}>{rate}×</option>)}
+                  <select
+                    className="field-control"
+                    value={playbackRate}
+                    aria-label="播放速度"
+                    onChange={(event) => updatePlaybackRate(Number(event.target.value))}
+                  >
+                    {AUDIO_PLAYBACK_RATES.map((rate) => (
+                      <option key={rate} value={rate}>{rate}×</option>
+                    ))}
                   </select>
                 </label>
 
+                <div className="audio-player-transport" role="group" aria-label="播放控制">
+                  <button
+                    type="button"
+                    className="audio-player-chapter-control"
+                    aria-label="播放上一章"
+                    disabled={phase === "loading" || !adjacentAudioSummary(current.id, -1)}
+                    onClick={() => void playAdjacentSource(-1)}
+                  >
+                    <SkipBack aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    className="audio-player-skip"
+                    aria-label="倒退 15 秒"
+                    disabled={phase === "loading"}
+                    onClick={() => jumpBy(-15)}
+                  >
+                    <RotateCcw aria-hidden="true" /><span>15</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="audio-player-main-toggle"
+                    aria-label={isPlaybackActive ? "暫停" : "播放"}
+                    disabled={phase === "loading"}
+                    onClick={() => void togglePlayback()}
+                  >
+                    {isPlaybackActive ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
+                  </button>
+                  <button
+                    type="button"
+                    className="audio-player-skip"
+                    aria-label="快進 30 秒"
+                    disabled={phase === "loading"}
+                    onClick={() => jumpBy(30)}
+                  >
+                    <span>30</span><RotateCw aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    className="audio-player-chapter-control"
+                    aria-label={randomReview ? "隨機播放下一章" : "播放下一章"}
+                    disabled={phase === "loading" || !canPlayNext}
+                    onClick={() => void playNextSource()}
+                  >
+                    <SkipForward aria-hidden="true" />
+                  </button>
+                </div>
+
                 <div className="audio-player-utilities">
+                  <button
+                    type="button"
+                    className="audio-player-utility"
+                    aria-label="回到開頭"
+                    disabled={phase === "loading"}
+                    onClick={() => seekTo(0)}
+                  >
+                    <RotateCcw aria-hidden="true" />
+                  </button>
                   <details
                     ref={settingsDetailsRef}
                     className="audio-player-settings"
@@ -2757,38 +2805,108 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                       if (event.currentTarget.open) window.dispatchEvent(new Event(AUDIO_PLAYER_SETTINGS_OPEN_EVENT));
                     }}
                   >
-                    <summary className="audio-player-utility" aria-label="播放設定"><Settings aria-hidden="true" /></summary>
+                    <summary className="audio-player-utility" aria-label="播放設定">
+                      <Settings aria-hidden="true" />
+                    </summary>
                     <div className="audio-player-settings-panel">
                       <div className="audio-player-options" role="group" aria-label="播放選項">
                         <label className="audio-player-option audio-player-option-select">
                           <Timer aria-hidden="true" />
-                          <select value={sleepTimer ?? ""} aria-label={sleepTimerLabel} onChange={(event) => updateSleepTimer(event.target.value === "chapter-end" ? "chapter-end" : event.target.value ? Number(event.target.value) as 15 | 30 | 45 | 60 : null)}>
-                            <option value="">睡眠計時</option><option value="chapter-end">本章播完</option><option value="15">15 分鐘</option><option value="30">30 分鐘</option><option value="45">45 分鐘</option><option value="60">60 分鐘</option>
+                          <select
+                            value={sleepTimer ?? ""}
+                            aria-label={sleepTimerLabel}
+                            onChange={(event) => updateSleepTimer(
+                              event.target.value === "chapter-end"
+                                ? "chapter-end"
+                                : event.target.value
+                                  ? Number(event.target.value) as 15 | 30 | 45 | 60
+                                  : null,
+                            )}
+                          >
+                            <option value="">睡眠計時</option>
+                            <option value="chapter-end">本章播完</option>
+                            <option value="15">15 分鐘</option>
+                            <option value="30">30 分鐘</option>
+                            <option value="45">45 分鐘</option>
+                            <option value="60">60 分鐘</option>
                           </select>
                         </label>
-                        <button type="button" className={`audio-player-option audio-player-subtitle-option ${subtitlesEnabled ? "is-active" : ""}`.trim()} aria-pressed={subtitlesEnabled} onClick={() => updateSubtitlesEnabled(!subtitlesEnabled)}>
-                          <Captions aria-hidden="true" /><span><strong>字幕</strong><small>{subtitlesEnabled ? "開" : "關"}</small></span>
+                        <button
+                          type="button"
+                          className={`audio-player-option audio-player-subtitle-option ${subtitlesEnabled ? "is-active" : ""}`.trim()}
+                          aria-pressed={subtitlesEnabled}
+                          onClick={() => updateSubtitlesEnabled(!subtitlesEnabled)}
+                        >
+                          <Captions aria-hidden="true" />
+                          <span><strong>字幕</strong><small>{subtitlesEnabled ? "開" : "關"}</small></span>
                         </button>
-                        <button type="button" className={`audio-player-option ${continuousPlay ? "is-active" : ""}`.trim()} aria-pressed={continuousPlay} onClick={() => updateContinuousPlay(!continuousPlay)}>
-                          <Repeat2 aria-hidden="true" /><span><strong>連續播放</strong><small>{continuousPlay ? "開" : "關"}</small></span>
+                        <button
+                          type="button"
+                          className={`audio-player-option ${continuousPlay ? "is-active" : ""}`.trim()}
+                          aria-pressed={continuousPlay}
+                          onClick={() => updateContinuousPlay(!continuousPlay)}
+                        >
+                          <Repeat2 aria-hidden="true" />
+                          <span><strong>連續播放</strong><small>{continuousPlay ? "開" : "關"}</small></span>
                         </button>
-                        <button type="button" className={`audio-player-option ${randomReview ? "is-active" : ""}`.trim()} aria-pressed={randomReview} onClick={() => updateRandomReview(!randomReview)}>
-                          <Shuffle aria-hidden="true" /><span><strong>隨機複習</strong><small>{randomReview ? "開" : "關"}</small></span>
+                        <button
+                          type="button"
+                          className={`audio-player-option ${randomReview ? "is-active" : ""}`.trim()}
+                          aria-pressed={randomReview}
+                          onClick={() => updateRandomReview(!randomReview)}
+                        >
+                          <Shuffle aria-hidden="true" />
+                          <span><strong>隨機複習</strong><small>{randomReview ? "開" : "關"}</small></span>
                         </button>
-                        <button type="button" className={`audio-player-option ${queueOpen ? "is-active" : ""}`.trim()} aria-expanded={queueOpen} aria-controls="audio-player-queue-panel" onClick={() => setQueueOpen((open) => !open)}>
-                          <ListMusic aria-hidden="true" /><span><strong>接下來</strong><small>{queuedSources.length > 0 ? `${queuedSources.length} 章` : nextUpSource ? "下一章" : "已播完"}</small></span>
+                        <button
+                          type="button"
+                          className={`audio-player-option ${queueOpen ? "is-active" : ""}`.trim()}
+                          aria-expanded={queueOpen}
+                          aria-controls="audio-player-queue-panel"
+                          onClick={() => setQueueOpen((open) => !open)}
+                        >
+                          <ListMusic aria-hidden="true" />
+                          <span>
+                            <strong>接下來</strong>
+                            <small>{queuedSources.length > 0 ? `${queuedSources.length} 章` : nextUpSource ? "下一章" : "已播完"}</small>
+                          </span>
                         </button>
                       </div>
                       {queueOpen && (
                         <section id="audio-player-queue-panel" className="audio-player-queue-panel" aria-label="待播內容">
-                          <header><span>{queuedSources.length > 0 ? "待播清單" : randomReview ? "隨機複習下一章" : "依章節順序"}</span>{queuedSources.length > 0 && <button type="button" onClick={() => updateQueue([])}>清除</button>}</header>
-                          {queuedSources.length > 0 ? <ol>{queuedSources.slice(0, 4).map((source) => <li key={source.id}><span><small>{audioSummaryDisplayMarker(source)}</small><strong>{audioSummaryDisplayTitle(source)}</strong></span><button type="button" aria-label={`從待播清單移除 ${audioSummaryDisplayName(source)}`} onClick={() => removeFromQueue(source.id)}><X aria-hidden="true" /></button></li>)}</ol> : nextUpSource ? <p><small>{audioSummaryDisplayMarker(nextUpSource)}</small><strong>{audioSummaryDisplayTitle(nextUpSource)}</strong></p> : <p>這個系列已經播放到最後一章。</p>}
+                          <header>
+                            <span>{queuedSources.length > 0 ? "待播清單" : randomReview ? "隨機複習下一章" : "依章節順序"}</span>
+                            {queuedSources.length > 0 && <button type="button" onClick={() => updateQueue([])}>清除</button>}
+                          </header>
+                          {queuedSources.length > 0 ? (
+                            <ol>
+                              {queuedSources.slice(0, 4).map((source) => (
+                                <li key={source.id}>
+                                  <span><small>{audioSummaryDisplayMarker(source)}</small><strong>{audioSummaryDisplayTitle(source)}</strong></span>
+                                  <button type="button" aria-label={`從待播清單移除 ${audioSummaryDisplayName(source)}`} onClick={() => removeFromQueue(source.id)}>
+                                    <X aria-hidden="true" />
+                                  </button>
+                                </li>
+                              ))}
+                            </ol>
+                          ) : nextUpSource ? (
+                            <p><small>{audioSummaryDisplayMarker(nextUpSource)}</small><strong>{audioSummaryDisplayTitle(nextUpSource)}</strong></p>
+                          ) : (
+                            <p>這個系列已經播放到最後一章。</p>
+                          )}
                           {!continuousPlay && <small className="audio-player-queue-note">連續播放已關閉，本章播完後會停下。</small>}
                         </section>
                       )}
-                      <div className="audio-player-settings-actions"><button type="button" disabled={phase === "loading"} onClick={() => seekTo(0)}>回到開頭</button><button type="button" onClick={dismissPlayer}>關閉播放器</button></div>
                     </div>
                   </details>
+                  <button
+                    type="button"
+                    className="audio-player-utility audio-player-close"
+                    aria-label="關閉播放器"
+                    onClick={dismissPlayer}
+                  >
+                    <X aria-hidden="true" />
+                  </button>
                 </div>
               </div>
 
