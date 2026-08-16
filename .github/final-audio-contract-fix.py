@@ -45,3 +45,4 @@ for selector in [r"\.audio-player-volume(?:[^\{]*)", r"\.audio-player-fullscreen
 css_path.write_text(css)
 
 print("Restored baseline audio transport/output contract and removed unrelated controls")
+# Trigger marker: final contract pass
