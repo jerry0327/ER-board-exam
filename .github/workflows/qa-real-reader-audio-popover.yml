@@ -1,0 +1,61 @@
+name: QA real ReaderView audio popover
+
+on:
+  push:
+    branches:
+      - fix/original-player-skeleton-enhancements
+
+permissions:
+  contents: read
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start real app
+        run: |
+          npm run dev -- --host 127.0.0.1 > /tmp/em-board-dev.log 2>&1 &
+          for i in $(seq 1 120); do
+            if curl --fail --silent http://127.0.0.1:5173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/em-board-dev.log
+          exit 1
+
+      - name: Capture actual ReaderView audio popover
+        env:
+          QA_BASE_URL: http://127.0.0.1:5173
+          QA_OUT_DIR: qa-real-reader-audio-popover
+        run: node scripts/qa-real-reader-audio-popover.mjs
+
+      - name: Print verification
+        if: always()
+        run: |
+          test -f qa-real-reader-audio-popover/verification.json && cat qa-real-reader-audio-popover/verification.json || true
+          tail -n 80 /tmp/em-board-dev.log || true
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: real-reader-audio-popover-proof
+          path: qa-real-reader-audio-popover
+          if-no-files-found: error
