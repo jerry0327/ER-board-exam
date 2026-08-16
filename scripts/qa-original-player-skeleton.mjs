@@ -72,6 +72,38 @@ async function geometry(page) {
   });
 }
 
+async function overlayMetrics(page, selector) {
+  return page.evaluate((targetSelector) => {
+    const boxFor = (el) => {
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { top: r.top, bottom: r.bottom, left: r.left, right: r.right, width: r.width, height: r.height };
+    };
+    const dock = document.querySelector(".audio-player-dock");
+    const target = document.querySelector(targetSelector);
+    const subtitle = document.querySelector(".audio-subtitle-float");
+    const dockBox = boxFor(dock);
+    const targetBox = boxFor(target);
+    const subtitleBox = boxFor(subtitle);
+    const viewportHeight = window.innerHeight;
+    const topEdge = targetBox && dockBox ? Math.min(targetBox.top, dockBox.top) : (dockBox?.top ?? viewportHeight);
+    const occupiedBand = Math.max(0, viewportHeight - topEdge);
+    const subtitleStyle = subtitle ? getComputedStyle(subtitle) : null;
+    return {
+      viewport: { width: window.innerWidth, height: viewportHeight },
+      dock: dockBox,
+      target: targetBox,
+      subtitle: subtitleBox,
+      occupiedBand,
+      occupiedRatio: occupiedBand / viewportHeight,
+      remainingAbove: Math.max(0, topEdge),
+      remainingRatio: Math.max(0, topEdge) / viewportHeight,
+      subtitleOpacity: subtitleStyle?.opacity ?? null,
+      subtitlePointerEvents: subtitleStyle?.pointerEvents ?? null,
+    };
+  }, selector);
+}
+
 async function assertOriginalSkeleton(page, label) {
   const order = await page.locator(".audio-player-controls").evaluate((controls) => [...controls.children].map((el) => el.className));
   if (!String(order[0]).includes("audio-player-rate") || !String(order[1]).includes("audio-player-transport") || !String(order[2]).includes("audio-player-utilities")) {
@@ -163,9 +195,9 @@ async function desktopQa() {
   await context.close();
 }
 
-async function mobileQa(width) {
+async function mobileQa(width, height = 844) {
   const context = await browser.newContext({
-    viewport: { width, height: 844 },
+    viewport: { width, height },
     isMobile: true,
     hasTouch: true,
     deviceScaleFactor: 2,
@@ -173,10 +205,15 @@ async function mobileQa(width) {
   });
   const page = await context.newPage();
   await seed(page);
-  const key = String(width);
+  const key = `${width}x${height}`;
   report.mobile[key] = {};
-  await assertOriginalSkeleton(page, `mobile-${width}`);
-  report.mobile[key].expanded = await assertCenterline(page, `mobile-${width}`);
+  await assertOriginalSkeleton(page, `mobile-${key}`);
+  report.mobile[key].expanded = await assertCenterline(page, `mobile-${key}`);
+
+  const subtitle = page.locator(".audio-subtitle-float");
+  await subtitle.waitFor({ state: "visible", timeout: 10_000 });
+  report.mobile[key].subtitleOpen = await overlayMetrics(page, ".audio-subtitle-float");
+  await shot(page, `08a-mobile-${key}-expanded-subtitles.png`);
 
   const node = page.locator(".audio-section-node").nth(3);
   const before = Number(await page.locator(".audio-player-timeline > input[type=range]").inputValue());
@@ -184,40 +221,55 @@ async function mobileQa(width) {
   await page.waitForTimeout(180);
   const after = Number(await page.locator(".audio-player-timeline > input[type=range]").inputValue());
   report.mobile[key].nodeSeek = { before, after };
-  if (Math.abs(after - before) < 1) throw new Error(`mobile ${width}: Section node not clickable`);
-  await shot(page, `08-mobile-${width}-expanded.png`);
+  if (Math.abs(after - before) < 1) throw new Error(`mobile ${key}: Section node not clickable`);
+  await shot(page, `08-mobile-${key}-expanded.png`);
+
+  await page.locator(".audio-section-toggle").click();
+  await page.locator(".audio-section-panel-floating").waitFor({ state: "visible" });
+  await page.waitForTimeout(120);
+  report.mobile[key].sectionOpen = await overlayMetrics(page, ".audio-section-panel-floating");
+  if (Number(report.mobile[key].sectionOpen.subtitleOpacity) > 0.05 || report.mobile[key].sectionOpen.subtitlePointerEvents !== "none") {
+    throw new Error(`mobile ${key}: subtitles must yield while Section panel is open`);
+  }
+  await shot(page, `08b-mobile-${key}-expanded-sections.png`);
+  await page.keyboard.press("Escape");
+  await page.waitForTimeout(100);
 
   await page.locator(".audio-player-settings > summary").click();
   await page.locator(".audio-player-settings-panel").waitFor({ state: "visible" });
-  await shot(page, `09-mobile-${width}-settings.png`);
+  report.mobile[key].settingsOpen = await overlayMetrics(page, ".audio-player-settings-panel");
+  await shot(page, `09-mobile-${key}-settings.png`);
   await page.keyboard.press("Escape");
 
-  await page.locator(".audio-player-expand").click();
-  await page.locator(".audio-player-details").waitFor({ state: "hidden" });
-  await page.waitForTimeout(120);
-  const compact = await geometry(page);
-  report.mobile[key].compact = compact;
-  if (!compact.dock || compact.dock.height > 65) throw new Error(`mobile ${width}: compact too tall ${JSON.stringify(compact.dock)}`);
-  if (!compact.progress || Math.abs(compact.progress.top - compact.dock.top) > 2.5) throw new Error(`mobile ${width}: progress not top edge`);
-  if (!(await page.locator(".audio-player-stow").isVisible())) throw new Error(`mobile ${width}: stow missing`);
-  await shot(page, `10-mobile-${width}-compact.png`);
+  if (height >= 800) {
+    await page.locator(".audio-player-expand").click();
+    await page.locator(".audio-player-details").waitFor({ state: "hidden" });
+    await page.waitForTimeout(120);
+    const compact = await geometry(page);
+    report.mobile[key].compact = compact;
+    if (!compact.dock || compact.dock.height > 65) throw new Error(`mobile ${key}: compact too tall ${JSON.stringify(compact.dock)}`);
+    if (!compact.progress || Math.abs(compact.progress.top - compact.dock.top) > 2.5) throw new Error(`mobile ${key}: progress not top edge`);
+    if (!(await page.locator(".audio-player-stow").isVisible())) throw new Error(`mobile ${key}: stow missing`);
+    await shot(page, `10-mobile-${key}-compact.png`);
 
-  await page.locator(".audio-player-stow").click();
-  await page.waitForTimeout(100);
-  const circle = await page.locator(".audio-player-restore").boundingBox();
-  report.mobile[key].stowed = circle;
-  if (!circle || circle.width < 49 || circle.width > 52.5 || circle.height < 49 || circle.height > 52.5) throw new Error(`mobile ${width}: stowed bubble wrong ${JSON.stringify(circle)}`);
-  await shot(page, `11-mobile-${width}-stowed.png`);
+    await page.locator(".audio-player-stow").click();
+    await page.waitForTimeout(100);
+    const circle = await page.locator(".audio-player-restore").boundingBox();
+    report.mobile[key].stowed = circle;
+    if (!circle || circle.width < 49 || circle.width > 52.5 || circle.height < 49 || circle.height > 52.5) throw new Error(`mobile ${key}: stowed bubble wrong ${JSON.stringify(circle)}`);
+    await shot(page, `11-mobile-${key}-stowed.png`);
 
-  await page.locator(".audio-player-restore").click();
-  await page.waitForTimeout(100);
-  if (!(await page.locator(".audio-player-dock.is-collapsed:not(.is-stowed)").isVisible())) throw new Error(`mobile ${width}: bubble restore failed`);
+    await page.locator(".audio-player-restore").click();
+    await page.waitForTimeout(100);
+    if (!(await page.locator(".audio-player-dock.is-collapsed:not(.is-stowed)").isVisible())) throw new Error(`mobile ${key}: bubble restore failed`);
+  }
   await context.close();
 }
 
 await desktopQa();
-await mobileQa(390);
-await mobileQa(430);
+await mobileQa(390, 844);
+await mobileQa(430, 844);
+await mobileQa(390, 740);
 
 await fs.writeFile(path.join(outDir, "verification.json"), `${JSON.stringify(report, null, 2)}\n`);
 console.log(JSON.stringify(report, null, 2));
