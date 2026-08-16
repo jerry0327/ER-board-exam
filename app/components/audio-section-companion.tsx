@@ -595,11 +595,6 @@ export default function AudioSectionCompanion() {
             );
           })}
         </ol>
-                )}
-              </li>
-            );
-          })}
-        </ol>
       </section>,
       dockTarget,
     )
