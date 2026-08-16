@@ -2757,7 +2757,7 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                       if (event.currentTarget.open) window.dispatchEvent(new Event(AUDIO_PLAYER_SETTINGS_OPEN_EVENT));
                     }}
                   >
-                    <summary className="audio-player-utility" aria-label="播放設定" aria-haspopup="menu"><Settings aria-hidden="true" /></summary>
+                    <summary className="audio-player-utility" aria-label="播放設定"><Settings aria-hidden="true" /></summary>
                     <div className="audio-player-settings-panel">
                       <div className="audio-player-options" role="group" aria-label="播放選項">
                         <label className="audio-player-option audio-player-option-select">

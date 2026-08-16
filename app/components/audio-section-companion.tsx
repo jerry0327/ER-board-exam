@@ -112,7 +112,7 @@ function questionChapter(
     || number < Number(source.questionStart)
     || number > Number(source.questionEnd)
   ) return null;
-  return questions[number - Number(source.questionStart)] ?? null;
+  return questions.find((chapter) => questionNumber(chapter.title) === number) ?? null;
 }
 
 function questionScope(
@@ -178,6 +178,9 @@ export default function AudioSectionCompanion() {
       if (!request?.sourceId || !request.questionId) return;
       setChoiceError(null);
       setLoadingChoice(false);
+      setSectionOpen(false);
+      const settings = document.querySelector<HTMLDetailsElement>(".audio-player-settings[open]");
+      if (settings) settings.open = false;
       questionChoiceTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       setQuestionChoice(request);
     };
@@ -484,7 +487,7 @@ export default function AudioSectionCompanion() {
         <div className="audio-section-summary">
           <div className="audio-section-current">
             <small>{activeScope ? "只播放本題" : `目前段落 ${currentIndex >= 0 ? currentIndex + 1 : 1} / ${Math.max(1, chapters.length)}`}</small>
-            {activeScope && <strong title={currentTitle ?? undefined}>{currentTitle}</strong>}
+            {currentTitle && <strong title={currentTitle}>{currentTitle}</strong>}
           </div>
           <button
             ref={sectionToggleRef}

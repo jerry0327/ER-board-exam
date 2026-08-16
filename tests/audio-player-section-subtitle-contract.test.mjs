@@ -23,6 +23,8 @@ test("Section and subtitle runtime stays revision-safe and shares player-time se
   assert.match(companion, /siteSecondsFromSourceSeconds\(cue\.startSourceSeconds\)/u);
   assert.match(companion, /playerSecondsForChapter\(chapter\)/u);
   assert.match(companion, /requestAnimationFrame\(\(\) => setSectionOpen\(false\)\)/u);
+  assert.match(companion, /questions\.find\(\(chapter\) => questionNumber\(chapter\.title\) === number\)/u);
+  assert.match(companion, /\{currentTitle && <strong title=\{currentTitle\}>\{currentTitle\}<\/strong>\}/u);
 });
 
 test("Section popover has explicit ownership, dismissal, focus return, and Settings exclusion", () => {
@@ -56,6 +58,8 @@ test("subtitle preference is durable and cue buttons expose a meaningful seek la
   assert.match(provider, /localStorage\.setItem\(SUBTITLE_PREFERENCE_KEY, enabled \? "true" : "false"\)/u);
   assert.match(provider, /aria-pressed=\{subtitlesEnabled\}/u);
   assert.match(companion, /aria-label=\{`從 \$\{formatTime\(siteSecondsFromSourceSeconds\(cue\.startSourceSeconds\)\)\} 播放字幕：\$\{cue\.text\}`\}/u);
+  assert.match(provider, /aria-label="快進 30 秒"/u);
+  assert.doesNotMatch(provider, /(?:Volume2|Maximize2|gainNodeRef|updateVolume)/u);
 });
 
 test("player presentation is one feature layer and follows the player design contract", () => {
@@ -77,4 +81,6 @@ test("player presentation is one feature layer and follows the player design con
   assert.match(consolidated, /@media \(pointer: coarse\)/u);
   assert.match(consolidated, /\.audio-section-node,[\s\S]*?pointer-events: none;/u);
   assert.match(consolidated, /\.audio-subtitle-line\s*\{\s*min-height: 44px;/u);
+  assert.doesNotMatch(consolidated, /audio-player-(?:volume|fullscreen)/u);
+  assert.match(consolidated, /@media \(max-width: 600px\)[\s\S]*?\.audio-player-utilities \{[\s\S]*?display: flex;[\s\S]*?justify-content: flex-end;/u);
 });

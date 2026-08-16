@@ -9498,16 +9498,15 @@
   }
 
   .audio-section-current {
+    align-items: baseline;
+    display: flex;
+    gap: 8px;
     min-width: 0;
-  }
-
-  .audio-section-current small,
-  .audio-section-current strong {
-    display: block;
   }
 
   .audio-section-current small {
     color: var(--site-muted);
+    flex: 0 0 auto;
     font-size: 12px;
     line-height: 1.35;
     margin: 0;
@@ -9515,10 +9514,13 @@
 
   .audio-section-current strong {
     color: var(--site-primary);
+    display: block;
+    flex: 1 1 auto;
     font-size: 14px;
     font-weight: 720;
     line-height: 1.35;
-    margin-top: 4px;
+    margin: 0;
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -9934,54 +9936,6 @@
     min-width: 0;
     order: 3;
     position: relative;
-  }
-
-  .audio-player-volume:focus-within {
-    outline: 0;
-  }
-
-  .audio-player-volume svg {
-    flex: 0 0 auto;
-    height: 16px;
-    width: 16px;
-  }
-
-  .audio-player-volume input[type="range"] {
-    appearance: none;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    height: 18px;
-    margin: 0;
-    min-width: 0;
-    outline: 0;
-    padding: 0;
-    width: 100%;
-  }
-
-  .audio-player-volume input[type="range"]::-webkit-slider-runnable-track,
-  .audio-player-volume input[type="range"]::-moz-range-track {
-    background: color-mix(in srgb, var(--site-primary) 72%, var(--site-line));
-    border-radius: 1px;
-    height: 2px;
-  }
-
-  .audio-player-volume input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    background: var(--site-paper);
-    border: 1px solid var(--site-primary);
-    border-radius: 50%;
-    height: 10px;
-    margin-top: -4px;
-    width: 10px;
-  }
-
-  .audio-player-volume input[type="range"]::-moz-range-thumb {
-    background: var(--site-paper);
-    border: 1px solid var(--site-primary);
-    border-radius: 50%;
-    height: 10px;
-    width: 10px;
   }
 
   .audio-player-utility,
@@ -10445,10 +10399,10 @@
     }
 
     .audio-player-utilities {
-      display: grid;
+      display: flex;
       gap: 8px;
       grid-column: 2;
-      grid-template-columns: minmax(0, 1fr) 36px;
+      justify-content: flex-end;
       margin-left: 0;
       order: 3;
       width: 100%;
@@ -10513,10 +10467,6 @@
     .audio-question-choice-close {
       min-width: 44px;
       width: 44px;
-    }
-
-    .audio-player-volume input[type="range"] {
-      height: 44px;
     }
 
     .audio-player-timeline {
