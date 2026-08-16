@@ -9059,6 +9059,130 @@
   }
 }
 
+
+  /* Audio overlays inherit the native reader-panel visual language. */
+  .audio-player-settings-panel,
+  .audio-section-panel,
+  .audio-subtitle-float {
+    background: var(--site-reader-chrome);
+    border-color: color-mix(in srgb, var(--site-line-strong) 66%, transparent);
+    border-radius: var(--site-panel-radius);
+    box-shadow: var(--site-shadow-low);
+    color: var(--site-ink);
+  }
+
+  .audio-player-settings-panel .audio-player-option,
+  .audio-section-list button,
+  .audio-subtitle-line {
+    border-radius: var(--site-radius);
+  }
+
+  .audio-player-settings-panel .audio-player-option:hover,
+  .audio-player-settings-panel .audio-player-option:focus-visible,
+  .audio-section-list button:hover,
+  .audio-section-list button:focus-visible,
+  .audio-subtitle-line:hover,
+  .audio-subtitle-line:focus-visible {
+    background: var(--site-surface-hover);
+  }
+
+
+  /* Spoken-audio transport: quiet secondary actions, primary play anchor. */
+  .audio-player-chapter-control,
+  .audio-player-skip {
+    background: transparent;
+    border-color: transparent;
+    border-radius: var(--site-radius);
+    color: var(--site-ink-soft);
+    transition:
+      background-color 140ms var(--site-ease),
+      color 140ms var(--site-ease),
+      scale 120ms var(--site-ease);
+  }
+
+  .audio-player-chapter-control:hover:not(:disabled),
+  .audio-player-chapter-control:focus-visible,
+  .audio-player-skip:hover:not(:disabled),
+  .audio-player-skip:focus-visible {
+    background: var(--site-surface-hover);
+    border-color: transparent;
+    color: var(--site-primary);
+  }
+
+  .audio-player-chapter-control:active:not(:disabled),
+  .audio-player-skip:active:not(:disabled) {
+    scale: .94;
+  }
+
+  .audio-player-skip span {
+    color: currentColor;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+
+  /* Chapter seeking feedback: one centerline, progressive hover disclosure. */
+  .audio-section-track-base,
+  .audio-section-track-progress {
+    transition: height 140ms var(--site-ease), opacity 140ms var(--site-ease);
+  }
+
+  .audio-section-playhead {
+    transition:
+      height 140ms var(--site-ease),
+      width 140ms var(--site-ease),
+      box-shadow 140ms var(--site-ease);
+  }
+
+  .audio-section-node {
+    cursor: pointer;
+    transition:
+      background-color 140ms var(--site-ease),
+      height 140ms var(--site-ease),
+      width 140ms var(--site-ease);
+  }
+
+  .audio-player-timeline:hover .audio-section-track-base,
+  .audio-player-timeline:hover .audio-section-track-progress,
+  .audio-player-timeline:focus-within .audio-section-track-base,
+  .audio-player-timeline:focus-within .audio-section-track-progress {
+    height: 4px;
+  }
+
+  .audio-player-timeline:hover .audio-section-playhead,
+  .audio-player-timeline:focus-within .audio-section-playhead {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--site-primary) 12%, transparent);
+    height: 13px;
+    width: 13px;
+  }
+
+  .audio-section-node:hover,
+  .audio-section-node:focus-visible {
+    background: var(--site-primary);
+    height: 15px;
+    width: 3px;
+  }
+
+  .audio-section-node-tooltip {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition:
+      opacity 120ms var(--site-ease),
+      transform 160ms var(--site-ease),
+      visibility 0s linear 160ms;
+    visibility: hidden;
+  }
+
+  .audio-section-node:hover .audio-section-node-tooltip,
+  .audio-section-node:focus-visible .audio-section-node-tooltip {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    transition-delay: 0s;
+    visibility: visible;
+  }
+
 @layer site-utilities {
   /* Compound search controls expose one surface: the wrapper owns the frame. */
   :is(
