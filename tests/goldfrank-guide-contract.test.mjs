@@ -26,20 +26,11 @@ function findBareFormulaLines(markdown) {
   });
 }
 
-test("Goldfrank direct sanitizer preserves all 420 chapters and repairs clinical Markdown invariants", async (t) => {
+test("Goldfrank direct sanitizer preserves all 420 chapters and repairs clinical Markdown invariants", async () => {
   const sourceRoot = new URL("../../../outputs/02_learning_guides/goldfrank/", import.meta.url);
-  let sourceNames;
-  try {
-    sourceNames = (await readdir(sourceRoot))
-      .filter((name) => /^goldfrank-CH\d{3}-(?:full|standard|quick)\.md$/u.test(name))
-      .sort((left, right) => left.localeCompare(right, "en", { numeric: true }));
-  } catch (error) {
-    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
-      t.skip("external Goldfrank authoring corpus is not committed to this repository");
-      return;
-    }
-    throw error;
-  }
+  const sourceNames = (await readdir(sourceRoot))
+    .filter((name) => /^goldfrank-CH\d{3}-(?:full|standard|quick)\.md$/u.test(name))
+    .sort((left, right) => left.localeCompare(right, "en", { numeric: true }));
   assert.equal(sourceNames.length, 140 * 3);
 
   const sanitized = new Map();

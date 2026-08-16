@@ -11,7 +11,7 @@
     "build": "node scripts/with-static-content-lock.mjs -- bash scripts/build-verified.sh",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "test": "npm run build && node scripts/with-uncompressed-static-content.mjs -- npm run test:expanded && npm run audit:compressed-content",
-    "test:expanded": "node --experimental-strip-types --test tests/*.test.mjs && node --experimental-strip-types scripts/audit-markdown.mjs && node --experimental-strip-types scripts/audit-explanation-packs.mjs && node scripts/audit-board-textbook-runtime.mjs",
+    "test:expanded": "node --test tests/*.test.mjs && node --experimental-strip-types scripts/audit-markdown.mjs && node --experimental-strip-types scripts/audit-explanation-packs.mjs && node scripts/audit-board-textbook-runtime.mjs",
     "guard:static-index": "node scripts/guard-static-index.mjs",
     "compress:static-content": "node scripts/compress-static-content.mjs",
     "audit:compressed-content": "node scripts/with-static-content-lock.mjs -- node scripts/audit-compressed-static.mjs",
