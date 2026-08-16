@@ -117,3 +117,43 @@ if 'grid-template-columns: 18px minmax(0, 1fr);' not in css:
         raise RuntimeError('Settings sleep-timer selector block not found')
     css = css.replace(select_anchor, visible_select, 1)
 css_path.write_text(css)
+
+# Mobile runtime QA must exercise an actual touch and a Section marker that is
+# meaningfully separated from the seeded position. The prior nth(3) happened to
+# be 06:46 while the seed was 06:45.4, so its >1s movement assertion produced a
+# false negative even when the node was clicked correctly.
+qa_path = Path('scripts/qa-original-player-skeleton.mjs')
+qa = qa_path.read_text()
+old_mobile_seek = '''  const node = page.locator(".audio-section-node").nth(3);
+  const before = Number(await page.locator(".audio-player-timeline > input[type=range]").inputValue());
+  await node.click();
+  await page.waitForTimeout(180);
+  const after = Number(await page.locator(".audio-player-timeline > input[type=range]").inputValue());
+  report.mobile[key].nodeSeek = { before, after };
+  if (Math.abs(after - before) < 1) throw new Error(`mobile ${width}: Section node not clickable`);'''
+new_mobile_seek = '''  const range = page.locator(".audio-player-timeline > input[type=range]");
+  const before = Number(await range.inputValue());
+  const duration = Number(await range.getAttribute("max"));
+  const nodes = page.locator(".audio-section-node");
+  const nodeCount = await nodes.count();
+  if (nodeCount < 2) throw new Error(`mobile ${width}: expected multiple Section nodes`);
+  const candidates = [];
+  for (let index = 0; index < nodeCount; index += 1) {
+    const left = Number.parseFloat((await nodes.nth(index).getAttribute("style"))?.match(/left:\\s*([0-9.]+)%/u)?.[1] ?? "NaN");
+    if (Number.isFinite(left)) candidates.push({ index, expected: duration * left / 100 });
+  }
+  candidates.sort((a, b) => Math.abs(b.expected - before) - Math.abs(a.expected - before));
+  const target = candidates[0];
+  if (!target || Math.abs(target.expected - before) < 30) throw new Error(`mobile ${width}: no distant Section node available`);
+  await nodes.nth(target.index).tap();
+  await page.waitForTimeout(220);
+  const after = Number(await range.inputValue());
+  report.mobile[key].nodeSeek = { before, after, expected: target.expected, index: target.index };
+  if (Math.abs(after - target.expected) > 1.5) {
+    throw new Error(`mobile ${width}: touch Section seek missed target; ${JSON.stringify(report.mobile[key].nodeSeek)}`);
+  }'''
+if old_mobile_seek in qa:
+    qa = qa.replace(old_mobile_seek, new_mobile_seek, 1)
+elif 'touch Section seek missed target' not in qa:
+    raise RuntimeError('mobile Section QA block not found')
+qa_path.write_text(qa)
