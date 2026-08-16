@@ -54,7 +54,18 @@ type QuestionPlaybackScope = {
   endSeconds: number;
 };
 
+const SECTION_BUNDLE_CACHE_LIMIT = 6;
 const sectionBundleRequests = new Map<string, Promise<LoadedSectionBundle>>();
+
+function rememberSectionBundleRequest(key: string, request: Promise<LoadedSectionBundle>) {
+  sectionBundleRequests.delete(key);
+  sectionBundleRequests.set(key, request);
+  while (sectionBundleRequests.size > SECTION_BUNDLE_CACHE_LIMIT) {
+    const oldestKey = sectionBundleRequests.keys().next().value as string | undefined;
+    if (!oldestKey) break;
+    sectionBundleRequests.delete(oldestKey);
+  }
+}
 
 function formatTime(value: number) {
   const seconds = Math.max(0, Math.floor(Number.isFinite(value) ? value : 0));
@@ -69,7 +80,10 @@ function formatTime(value: number) {
 function loadSectionBundle(source: AudioSummarySource) {
   const key = `${source.id}:${source.revision}`;
   const existing = sectionBundleRequests.get(key);
-  if (existing) return existing;
+  if (existing) {
+    rememberSectionBundleRequest(key, existing);
+    return existing;
+  }
   const pending = (async (): Promise<LoadedSectionBundle> => {
     const { loadRuntimeSemanticAudioChapters } = await import("../lib/audio-runtime-semantic-package");
     const runtime = await loadRuntimeSemanticAudioChapters(source);
@@ -84,7 +98,7 @@ function loadSectionBundle(source: AudioSummarySource) {
     }
     return { sourceId: source.id, sourceRevision: source.revision, runtime, locales };
   })();
-  sectionBundleRequests.set(key, pending);
+  rememberSectionBundleRequest(key, pending);
   void pending.catch(() => {
     if (sectionBundleRequests.get(key) === pending) sectionBundleRequests.delete(key);
   });

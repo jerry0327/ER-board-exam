@@ -17,6 +17,10 @@ const consolidated = css.slice(consolidatedStart);
 
 test("Section and subtitle runtime stays revision-safe and shares player-time seek helpers", () => {
   assert.match(companion, /sourceRevision: string;/u);
+  assert.match(companion, /SECTION_BUNDLE_CACHE_LIMIT = 6/u);
+  assert.match(companion, /while \(sectionBundleRequests\.size > SECTION_BUNDLE_CACHE_LIMIT\)/u);
+  assert.match(companion, /rememberSectionBundleRequest\(key, existing\)/u);
+  assert.match(companion, /rememberSectionBundleRequest\(key, pending\)/u);
   assert.match(companion, /bundle\.sourceRevision === currentSource\.revision/u);
   assert.match(companion, /scope\.sourceRevision === currentSource\.revision/u);
   assert.match(companion, /currentSubtitleCueAt\(activeBundle\.runtime\.subtitle, player\.position\)/u);
