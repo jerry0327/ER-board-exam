@@ -568,6 +568,11 @@ export default function AudioSectionCompanion() {
           aria-hidden="true"
           style={{ width: `${Math.min(100, Math.max(0, player.position / Math.max(1, player.duration) * 100))}%` }}
         />
+        <span
+          className="audio-section-playhead"
+          aria-hidden="true"
+          style={{ left: `${Math.min(100, Math.max(0, player.position / Math.max(1, player.duration) * 100))}%` }}
+        />
         {markers.map((marker, index) => {
           const chapter = chapters[index];
           if (!chapter) return null;
