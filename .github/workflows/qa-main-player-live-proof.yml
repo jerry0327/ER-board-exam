@@ -6,7 +6,7 @@ on:
       - qa/main-player-live-proof-20260816
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   capture:
@@ -14,13 +14,30 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+      - name: Apply player visual refinement
+        run: python scripts/refine-player-visual-language.py
+      - name: Commit refined product code
+        run: |
+          if git diff --quiet -- app/site.css app/components/audio-section-companion.tsx; then
+            echo "No product diff to commit."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add app/site.css app/components/audio-section-companion.tsx
+            git commit -m "Refine audio player visual language"
+            git push origin HEAD:qa/main-player-live-proof-20260816
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: 22.13.0
           cache: npm
       - name: Install project dependencies
         run: npm ci
-      - name: Install Playwright for one-shot QA
+      - name: Validate TypeScript and lint
+        run: |
+          npx tsc --noEmit
+          npm run lint
+      - name: Install Playwright for live QA
         run: |
           npm install --no-save --package-lock=false playwright@1.55.0
           npx playwright install --with-deps chromium
