@@ -1,0 +1,56 @@
+name: QA main player live proof
+
+on:
+  push:
+    branches:
+      - qa/main-player-live-proof-20260816
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - name: Install project dependencies
+        run: npm ci
+      - name: Install Playwright for one-shot QA
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start real app
+        run: |
+          npm run dev -- --host 127.0.0.1 > /tmp/em-board-dev.log 2>&1 &
+          echo $! > /tmp/em-board-dev.pid
+          for i in $(seq 1 120); do
+            if curl --fail --silent http://127.0.0.1:5173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/em-board-dev.log
+          exit 1
+      - name: Operate real player and capture screenshots
+        env:
+          QA_BASE_URL: http://127.0.0.1:5173
+          QA_OUT_DIR: qa-player-proof
+        run: node scripts/qa-main-player-live-proof.mjs
+      - name: Show verification report
+        if: always()
+        run: |
+          test -f qa-player-proof/verification.json && cat qa-player-proof/verification.json || true
+          echo '--- dev log tail ---'
+          tail -n 100 /tmp/em-board-dev.log || true
+      - name: Upload actual runtime screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: main-player-live-proof
+          path: qa-player-proof
+          if-no-files-found: error
