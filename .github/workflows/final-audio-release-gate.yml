@@ -1,0 +1,47 @@
+name: Final audio release gate
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+    paths:
+      - .github/final-audio-release-gate-trigger
+
+permissions:
+  contents: read
+
+jobs:
+  release-gate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Type check
+        run: npx tsc --noEmit
+      - name: Lint
+        run: npm run lint
+      - name: Player and Section regression contracts
+        run: |
+          node --experimental-strip-types --test \
+            tests/audio-player-section-subtitle-contract.test.mjs \
+            tests/audio-player-dock-contract.test.mjs \
+            tests/audio-chapters.test.mjs \
+            tests/audio-runtime-semantic-warm.test.mjs \
+            tests/route-code-splitting-contract.test.mjs
+      - name: Audit audio runtime before build
+        run: npm run audit:audio-runtime
+      - name: Guard subtitle deployment before build
+        run: npm run guard:subtitle-deployment
+      - name: Production build
+        run: npm run build
+      - name: Audit audio runtime after build
+        run: npm run audit:audio-runtime
+      - name: Guard subtitle deployment after build
+        run: npm run guard:subtitle-deployment
