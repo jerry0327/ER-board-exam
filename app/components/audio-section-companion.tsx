@@ -2,7 +2,6 @@
 
 import {
   ChevronDown,
-  ListTree,
   X,
 } from "lucide-react";
 import { createPortal } from "react-dom";
@@ -270,6 +269,7 @@ export default function AudioSectionCompanion() {
   const currentChapter = activeBundle
     ? currentAudioChapterAt(activeBundle.runtime.metadata, player.position)?.l1 ?? null
     : null;
+  const currentIndex = currentChapter ? chapters.findIndex((chapter) => chapter.id === currentChapter.id) : -1;
   const currentTitle = activeScope?.title
     ?? (activeBundle && currentChapter ? sectionLabel(activeBundle, currentChapter) : null);
 
@@ -327,18 +327,11 @@ export default function AudioSectionCompanion() {
       <div className="audio-section-companion">
         <div className="audio-section-summary">
           <div className="audio-section-current">
-            <small>{activeScope ? "只播放本題" : "目前段落"}</small>
-            <strong title={currentTitle ?? undefined}>{currentTitle ?? "選擇段落"}</strong>
+            <small>{activeScope ? "只播放本題" : `目前段落 ${currentIndex >= 0 ? currentIndex + 1 : 1} / ${Math.max(1, chapters.length)}`}</small>
+            {activeScope && <strong title={currentTitle ?? undefined}>{currentTitle}</strong>}
           </div>
-          <button
-            type="button"
-            className="audio-section-toggle"
-            aria-expanded={sectionOpen}
-            onClick={() => setSectionOpen((open) => !open)}
-          >
-            <ListTree aria-hidden="true" />
-            <span>段落</span>
-            <ChevronDown aria-hidden="true" />
+          <button type="button" className="audio-section-toggle" aria-expanded={sectionOpen} onClick={() => setSectionOpen((open) => !open)}>
+            <span>段落</span><ChevronDown aria-hidden="true" />
           </button>
         </div>
         {sectionOpen && (
