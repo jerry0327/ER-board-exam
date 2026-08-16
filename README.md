@@ -149,7 +149,7 @@ npm test
 ```text
 app/                            Web UI、views、components 與應用程式邏輯
 public/data/                    題庫與結構化 runtime 資料
-public/guides/                  學習指引 content packs
+public/content-packs/           壓縮後的 data / guides / subtitle content packs
 public/audio/                   音訊、SNAC 與 managed-audio assets
 public/subtitles-runtime/       HXT/HXM 字幕與 section runtime assets
 public/subtitles-title-locales/ section title locale assets
