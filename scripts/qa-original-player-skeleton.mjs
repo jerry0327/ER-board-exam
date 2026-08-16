@@ -215,13 +215,28 @@ async function mobileQa(width, height = 844) {
   report.mobile[key].subtitleOpen = await overlayMetrics(page, ".audio-subtitle-float");
   await shot(page, `08a-mobile-${key}-expanded-subtitles.png`);
 
-  const node = page.locator(".audio-section-node").nth(3);
-  const before = Number(await page.locator(".audio-player-timeline > input[type=range]").inputValue());
-  await node.click();
-  await page.waitForTimeout(180);
-  const after = Number(await page.locator(".audio-player-timeline > input[type=range]").inputValue());
-  report.mobile[key].nodeSeek = { before, after };
-  if (Math.abs(after - before) < 1) throw new Error(`mobile ${key}: Section node not clickable`);
+  const range = page.locator(".audio-player-timeline > input[type=range]");
+  const before = Number(await range.inputValue());
+  const duration = Number(await range.getAttribute("max"));
+  const nodes = page.locator(".audio-section-node");
+  const nodeCount = await nodes.count();
+  if (nodeCount < 2) throw new Error(`mobile ${key}: expected multiple Section nodes`);
+  const candidates = [];
+  for (let index = 0; index < nodeCount; index += 1) {
+    const style = await nodes.nth(index).getAttribute("style");
+    const left = Number.parseFloat(style?.match(/left:\s*([0-9.]+)%/u)?.[1] ?? "NaN");
+    if (Number.isFinite(left)) candidates.push({ index, expected: duration * left / 100 });
+  }
+  candidates.sort((a, b) => Math.abs(b.expected - before) - Math.abs(a.expected - before));
+  const target = candidates[0];
+  if (!target || Math.abs(target.expected - before) < 30) throw new Error(`mobile ${key}: no distant Section node available`);
+  await nodes.nth(target.index).tap();
+  await page.waitForTimeout(220);
+  const after = Number(await range.inputValue());
+  report.mobile[key].nodeSeek = { before, after, expected: target.expected, index: target.index };
+  if (Math.abs(after - target.expected) > 1.5) {
+    throw new Error(`mobile ${key}: touch Section seek missed target; ${JSON.stringify(report.mobile[key].nodeSeek)}`);
+  }
   await shot(page, `08-mobile-${key}-expanded.png`);
 
   await page.locator(".audio-section-toggle").click();
