@@ -8,6 +8,7 @@ import { createPortal } from "react-dom";
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { useAudioPlayer } from "./audio-player-provider";
@@ -31,18 +32,21 @@ import {
   type AudioSummarySource,
 } from "../lib/audio-summaries";
 import {
+  AUDIO_PLAYER_SETTINGS_OPEN_EVENT,
   QUESTION_AUDIO_CHOICE_EVENT,
   type QuestionAudioChoiceRequest,
 } from "../lib/audio-player-section-events";
 
 type LoadedSectionBundle = {
   sourceId: string;
+  sourceRevision: string;
   runtime: LoadedRuntimeSemanticAudioChapters;
   locales: LoadedSectionTitleLocales | null;
 };
 
 type QuestionPlaybackScope = {
   sourceId: string;
+  sourceRevision: string;
   questionId: string;
   sectionId: string;
   title: string;
@@ -78,7 +82,7 @@ function loadSectionBundle(source: AudioSummarySource) {
     } catch {
       // Canonical Section titles remain a safe fallback when a locale pack is unavailable.
     }
-    return { sourceId: source.id, runtime, locales };
+    return { sourceId: source.id, sourceRevision: source.revision, runtime, locales };
   })();
   sectionBundleRequests.set(key, pending);
   void pending.catch(() => {
@@ -127,6 +131,7 @@ function questionScope(
   if (!(endSeconds > startSeconds)) return null;
   return {
     sourceId: source.id,
+    sourceRevision: source.revision,
     questionId,
     sectionId: chapter.id,
     title: localizedSectionTitle(bundle.locales, chapter.id, chapter.title, "zh-TW"),
@@ -153,9 +158,13 @@ export default function AudioSectionCompanion() {
   const [detailsTarget, setDetailsTarget] = useState<HTMLElement | null>(null);
   const [timelineTarget, setTimelineTarget] = useState<HTMLElement | null>(null);
   const [dockTarget, setDockTarget] = useState<HTMLElement | null>(null);
+  const sectionToggleRef = useRef<HTMLButtonElement | null>(null);
+  const sectionPanelRef = useRef<HTMLElement | null>(null);
+  const questionDialogRef = useRef<HTMLElement | null>(null);
+  const questionChoiceTriggerRef = useRef<HTMLElement | null>(null);
   const currentSource = player.current;
-  const activeBundle = bundle?.sourceId === currentSource?.id ? bundle : null;
-  const activeScope = scope?.sourceId === currentSource?.id ? scope : null;
+  const activeBundle = bundle?.sourceId === currentSource?.id && bundle.sourceRevision === currentSource.revision ? bundle : null;
+  const activeScope = scope?.sourceId === currentSource?.id && scope.sourceRevision === currentSource.revision ? scope : null;
 
   useEffect(() => {
     const root = document.documentElement;
@@ -169,6 +178,7 @@ export default function AudioSectionCompanion() {
       if (!request?.sourceId || !request.questionId) return;
       setChoiceError(null);
       setLoadingChoice(false);
+      questionChoiceTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       setQuestionChoice(request);
     };
     window.addEventListener(QUESTION_AUDIO_CHOICE_EVENT, handleChoice as EventListener);
@@ -177,17 +187,49 @@ export default function AudioSectionCompanion() {
 
   useEffect(() => {
     if (!questionChoice) return;
+    const dialog = questionDialogRef.current;
+    if (!dialog) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const focusableSelector = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const focusFrame = window.requestAnimationFrame(() => {
+      dialog.querySelector<HTMLElement>(focusableSelector)?.focus();
+    });
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setQuestionChoice(null);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setQuestionChoice(null);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = [...dialog.querySelectorAll<HTMLElement>(focusableSelector)];
+      if (!focusable.length) {
+        event.preventDefault();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable.at(-1) ?? first;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+      window.requestAnimationFrame(() => questionChoiceTriggerRef.current?.focus());
+    };
   }, [questionChoice]);
 
   useEffect(() => {
+    setSectionOpen(false);
     if (!currentSource) {
       setBundle(null);
-      setSectionOpen(false);
       return;
     }
     let active = true;
@@ -208,7 +250,7 @@ export default function AudioSectionCompanion() {
       if (scope) setScope(null);
       return;
     }
-    if (scope && scope.sourceId !== currentSource.id) setScope(null);
+    if (scope && (scope.sourceId !== currentSource.id || scope.sourceRevision !== currentSource.revision)) setScope(null);
   }, [currentSource, scope]);
 
 
@@ -252,6 +294,41 @@ export default function AudioSectionCompanion() {
       dock.classList.remove("has-audio-sections", "is-question-scope");
     };
   }, [activeBundle, activeScope, sectionOpen]);
+
+
+  useEffect(() => {
+    const handleSettingsOpen = () => setSectionOpen(false);
+    window.addEventListener(AUDIO_PLAYER_SETTINGS_OPEN_EVENT, handleSettingsOpen);
+    return () => window.removeEventListener(AUDIO_PLAYER_SETTINGS_OPEN_EVENT, handleSettingsOpen);
+  }, []);
+
+  useEffect(() => {
+    if (!sectionOpen || !activeBundle) return;
+    const panel = sectionPanelRef.current;
+    const trigger = sectionToggleRef.current;
+    if (!panel || !trigger) return;
+    const focusFrame = window.requestAnimationFrame(() => {
+      (panel.querySelector<HTMLElement>('[aria-current="true"]') ?? panel.querySelector<HTMLElement>("button"))?.focus();
+    });
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node) || panel.contains(target) || trigger.contains(target)) return;
+      setSectionOpen(false);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      setSectionOpen(false);
+      window.requestAnimationFrame(() => trigger.focus());
+    };
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeBundle, sectionOpen]);
 
   useEffect(() => {
     if (!activeScope) return;
@@ -354,6 +431,18 @@ export default function AudioSectionCompanion() {
     setScope(null);
     setSectionOpen(false);
     player.seek(playerSecondsForChapter(chapter));
+    window.requestAnimationFrame(() => sectionToggleRef.current?.focus());
+  }
+
+  function toggleSectionPanel() {
+    if (sectionOpen) {
+      setSectionOpen(false);
+      window.requestAnimationFrame(() => sectionToggleRef.current?.focus());
+      return;
+    }
+    const settings = document.querySelector<HTMLDetailsElement>(".audio-player-settings[open]");
+    if (settings) settings.open = false;
+    setSectionOpen(true);
   }
 
   const subtitlePortal = player.subtitlesEnabled && activeBundle && dockTarget && currentSubtitleCue
@@ -368,6 +457,7 @@ export default function AudioSectionCompanion() {
                 type="button"
                 className={`audio-subtitle-line ${isCurrent ? "is-current" : cue.index < currentSubtitleCue.index ? "is-previous" : "is-next"}`}
                 aria-current={isCurrent ? "true" : undefined}
+                aria-label={`從 ${formatTime(siteSecondsFromSourceSeconds(cue.startSourceSeconds))} 播放字幕：${cue.text}`}
                 onClick={() => seekSubtitleCue(cue)}
               >
                 <span>{cue.text}</span>
@@ -389,7 +479,15 @@ export default function AudioSectionCompanion() {
             <small>{activeScope ? "只播放本題" : `目前段落 ${currentIndex >= 0 ? currentIndex + 1 : 1} / ${Math.max(1, chapters.length)}`}</small>
             {activeScope && <strong title={currentTitle ?? undefined}>{currentTitle}</strong>}
           </div>
-          <button type="button" className="audio-section-toggle" aria-expanded={sectionOpen} onClick={() => setSectionOpen((open) => !open)}>
+          <button
+            ref={sectionToggleRef}
+            type="button"
+            className="audio-section-toggle"
+            aria-expanded={sectionOpen}
+            aria-haspopup="dialog"
+            aria-controls="audio-player-section-panel"
+            onClick={toggleSectionPanel}
+          >
             <span>段落</span><ChevronDown aria-hidden="true" />
           </button>
         </div>
@@ -400,9 +498,15 @@ export default function AudioSectionCompanion() {
 
   const sectionListPortal = activeBundle && dockTarget && sectionOpen
     ? createPortal(
-      <section className="audio-section-panel audio-section-panel-floating" aria-label="音檔段落">
+      <section
+        ref={sectionPanelRef}
+        id="audio-player-section-panel"
+        className="audio-section-panel audio-section-panel-floating"
+        role="dialog"
+        aria-labelledby="audio-player-section-panel-title"
+      >
         <header>
-          <span>段落</span>
+          <span id="audio-player-section-panel-title">段落</span>
           <span>{chapters.length} 段</span>
         </header>
         <ol className="audio-section-list">
@@ -510,6 +614,7 @@ export default function AudioSectionCompanion() {
           }}
         >
           <section
+            ref={questionDialogRef}
             className="audio-question-choice"
             role="dialog"
             aria-modal="true"

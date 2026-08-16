@@ -51,6 +51,7 @@ import {
   validAudioPlaybackRate,
 } from "../lib/audio-playback";
 import { QUESTION_BANK_READY_ATTRIBUTE, QUESTION_BANK_READY_EVENT } from "../lib/app-readiness";
+import { AUDIO_PLAYER_SETTINGS_OPEN_EVENT } from "../lib/audio-player-section-events";
 
 const SAMPLE_RATE = 24_000;
 const FINE_FRAME_SAMPLES = 512;
@@ -373,6 +374,7 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
   );
   const [queueOpen, setQueueOpen] = useState(false);
   const [randomNextId, setRandomNextId] = useState<string | null>(null);
+  const settingsDetailsRef = useRef<HTMLDetailsElement | null>(null);
 
 
   useEffect(() => {
@@ -382,6 +384,41 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
       // Subtitle preference is optional when storage is unavailable.
     }
   }, []);
+
+
+  useEffect(() => {
+    const closeSettings = (restoreFocus: boolean) => {
+      const details = settingsDetailsRef.current;
+      if (!details?.open) return;
+      details.open = false;
+      if (restoreFocus) {
+        window.requestAnimationFrame(() => details.querySelector<HTMLElement>("summary")?.focus());
+      }
+    };
+    const handlePointerDown = (event: PointerEvent) => {
+      const details = settingsDetailsRef.current;
+      const target = event.target;
+      if (!details?.open || !(target instanceof Node) || details.contains(target)) return;
+      closeSettings(false);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape" || !settingsDetailsRef.current?.open) return;
+      event.preventDefault();
+      event.stopPropagation();
+      closeSettings(true);
+    };
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (expanded && !stowed) return;
+    if (settingsDetailsRef.current) settingsDetailsRef.current.open = false;
+  }, [expanded, stowed]);
 
   const currentRef = useRef<AudioSummarySource | null>(null);
   const listeningHistoryRef = useRef<AudioListeningHistory>({});
@@ -2743,8 +2780,14 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                     <Volume2 aria-hidden="true" />
                     <input type="range" min="0" max="1" step="0.05" value={volume} aria-label="音量" onChange={(event) => updateVolume(Number(event.target.value))} />
                   </label>
-                  <details className="audio-player-settings">
-                    <summary className="audio-player-utility" aria-label="播放設定"><Settings aria-hidden="true" /></summary>
+                  <details
+                    ref={settingsDetailsRef}
+                    className="audio-player-settings"
+                    onToggle={(event) => {
+                      if (event.currentTarget.open) window.dispatchEvent(new Event(AUDIO_PLAYER_SETTINGS_OPEN_EVENT));
+                    }}
+                  >
+                    <summary className="audio-player-utility" aria-label="播放設定" aria-haspopup="menu"><Settings aria-hidden="true" /></summary>
                     <div className="audio-player-settings-panel">
                       <div className="audio-player-options" role="group" aria-label="播放選項">
                         <label className="audio-player-option audio-player-option-select">

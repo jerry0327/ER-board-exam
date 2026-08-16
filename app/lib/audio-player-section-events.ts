@@ -1,4 +1,5 @@
 export const QUESTION_AUDIO_CHOICE_EVENT = "em-board-question-audio-choice";
+export const AUDIO_PLAYER_SETTINGS_OPEN_EVENT = "em-board-audio-player-settings-open";
 
 export type QuestionAudioChoiceRequest = {
   sourceId: string;
