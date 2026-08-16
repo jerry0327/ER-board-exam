@@ -38,14 +38,11 @@ jobs:
       - name: ESLint
         run: npm run lint
 
-      - name: Contract and unit tests
-        run: node scripts/with-uncompressed-static-content.mjs -- node --test tests/*.test.mjs
-
-  build:
-    name: Production build
+  build-contracts:
+    name: Build and contracts
     needs: quality
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -61,6 +58,9 @@ jobs:
 
       - name: Build verified production artifact
         run: npm run build
+
+      - name: Contract and unit tests
+        run: node scripts/with-uncompressed-static-content.mjs -- node --experimental-strip-types --test tests/*.test.mjs
 
   browser-smoke:
     name: Browser smoke
