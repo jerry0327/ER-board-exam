@@ -81,11 +81,13 @@ jobs:
           QA_OUT_DIR: qa-original-player-proof
         run: |
           node scripts/qa-original-player-skeleton.mjs
+          node scripts/qa-longest-real-l1.mjs
           cp qa-longest-l1.json qa-original-player-proof/longest-l1.json
       - name: Print verification
         if: always()
         run: |
           test -f qa-longest-l1.json && cat qa-longest-l1.json || true
+          test -f qa-original-player-proof/longest-real-l1-runtime.json && cat qa-original-player-proof/longest-real-l1-runtime.json || true
           test -f qa-original-player-proof/verification.json && cat qa-original-player-proof/verification.json || true
           echo '--- dev log tail ---'
           tail -n 100 /tmp/em-board-dev.log || true
