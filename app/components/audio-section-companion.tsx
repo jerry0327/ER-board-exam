@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  ChevronDown,
-  X,
-} from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { createPortal } from "react-dom";
 import {
   useEffect,
@@ -18,6 +15,7 @@ import {
   level1AudioChapterMarkers,
   playerSecondsForChapter,
   type AudioChapterL1,
+  type AudioChapterL2,
   type SubtitleCue,
 } from "../lib/audio-chapters";
 import type { LoadedRuntimeSemanticAudioChapters } from "../lib/audio-runtime-semantic-package";
@@ -34,6 +32,7 @@ import {
 import {
   AUDIO_PLAYER_SETTINGS_OPEN_EVENT,
   QUESTION_AUDIO_CHOICE_EVENT,
+  type QuestionAudioChoiceEventDetail,
   type QuestionAudioChoiceRequest,
 } from "../lib/audio-player-section-events";
 
@@ -156,7 +155,7 @@ function questionScope(
 
 function sectionLabel(
   bundle: LoadedSectionBundle,
-  chapter: AudioChapterL1,
+  chapter: AudioChapterL1 | AudioChapterL2,
 ) {
   return localizedSectionTitle(bundle.locales, chapter.id, chapter.title, "zh-TW");
 }
@@ -188,57 +187,81 @@ export default function AudioSectionCompanion() {
 
   useEffect(() => {
     const handleChoice = (event: Event) => {
-      const request = (event as CustomEvent<QuestionAudioChoiceRequest>).detail;
+      const request = (event as CustomEvent<QuestionAudioChoiceEventDetail>).detail;
       if (!request?.sourceId || !request.questionId) return;
       setChoiceError(null);
       setLoadingChoice(false);
       setSectionOpen(false);
       const settings = document.querySelector<HTMLDetailsElement>(".audio-player-settings[open]");
       if (settings) settings.open = false;
-      questionChoiceTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-      setQuestionChoice(request);
+      questionChoiceTriggerRef.current = request.trigger instanceof HTMLElement
+        ? request.trigger
+        : document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null;
+      setQuestionChoice({ sourceId: request.sourceId, questionId: request.questionId });
     };
     window.addEventListener(QUESTION_AUDIO_CHOICE_EVENT, handleChoice as EventListener);
     return () => window.removeEventListener(QUESTION_AUDIO_CHOICE_EVENT, handleChoice as EventListener);
   }, []);
 
   useEffect(() => {
+    // The question audio menu stays anchored without locking page scroll.
     if (!questionChoice) return;
-    const dialog = questionDialogRef.current;
-    if (!dialog) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const focusableSelector = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-    const focusFrame = window.requestAnimationFrame(() => {
-      dialog.querySelector<HTMLElement>(focusableSelector)?.focus();
-    });
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        setQuestionChoice(null);
-        return;
-      }
-      if (event.key !== "Tab") return;
-      const focusable = [...dialog.querySelectorAll<HTMLElement>(focusableSelector)];
-      if (!focusable.length) {
-        event.preventDefault();
-        return;
-      }
-      const first = focusable[0];
-      const last = focusable.at(-1) ?? first;
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
+    const menu = questionDialogRef.current;
+    const trigger = questionChoiceTriggerRef.current;
+    if (!menu || !trigger) return;
+
+    const positionMenu = () => {
+      const anchor = trigger.getBoundingClientRect();
+      const menuBox = menu.getBoundingClientRect();
+      const gutter = 8;
+      const gap = 8;
+      const maxLeft = Math.max(gutter, window.innerWidth - menuBox.width - gutter);
+      const preferredLeft = anchor.left + anchor.width / 2 - menuBox.width / 2;
+      const left = Math.min(maxLeft, Math.max(gutter, preferredLeft));
+      const top = anchor.bottom + gap;
+      const maxHeight = Math.max(88, window.innerHeight - top - gutter);
+      const caretX = Math.min(menuBox.width - 18, Math.max(18, anchor.left + anchor.width / 2 - left));
+      menu.style.left = `${Math.round(left)}px`;
+      menu.style.top = `${Math.round(top)}px`;
+      menu.style.maxHeight = `${Math.round(maxHeight)}px`;
+      menu.style.setProperty("--audio-question-caret-x", `${Math.round(caretX)}px`);
     };
-    document.addEventListener("keydown", onKeyDown);
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      const anchor = trigger.getBoundingClientRect();
+      const roomBelow = window.innerHeight - anchor.bottom - 16;
+      if (roomBelow < Math.min(112, menu.scrollHeight + 8)) {
+        trigger.scrollIntoView({ block: "center", inline: "nearest", behavior: "auto" });
+        window.requestAnimationFrame(positionMenu);
+      } else {
+        positionMenu();
+      }
+      menu.querySelector<HTMLButtonElement>("button:not([disabled])")?.focus();
+    });
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node) || menu.contains(target) || trigger.contains(target)) return;
+      setQuestionChoice(null);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      setQuestionChoice(null);
+    };
+    const handleViewportChange = () => positionMenu();
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleViewportChange);
+    window.addEventListener("scroll", handleViewportChange, true);
     return () => {
       window.cancelAnimationFrame(focusFrame);
-      document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleViewportChange);
+      window.removeEventListener("scroll", handleViewportChange, true);
       window.requestAnimationFrame(() => questionChoiceTriggerRef.current?.focus());
     };
   }, [questionChoice]);
@@ -295,7 +318,7 @@ export default function AudioSectionCompanion() {
         setTimelineTarget(null);
         return;
       }
-      setDetailsTarget(document.querySelector<HTMLElement>(".audio-player-details"));
+      setDetailsTarget(document.querySelector<HTMLElement>(".audio-section-inline-slot"));
       setTimelineTarget(document.querySelector<HTMLElement>(".audio-player-timeline"));
     });
     return () => {
@@ -387,10 +410,13 @@ export default function AudioSectionCompanion() {
     () => activeBundle ? level1AudioChapterMarkers(activeBundle.runtime.metadata) : [],
     [activeBundle],
   );
-  const currentChapter = activeBundle
-    ? currentAudioChapterAt(activeBundle.runtime.metadata, player.position)?.l1 ?? null
+  const currentPositionChapter = activeBundle
+    ? currentAudioChapterAt(activeBundle.runtime.metadata, player.position)
     : null;
+  const currentChapter = currentPositionChapter?.l1 ?? null;
+  const currentL2 = currentPositionChapter?.l2 ?? null;
   const currentIndex = currentChapter ? chapters.findIndex((chapter) => chapter.id === currentChapter.id) : -1;
+  const l2Count = chapters.reduce((total, chapter) => total + chapter.children.length, 0);
   const currentTitle = activeScope?.title
     ?? (activeBundle && currentChapter ? sectionLabel(activeBundle, currentChapter) : null);
   const currentSubtitleCue = activeBundle && player.subtitlesEnabled
@@ -452,7 +478,7 @@ export default function AudioSectionCompanion() {
     player.seek(siteSecondsFromSourceSeconds(cue.startSourceSeconds));
   }
 
-  function seekChapter(chapter: AudioChapterL1) {
+  function seekChapter(chapter: AudioChapterL1 | AudioChapterL2) {
     setScope(null);
     setSectionOpen(false);
     player.seek(playerSecondsForChapter(chapter));
@@ -498,24 +524,21 @@ export default function AudioSectionCompanion() {
 
   const sectionPortal = activeBundle && detailsTarget
     ? createPortal(
-      <div className="audio-section-companion">
-        <div className="audio-section-summary">
-          <div className="audio-section-current">
-            <small>{activeScope ? "只播放本題" : `目前段落 ${currentIndex >= 0 ? currentIndex + 1 : 1} / ${Math.max(1, chapters.length)}`}</small>
-            {currentTitle && <strong title={currentTitle}>{currentTitle}</strong>}
-          </div>
-          <button
-            ref={sectionToggleRef}
-            type="button"
-            className="audio-section-toggle"
-            aria-expanded={sectionOpen}
-            aria-haspopup="dialog"
-            aria-controls="audio-player-section-panel"
-            onClick={toggleSectionPanel}
-          >
-            <span>段落</span><ChevronDown aria-hidden="true" />
-          </button>
-        </div>
+      <div className="audio-section-companion audio-section-companion-inline">
+        <button
+          ref={sectionToggleRef}
+          type="button"
+          className="audio-section-toggle audio-section-inline-control"
+          aria-expanded={sectionOpen}
+          aria-haspopup="dialog"
+          aria-controls="audio-player-section-panel"
+          aria-label={`目前段落 ${currentIndex >= 0 ? currentIndex + 1 : 1} / ${Math.max(1, chapters.length)}：${currentTitle ?? "段落"}；開啟段落選單`}
+          onClick={toggleSectionPanel}
+        >
+          <span className="audio-section-inline-index">{activeScope ? "本題" : `${currentIndex >= 0 ? currentIndex + 1 : 1}/${Math.max(1, chapters.length)}`}</span>
+          <strong className="audio-section-inline-title">{currentTitle ?? "段落"}</strong>
+          <ChevronDown aria-hidden="true" />
+        </button>
       </div>,
       detailsTarget,
     )
@@ -532,17 +555,17 @@ export default function AudioSectionCompanion() {
       >
         <header>
           <span id="audio-player-section-panel-title">段落</span>
-          <span>{chapters.length} 段</span>
+          <span>{chapters.length} 主段 · {l2Count} 子段</span>
         </header>
         <ol className="audio-section-list">
           {chapters.map((chapter, index) => {
             const startSeconds = markers[index]?.playerStartSeconds ?? playerSecondsForChapter(chapter);
             const isCurrent = chapter.id === currentChapter?.id;
             return (
-              <li key={chapter.id}>
+              <li key={chapter.id} className="audio-section-l1-item">
                 <button
                   type="button"
-                  className={isCurrent ? "is-current" : undefined}
+                  className={`audio-section-list-l1 ${isCurrent ? "is-current" : ""}`.trim()}
                   aria-current={isCurrent ? "true" : undefined}
                   onClick={() => seekChapter(chapter)}
                 >
@@ -550,6 +573,27 @@ export default function AudioSectionCompanion() {
                   <strong>{sectionLabel(activeBundle, chapter)}</strong>
                   <time>{formatTime(startSeconds)}</time>
                 </button>
+                {chapter.children.length > 0 && (
+                  <ol className="audio-section-sublist" aria-label={`${sectionLabel(activeBundle, chapter)} 子段落`}>
+                    {chapter.children.map((child) => {
+                      const isCurrentL2 = child.id === currentL2?.id;
+                      return (
+                        <li key={child.id}>
+                          <button
+                            type="button"
+                            className={`audio-section-list-l2 ${isCurrentL2 ? "is-current-l2" : ""}`.trim()}
+                            aria-current={isCurrentL2 ? "location" : undefined}
+                            onClick={() => seekChapter(child)}
+                          >
+                            <span className="audio-section-list-branch" aria-hidden="true">↳</span>
+                            <strong>{sectionLabel(activeBundle, child)}</strong>
+                            <time>{formatTime(playerSecondsForChapter(child))}</time>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                )}
               </li>
             );
           })}
@@ -561,7 +605,7 @@ export default function AudioSectionCompanion() {
 
   const timelinePortal = activeBundle && timelineTarget && !activeScope
     ? createPortal(
-      <div className="audio-section-node-layer">
+      <div className="audio-section-node-layer" aria-hidden="true">
         <span className="audio-section-track-base" aria-hidden="true" />
         <span
           className="audio-section-track-progress"
@@ -573,33 +617,6 @@ export default function AudioSectionCompanion() {
           aria-hidden="true"
           style={{ left: `${Math.min(100, Math.max(0, player.position / Math.max(1, player.duration) * 100))}%` }}
         />
-        {markers.map((marker, index) => {
-          const chapter = chapters[index];
-          if (!chapter) return null;
-          const left = Math.min(100, Math.max(0, marker.playerStartSeconds / Math.max(1, player.duration) * 100));
-          const isCurrent = chapter.id === currentChapter?.id;
-          const isPast = marker.playerStartSeconds <= player.position;
-          const label = sectionLabel(activeBundle, chapter);
-          return (
-            <button
-              key={marker.id}
-              type="button"
-              className={`audio-section-node ${isCurrent ? "is-current" : ""} ${isPast ? "is-past" : ""} ${index <= 1 ? "is-edge-start" : ""} ${index >= markers.length - 2 ? "is-edge-end" : ""}`.trim()}
-              style={{ left: `${left}%` }}
-              aria-label={`從 ${formatTime(marker.playerStartSeconds)} 播放：${label}`}
-              onClick={(event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                seekChapter(chapter);
-              }}
-            >
-              <span className="audio-section-node-tooltip" role="tooltip">
-                <strong>{label}</strong>
-                <time>{formatTime(marker.playerStartSeconds)}</time>
-              </span>
-            </button>
-          );
-        })}
       </div>,
       timelineTarget,
     )
@@ -636,53 +653,33 @@ export default function AudioSectionCompanion() {
       {timelinePortal}
       {scopeTimelinePortal}
       {questionChoice && (
-        <div
-          className="audio-question-choice-backdrop"
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setQuestionChoice(null);
-          }}
+        <section
+          ref={questionDialogRef}
+          className="audio-question-choice audio-question-choice-popover"
+          role="menu"
+          aria-label="選擇播放方式"
         >
-          <section
-            ref={questionDialogRef}
-            className="audio-question-choice"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="question-audio-choice-title"
+          <button
+            type="button"
+            role="menuitem"
+            className="audio-question-choice-option"
+            disabled={!choiceSource || loadingChoice}
+            onClick={() => void chooseFullQuestionSet()}
           >
-            <header>
-              <strong id="question-audio-choice-title">選擇播放方式</strong>
-              <button
-                type="button"
-                className="audio-question-choice-close"
-                aria-label="關閉"
-                onClick={() => setQuestionChoice(null)}
-              >
-                <X aria-hidden="true" />
-              </button>
-            </header>
-            <div className="audio-question-choice-options">
-              <button
-                type="button"
-                className="audio-question-choice-option"
-                disabled={!choiceSource || loadingChoice}
-                onClick={() => void chooseFullQuestionSet()}
-              >
-                <span>完整音檔</span>
-              </button>
-              <button
-                type="button"
-                className="audio-question-choice-option"
-                disabled={!choiceSource || loadingChoice}
-                aria-busy={loadingChoice || undefined}
-                onClick={() => void chooseQuestionOnly()}
-              >
-                <span>{loadingChoice ? "載入中…" : "只播放本題"}</span>
-              </button>
-            </div>
-            {choiceError && <p className="audio-question-choice-error">{choiceError}</p>}
-          </section>
-        </div>
+            完整音檔
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            className="audio-question-choice-option"
+            disabled={!choiceSource || loadingChoice}
+            aria-busy={loadingChoice || undefined}
+            onClick={() => void chooseQuestionOnly()}
+          >
+            {loadingChoice ? "載入中…" : "只播放本題"}
+          </button>
+          {choiceError && <p className="audio-question-choice-error">{choiceError}</p>}
+        </section>
       )}
     </>
   );

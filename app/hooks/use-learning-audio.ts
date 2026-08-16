@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type MouseEvent } from "react";
 import { useAudioPlayer } from "../components/audio-player-provider";
 import { requestQuestionAudioChoice } from "../lib/audio-player-section-events";
 import {
@@ -63,11 +63,19 @@ export function useLearningAudio({
     if (!primeSource(source)) prefetchSource(source);
   }, [contentReady, prefetchSource, prepareDecoder, prepareShell, primeSource, source]);
 
-  const open = useCallback(() => {
+  const open = useCallback((event?: MouseEvent<HTMLElement>) => {
     if (!source) return;
     prepare();
     if (resource?.kind === "question" && resource.questionId) {
-      requestQuestionAudioChoice({ sourceId: source.id, questionId: resource.questionId });
+      const clickedTrigger = event?.currentTarget instanceof HTMLElement
+        ? event.currentTarget
+        : typeof document !== "undefined" && document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null;
+      requestQuestionAudioChoice(
+        { sourceId: source.id, questionId: resource.questionId },
+        clickedTrigger,
+      );
       return;
     }
     if (currentSourceId === source.id) openPlayer();

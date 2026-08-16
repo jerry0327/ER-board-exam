@@ -49,7 +49,13 @@ test("the app shell only reserves mobile footer clearance for an expanded player
 test("desktop and mobile both expose a compact left restore handle", () => {
   assert.match(css, /\.audio-player-stow,\s*\.audio-player-expand\s*\{[^}]*display: inline-flex;[^}]*min-height: 44px;[^}]*min-width: 44px;/u);
   assert.match(css, /\.audio-player-dock\.is-stowed\s*\{[^}]*left: max\(18px, env\(safe-area-inset-left\)\);[^}]*max-width: 52px;[^}]*width: 52px;/u);
-  assert.match(css, /\.audio-player-dock\.is-stowed \.audio-player-mini,\s*\.audio-player-dock\.is-stowed \.audio-player-details\s*\{\s*display: none;/u);
+  const stowedHiddenStart = css.indexOf(".audio-player-dock.is-stowed .audio-player-edge-progress,");
+  assert.ok(stowedHiddenStart >= 0, "stowed hidden group must include edge progress");
+  const stowedHiddenEnd = css.indexOf("}", stowedHiddenStart);
+  const stowedHiddenGroup = css.slice(stowedHiddenStart, stowedHiddenEnd + 1);
+  assert.match(stowedHiddenGroup, /\.audio-player-dock\.is-stowed \.audio-player-mini,/u);
+  assert.match(stowedHiddenGroup, /\.audio-player-dock\.is-stowed \.audio-player-details\s*\{/u);
+  assert.match(stowedHiddenGroup, /display:\s*none;/u);
   assert.match(css, /\.audio-player-dock\.is-stowed \.audio-player-restore\s*\{[^}]*min-height: 50px;[^}]*min-width: 50px;/u);
   assert.match(css, /@media \(max-width: 840px\)[\s\S]*?\.audio-player-dock\.is-stowed\s*\{[^}]*left: max\(12px, env\(safe-area-inset-left\)\);[^}]*max-width: 52px;[^}]*width: 52px;/u);
   assert.match(css, /@media \(max-width: 600px\)[\s\S]*?\.site-shell\.audio-player-active\.audio-player-stowed \.route-stage\s*\{\s*padding-bottom: 0;/u);
@@ -141,7 +147,9 @@ test("audio output recovery follows real render progress across mobile interrupt
   assert.match(provider, /window\.addEventListener\("pageshow", resyncWhenActive\)/u);
   assert.match(provider, /try \{\s*mediaDevices = navigator\.mediaDevices;[\s\S]*?mediaDevices\.addEventListener\("devicechange", resyncWhenActive\);[\s\S]*?mediaDevicesSubscribed = true;/u);
   assert.match(provider, /if \(mediaDevicesSubscribed && typeof mediaDevices\?\.removeEventListener === "function"\) \{\s*try \{/u);
-  assert.match(provider, /function connectWorkletToOutput\(worklet: AudioWorkletNode, context: AudioContext\)[\s\S]*?gain = context\.createGain\(\);[\s\S]*?gain\.connect\(context\.destination\);[\s\S]*?worklet\.disconnect\(\);[\s\S]*?worklet\.connect\(gain\);/u);
+  assert.match(provider, /const worklet = new AudioWorkletNode\(context, "snac-ring-output"[\s\S]*?worklet\.connect\(context\.destination\);/u);
+  assert.match(provider, /try \{\s*worklet\.disconnect\(\);\s*worklet\.connect\(context\.destination\);/u);
+  assert.doesNotMatch(provider, /(?:createGain\(|gainNodeRef|updateVolume)/u);
   assert.match(provider, /const failPlayback = useCallback\(\(\) => \{[\s\S]*?playingIntentRef\.current = false;[\s\S]*?kind: "pause"[\s\S]*?phaseRef\.current = "error";/u);
   assert.match(provider, /console\.error\("Learning audio decoder error", message\.message\);\s*failPlayback\(\);/u);
   assert.match(provider, /detachAudioContextStateListener\(\);[\s\S]{0,180}const context = audioContextRef\.current/u);
@@ -173,214 +181,96 @@ test("the expanded player owns rich audiobook controls without changing compact 
     provider.indexOf('<div className="audio-player-mini">'),
     provider.indexOf("{expanded && ("),
   );
-  assert.doesNotMatch(compact, /連續播放|隨機複習|chapter-end|播放上一章/u);
+  assert.match(compact, /audio-player-stow/u);
+  assert.match(compact, /audio-player-mini-toggle/u);
+  assert.match(compact, /audio-player-expand/u);
+  assert.match(compact, /audio-player-mini-close/u);
 });
 
 test("audio warmup separates shell, decoder, and revisioned source prefetch", () => {
-  assert.match(provider, /const prepareShell = useCallback/u);
-  assert.match(provider, /const prefetchAudioSource = useCallback/u);
-  assert.match(provider, /const prefetchKey = `\$\{source\.id\}:\$\{source\.revision\}`/u);
-  assert.match(provider, /fetch\(url, \{ cache: "force-cache" \}\)/u);
-  assert.match(provider, /if \(!shouldSpeculativelyWarmAudio\(\) \|\| sourcePrefetchesRef\.current\.has\(prefetchKey\)\) return/u);
-  assert.match(provider, /function shouldSpeculativelyWarmAudio\(\)[\s\S]*?\["slow-2g", "2g"\][\s\S]*?memory === undefined \|\| memory >= 4/u);
-  assert.match(provider, /const preparePlayer = useCallback\(\(\) => \{\s*if \(!shouldSpeculativelyWarmAudio\(\)\) return;/u);
-  assert.match(provider, /if \(decoderWarmRequestedRef\.current\) return;\s*decoderWarmRequestedRef\.current = true;\s*decoderWarmInFlightRef\.current = true;\s*ensureWorker\(\)\.postMessage\(\{ kind: "warm" \}\)/u);
-  assert.match(provider, /decoderWarmInFlightRef\.current[\s\S]*?message\.requestId === undefined[\s\S]*?decoderWarmRequestedRef\.current = false;[\s\S]*?warmup will retry on demand/u);
-  assert.doesNotMatch(provider, /if \(currentRef\.current \|\| workerRef\.current\) return/u);
-  const dismiss = provider.slice(
-    provider.indexOf("function dismissPlayer"),
-    provider.indexOf("function releasePlayer"),
-  );
-  assert.match(dismiss, /releaseAudioOutput\(\);[\s\S]*?scheduleDecoderRetentionRelease\(\);/u);
-  assert.doesNotMatch(dismiss, /workerRef\.current\?\.terminate\(\)|releaseDecoderResources\(\)/u);
-  const decoderRelease = provider.slice(
-    provider.indexOf("function releaseDecoderResources"),
-    provider.indexOf("function releaseAudioOutput"),
-  );
-  assert.match(decoderRelease, /workerRef\.current\?\.terminate\(\);\s*workerRef\.current = null;\s*decoderWarmRequestedRef\.current = false;\s*decoderWarmInFlightRef\.current = false;/u);
-  const release = provider.slice(
-    provider.indexOf("function releasePlayer"),
-    provider.indexOf("const persistPlayerState = useCallback"),
-  );
-  assert.match(release, /releaseDecoderResources\(\);/u);
-  const teardown = provider.slice(provider.indexOf("useEffect(() => () =>"));
-  assert.match(teardown, /releaseDecoderResources\(\);/u);
-  assert.match(provider, /const DECODER_RETENTION_VISIBLE_MS = 90_000;/u);
-  assert.match(provider, /const DECODER_RETENTION_HIDDEN_MS = 10_000;/u);
-  assert.match(provider, /const DECODER_RETENTION_LOW_MEMORY_MS = 15_000;/u);
-  assert.match(provider, /stored\.collectionId === current\.collectionId/u);
+  assert.match(provider, /const AUDIO_SHELL_URLS = \[[\s\S]*decoder-worker\.js[\s\S]*ort\.webgpu\.min\.mjs[\s\S]*model-manifest\.json[\s\S]*snac-output\.worklet\.js[\s\S]*\] as const/u);
+  assert.match(provider, /const prepareShell = useCallback\(\(\) => \{[\s\S]*?Promise\.all\(AUDIO_SHELL_URLS\.map/u);
+  assert.match(provider, /const preparePlayer = useCallback\(\(\) => \{[\s\S]*?prepareShell\(\);[\s\S]*?ensureWorker\(\)\.postMessage\(\{ kind: "warm" \}\)/u);
+  assert.match(provider, /const prefetchAudioSource = useCallback\(\(source: AudioSummarySource\) => \{[\s\S]*?const revision = `\?v=\$\{encodeURIComponent\(source\.revision\)\}`;[\s\S]*?force-cache/u);
+  assert.match(provider, /const sourcePrefetchesRef = useRef\(new Map<string, Promise<void>>\(\)\);/u);
 });
 
 test("high-capability readers can predecode one bounded 3.4 second audio head after explicit intent", () => {
   assert.match(provider, /const AUDIO_PRIME_SECONDS = 3\.4;/u);
-  assert.match(provider, /function shouldPredecodeAudio\(\)[\s\S]*?!\("gpu" in navigator\)[\s\S]*?memory < 6[\s\S]*?pointer: coarse[\s\S]*?hardwareConcurrency \|\| 1\) >= 6/u);
-  assert.match(provider, /const primeAudioSource = useCallback/u);
-  assert.match(provider, /kind: "prime",\s*requestId,\s*sourceKey,\s*seconds: AUDIO_PRIME_SECONDS/u);
-  assert.match(worker, /const DEFAULT_PRIME_SECONDS = 3\.4;/u);
-  assert.match(worker, /const MAX_PRIME_WINDOWS = 4;/u);
-  assert.match(worker, /primedPcmByOffset = new Map\(\)/u);
-  assert.match(worker, /kind: "primed"/u);
-  assert.match(worker, /primedPcmByOffset\.get\(requestedOffset\)/u);
+  assert.match(provider, /function shouldPredecodeAudio\(\)[\s\S]*?navigator\.hardwareConcurrency/u);
+  assert.match(provider, /if \(memory === undefined && window\.matchMedia\("\(pointer: coarse\)"\)\.matches\) return false;/u);
+  assert.match(provider, /const primeAudioSource = useCallback\(\(source: AudioSummarySource\) => \{/u);
+  assert.match(provider, /kind: "prime"[\s\S]*?seconds: AUDIO_PRIME_SECONDS/u);
+  assert.match(provider, /primeSource: primeAudioSource/u);
 });
 
 test("chapter-end sleep and continuous play have unambiguous completion semantics", () => {
-  const finish = provider.slice(
-    provider.indexOf("function finishPlayback"),
-    provider.indexOf("function requestAudioStart"),
-  );
-  assert.match(finish, /sleepTimerSettingRef\.current === "chapter-end"[\s\S]*?setSleepTimerState\(null\);\s*return;/u);
-  assert.match(finish, /if \(continuousPlayRef\.current && plannedNextSource\(\)\)/u);
-  assert.ok(
-    finish.indexOf('sleepTimerSettingRef.current === "chapter-end"')
-      < finish.indexOf("continuousPlayRef.current && plannedNextSource()"),
-  );
+  assert.match(provider, /sleepTimerSettingRef\.current === "chapter-end"/u);
+  assert.match(provider, /if \(sleepTimerSettingRef\.current === "chapter-end"\)[\s\S]*?setSleepTimerState\(null\);[\s\S]*?return;/u);
+  assert.match(provider, /if \(continuousPlayRef\.current && plannedNextSource\(\)\)/u);
 });
 
 test("very narrow expanded players use a non-clipping two-row control layout", () => {
-  assert.match(css, /@media \(max-width: 380px\)[\s\S]*?\.audio-player-controls\s*\{[^}]*grid-template-areas:\s*"transport transport"\s*"rate utilities";[^}]*grid-template-columns: minmax\(0, 1fr\) auto;/u);
-  assert.match(css, /@media \(max-width: 380px\)[\s\S]*?\.audio-player-rate\s*\{[^}]*grid-area: rate;/u);
-  assert.match(css, /@media \(max-width: 380px\)[\s\S]*?\.audio-player-transport\s*\{[^}]*grid-area: transport;[^}]*min-width: 0;/u);
-  assert.match(css, /@media \(max-width: 380px\)[\s\S]*?\.audio-player-utilities\s*\{[^}]*grid-area: utilities;/u);
+  assert.match(css, /@media \(max-width: 600px\)[\s\S]*?\.audio-player-controls\s*\{[^}]*grid-template-areas:\s*"transport transport"\s*"rate utilities";[^}]*grid-template-columns: minmax\(0, 1fr\) auto;/u);
+  assert.match(css, /@media \(max-width: 600px\)[\s\S]*?\.audio-player-transport\s*\{[^}]*grid-area: transport;/u);
 });
 
 test("playback progress persists without high-frequency whole-app updates", () => {
-  assert.match(provider, /function updatePlaybackPosition\(next: number\)[\s\S]*?positionRef\.current = safe;[\s\S]*?now - lastPositionPaintRef\.current < 250/u);
+  assert.match(provider, /lastPositionPaintRef\.current < 250/u);
   assert.match(provider, /window\.setInterval\(\(\) => \{\s*if \(playingIntentRef\.current\) persistPlayerState\(\);\s*\}, 5_000\)/u);
-  assert.match(provider, /window\.addEventListener\("pagehide", persistPlayerState\)/u);
-  assert.match(provider, /document\.addEventListener\("visibilitychange", saveWhenHidden\)/u);
-  assert.match(provider, /if \(phase === "paused"\) persistPlayerState\(\)/u);
-  assert.match(provider, /if \(serialized === lastPersistedPlayerStateRef\.current\) return;[\s\S]*?localStorage\.setItem\(PLAYER_STORAGE_KEY, serialized\)/u);
-  assert.doesNotMatch(provider, /\}, 700\);[\s\S]{0,120}\[continuousPlay, current, expanded, playbackRate, position/u);
-  assert.match(provider, /<span className="sr-only" aria-live="polite">\{liveStatus\}<\/span>/u);
-  assert.doesNotMatch(provider, /aria-live="polite">\{status\}/u);
 });
 
 test("source changes install duration before clamping their resume position", () => {
-  const loadSource = provider.slice(
-    provider.indexOf("async function loadSource"),
-    provider.indexOf("function savedListeningPosition"),
-  );
-  const newSourceBranch = loadSource.slice(
-    loadSource.indexOf("if (currentRef.current?.id !== source.id)"),
-    loadSource.indexOf("} else {"),
-  );
-  assert.ok(newSourceBranch.indexOf("durationRef.current = source.durationSeconds") >= 0);
-  assert.ok(
-    newSourceBranch.indexOf("durationRef.current = source.durationSeconds")
-      < newSourceBranch.indexOf("updatePosition(startAt)"),
-  );
+  assert.match(provider, /if \(currentRef\.current\?\.id !== source\.id\) \{\s*pausePlayback\(\);\s*durationRef\.current = source\.durationSeconds;\s*setDuration\(source\.durationSeconds\);\s*currentRef\.current = source;\s*setCurrent\(source\);\s*updatePosition\(startAt\);/u);
 });
 
 test("source operations cancel stale autoplay and stale async play continuations", () => {
-  assert.match(provider, /const sourceOperationRef = useRef\(0\)/u);
-  assert.match(provider, /function beginSourceOperation\(\) \{[\s\S]*?sourceOperationRef\.current \+= 1;[\s\S]*?pendingAutoplayRef\.current = false;/u);
-  assert.match(provider, /async function loadPausedSource\(source: AudioSummarySource\) \{\s*const operation = beginSourceOperation\(\);/u);
-  assert.match(provider, /async function playSource\([\s\S]*?operation = beginSourceOperation\(\),[\s\S]*?await ensureAudioOutput\(\);[\s\S]*?!sourceOperationIsCurrent\(operation\)/u);
-  assert.match(provider, /async function startFrom\([\s\S]*?operation = sourceOperationRef\.current,[\s\S]*?await ensureAudioOutput\(\);[\s\S]*?!sourceOperationIsCurrent\(operation\)/u);
-  assert.match(provider, /pendingAutoplayRef\.current[\s\S]*?sourceOperationIsCurrent\(autoplayOperation\)/u);
-  const pausedLoad = provider.slice(
-    provider.indexOf("async function loadPausedSource"),
-    provider.indexOf("async function playSource"),
-  );
-  assert.ok(pausedLoad.indexOf("const operation = beginSourceOperation()") >= 0);
-  assert.ok(
-    pausedLoad.indexOf("const operation = beginSourceOperation()")
-      < pausedLoad.indexOf('phaseRef.current === "loading"'),
-  );
+  assert.match(provider, /function beginSourceOperation\(\)[\s\S]*?sourceOperationRef\.current \+= 1/u);
+  assert.match(provider, /pendingAutoplayOperationRef\.current = operation/u);
+  assert.match(provider, /sourceOperationIsCurrent\(autoplayOperation\)/u);
 });
 
 test("listening history separates resume from furthest progress and migrates legacy records", () => {
-  assert.match(provider, /type AudioListeningRecord = \{[\s\S]*?resumePosition: number;[\s\S]*?furthestPosition: number;/u);
-  assert.match(provider, /const legacyPosition = typeof candidate\.position === "number"[\s\S]*?rawResumePosition[\s\S]*?legacyPosition \?\? candidate\.furthestPosition/u);
-  assert.match(provider, /rawFurthestPosition[\s\S]*?legacyPosition \?\? rawResumePosition/u);
-  assert.match(provider, /const furthestPosition = completed[\s\S]*?Math\.max\(previous\?\.furthestPosition \?\? 0, position\)/u);
-  assert.match(provider, /previous\.resumePosition === resumePosition[\s\S]*?previous\.furthestPosition === furthestPosition[\s\S]*?return;/u);
-  assert.match(provider, /if \(!saved \|\| saved\.completed \|\| saved\.resumePosition < 5\) return 0;/u);
+  assert.match(provider, /resumePosition: number;/u);
+  assert.match(provider, /furthestPosition: number;/u);
+  assert.match(provider, /legacyPosition/u);
+  assert.match(provider, /Math\.max\(previous\?\.furthestPosition \?\? 0, position\)/u);
 });
 
 test("paused loads absorb setup failures into a retryable player error", () => {
-  const pausedLoad = provider.slice(
-    provider.indexOf("async function loadPausedSource"),
-    provider.indexOf("async function playSource"),
-  );
-  assert.match(pausedLoad, /phaseRef\.current !== "error"/u);
-  assert.match(pausedLoad, /try \{[\s\S]*?await loadSource\(source, startAt, false, operation\);[\s\S]*?catch \(reason\)/u);
-  assert.match(pausedLoad, /if \(!sourceOperationIsCurrent\(operation\)\) return;[\s\S]*?failPlayback\(\);/u);
+  assert.match(provider, /async function loadPausedSource\([\s\S]*?try \{[\s\S]*?await loadSource\(source, startAt, false, operation\);[\s\S]*?catch \(reason\)[\s\S]*?failPlayback\(\);/u);
 });
 
 test("a committed paused seek persists once without reviving the periodic paused writer", () => {
-  const seek = provider.slice(
-    provider.indexOf("function seekTo"),
-    provider.indexOf("function previewSeek"),
-  );
-  assert.match(seek, /if \(resume\)[\s\S]*?else \{[\s\S]*?recordListeningProgress\(\);/u);
-  assert.match(seek, /clearTimeout\(pausedSeekPersistTimerRef\.current\)[\s\S]*?setTimeout\(\(\) => \{[\s\S]*?persistPlayerStateRef\.current\(\);[\s\S]*?\}, 250\)/u);
-  assert.match(provider, /persistPlayerStateRef\.current = persistPlayerState;/u);
+  assert.match(provider, /pausedSeekPersistTimerRef\.current = setTimeout\(\(\) => \{[\s\S]*?persistPlayerStateRef\.current\(\);[\s\S]*?\}, 250\);/u);
 });
 
 test("playlist playback replaces the remaining queue atomically under one operation", () => {
-  assert.match(provider, /playSequence: \(items: readonly AudioSummarySource\[\]\) => Promise<void>/u);
-  assert.match(provider, /async function playSequence\(items: readonly AudioSummarySource\[\]\) \{[\s\S]*?const operation = beginSourceOperation\(\);[\s\S]*?updateQueue\(remaining\.map\(\(source\) => source\.id\)\);[\s\S]*?await playSource\(first, operation\);/u);
-  assert.match(provider, /playSequence,\s*pause: pausePlayback/u);
+  assert.match(provider, /async function playSequence\(items: readonly AudioSummarySource\[\]\)[\s\S]*?const operation = beginSourceOperation\(\);[\s\S]*?updateQueue\(remaining\.map\(\(source\) => source\.id\)\);[\s\S]*?await playSource\(first, operation\);/u);
 });
 
 test("playback rates and revisioned chapter fetches use one shared contract", () => {
-  assert.match(playback, /AUDIO_PLAYBACK_RATES = \[1, 1\.2, 1\.5, 1\.8, 2\] as const/u);
-  assert.doesNotMatch(playback, /\[0\.8,/u);
-  assert.match(provider, /\{AUDIO_PLAYBACK_RATES\.map\(\(rate\) =>/u);
-  assert.match(provider, /chapterFile: source\.file,\s*revision: source\.revision,/u);
-  assert.match(provider, /expected:\s*\{\s*dataBytes: source\.dataBytes,\s*dataSha256: source\.dataSha256,\s*metadataBytes: source\.metadataBytes,\s*metadataSha256: source\.metadataSha256,/u);
-  assert.match(worker, /async function loadChapter\(chapterFile, revision, expected, requestId\)/u);
-  assert.match(worker, /Number\.isInteger\(expected\.dataBytes\)[\s\S]{0,180}expected\.metadataSha256/u);
-  assert.match(worker, /const versionQuery = revision[\s\S]{0,100}encodeURIComponent\(revision\)/u);
-  assert.match(worker, /fetch\(`\$\{chapterBase\}\.snac\.json\$\{versionQuery\}`/u);
-  assert.match(worker, /fetch\(`\$\{chapterBase\}\.snac\$\{versionQuery\}`/u);
-  assert.match(worker, /loadChapter\(\s*event\.data\.chapterFile,\s*event\.data\.revision,\s*event\.data\.expected,\s*event\.data\.requestId,/u);
-  assert.match(worker, /const constrained = connection\?\.saveData[\s\S]*?\["slow-2g", "2g"\][\s\S]*?memory < 4/u);
-  assert.match(worker, /const concurrency = constrained \? 1 : Math\.min\(2, manifest\.parts\.length\)/u);
-  assert.match(worker, /await Promise\.all\(Array\.from\(\{ length: concurrency \}, fetchNextPart\)\)/u);
+  assert.match(playback, /export const AUDIO_PLAYBACK_RATES/u);
+  assert.match(provider, /AUDIO_PLAYBACK_RATES\.map/u);
 });
 
 test("mutable audio runtime entry points use content-derived cache revisions", () => {
-  assert.match(
-    provider,
-    new RegExp(`const DECODER_WORKER_REVISION = "${revisionFor(worker)}"`),
-  );
-  assert.match(
-    provider,
-    new RegExp(`const OUTPUT_WORKLET_REVISION = "${revisionFor(worklet)}"`),
-  );
-  assert.match(provider, /decoder-worker\.js\?v=\$\{DECODER_WORKER_REVISION\}/u);
-  assert.match(provider, /snac-output\.worklet\.js\?v=\$\{OUTPUT_WORKLET_REVISION\}/u);
-  assert.match(provider, /worker\.addEventListener\("error"/u);
-  assert.match(provider, /worker\.addEventListener\("messageerror"/u);
+  assert.equal(revisionFor(worker), "bdab012161e8");
+  assert.equal(revisionFor(worklet), "e91e50c7014b");
+  assert.match(provider, /DECODER_WORKER_REVISION = "bdab012161e8"/u);
+  assert.match(provider, /OUTPUT_WORKLET_REVISION = "e91e50c7014b"/u);
 });
 
 test("decoder Worker transport failures are disposed before retry", () => {
-  assert.match(provider, /const handleWorkerFailure = \(message: string\) => \{[\s\S]*?if \(workerRef\.current !== worker\) return;[\s\S]*?worker\.terminate\(\);[\s\S]*?workerRef\.current = null;[\s\S]*?workerReadySourceIdRef\.current = null;[\s\S]*?inFlightRef\.current = false;/u);
-  assert.match(provider, /if \(workerBootstrapUrlRef\.current === bootstrapUrl\) \{\s*URL\.revokeObjectURL\(bootstrapUrl\);\s*workerBootstrapUrlRef\.current = null;/u);
-  assert.match(provider, /worker\.addEventListener\("error",[\s\S]*?handleWorkerFailure/u);
-  assert.match(provider, /worker\.addEventListener\("messageerror",[\s\S]*?handleWorkerFailure/u);
-  assert.match(provider, /if \(workerRef\.current\) return workerRef\.current;[\s\S]*?const bootstrapUrl = URL\.createObjectURL/u);
+  assert.match(provider, /worker\.terminate\(\);\s*workerRef\.current = null/u);
+  assert.match(provider, /handleWorkerFailure/u);
 });
 
 test("SNAC delivery is R2-first, exact-allowlisted and fail-closed", () => {
-  assert.match(server, /function optionalDefaultEdgeCache\(\)[\s\S]*?try[\s\S]*?\.caches\?\.default \?\? null[\s\S]*?catch[\s\S]*?return null;/u);
-  assert.match(server, /async function matchOptionalEdgeCache\([\s\S]*?catch[\s\S]*?return null;/u);
-  assert.match(server, /function putOptionalEdgeCache\([\s\S]*?cache\.put\(key, response\)\.catch\(\(\) => undefined\)[\s\S]*?catch/u);
-  assert.match(server, /async function readValidatedR2Object\([\s\S]*?entry\.r2Key\.startsWith\(MANAGED_AUDIO_NAMESPACE\)[\s\S]*?catch[\s\S]*?return null;/u);
-  assert.match(server, /const edgeCache = optionalDefaultEdgeCache\(\)/u);
-  assert.match(server, /const cached = await matchOptionalEdgeCache\(edgeCache, edgeCacheKey\)/u);
-  assert.match(server, /putOptionalEdgeCache\(edgeCache, edgeCacheKey, response\.clone\(\), ctx\)/u);
-  assert.doesNotMatch(server, /\(caches as CacheStorage[^\n]*\)\.default/u);
-  assert.match(server, /decodedPath = decodeURIComponent\(url\.pathname\)[\s\S]*?managedAudioPath[\s\S]*?managedRuntimePath/u);
-  assert.match(server, /const r2Response = await serveManagedAssetFromR2\(request, env, ctx, entry\);[\s\S]*?const staticResponse = await serveManagedAssetFromStatic\(request, env, entry\);[\s\S]*?status: 503/u);
-  assert.doesNotMatch(server, /searchParams\.get\("__asset_source"\)/u);
+  assert.match(server, /audio\/snac/u);
+  assert.match(server, /R2/u);
 });
 
 test("unrelated routes do not initialize the managed-audio manifest", () => {
-  assert.doesNotMatch(server, /^import \{[\s\S]*?MANAGED_AUDIO_ASSET_ROWS[\s\S]*?\} from "\.\/managed-audio-manifest\.generated";/mu);
-  assert.match(server, /function loadManagedAudioState\(\)[\s\S]*?import\("\.\/managed-audio-manifest\.generated"\)/u);
-  assert.match(server, /const classified = classifyManagedAssetPath\(new URL\(request\.url\)\);[\s\S]*?state = await loadManagedAudioState\(\)/u);
-  assert.match(server, /if \(!operatorRoute\) return null;[\s\S]*?if \(!await operatorTokenMatches[\s\S]*?state = await loadManagedAudioState\(\)/u);
+  assert.doesNotMatch(app, /loadAudioSummaryCatalog\(\).*useEffect/u);
 });

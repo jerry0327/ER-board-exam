@@ -385,9 +385,9 @@ export default function ReaderView({
     resource: question ? { kind: "question", questionId: question.id } : null,
   });
 
-  function openQuestionAudio() {
+  function openQuestionAudio(event: ReactMouseEvent<HTMLButtonElement>) {
     if (!questionAudio) return;
-    openQuestionAudioPlayer();
+    openQuestionAudioPlayer(event);
     setMobileToolsOpen(false);
   }
   const loadError = loadState.key === loadKey ? loadState.error : "";
