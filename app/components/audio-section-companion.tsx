@@ -1,12 +1,8 @@
 "use client";
 
 import {
-  Check,
   ChevronDown,
-  Headphones,
-  Layers3,
   ListTree,
-  Play,
   X,
 } from "lucide-react";
 import { createPortal } from "react-dom";
@@ -29,9 +25,6 @@ import {
   type LoadedSectionTitleLocales,
 } from "../lib/audio-section-title-locales";
 import {
-  audioSummaryDisplayMarker,
-  audioSummaryDisplayName,
-  audioSummaryDisplayTitle,
   audioSummaryForId,
   type AudioSummarySource,
 } from "../lib/audio-summaries";
@@ -236,10 +229,9 @@ export default function AudioSectionCompanion() {
     const dock = document.querySelector<HTMLElement>(".audio-player-dock");
     if (!dock) return;
     dock.classList.toggle("has-audio-sections", Boolean(activeBundle));
-    dock.classList.toggle("is-section-list-open", Boolean(activeBundle && sectionOpen));
     dock.classList.toggle("is-question-scope", Boolean(activeScope));
     return () => {
-      dock.classList.remove("has-audio-sections", "is-section-list-open", "is-question-scope");
+      dock.classList.remove("has-audio-sections", "is-question-scope");
     };
   }, [activeBundle, activeScope, sectionOpen]);
 
@@ -278,9 +270,6 @@ export default function AudioSectionCompanion() {
   const currentChapter = activeBundle
     ? currentAudioChapterAt(activeBundle.runtime.metadata, player.position)?.l1 ?? null
     : null;
-  const currentIndex = currentChapter
-    ? chapters.findIndex((chapter) => chapter.id === currentChapter.id)
-    : -1;
   const currentTitle = activeScope?.title
     ?? (activeBundle && currentChapter ? sectionLabel(activeBundle, currentChapter) : null);
 
@@ -338,14 +327,7 @@ export default function AudioSectionCompanion() {
       <div className="audio-section-companion">
         <div className="audio-section-summary">
           <div className="audio-section-current">
-            <small>
-              {activeScope
-                ? "單題播放範圍"
-                : currentIndex >= 0
-                  ? `目前段落 ${currentIndex + 1} / ${chapters.length}`
-                  : "段落導覽"}
-              {activeScope && <span className="audio-section-scope-badge">播完即停</span>}
-            </small>
+            <small>{activeScope ? "只播放本題" : "目前段落"}</small>
             <strong title={currentTitle ?? undefined}>{currentTitle ?? "選擇段落"}</strong>
           </div>
           <button
@@ -377,7 +359,7 @@ export default function AudioSectionCompanion() {
                       aria-current={isCurrent ? "true" : undefined}
                       onClick={() => seekChapter(chapter)}
                     >
-                      <span className="audio-section-number">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="audio-section-list-dot" aria-hidden="true" />
                       <strong>{sectionLabel(activeBundle, chapter)}</strong>
                       <time>{formatTime(startSeconds)}</time>
                     </button>
@@ -394,13 +376,40 @@ export default function AudioSectionCompanion() {
 
   const timelinePortal = activeBundle && timelineTarget && !activeScope
     ? createPortal(
-      <div className="audio-section-boundaries" aria-hidden="true">
-        {markers.slice(1).map((marker) => (
-          <i
-            key={marker.id}
-            style={{ left: `${Math.min(100, Math.max(0, marker.playerStartSeconds / Math.max(1, player.duration) * 100))}%` }}
-          />
-        ))}
+      <div className="audio-section-node-layer">
+        <span className="audio-section-track-base" aria-hidden="true" />
+        <span
+          className="audio-section-track-progress"
+          aria-hidden="true"
+          style={{ width: `${Math.min(100, Math.max(0, player.position / Math.max(1, player.duration) * 100))}%` }}
+        />
+        {markers.map((marker, index) => {
+          const chapter = chapters[index];
+          if (!chapter) return null;
+          const left = Math.min(100, Math.max(0, marker.playerStartSeconds / Math.max(1, player.duration) * 100));
+          const isCurrent = chapter.id === currentChapter?.id;
+          const isPast = marker.playerStartSeconds <= player.position;
+          const label = sectionLabel(activeBundle, chapter);
+          return (
+            <button
+              key={marker.id}
+              type="button"
+              className={`audio-section-node ${isCurrent ? "is-current" : ""} ${isPast ? "is-past" : ""}`.trim()}
+              style={{ left: `${left}%` }}
+              aria-label={`從 ${formatTime(marker.playerStartSeconds)} 播放：${label}`}
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                seekChapter(chapter);
+              }}
+            >
+              <span className="audio-section-node-tooltip" role="tooltip">
+                <strong>{label}</strong>
+                <time>{formatTime(marker.playerStartSeconds)}</time>
+              </span>
+            </button>
+          );
+        })}
       </div>,
       timelineTarget,
     )
@@ -449,10 +458,7 @@ export default function AudioSectionCompanion() {
             aria-labelledby="question-audio-choice-title"
           >
             <header>
-              <div>
-                <small>題庫詳解音檔</small>
-                <strong id="question-audio-choice-title">選擇播放方式</strong>
-              </div>
+              <strong id="question-audio-choice-title">選擇播放方式</strong>
               <button
                 type="button"
                 className="audio-question-choice-close"
@@ -462,12 +468,6 @@ export default function AudioSectionCompanion() {
                 <X aria-hidden="true" />
               </button>
             </header>
-            {choiceSource && (
-              <div className="audio-question-source">
-                <span>{audioSummaryDisplayMarker(choiceSource)}</span>
-                <strong>{audioSummaryDisplayTitle(choiceSource)}</strong>
-              </div>
-            )}
             <div className="audio-question-choice-options">
               <button
                 type="button"
@@ -475,25 +475,16 @@ export default function AudioSectionCompanion() {
                 disabled={!choiceSource || loadingChoice}
                 onClick={() => void chooseFullQuestionSet()}
               >
-                <Layers3 aria-hidden="true" />
-                <span>
-                  <strong>五題完整音檔</strong>
-                  <small>{choiceSource ? `載入 ${audioSummaryDisplayName(choiceSource)} 的完整五題內容` : "完整題組音檔"}</small>
-                </span>
-                <Play aria-hidden="true" />
+                <span>完整音檔</span>
               </button>
               <button
                 type="button"
                 className="audio-question-choice-option"
                 disabled={!choiceSource || loadingChoice}
+                aria-busy={loadingChoice || undefined}
                 onClick={() => void chooseQuestionOnly()}
               >
-                <Headphones aria-hidden="true" />
-                <span>
-                  <strong>只播放 {questionChoice.questionId}</strong>
-                  <small>從本題開始；本題講解結束後自動停止，不會接著播放下一題</small>
-                </span>
-                {loadingChoice ? <span aria-hidden="true">…</span> : <Check aria-hidden="true" />}
+                <span>{loadingChoice ? "載入中…" : "只播放本題"}</span>
               </button>
             </div>
             {choiceError && <p className="audio-question-choice-error">{choiceError}</p>}

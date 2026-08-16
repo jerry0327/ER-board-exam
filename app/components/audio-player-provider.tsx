@@ -2703,11 +2703,11 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
                   <button
                     type="button"
                     className="audio-player-skip"
-                    aria-label="快進 30 秒"
+                    aria-label="快進 15 秒"
                     disabled={phase === "loading"}
-                    onClick={() => jumpBy(30)}
+                    onClick={() => jumpBy(15)}
                   >
-                    <span>30</span><RotateCw aria-hidden="true" />
+                    <span>15</span><RotateCw aria-hidden="true" />
                   </button>
                   <button
                     type="button"
