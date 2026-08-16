@@ -1,0 +1,127 @@
+name: Capture current audio player runtime
+
+on:
+  push:
+    branches:
+      - agent/audio-sections-question-scope
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start actual app
+        shell: bash
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/em-board-dev.log 2>&1 &
+          echo $! > /tmp/em-board-dev.pid
+          for attempt in $(seq 1 120); do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/em-board-dev.log
+          exit 1
+      - name: Capture real runtime
+        run: |
+          mkdir -p visual-proof
+          cat > .capture-current-player.mjs <<'JS'
+          import { chromium } from 'playwright';
+
+          const base = 'http://127.0.0.1:4173/';
+          const browser = await chromium.launch({ headless: true });
+
+          async function getCatalog(page) {
+            return page.evaluate(async () => {
+              const response = await fetch('/audio/snac/catalog.json');
+              if (!response.ok) throw new Error(`catalog ${response.status}`);
+              return (await response.json()).entries;
+            });
+          }
+
+          async function seedPlayer(page, sourceId, expanded = true) {
+            await page.goto(base, { waitUntil: 'domcontentloaded' });
+            await page.evaluate(({ sourceId, expanded }) => {
+              localStorage.setItem('em-board-audio-player-v2', JSON.stringify({
+                sourceId,
+                position: 0,
+                rate: 1,
+                expanded,
+                stowed: false,
+                continuousPlay: true,
+                queueIds: [],
+                randomReview: false,
+              }));
+            }, { sourceId, expanded });
+            await page.reload({ waitUntil: 'domcontentloaded' });
+            await page.locator('.audio-player-dock').waitFor({ state: 'visible', timeout: 30000 });
+            if (expanded) {
+              await page.locator('.audio-player-dock.is-expanded').waitFor({ state: 'visible', timeout: 30000 });
+              await page.locator('.audio-section-companion').waitFor({ state: 'visible', timeout: 30000 });
+            }
+          }
+
+          const desktop = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
+          const page = await desktop.newPage();
+          await page.goto(base, { waitUntil: 'domcontentloaded' });
+          const entries = await getCatalog(page);
+          const textbook = entries.find((entry) => entry.kind === 'textbook-chapter' || entry.kind === 'textbook-section');
+          const questionSet = entries.find((entry) => entry.kind === 'question-set');
+          if (!textbook) throw new Error('No textbook audio source found');
+
+          await seedPlayer(page, textbook.id, true);
+          await page.waitForTimeout(500);
+          await page.locator('.audio-player-dock').screenshot({ path: 'visual-proof/desktop-expanded-player.png' });
+
+          const nodes = page.locator('.audio-section-node');
+          if (await nodes.count() > 1) {
+            await nodes.nth(1).hover();
+            await page.waitForTimeout(180);
+            await page.locator('.audio-player-dock').screenshot({ path: 'visual-proof/desktop-section-hover.png' });
+          }
+
+          await page.locator('.audio-section-toggle').click();
+          await page.locator('.audio-section-panel').waitFor({ state: 'visible' });
+          await page.waitForTimeout(150);
+          await page.locator('.audio-player-dock').screenshot({ path: 'visual-proof/desktop-section-list.png' });
+
+          if (questionSet) {
+            const qn = Number(questionSet.questionStart ?? 1);
+            const questionId = `${questionSet.questionExam}-Q${String(qn).padStart(3, '0')}`;
+            await page.evaluate(({ sourceId, questionId }) => {
+              window.dispatchEvent(new CustomEvent('em-board-question-audio-choice', {
+                detail: { sourceId, questionId },
+              }));
+            }, { sourceId: questionSet.id, questionId });
+            await page.locator('.audio-question-choice').waitFor({ state: 'visible', timeout: 10000 });
+            await page.locator('.audio-question-choice').screenshot({ path: 'visual-proof/desktop-question-choice.png' });
+          }
+          await desktop.close();
+
+          const mobile = await browser.newContext({ viewport: { width: 412, height: 915 }, deviceScaleFactor: 1 });
+          const mobilePage = await mobile.newPage();
+          await seedPlayer(mobilePage, textbook.id, true);
+          await mobilePage.waitForTimeout(500);
+          await mobilePage.screenshot({ path: 'visual-proof/mobile-expanded-player.png', fullPage: true });
+          await mobile.close();
+
+          await browser.close();
+          JS
+          node .capture-current-player.mjs
+          rm -f .capture-current-player.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: current-audio-player-runtime
+          path: visual-proof/*.png
+          if-no-files-found: error
