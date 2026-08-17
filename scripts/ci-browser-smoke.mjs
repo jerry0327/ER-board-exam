@@ -11,6 +11,20 @@ const viewports = [
   { name: "mobile-430", width: 430, height: 932, isMobile: true, hasTouch: true },
 ];
 
+async function openSpotlightWithShortcut(page, timeout = 15_000) {
+  const dialog = page.locator("#global-spotlight-dialog");
+  const deadline = Date.now() + timeout;
+
+  do {
+    await page.keyboard.press("Control+K");
+    if (await dialog.isVisible().catch(() => false)) return dialog;
+    await page.waitForTimeout(250);
+  } while (Date.now() < deadline);
+
+  await dialog.waitFor({ state: "visible", timeout: 1 });
+  return dialog;
+}
+
 await fs.mkdir(outputDir, { recursive: true });
 
 const browser = await chromium.launch({ headless: true });
@@ -52,9 +66,7 @@ try {
 
     let spotlight = null;
     if (!target.isMobile) {
-      await page.keyboard.press("Control+K");
-      const dialog = page.locator("#global-spotlight-dialog");
-      await dialog.waitFor({ state: "visible", timeout: 15_000 });
+      const dialog = await openSpotlightWithShortcut(page);
       spotlight = { opened: true };
       await page.keyboard.press("Escape");
       await dialog.waitFor({ state: "detached", timeout: 10_000 }).catch(async () => {
