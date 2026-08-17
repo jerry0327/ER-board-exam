@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const [guide, reader, annotationDrawer, annotationTools, markdown, notebook, route, annotationSource, css] = await Promise.all([
   readFile(new URL("../app/views/guide-view.tsx", import.meta.url), "utf8"),
@@ -11,7 +12,7 @@ const [guide, reader, annotationDrawer, annotationTools, markdown, notebook, rou
   readFile(new URL("../app/views/notebook-view.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/api/annotations/route.ts", import.meta.url), "utf8"),
   readFile(new URL("../app/lib/annotation-source.ts", import.meta.url), "utf8"),
-  readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  readLegacyCss(),
 ]);
 
 test("guide and detailed reader use one complete annotation pipeline and right-side drawer", () => {
