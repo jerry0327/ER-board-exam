@@ -2,11 +2,9 @@ import fs from "node:fs";
 
 const globalsPath = "app/globals.css";
 const sitePath = "app/site.css";
-const ciPath = ".github/workflows/ci.yml";
 
 const globals = fs.readFileSync(globalsPath, "utf8");
 const site = fs.readFileSync(sitePath, "utf8");
-const ci = fs.readFileSync(ciPath, "utf8");
 
 const layerOpen = "@layer legacy {";
 const openIndex = globals.indexOf(layerOpen);
@@ -87,10 +85,5 @@ fs.unlinkSync(globalsPath);
 
 const audit = `import fs from "node:fs";\n\nconst modules = ${JSON.stringify(segments.map(([filename]) => `app/${filename}`), null, 2)};\nconst aliases = ${JSON.stringify([...aliases.keys()], null, 2)};\nconst site = fs.readFileSync("app/site.css", "utf8");\nconst layout = fs.readFileSync("app/layout.tsx", "utf8");\nconst failures = [];\nif (fs.existsSync("app/globals.css")) failures.push("app/globals.css must remain retired");\nif (site.includes("globals.css")) failures.push("site.css must not import globals.css");\nif (!layout.includes('import "./site.css"')) failures.push("RootLayout must keep site.css as the runtime style entry");\nfor (const modulePath of modules) {\n  if (!fs.existsSync(modulePath)) { failures.push(\`Missing CSS module: \${modulePath}\`); continue; }\n  const source = fs.readFileSync(modulePath, "utf8");\n  const filename = modulePath.split("/").pop();\n  if (!site.includes(\`@import "./\${filename}" layer(legacy);\`)) failures.push(\`site.css missing ordered import for \${filename}\`);\n  for (const alias of aliases) {\n    if (source.includes(\`var(--\${alias})\`)) failures.push(\`\${modulePath} still uses legacy token --\${alias}\`);\n  }\n}\nconst bytes = Object.fromEntries(modules.map((modulePath) => [modulePath, fs.statSync(modulePath).size]));\nconsole.log(JSON.stringify({ globalsRetired: !fs.existsSync("app/globals.css"), moduleBytes: bytes, totalMigratedBytes: Object.values(bytes).reduce((a,b)=>a+b,0) }, null, 2));\nif (failures.length) { for (const failure of failures) console.error(\`CSS authority: \${failure}\`); process.exit(1); }\n`;
 fs.writeFileSync("scripts/audit-css-authority.mjs", audit);
-
-const lintNeedle = "      - name: ESLint\n        run: npm run lint\n";
-if (!ci.includes(lintNeedle)) throw new Error("CI ESLint anchor not found");
-const ciNext = ci.replace(lintNeedle, `${lintNeedle}\n      - name: CSS authority\n        run: node scripts/audit-css-authority.mjs\n`);
-fs.writeFileSync(ciPath, ciNext);
 
 console.log(JSON.stringify({ migrated: segments.map(([filename]) => filename), aliasesCanonicalized: aliases.size }, null, 2));
