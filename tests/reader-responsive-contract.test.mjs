@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
-const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+const css = await readLegacyCss();
 const instrument = await readFile(new URL("../app/site.css", import.meta.url), "utf8");
 const reader = await readFile(new URL("../app/views/reader-view.tsx", import.meta.url), "utf8");
 const guide = await readFile(new URL("../app/views/guide-view.tsx", import.meta.url), "utf8");
@@ -220,7 +221,7 @@ test("guide H4 outline entries use the same semantic dot in rails and mobile she
   assert.match(h4DotRule, /height:\s*5px;/u);
   assert.match(h4DotRule, /width:\s*5px;/u);
   assert.doesNotMatch(h4DotRule, /#[\da-f]{3,8}|rgba?\(|hsla?\(/iu);
-  assert.match(css, /\.markdown-body h4::before \{[^}]*background:\s*var\(--sage\);[^}]*height:\s*5px;[^}]*width:\s*5px;/u);
+  assert.match(css, /\.markdown-body h4::before \{[^}]*background:\s*var\(--site-success\);[^}]*height:\s*5px;[^}]*width:\s*5px;/u);
 });
 
 test("Tintinalli chapter progress becomes a bounded mobile grid", () => {
