@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
-const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+const css = await readLegacyCss();
 
 test("reader filters cannot consume or overflow the question list", () => {
   assert.match(css, /\.reader-library\s*\{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;[^}]*height:\s*calc\(100dvh - 108px\);[^}]*min-height:\s*0;[^}]*min-width:\s*0;/su);
