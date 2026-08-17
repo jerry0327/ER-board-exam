@@ -2,14 +2,17 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const [companion, provider, events, css, learningAudio, readerView] = await Promise.all([
+const [companion, provider, dock, events, css, learningAudio, readerView] = await Promise.all([
   readFile(new URL("../app/components/audio-section-companion.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/audio-player-provider.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../app/components/audio-player-dock.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/lib/audio-player-section-events.ts", import.meta.url), "utf8"),
   readFile(new URL("../app/site.css", import.meta.url), "utf8"),
   readFile(new URL("../app/hooks/use-learning-audio.ts", import.meta.url), "utf8"),
   readFile(new URL("../app/views/reader-view.tsx", import.meta.url), "utf8"),
 ]);
+
+const player = `${provider}\n${dock}`;
 
 const marker = "/* Original player skeleton: Section, subtitle and Settings enhancements only. */";
 const markerIndex = css.indexOf(marker);
@@ -39,13 +42,13 @@ test("Section and subtitle runtime stays revision-safe and shares player-time se
 });
 
 test("Section enhancements mount into a dedicated slot without replacing the original player skeleton", () => {
-  assert.match(provider, /audio-player-time-current[\s\S]*?audio-section-inline-slot[\s\S]*?audio-player-time-duration/u);
+  assert.match(player, /audio-player-time-current[\s\S]*?audio-section-inline-slot[\s\S]*?audio-player-time-duration/u);
   assert.match(companion, /document\.querySelector<HTMLElement>\("\.audio-section-inline-slot"\)/u);
-  assert.doesNotMatch(provider, /className="audio-section-slot"/u);
-  assert.match(provider, /<label className="audio-player-rate">[\s\S]*?<div className="audio-player-transport" role="group" aria-label="播放控制">[\s\S]*?<div className="audio-player-utilities">/u);
-  assert.match(provider, /className="audio-player-stow"/u);
-  assert.match(provider, /className="audio-player-restore"/u);
-  assert.match(provider, /className="audio-player-edge-progress"/u);
+  assert.doesNotMatch(player, /className="audio-section-slot"/u);
+  assert.match(player, /<label className="audio-player-rate">[\s\S]*?<div className="audio-player-transport" role="group" aria-label="播放控制">[\s\S]*?<div className="audio-player-utilities">/u);
+  assert.match(player, /className="audio-player-stow"/u);
+  assert.match(player, /className="audio-player-restore"/u);
+  assert.match(player, /className="audio-player-edge-progress"/u);
   assert.doesNotMatch(enhancement, /(?:^|\n)\s*\.audio-player-dock(?:\.is-(?:expanded|collapsed|stowed))?\s*(?:,|\{)/u);
   assert.doesNotMatch(enhancement, /\.audio-player-mini\s*\{/u);
   assert.doesNotMatch(enhancement, /\.audio-player-details\s*\{/u);
@@ -72,14 +75,14 @@ test("Section popover has explicit ownership, dismissal, focus return, and Setti
   assert.match(companion, /AUDIO_PLAYER_SETTINGS_OPEN_EVENT/u);
   assert.match(companion, /document\.querySelector<HTMLDetailsElement>\("\.audio-player-settings\[open\]"\)/u);
   assert.match(events, /AUDIO_PLAYER_SETTINGS_OPEN_EVENT = "em-board-audio-player-settings-open"/u);
-  assert.match(provider, /window\.dispatchEvent\(new Event\(AUDIO_PLAYER_SETTINGS_OPEN_EVENT\)\)/u);
+  assert.match(player, /window\.dispatchEvent\(new Event\(AUDIO_PLAYER_SETTINGS_OPEN_EVENT\)\)/u);
 });
 
 test("Settings and anchored question-choice menu support dismissal and focus lifecycle", () => {
-  assert.match(provider, /settingsDetailsRef/u);
-  assert.match(provider, /details\.open = false/u);
-  assert.match(provider, /event\.key !== "Escape"/u);
-  assert.match(provider, /document\.addEventListener\("pointerdown", handlePointerDown\)/u);
+  assert.match(player, /settingsDetailsRef/u);
+  assert.match(player, /details\.open = false/u);
+  assert.match(player, /event\.key !== "Escape"/u);
+  assert.match(player, /document\.addEventListener\("pointerdown", handlePointerDown\)/u);
   assert.doesNotMatch(companion, /document\.body\.style\.overflow = "hidden"/u);
   assert.doesNotMatch(companion, /event\.key !== "Tab"/u);
   assert.doesNotMatch(companion, /audio-question-choice-backdrop/u);
@@ -107,7 +110,7 @@ test("mobile player uses one symmetric control rail and moves destructive close 
   assert.match(css, /\.audio-player-secondary-left \.audio-player-reset\s*\{[^}]*grid-column:\s*3;/u);
   assert.match(css, /\.audio-player-settings\s*\{[^}]*grid-column:\s*4;/u);
   assert.match(css, /\.audio-player-close\s*\{\s*display:\s*none;/u);
-  assert.match(provider, /className="audio-player-settings-dismiss"[\s\S]*?<span>關閉播放器<\/span>/u);
+  assert.match(player, /className="audio-player-settings-dismiss"[\s\S]*?<span>關閉播放器<\/span>/u);
 });
 
 test("expanded timeline is a clean progress surface without permanent chapter ticks", () => {
@@ -119,19 +122,19 @@ test("expanded timeline is a clean progress surface without permanent chapter ti
 });
 
 test("subtitle preference is durable and cue buttons expose a meaningful seek label", () => {
-  assert.match(provider, /SUBTITLE_PREFERENCE_KEY = "em-board-audio-subtitles-v1"/u);
-  assert.match(provider, /localStorage\.getItem\(SUBTITLE_PREFERENCE_KEY\) === "true"/u);
-  assert.match(provider, /localStorage\.setItem\(SUBTITLE_PREFERENCE_KEY, enabled \? "true" : "false"\)/u);
-  assert.match(provider, /aria-pressed=\{subtitlesEnabled\}/u);
+  assert.match(player, /SUBTITLE_PREFERENCE_KEY = "em-board-audio-subtitles-v1"/u);
+  assert.match(player, /localStorage\.getItem\(SUBTITLE_PREFERENCE_KEY\) === "true"/u);
+  assert.match(player, /localStorage\.setItem\(SUBTITLE_PREFERENCE_KEY, enabled \? "true" : "false"\)/u);
+  assert.match(player, /aria-pressed=\{subtitlesEnabled\}/u);
   assert.match(companion, /aria-label=\{`從 \$\{formatTime\(siteSecondsFromSourceSeconds\(cue\.startSourceSeconds\)\)\} 播放字幕：\$\{cue\.text\}`\}/u);
-  assert.match(provider, /aria-label="快進 30 秒"/u);
-  assert.doesNotMatch(provider, /(?:Volume2|Maximize2|gainNodeRef|updateVolume)/u);
+  assert.match(player, /aria-label="快進 30 秒"/u);
+  assert.doesNotMatch(player, /(?:Volume2|Maximize2|gainNodeRef|updateVolume)/u);
 });
 
 test("advanced playback options live only in Settings while the original transport remains visible", () => {
-  const detailsStart = provider.indexOf('<div id="learning-audio-details" className="audio-player-details">');
-  const detailsEnd = provider.indexOf('{error && (', detailsStart);
-  const details = provider.slice(detailsStart, detailsEnd);
+  const detailsStart = dock.indexOf('<div id="learning-audio-details" className="audio-player-details">');
+  const detailsEnd = dock.indexOf('{error && (', detailsStart);
+  const details = dock.slice(detailsStart, detailsEnd);
   assert.match(details, /<details[\s\S]*?className="audio-player-settings"/u);
   assert.match(details, /className="audio-player-settings-panel"[\s\S]*?睡眠計時[\s\S]*?字幕[\s\S]*?連續播放[\s\S]*?隨機複習[\s\S]*?接下來/u);
   assert.doesNotMatch(details, /<div className="audio-player-options" role="group" aria-label="播放選項">[\s\S]*?<\/div>\s*<\/div>\s*\{error/u);
