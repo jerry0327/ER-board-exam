@@ -11,7 +11,7 @@
   border: 1px solid var(--site-line);
   border-radius: 18px;
   box-shadow: var(--site-shadow-low);
-  margin: var(--page-top) auto var(--page-bottom);
+  margin: var(--site-page-top) auto var(--site-page-bottom);
   max-width: 1180px;
   overflow: hidden;
   padding: clamp(34px, 6vw, 76px);

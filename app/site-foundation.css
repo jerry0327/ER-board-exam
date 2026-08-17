@@ -115,7 +115,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .learning-data-actions button:disabled { cursor: not-allowed; opacity: .48; }
 .learning-data-actions svg { height: 16px; width: 16px; }
 
-.dashboard-page { display: grid; gap: 30px 34px; grid-template-columns: minmax(0, 1fr) 332px; margin: 0 auto; max-width: var(--site-max); padding: var(--page-top) var(--site-gutter) var(--page-bottom); }
+.dashboard-page { display: grid; gap: 30px 34px; grid-template-columns: minmax(0, 1fr) 332px; margin: 0 auto; max-width: var(--site-max); padding: var(--site-page-top) var(--site-gutter) var(--site-page-bottom); }
 .hero-copy { align-self: stretch; position: relative; }
 .hero-copy::after { background: var(--site-line); bottom: 0; content: ""; pointer-events: none; position: absolute; right: 0; top: 0; width: 1px; z-index: 1; }
 .welcome-folio { --welcome-accent: var(--site-primary); align-items: center; background: var(--site-paper); border-color: var(--site-line); border-radius: 14px; box-shadow: 0 1px 0 rgba(53,45,34,.025), 0 18px 44px rgba(53,45,34,.09); display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 36%); min-height: 510px; overflow: hidden; padding: 54px 34px 50px 58px; }

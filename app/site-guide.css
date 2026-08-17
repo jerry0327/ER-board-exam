@@ -6,7 +6,7 @@
  * stylesheet entry and cascade authority.
  */
 /* 303-chapter study-guide library and Markdown reader */
-.guide-page { border: 1px solid var(--site-line); border-radius: 14px; box-shadow: 0 10px 28px rgba(53,49,41,.1); display: grid; grid-template-columns: 310px minmax(0, 1fr); margin: var(--page-top) auto var(--page-bottom); max-width: var(--site-max); min-height: calc(100vh - 210px); width: calc(100% - (2 * var(--site-gutter))); }
+.guide-page { border: 1px solid var(--site-line); border-radius: 14px; box-shadow: 0 10px 28px rgba(53,49,41,.1); display: grid; grid-template-columns: 310px minmax(0, 1fr); margin: var(--site-page-top) auto var(--site-page-bottom); max-width: var(--site-max); min-height: calc(100vh - 210px); width: calc(100% - (2 * var(--site-gutter))); }
 .guide-library { background: var(--site-paper-soft); border-radius: 14px 0 0 14px; border-right: 1px solid var(--site-line); height: calc(100vh - 108px); overflow: hidden; position: sticky; top: 92px; }
 .guide-library > header { border-bottom: 1px solid var(--site-line); display: grid; gap: 9px; grid-template-columns: 1fr auto; padding: 18px; }
 .guide-library > header p { color: var(--site-primary); font-family: Georgia, serif; font-size: 12px; letter-spacing: .09em; margin: 0; }

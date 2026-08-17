@@ -6,7 +6,7 @@
  * stylesheet entry and cascade authority.
  */
 /* Shared inner pages */
-.workspace-page { margin: 0 auto; max-width: var(--site-max); min-height: calc(100vh - 76px); padding: var(--page-top) var(--site-gutter) var(--page-bottom); }
+.workspace-page { margin: 0 auto; max-width: var(--site-max); min-height: calc(100vh - 76px); padding: var(--site-page-top) var(--site-gutter) var(--site-page-bottom); }
 .page-intro { max-width: 840px; }
 .page-intro .eyebrow { margin-bottom: 16px; }
 .page-intro h1 { font-family: var(--site-display); font-size: clamp(34px, 3.3vw, 50px); font-weight: 600; letter-spacing: .035em; line-height: 1.45; margin: 0; }
@@ -65,7 +65,7 @@
 .setup-summary span, .setup-summary > p { color: var(--site-muted); font-size: 12px; line-height: 1.65; }
 
 /* Practice session and reusable question sheet */
-.practice-session-page { max-width: var(--site-max); padding-top: var(--page-top); }
+.practice-session-page { max-width: var(--site-max); padding-top: var(--site-page-top); }
 .session-toolbar { align-items: center; display: grid; gap: 18px; grid-template-columns: auto minmax(160px, 1fr) auto; margin-bottom: 18px; }
 .session-toolbar > div:first-child { display: flex; gap: 12px; }
 .session-toolbar span { color: var(--site-muted); }
