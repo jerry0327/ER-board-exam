@@ -443,7 +443,7 @@ test("view keeps evidence collapsed after completion and uses the account-backed
   assert.doesNotMatch(css, /\.remoc-region-tabs/u);
   assert.match(recognized, /className="recognized-tools-panel paper-card"[\s\S]*?className="recognized-transfer-row"[\s\S]*?className="recognized-filters"/u);
   assert.doesNotMatch(recognized, /className="(?:recognized-transfer-row|recognized-filters) paper-card"/u);
-  assert.match(recognizedCss, /\.recognized-filters\s*\{[^}]*border-top:\s*1px solid var\(--line\);/su);
+  assert.match(recognizedCss, /\.recognized-filters\s*\{[^}]*border-top:\s*1px solid var\(--site-line\);/su);
   assert.match(recognizedCss, /\.checklist-evidence/u);
   assert.match(recognizedCss, /\.recognized-evidence/u);
   assert.doesNotMatch(css, /@import\s+["']\.\/globals\.css/u);
