@@ -1,5 +1,15 @@
 @import "./katex-woff2.css" layer(vendor);
-@import "./globals.css" layer(legacy);
+@import "./site-foundation.css" layer(legacy);
+@import "./site-learning-library.css" layer(legacy);
+@import "./site-practice.css" layer(legacy);
+@import "./site-browse.css" layer(legacy);
+@import "./site-reader.css" layer(legacy);
+@import "./site-guide.css" layer(legacy);
+@import "./site-notes.css" layer(legacy);
+@import "./site-rest.css" layer(legacy);
+@import "./site-analytics.css" layer(legacy);
+@import "./site-responsive.css" layer(legacy);
+@import "./site-interactions.css" layer(legacy);
 @import "./analytics-map.css" layer(legacy);
 @import "./board-prep.css" layer(legacy);
 @import "./recognized-courses.css" layer(legacy);
