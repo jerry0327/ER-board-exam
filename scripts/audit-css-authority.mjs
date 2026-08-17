@@ -68,11 +68,22 @@ if (fs.existsSync("app/globals.css")) failures.push("app/globals.css must remain
 if (site.includes("globals.css")) failures.push("site.css must not import globals.css");
 const layoutCssImports = [...layout.matchAll(/import\s+["']([^"']+\.css)["'];?/gu)].map((match) => match[1]);
 if (layoutCssImports.length !== 1 || layoutCssImports[0] !== "./site.css") failures.push(`RootLayout CSS entry must be only ./site.css; found: ${layoutCssImports.join(", ")}`);
+let previousImportIndex = -1;
 for (const modulePath of modules) {
   if (!fs.existsSync(modulePath)) { failures.push(`Missing CSS module: ${modulePath}`); continue; }
   const filename = modulePath.split("/").pop();
-  if (!site.includes(`@import "./${filename}" layer(legacy);`)) failures.push(`site.css missing ordered import for ${filename}`);
+  const importStatement = `@import "./${filename}" layer(legacy);`;
+  const importIndex = site.indexOf(importStatement);
+  if (importIndex < 0) {
+    failures.push(`site.css missing ordered import for ${filename}`);
+    continue;
+  }
+  if (importIndex <= previousImportIndex) failures.push(`site.css legacy module order changed at ${filename}`);
+  previousImportIndex = importIndex;
 }
+const firstPostMigrationLegacyImport = site.indexOf('@import "./analytics-map.css" layer(legacy);');
+if (firstPostMigrationLegacyImport < 0) failures.push("site.css analytics-map legacy import is missing");
+else if (previousImportIndex >= firstPostMigrationLegacyImport) failures.push("Migrated site modules must remain before the existing feature legacy imports");
 for (const file of filesUnder("app")) {
   const source = fs.readFileSync(file, "utf8");
   for (const alias of legacyAliases) {
