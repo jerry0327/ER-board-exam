@@ -80,7 +80,7 @@ jobs:
         run: |
           npx tsc --noEmit
           npm run lint
-          npm run test:css-authority
+          node scripts/audit-css-authority.mjs
 
       - name: Build verified production artifact
         run: npm run build
