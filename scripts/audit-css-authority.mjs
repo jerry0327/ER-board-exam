@@ -81,6 +81,11 @@ for (const file of filesUnder("app")) {
   }
 }
 if (!site.includes("--site-page-top:") || !site.includes("--site-page-bottom:")) failures.push("Canonical page spacing tokens are missing");
+for (const file of filesUnder("app")) {
+  if (!file.endsWith(".css")) continue;
+  const source = fs.readFileSync(file, "utf8");
+  if (/font-family\s*:\s*[^;{}]*\bGeorgia\b[^;{}]*;/gu.test(source)) failures.push(`${file} bypasses --site-display with a direct Georgia font-family`);
+}
 const bytes = Object.fromEntries(modules.map((modulePath) => [modulePath, fs.statSync(modulePath).size]));
 console.log(JSON.stringify({ globalsRetired: !fs.existsSync("app/globals.css"), legacyAliasCount: legacyAliases.length, moduleBytes: bytes, totalMigratedBytes: Object.values(bytes).reduce((a,b)=>a+b,0) }, null, 2));
 if (failures.length) { for (const failure of failures) console.error(`CSS authority: ${failure}`); process.exit(1); }

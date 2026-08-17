@@ -20,7 +20,7 @@
 
 /* Dashboard live question */
 .option-preview-row { align-items: flex-start; background: rgba(255,255,255,.28); border: 1px solid rgba(76,73,65,.18); border-radius: 8px; display: flex; gap: 12px; min-height: 48px; padding: 11px 15px; }
-.option-preview-row > span { align-items: center; border: 1px solid var(--site-line-strong); border-radius: 50%; display: flex; flex: 0 0 26px; font-family: Georgia, serif; height: 26px; justify-content: center; }
+.option-preview-row > span { align-items: center; border: 1px solid var(--site-line-strong); border-radius: 50%; display: flex; flex: 0 0 26px; font-family: var(--site-display); height: 26px; justify-content: center; }
 .option-preview-row p { line-height: 1.65; margin: 0; }
 
 /* Practice setup */
@@ -61,7 +61,7 @@
 .setup-summary .paper-slip { min-height: 140px; }
 .setup-summary .paper-slip svg { color: var(--site-success); }
 .setup-summary h2 { font-family: var(--site-display); font-size: 14px; font-weight: 500; margin: 12px 0 3px; }
-.setup-summary strong { color: var(--site-primary); display: block; font-family: Georgia, serif; font-size: 38px; font-weight: 500; }
+.setup-summary strong { color: var(--site-primary); display: block; font-family: var(--site-display); font-size: 38px; font-weight: 500; }
 .setup-summary span, .setup-summary > p { color: var(--site-muted); font-size: 12px; line-height: 1.65; }
 
 /* Practice session and reusable question sheet */
@@ -89,7 +89,7 @@
 .exam-session-console details[open] summary::after { content: "−"; }
 .exam-session-console details summary small { color: var(--site-muted); font-size: 12px; }
 .exam-question-grid { border-top: 1px solid rgba(55,61,56,.09); display: grid; gap: 6px; grid-template-columns: repeat(auto-fill, minmax(39px, 1fr)); max-height: 218px; overflow-y: auto; padding: 12px 16px 15px; }
-.exam-question-grid button { align-items: center; aspect-ratio: 1; background: var(--site-paper); border: 1px solid var(--site-line); border-radius: 7px; cursor: pointer; display: flex; font-family: Georgia, serif; font-size: 12px; justify-content: center; min-width: 0; position: relative; }
+.exam-question-grid button { align-items: center; aspect-ratio: 1; background: var(--site-paper); border: 1px solid var(--site-line); border-radius: 7px; cursor: pointer; display: flex; font-family: var(--site-display); font-size: 12px; justify-content: center; min-width: 0; position: relative; }
 .exam-question-grid button.answered { background: var(--site-success-soft); border-color: color-mix(in srgb, var(--site-success) 66%, var(--site-line)); }
 .exam-question-grid button.flagged { border-color: var(--site-primary); box-shadow: none; color: var(--site-primary); }
 .exam-question-grid button.current { border-color: var(--site-primary); box-shadow: inset 0 0 0 2px var(--site-primary); font-weight: 700; }
@@ -101,7 +101,7 @@
 .question-guide-links { align-items: center; background: var(--site-surface-muted); border-bottom: 1px solid var(--site-line); display: flex; flex-wrap: wrap; gap: 7px; min-height: 45px; padding: 7px 25px 7px 30px; }
 .question-guide-links > svg { color: var(--site-primary); flex: 0 0 auto; }
 .question-guide-links > span { color: var(--site-muted); font-size: 12px; margin-right: 2px; }
-.question-guide-links > button { background: var(--site-paper); border: 1px solid var(--site-line); border-radius: 99px; color: var(--site-primary); cursor: pointer; font-family: Georgia, serif; font-size: 12px; min-height: 28px; padding: 0 9px; }
+.question-guide-links > button { background: var(--site-paper); border: 1px solid var(--site-line); border-radius: 99px; color: var(--site-primary); cursor: pointer; font-family: var(--site-display); font-size: 12px; min-height: 28px; padding: 0 9px; }
 .question-guide-links > button:hover { background: var(--site-success-soft); border-color: var(--site-success); }
 .question-guide-links > small { color: var(--site-muted); font-size: 12px; }
 .polarity-badge, .multi-badge, .all-credit-badge, .quality-badge { align-items: center; background: rgba(255,255,255,.42); border: 1px solid var(--site-line); border-radius: 99px; color: var(--site-muted); display: inline-flex; font-size: 12px; gap: 5px; padding: 5px 9px; }
@@ -119,7 +119,7 @@
 .answer-options button.selected { background: var(--site-success-soft); border-color: var(--site-success); }
 .answer-options button.official, .answer-options .reader-option.official { background: #e3eadf; border-color: #718970; box-shadow: none; }
 .answer-options button.incorrect, .answer-options .reader-option.incorrect { background: color-mix(in srgb, var(--site-primary) 7%, transparent); border-color: color-mix(in srgb, var(--site-primary) 42%, transparent); box-shadow: none; }
-.option-key { align-items: center; border: 1px solid var(--site-line-strong); border-radius: 50%; display: flex; flex: 0 0 28px; font-family: Georgia, serif; height: 28px; justify-content: center; }
+.option-key { align-items: center; border: 1px solid var(--site-line-strong); border-radius: 50%; display: flex; flex: 0 0 28px; font-family: var(--site-display); height: 28px; justify-content: center; }
 .option-text { flex: 1; line-height: 1.7; white-space: pre-line; }
 .selection-check { color: var(--site-line-strong); flex: 0 0 auto; margin-top: 4px; }
 .answer-options button.selected .selection-check { color: var(--site-primary); }
@@ -188,7 +188,7 @@
 .exam-review-summary article.attention { border-color: color-mix(in srgb, var(--site-primary) 34%, transparent); }
 .exam-review-summary article.flagged { border-color: var(--site-primary); box-shadow: var(--site-shadow-low); }
 .exam-review-summary span { color: var(--site-muted); font-size: 12px; }
-.exam-review-summary strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 31px; font-weight: 500; }
+.exam-review-summary strong { color: var(--site-primary); font-family: var(--site-display); font-size: 31px; font-weight: 500; }
 .exam-review-summary small { color: var(--site-muted); font-size: 12px; }
 .exam-review-lists { border-radius: 13px; display: grid; gap: 0; grid-template-columns: 1fr 1fr; margin-top: 14px; overflow: hidden; }
 .exam-review-lists > div { min-width: 0; padding: 21px; }
@@ -200,7 +200,7 @@
 .exam-review-lists header small { color: var(--site-muted); font-size: 12px; margin-top: 2px; }
 .exam-review-question-grid { display: grid; gap: 7px; grid-template-columns: repeat(auto-fill, minmax(66px, 1fr)); margin-top: 16px; max-height: 260px; overflow-y: auto; }
 .exam-review-question-grid button { align-items: center; background: color-mix(in srgb, var(--site-primary) 5.5%, transparent); border: 1px solid color-mix(in srgb, var(--site-primary) 20%, transparent); border-radius: 7px; color: var(--site-primary); cursor: pointer; display: grid; min-height: 51px; padding: 6px; }
-.exam-review-question-grid button span { font-family: Georgia, serif; }
+.exam-review-question-grid button span { font-family: var(--site-display); }
 .exam-review-question-grid button small { font-size: 12px; opacity: .72; overflow: hidden; text-overflow: ellipsis; }
 .exam-review-question-grid.flagged button { background: var(--site-success-soft); border-color: var(--site-success); color: var(--site-ink); }
 .exam-review-empty { align-items: center; color: var(--site-muted); display: flex; font-size: 12px; gap: 7px; margin: 20px 0 0; }
@@ -240,7 +240,7 @@ html:has(.practice-dialog-backdrop) { overflow: hidden; }
 .markdown-body strong { font-weight: 700; }
 .markdown-body .structured-label { background: color-mix(in srgb, var(--site-primary) 7.5%, transparent); border: 1px solid color-mix(in srgb, var(--site-primary) 14%, transparent); border-radius: 4px; color: var(--site-primary-strong); display: inline-block; font-family: var(--site-sans); font-size: .83em; letter-spacing: .025em; line-height: 1.45; margin-right: .35em; padding: .1em .42em; }
 .markdown-body .option-analysis-heading { align-items: start; border-left: 0; display: grid; gap: 10px; grid-template-columns: 28px minmax(0, 1fr); padding-left: 0; }
-.markdown-body .option-analysis-heading > span:first-child { align-items: center; border: 1px solid color-mix(in srgb, var(--site-primary) 40%, transparent); border-radius: 50%; display: inline-flex; font-family: Georgia, serif; font-size: 13px; height: 27px; justify-content: center; margin-top: 1px; width: 27px; }
+.markdown-body .option-analysis-heading > span:first-child { align-items: center; border: 1px solid color-mix(in srgb, var(--site-primary) 40%, transparent); border-radius: 50%; display: inline-flex; font-family: var(--site-display); font-size: 13px; height: 27px; justify-content: center; margin-top: 1px; width: 27px; }
 .markdown-body .flow-sequence, .markdown-body .flow-tree { -webkit-overflow-scrolling: touch; background: var(--site-paper-soft); border: 1px solid var(--site-line); border-radius: 0; color: var(--site-ink-soft); font-weight: 600; line-height: 1.9; max-inline-size: 100%; min-inline-size: 0; overflow-wrap: anywhere; overflow-x: auto; overscroll-behavior-inline: contain; padding: 12px 15px; white-space: pre-wrap; word-break: break-word; }
 .markdown-body .flow-tree { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; font-size: .9em; font-weight: 500; overflow-wrap: normal; tab-size: 2; white-space: pre; word-break: normal; }
 .decision-tree { background: var(--site-paper-soft); border: 1px solid var(--site-line); border-radius: 12px; contain: inline-size; display: grid; gap: 7px; margin: 20px 0 26px; max-width: 100%; min-width: 0; overflow: hidden; padding: 14px; }
@@ -339,7 +339,7 @@ html:has(.practice-dialog-backdrop) { overflow: hidden; }
 .result-card { border-radius: 14px; max-width: 620px; padding: 50px; text-align: center; width: 100%; }
 .result-card > svg { color: var(--site-primary); }
 .result-card > p:first-of-type { color: var(--site-muted); letter-spacing: .1em; }
-.result-card h1 { color: var(--site-primary); font-family: Georgia, serif; font-size: 72px; font-weight: 500; margin: 10px 0 0; }
+.result-card h1 { color: var(--site-primary); font-family: var(--site-display); font-size: 72px; font-weight: 500; margin: 10px 0 0; }
 .result-card h1 span { color: var(--site-line-strong); font-size: 34px; }
 .result-card > strong { color: #657966; font-size: 20px; }
 .result-card > p:last-of-type { color: var(--site-muted); line-height: 1.7; margin: 22px auto; max-width: 420px; }
@@ -357,7 +357,7 @@ html:has(.practice-dialog-backdrop) { overflow: hidden; }
 .result-review-list { max-height: 620px; overflow-y: auto; }
 .result-review-list > button { align-items: center; background: transparent; border: 0; border-bottom: 1px solid rgba(55,61,56,.1); cursor: pointer; display: grid; gap: 12px; grid-template-columns: 28px minmax(0,1fr) auto auto; padding: 14px 18px; text-align: left; width: 100%; }
 .result-review-list > button:hover { background: rgba(220,228,218,.3); }
-.result-review-list > button > span { color: var(--site-line-strong); font-family: Georgia, serif; }
+.result-review-list > button > span { color: var(--site-line-strong); font-family: var(--site-display); }
 .result-review-list strong, .result-review-list small { display: block; }
 .result-review-list strong { font-family: var(--site-display); font-size: 12px; }
 .result-review-list small { color: var(--site-muted); font-size: 12px; margin-top: 4px; }
@@ -378,7 +378,7 @@ html:has(.practice-dialog-backdrop) { overflow: hidden; }
 .evaluation-metrics article { background: var(--site-surface-muted); border: 1px solid var(--site-line); border-radius: 10px; display: grid; gap: 2px; grid-template-columns: auto 1fr; padding: 15px; }
 .evaluation-metrics article > svg { color: var(--site-success); grid-row: 1 / 4; margin: 2px 9px 0 0; }
 .evaluation-metrics span { color: var(--site-muted); font-size: 12px; }
-.evaluation-metrics strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 24px; font-weight: 500; }
+.evaluation-metrics strong { color: var(--site-primary); font-family: var(--site-display); font-size: 24px; font-weight: 500; }
 .evaluation-metrics small { color: var(--site-muted); font-size: 12px; }
 .evaluation-layout { display: grid; gap: 14px; grid-template-columns: minmax(0, 1.2fr) minmax(290px, .8fr); margin-top: 14px; }
 .evaluation-topics, .evaluation-plan { border: 1px solid var(--site-line); border-radius: 11px; padding: 20px; }
@@ -393,7 +393,7 @@ html:has(.practice-dialog-backdrop) { overflow: hidden; }
 .evaluation-topics span small { color: var(--site-muted); font-size: 12px; margin-top: 2px; }
 .evaluation-topic-track { background: rgba(55,61,56,.1); border-radius: 99px; height: 7px; overflow: hidden; }
 .evaluation-topic-track i { background: var(--site-primary); display: block; height: 100%; }
-.evaluation-topics b { color: var(--site-primary); font-family: Georgia, serif; font-size: 12px; text-align: right; }
+.evaluation-topics b { color: var(--site-primary); font-family: var(--site-display); font-size: 12px; text-align: right; }
 .evaluation-empty { color: var(--site-muted); font-size: 12px; }
 .evaluation-plan { background: var(--site-paper-soft); }
 .evaluation-plan > p:first-child { color: var(--site-primary); font-size: 12px; letter-spacing: .08em; margin: 0 0 6px; }
@@ -401,7 +401,7 @@ html:has(.practice-dialog-backdrop) { overflow: hidden; }
 .evaluation-plan > small { color: var(--site-muted); display: block; font-size: 12px; line-height: 1.6; }
 .evaluation-guide-links { border-top: 1px solid var(--site-line); display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; padding-top: 12px; }
 .evaluation-guide-links > span { align-items: center; color: var(--site-muted); display: flex; flex-basis: 100%; font-size: 12px; gap: 5px; }
-.evaluation-guide-links > button { background: var(--site-paper); border: 1px solid var(--site-line); border-radius: 7px; color: var(--site-primary); display: grid; font-family: Georgia, serif; font-size: 12px; gap: 2px; min-height: 44px; padding: 6px 10px; text-align: left; }
+.evaluation-guide-links > button { background: var(--site-paper); border: 1px solid var(--site-line); border-radius: 7px; color: var(--site-primary); display: grid; font-family: var(--site-display); font-size: 12px; gap: 2px; min-height: 44px; padding: 6px 10px; text-align: left; }
 .evaluation-guide-links > button small { color: var(--site-muted); font-family: var(--site-sans); font-size: 12px; }
 .evaluation-actions { display: grid; gap: 7px; margin-top: 15px; }
 .evaluation-actions button { min-height: 42px; padding-inline: 12px; width: 100%; }

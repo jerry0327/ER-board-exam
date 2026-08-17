@@ -21,7 +21,7 @@
 .rest-stage-content { align-items: center; display: flex; flex-direction: column; max-width: 660px; padding: 60px 30px; position: relative; text-align: center; z-index: 3; }
 .rest-stage-content > p { font-family: var(--site-display); font-size: clamp(18px, 2vw, 25px); letter-spacing: .035em; line-height: 1.8; margin: 18px 0; text-wrap: balance; }
 .rest-time strong, .rest-time span { display: block; }
-.rest-time strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 46px; font-weight: 500; }
+.rest-time strong { color: var(--site-primary); font-family: var(--site-display); font-size: 46px; font-weight: 500; }
 .rest-time span { color: var(--site-muted); font-size: 12px; margin-top: 4px; }
 .rest-time.visually-quiet { opacity: .08; }
 .rest-focus-icon { color: color-mix(in srgb, var(--site-primary) 66%, transparent); height: 54px; width: 54px; }

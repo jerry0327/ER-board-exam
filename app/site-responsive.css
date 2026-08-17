@@ -333,7 +333,7 @@
   .reader-rail-jump > svg { color: var(--site-primary); flex: 0 0 auto; }
   .reader-rail-jump > span, .reader-rail-jump small, .reader-rail-jump strong { display: block; min-width: 0; }
   .reader-rail-jump small { color: var(--site-muted); font-size: 12px; line-height: 1.2; }
-  .reader-rail-jump strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 14px; font-weight: 500; margin-top: 3px; }
+  .reader-rail-jump strong { color: var(--site-primary); font-family: var(--site-display); font-size: 14px; font-weight: 500; margin-top: 3px; }
   .reader-rail-jump em { color: var(--site-muted); font-family: var(--site-sans); font-size: 12px; font-style: normal; }
   .reader-rail-step-controls { display: grid; gap: 6px; grid-template-columns: 1fr 1fr; }
   .reader-rail-step-controls button { align-items: center; background: rgba(255,255,255,.38); border: 1px solid var(--site-line); border-radius: 7px; display: flex; font-size: 12px; gap: 5px; justify-content: center; min-height: 44px; min-width: 0; padding: 0 7px; }
@@ -368,7 +368,7 @@
   .guide-rail-current > svg { color: var(--site-primary); flex: 0 0 auto; }
   .guide-rail-current > span, .guide-rail-current small, .guide-rail-current strong { display: block; min-width: 0; }
   .guide-rail-current small { color: var(--site-muted); font-size: 12px; line-height: 1.2; }
-  .guide-rail-current strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 13px; font-weight: 500; margin-top: 3px; }
+  .guide-rail-current strong { color: var(--site-primary); font-family: var(--site-display); font-size: 13px; font-weight: 500; margin-top: 3px; }
   .guide-rail-current em { color: var(--site-muted); font-family: var(--site-sans); font-size: 12px; font-style: normal; }
   .guide-rail-step-controls { display: grid; gap: 6px; grid-template-columns: 1fr 1fr; }
   .guide-rail-step-controls button { align-items: center; background: rgba(255,255,255,.38); border: 1px solid var(--site-line); border-radius: 7px; display: flex; font-size: 12px; gap: 5px; justify-content: center; min-height: 44px; min-width: 0; padding: 0 7px; }

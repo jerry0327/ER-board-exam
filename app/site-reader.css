@@ -16,7 +16,7 @@
 .reader-exam-card-head { align-items: flex-start; display: flex; justify-content: space-between; }
 .reader-exam-card-head > span { min-width: 0; }
 .reader-exam-card-head small, .reader-exam-card-head strong { display: block; }
-.reader-exam-card-head small { color: var(--site-primary); font-family: Georgia, serif; font-size: 12px; letter-spacing: .08em; }
+.reader-exam-card-head small { color: var(--site-primary); font-family: var(--site-display); font-size: 12px; letter-spacing: .08em; }
 .reader-exam-card-head strong { font-family: var(--site-display); font-size: 16px; margin-top: 6px; }
 .reader-exam-card-head svg { color: var(--site-success); flex: 0 0 auto; }
 .reader-exam-card-count { color: var(--site-muted); font-size: 12px; }
@@ -32,7 +32,7 @@
 .paper-number-jump input { background: rgba(255,255,255,.5); border: 1px solid var(--site-line); border-radius: 7px 0 0 7px; min-height: 42px; min-width: 0; padding: 0 11px; width: 100%; }
 .paper-number-jump button { background: var(--site-primary); border: 1px solid var(--site-primary); border-radius: 0 7px 7px 0; color: white; padding: 0 14px; }
 .paper-question-grid { display: grid; gap: 8px; grid-template-columns: repeat(10, minmax(44px, 1fr)); }
-.paper-question-grid > button { align-items: center; aspect-ratio: 1; background: rgba(251,248,241,.68); border: 1px solid var(--site-line); border-radius: 8px; cursor: pointer; display: flex; font-family: Georgia, serif; justify-content: center; min-height: 44px; position: relative; }
+.paper-question-grid > button { align-items: center; aspect-ratio: 1; background: rgba(251,248,241,.68); border: 1px solid var(--site-line); border-radius: 8px; cursor: pointer; display: flex; font-family: var(--site-display); justify-content: center; min-height: 44px; position: relative; }
 .paper-question-grid > button:hover { background: var(--site-paper); border-color: color-mix(in srgb, var(--site-primary) 38%, transparent); }
 .paper-question-grid > button.done { background: rgba(220,228,218,.74); border-color: rgba(91,116,94,.36); color: #4d6652; }
 .paper-question-grid > button.later { background: rgba(185,173,158,.17); }
@@ -66,9 +66,9 @@
 .reader-toolbar { align-items: center; background: rgba(241,237,228,.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--site-line); display: flex; gap: 18px; min-height: 58px; position: sticky; top: 92px; z-index: 20; }
 .reader-list-trigger { align-items: center; background: transparent; border: 0; cursor: pointer; display: none; flex: 0 0 auto; gap: 6px; white-space: nowrap; }
 .reader-position { color: var(--site-muted); font-size: 12px; white-space: nowrap; }
-.reader-position span { color: var(--site-primary); font-family: Georgia, serif; font-size: 18px; }
+.reader-position span { color: var(--site-primary); font-family: var(--site-display); font-size: 18px; }
 .reader-paper-jump-trigger, .reader-toc-trigger { align-items: center; background: rgba(255,255,255,.42); border: 1px solid var(--site-line); border-radius: 7px; color: var(--site-ink); cursor: pointer; display: flex; gap: 5px; min-height: 34px; padding: 0 9px; white-space: nowrap; }
-.reader-paper-jump-trigger span { color: var(--site-primary); font-family: Georgia, serif; font-size: 13px; }
+.reader-paper-jump-trigger span { color: var(--site-primary); font-family: var(--site-display); font-size: 13px; }
 .reader-paper-jump-trigger small { color: var(--site-muted); font-size: 12px; }
 .reader-step-controls { display: flex; }
 .reader-step-controls button { align-items: center; background: rgba(255,255,255,.42); border: 1px solid var(--site-line); display: flex; height: 34px; justify-content: center; width: 35px; }

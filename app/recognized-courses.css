@@ -199,7 +199,7 @@
 }
 .recognized-metric > div { align-items: center; color: var(--site-muted); display: flex; font-size: 12px; justify-content: space-between; }
 .recognized-metric > div svg { color: var(--site-success); height: 15px; width: 15px; }
-.recognized-metric strong { display: block; font-family: Georgia, serif; font-size: 21px; font-weight: 500; margin-top: 7px; }
+.recognized-metric strong { display: block; font-family: var(--site-display); font-size: 21px; font-weight: 500; margin-top: 7px; }
 .recognized-metric strong small { color: var(--site-muted); font-family: var(--site-sans); font-size: 12px; font-weight: 500; }
 .recognized-meter { background: var(--site-surface-muted); border-radius: 99px; display: block; height: 4px; margin-top: 9px; overflow: hidden; }
 .recognized-meter i { background: var(--site-warning); border-radius: inherit; display: block; height: 100%; }

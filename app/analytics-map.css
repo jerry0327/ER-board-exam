@@ -9,7 +9,7 @@
 .topic-treemap > button:hover { filter: saturate(1.12) brightness(1.025); z-index: 2; }
 .topic-treemap > button[aria-pressed="true"] { box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--site-primary) 78%, transparent); z-index: 3; }
 .topic-treemap > button span { display: block; font-family: var(--site-display); font-size: clamp(10px, 1.25vw, 16px); font-weight: 700; line-height: 1.32; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
-.topic-treemap > button strong { color: var(--site-primary-strong); font-family: Georgia, serif; font-size: clamp(14px, 1.7vw, 24px); font-weight: 500; line-height: 1.1; margin-top: 5px; }
+.topic-treemap > button strong { color: var(--site-primary-strong); font-family: var(--site-display); font-size: clamp(14px, 1.7vw, 24px); font-weight: 500; line-height: 1.1; margin-top: 5px; }
 .topic-treemap > button small { color: color-mix(in srgb, var(--site-ink) 68%, transparent); font-size: 12px; }
 .topic-treemap > button > i { background: color-mix(in srgb, var(--site-paper) 78%, transparent); bottom: 5px; display: block; height: 3px; left: 6px; max-width: calc(100% - 12px); position: absolute; }
 .topic-treemap > button[data-compact="true"] { align-items: center; padding: 5px 4px 8px; text-align: center; }
@@ -22,7 +22,7 @@
 .topic-map-detail dl { display: grid; gap: 7px; grid-template-columns: 1fr 1fr; margin: 0 0 20px; }
 .topic-map-detail dl > div { padding: 9px 10px; }
 .topic-map-detail dt { color: var(--site-muted); font-size: 12px; }
-.topic-map-detail dd { color: var(--site-ink); font-family: Georgia, serif; font-size: 20px; margin: 2px 0 0; }
+.topic-map-detail dd { color: var(--site-ink); font-family: var(--site-display); font-size: 20px; margin: 2px 0 0; }
 .topic-era-bars { display: grid; gap: 10px; margin-bottom: 14px; }
 .topic-era-bars > div { align-items: center; display: grid; gap: 7px; grid-template-columns: 50px minmax(55px, 1fr) 36px; }
 .topic-era-bars span, .topic-era-bars strong { font-size: 12px; }
@@ -44,7 +44,7 @@
 .overlap-list span b { color: var(--site-muted); display: block; font-size: 12px; font-weight: 500; }
 .overlap-list > div > i { background: color-mix(in srgb, var(--site-ink) 8%, transparent); border-radius: 99px; height: 6px; overflow: hidden; }
 .overlap-list > div > i em { background: var(--site-info); border-radius: inherit; display: block; height: 100%; }
-.overlap-list > div > strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 14px; text-align: center; }
+.overlap-list > div > strong { color: var(--site-primary); font-family: var(--site-display); font-size: 14px; text-align: center; }
 
 .workspace-page, .dashboard-page { animation: workspace-arrive .28s cubic-bezier(.22,.75,.32,1) both; }
 .reader-gesture-surface { animation: reader-sheet-arrive .22s cubic-bezier(.22,.75,.32,1) both; min-width: 0; }
@@ -62,7 +62,7 @@
   .topic-map-layout { display: none; }
   .topic-mobile-ranking { display: grid; gap: 7px; margin-top: 17px; }
   .topic-mobile-ranking > button { display: grid; gap: 8px; grid-template-columns: 24px minmax(0, 1fr) 44px 44px; min-height: 54px; padding: 8px 10px; text-align: left; }
-  .topic-mobile-ranking > button > b { color: var(--site-line-strong); font-family: Georgia, serif; font-size: 12px; }
+  .topic-mobile-ranking > button > b { color: var(--site-line-strong); font-family: var(--site-display); font-size: 12px; }
   .topic-mobile-ranking > button > span { min-width: 0; }
   .topic-mobile-ranking > button > span strong { display: block; font-family: var(--site-display); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .topic-mobile-ranking > button > span i { background: color-mix(in srgb, var(--site-ink) 8%, transparent); border-radius: 99px; display: block; height: 4px; margin-top: 5px; overflow: hidden; }

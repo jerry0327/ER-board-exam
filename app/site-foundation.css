@@ -42,7 +42,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 .topbar::after { background: var(--site-line); bottom: 3px; content: ""; height: 1px; left: 0; pointer-events: none; position: absolute; right: 0; }
 .brand { align-items: center; background: transparent; border: 0; cursor: pointer; display: flex; gap: 12px; padding: 0; text-align: left; }
-.brand-mark { align-items: center; background: var(--site-primary); border: 1px solid color-mix(in srgb, var(--site-primary-strong) 82%, black); border-radius: 10px; box-shadow: inset 0 1px rgba(255,255,255,.12), 0 5px 14px rgba(78,29,31,.13); color: #fff8ef; display: flex; font-family: Georgia, serif; font-size: 12px; height: 36px; justify-content: center; letter-spacing: .06em; width: 36px; }
+.brand-mark { align-items: center; background: var(--site-primary); border: 1px solid color-mix(in srgb, var(--site-primary-strong) 82%, black); border-radius: 10px; box-shadow: inset 0 1px rgba(255,255,255,.12), 0 5px 14px rgba(78,29,31,.13); color: #fff8ef; display: flex; font-family: var(--site-display); font-size: 12px; height: 36px; justify-content: center; letter-spacing: .06em; width: 36px; }
 .brand strong { display: block; font-family: var(--site-display); font-size: 19px; letter-spacing: .08em; }
 .brand small { color: var(--site-muted); display: block; font-size: 12px; letter-spacing: .08em; margin-top: 2px; }
 .desktop-nav { align-items: stretch; align-self: stretch; display: flex; gap: clamp(16px, 2.2vw, 34px); }
@@ -176,12 +176,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .daily-goal small { color: var(--site-muted); display: block; font-size: 12px; margin-top: 7px; }
 .goal-ring { align-items: baseline; aspect-ratio: 1; border: 4px solid color-mix(in srgb, var(--site-primary) 16%, transparent); border-bottom-color: var(--site-primary); border-radius: 50%; display: flex; justify-content: center; transform: rotate(8deg); width: 88px; }
 .goal-ring > * { transform: rotate(-8deg); }
-.goal-ring strong { color: var(--site-primary); font-family: Georgia, var(--site-display); font-size: 34px; font-style: italic; font-weight: 500; }
+.goal-ring strong { color: var(--site-primary); font-family: var(--site-display); font-size: 34px; font-style: italic; font-weight: 500; }
 .goal-ring span { color: var(--site-muted); font-family: var(--site-sans); font-size: 12px; }
 .stat-slip { align-items: center; display: flex; gap: 16px; }
 .stat-slip > svg { color: var(--site-primary); }
 .stat-slip div { flex: 1; }
-.stat-slip strong { color: var(--site-primary); float: right; font-family: Georgia, var(--site-display); font-size: 31px; font-weight: 500; margin-top: -18px; }
+.stat-slip strong { color: var(--site-primary); float: right; font-family: var(--site-display); font-size: 31px; font-weight: 500; margin-top: -18px; }
 .stat-slip strong small { display: inline; font-size: 12px; }
 .stat-slip > div > small { color: var(--site-muted); display: block; font-size: 12px; margin-top: 8px; }
 .stat-slip.sage > svg, .stat-slip.sage strong { color: #657966; }
@@ -201,7 +201,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .exam-countdown-windows { display: grid; gap: 3px; }
 .exam-countdown-days { min-width: 150px; text-align: center; }
 .exam-countdown-days strong, .exam-countdown-days span { display: block; }
-.exam-countdown-days strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 38px; font-weight: 500; line-height: 1; }
+.exam-countdown-days strong { color: var(--site-primary); font-family: var(--site-display); font-size: 38px; font-weight: 500; line-height: 1; }
 .exam-countdown-days span { color: var(--site-muted); font-size: 12px; margin-top: 5px; }
 .exam-countdown-card > a { align-items: center; border: 1px solid color-mix(in srgb, var(--site-primary) 30%, transparent); border-radius: 7px; color: var(--site-primary); display: flex; font-size: 12px; gap: 6px; min-height: 40px; padding: 0 12px; text-decoration: none; white-space: nowrap; }
 .exam-countdown-card > a svg { height: 14px; width: 14px; }
@@ -234,7 +234,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .quick-start > button:nth-child(3n)::before { background: rgba(173,87,81,.54); }
 .quick-start > button:hover { background: var(--site-paper); box-shadow: 0 12px 26px rgba(53,49,41,.09); transform: translateY(-2px); }
 .quick-start > button:disabled { cursor: not-allowed; opacity: .52; transform: none; }
-.quick-start > button > span { color: var(--site-primary); font-family: Georgia, serif; font-size: 20px; }
+.quick-start > button > span { color: var(--site-primary); font-family: var(--site-display); font-size: 20px; }
 .quick-start > button div { flex: 1; }
 .quick-start h3 { font-family: var(--site-display); font-size: 15px; margin: 0 0 6px; }
 .quick-start p { color: var(--site-muted); font-size: 12px; line-height: 1.6; margin: 0; }
@@ -248,7 +248,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .daily-plan-board > header h2 { font-family: var(--site-display); font-size: 21px; margin: 0; }
 .daily-plan-board > header p:last-child { color: var(--site-muted); font-size: 12px; line-height: 1.7; margin: 8px 0 0; }
 .daily-plan-progress { display: grid; gap: 6px; }
-.daily-plan-progress > strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 30px; font-weight: 500; text-align: right; }
+.daily-plan-progress > strong { color: var(--site-primary); font-family: var(--site-display); font-size: 30px; font-weight: 500; text-align: right; }
 .daily-plan-progress > strong small { color: var(--site-muted); font-size: 12px; }
 .daily-plan-progress > span { background: rgba(55,61,56,.1); border-radius: 99px; height: 7px; overflow: hidden; }
 .daily-plan-progress > span i { background: var(--site-success); border-radius: inherit; display: block; height: 100%; }

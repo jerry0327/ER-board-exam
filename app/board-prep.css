@@ -36,7 +36,7 @@
 }
 .board-prep-progress > div { align-items: end; display: flex; justify-content: space-between; }
 .board-prep-progress > div span { color: var(--board-prep-intro-muted); font-size: 12px; }
-.board-prep-progress > div strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 28px; font-weight: 500; line-height: 1; }
+.board-prep-progress > div strong { color: var(--site-primary); font-family: var(--site-display); font-size: 28px; font-weight: 500; line-height: 1; }
 .board-prep-progress-track { background: color-mix(in srgb, var(--site-line) 72%, transparent); border-radius: 999px; display: block; height: 6px; overflow: hidden; }
 .board-prep-progress-track i { background: var(--site-success); border-radius: inherit; display: block; height: 100%; }
 .board-prep-progress > p { align-items: baseline; color: var(--board-prep-intro-muted); display: flex; font-size: 12px; gap: 4px; justify-content: space-between; margin: 0; }
@@ -124,10 +124,10 @@
 .board-prep-section { border-radius: 14px; min-width: 0; overflow: hidden; }
 .board-prep-section > header { align-items: center; background: color-mix(in srgb, var(--site-paper-soft) 32%, transparent); border-bottom: 1px solid var(--site-line); display: flex; justify-content: space-between; min-height: 82px; padding: 16px 20px; }
 .board-prep-section > header > div { align-items: center; display: flex; gap: 13px; min-width: 0; }
-.board-prep-section > header > div > span { color: color-mix(in srgb, var(--site-primary) 74%, var(--site-muted)); font-family: Georgia, serif; font-size: 22px; }
+.board-prep-section > header > div > span { color: color-mix(in srgb, var(--site-primary) 74%, var(--site-muted)); font-family: var(--site-display); font-size: 22px; }
 .board-prep-section h2 { font-family: var(--site-display); font-size: 18px; margin: 0; }
 .board-prep-section header p { color: var(--site-muted); font-size: 12px; line-height: 1.5; margin: 5px 0 0; }
-.board-prep-section > header > strong { background: var(--site-surface-raised); border: 1px solid var(--site-line); border-radius: 999px; color: var(--site-primary); flex: 0 0 auto; font-family: Georgia, serif; font-size: 12px; padding: 7px 10px; }
+.board-prep-section > header > strong { background: var(--site-surface-raised); border: 1px solid var(--site-line); border-radius: 999px; color: var(--site-primary); flex: 0 0 auto; font-family: var(--site-display); font-size: 12px; padding: 7px 10px; }
 .board-prep-requirements { display: grid; }
 .board-prep-requirement { background: color-mix(in srgb, var(--site-paper) 97%, transparent); border-bottom: 1px solid var(--site-line); padding: 20px; transition: background .18s ease; }
 .board-prep-requirement:last-child { border-bottom: 0; }
@@ -370,7 +370,7 @@
 .remoc-progress-grid > button > span:first-child small { color: var(--site-muted); font-size: 12px; line-height: 1.4; margin-top: 5px; }
 .remoc-progress-grid > button > svg { align-self: center; color: var(--site-muted); height: 13px; width: 13px; }
 .remoc-progress-value { align-items: baseline; display: flex; gap: 3px; white-space: nowrap; }
-.remoc-progress-value > strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 22px; }
+.remoc-progress-value > strong { color: var(--site-primary); font-family: var(--site-display); font-size: 22px; }
 .remoc-progress-value > em { color: var(--site-muted); font-size: 12px; font-style: normal; }
 .remoc-progress-value > small { color: var(--site-muted); font-size: 12px; }
 .remoc-progress-meter { background: var(--site-surface-muted); border-radius: 999px; bottom: 9px; height: 3px; left: 11px; overflow: hidden; position: absolute; right: 11px; }
@@ -438,7 +438,7 @@
 .remoc-course-date small,
 .remoc-course-date strong { display: block; }
 .remoc-course-date small { color: var(--site-muted); font-size: 12px; }
-.remoc-course-date strong { font-family: Georgia, serif; font-size: 13px; margin-top: 2px; }
+.remoc-course-date strong { font-family: var(--site-display); font-size: 13px; margin-top: 2px; }
 .remoc-recognition-status { align-items: center; border-radius: 999px; display: inline-flex; flex: 0 0 auto; font-size: 12px; font-weight: 700; gap: 4px; min-height: 29px; padding: 0 9px; }
 .remoc-recognition-status svg { height: 12px; width: 12px; }
 .remoc-recognition-status.recognized { background: color-mix(in srgb, var(--site-success-soft) 66%, transparent); color: var(--site-success); }

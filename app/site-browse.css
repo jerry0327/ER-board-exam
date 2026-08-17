@@ -18,7 +18,7 @@
 .results-heading { align-items: center; display: flex; justify-content: space-between; padding: 23px 3px 12px; }
 .results-heading > div { align-items: baseline; display: flex; gap: 7px; }
 .results-heading svg { color: var(--site-success); }
-.results-heading strong { color: var(--site-primary); font-family: Georgia, serif; font-size: 22px; }
+.results-heading strong { color: var(--site-primary); font-family: var(--site-display); font-size: 22px; }
 .results-heading span { color: var(--site-muted); font-size: 12px; }
 .results-heading-actions { align-items: center; display: flex; gap: 14px; }
 .question-results { display: grid; gap: 9px; }
