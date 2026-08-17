@@ -1,0 +1,112 @@
+name: Spotlight browser diagnostics
+
+on:
+  push:
+    branches: [refactor/css-legacy-retirement]
+
+permissions:
+  contents: read
+
+jobs:
+  spotlight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: refactor/css-legacy-retirement
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium runtime
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start application
+        run: |
+          npm run dev -- --host 127.0.0.1 > /tmp/em-board-browser-debug.log 2>&1 &
+          for i in $(seq 1 120); do
+            if curl --fail --silent http://127.0.0.1:5173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/em-board-browser-debug.log
+          exit 1
+
+      - name: Diagnose spotlight shortcut and visibility
+        shell: bash
+        run: |
+          node --input-type=module <<'JS'
+          import { chromium } from 'playwright';
+          const browser = await chromium.launch({ headless: true });
+          const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+          page.on('pageerror', error => console.log('PAGEERROR', error.stack || error.message));
+          page.on('console', message => console.log('CONSOLE', message.type(), message.text()));
+          await page.goto('http://127.0.0.1:5173/', { waitUntil: 'domcontentloaded' });
+          await page.locator('.quick-links').first().waitFor({ state: 'visible', timeout: 15000 });
+          await page.waitForTimeout(500);
+
+          const snapshot = async label => {
+            const state = await page.evaluate(() => {
+              const dialog = document.querySelector('#global-spotlight-dialog');
+              const overlay = document.querySelector('.spotlight-overlay');
+              const trigger = document.querySelector('.spotlight-trigger');
+              const describe = el => {
+                if (!el) return null;
+                const style = getComputedStyle(el);
+                const rect = el.getBoundingClientRect();
+                return {
+                  tag: el.tagName,
+                  id: el.id,
+                  className: el.className,
+                  display: style.display,
+                  visibility: style.visibility,
+                  opacity: style.opacity,
+                  position: style.position,
+                  width: rect.width,
+                  height: rect.height,
+                  top: rect.top,
+                  left: rect.left,
+                  ariaModal: el.getAttribute('aria-modal'),
+                };
+              };
+              return {
+                dialog: describe(dialog),
+                overlay: describe(overlay),
+                trigger: describe(trigger),
+                triggerExpanded: trigger?.getAttribute('aria-expanded') ?? null,
+                activeElement: document.activeElement?.id || document.activeElement?.className || document.activeElement?.tagName,
+                ariaModals: [...document.querySelectorAll('[aria-modal="true"]')].map(describe),
+              };
+            });
+            console.log(`SNAPSHOT ${label}\n${JSON.stringify(state, null, 2)}`);
+          };
+
+          await snapshot('before-shortcut');
+          await page.keyboard.press('Control+KeyK');
+          await page.waitForTimeout(750);
+          await snapshot('after-shortcut');
+          console.log('DIALOG_ATTACHED_AFTER_SHORTCUT', await page.locator('#global-spotlight-dialog').count());
+          console.log('DIALOG_VISIBLE_AFTER_SHORTCUT', await page.locator('#global-spotlight-dialog').isVisible().catch(() => false));
+
+          if (!(await page.locator('#global-spotlight-dialog').isVisible().catch(() => false))) {
+            console.log('FALLBACK_CLICK_TRIGGER');
+            await page.locator('.spotlight-trigger').first().click({ force: true });
+            await page.waitForTimeout(750);
+            await snapshot('after-trigger-click');
+            console.log('DIALOG_VISIBLE_AFTER_CLICK', await page.locator('#global-spotlight-dialog').isVisible().catch(() => false));
+          }
+          await browser.close();
+          JS
+
+      - name: Print app log
+        if: always()
+        run: tail -n 200 /tmp/em-board-browser-debug.log || true
