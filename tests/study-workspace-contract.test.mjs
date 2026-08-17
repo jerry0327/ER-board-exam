@@ -4,7 +4,7 @@ import test from "node:test";
 import { readLegacyCss } from "./css-test-utils.mjs";
 
 const app = await readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8");
-const practice = await readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8");
+const practice = await readFile(new URL("../app/views/practice-view.impl.tsx", import.meta.url), "utf8");
 const guide = await readFile(new URL("../app/views/guide-view.tsx", import.meta.url), "utf8");
 const guideHook = await readFile(new URL("../app/hooks/use-guide-progress.ts", import.meta.url), "utf8");
 const guideNoteMigration = await readFile(new URL("../app/hooks/use-guide-note-migration.ts", import.meta.url), "utf8");

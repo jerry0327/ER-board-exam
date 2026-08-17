@@ -42,7 +42,7 @@ test("reader, search, notes, and resume surfaces use canonical titles and Englis
   const sources = await Promise.all([
     "app/views/supplemental-guide-view.tsx",
     "app/views/notebook-view.tsx",
-    "app/components/global-spotlight.tsx",
+    "app/components/global-spotlight.impl.tsx",
     "app/question-bank-app.tsx",
   ].map(readSource));
   const [supplemental, notebook, spotlight, app] = sources;

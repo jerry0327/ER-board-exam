@@ -10,7 +10,7 @@
 | 2 | 首次音檔來源＋第一個 decode window | 需抓單集 metadata／payload並開始推論 | 正文顯示後預抓當前來源；高能力裝置預解碼最多 3.4 秒 |
 | 3 | 題庫索引與全文搜尋 | 完整索引約 1.58 MB raw／243 KB stored；首屏 planning index 約 351 KB raw／17 KB stored；搜尋資料約 2.07 MB raw／498 KB stored | 首屏只取 planning index；完整索引在首頁 paint 後 idle 載入，低速／省流量連線則等到題庫操作；搜尋 catalog 在使用者需要時 lazy load |
 | 4 | 學習文件 PDF viewer | worker 約 1.31 MB raw／390 KB gzip，viewer 約 483 KB raw／144 KB gzip；文件本身 q11 約 1.55 MB | 僅進入「學習文件」後按需載入，不列入學習首頁 sibling 預載 |
-| 5 | Markdown renderer／全站 CSS | 共用 Markdown chunk 約 463 KB raw／137 KB gzip；CSS 約 440 KB raw／73 KB gzip | reader 才需要 Markdown chunk；視覺仍維持單一 CSS 權威，避免重複樣式 |
+| 5 | Markdown renderer／全站 CSS | 2026-08-06 基準：共用 Markdown chunk 約 463 KB raw／137 KB gzip；CSS 約 440 KB raw／73 KB gzip | reader 才需要 Markdown chunk；共享 token／foundation 維持核心 CSS 權威，analytics map、備考、認列課程、作答工具與 spotlight 樣式改由既有 lazy owner 按需載入；每次效能變更仍須以 build 重新量測 |
 | 6 | 教材 reader 與內容 pack | production route chunk：學習首頁約 18 KB raw／5 KB gzip，詳解約 32 KB／10 KB，音檔約 32 KB／10 KB；正文位於 q11 content packs | 學習首頁先 render，再逐一 idle preload reader；Markdown 仍按章抓取 |
 | 7 | 視覺轉場 | 純 UI 工作，不應成為等待來源 | 只使用短 crossfade，動畫不等待網路或資料 |
 

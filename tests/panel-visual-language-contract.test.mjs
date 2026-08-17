@@ -13,7 +13,7 @@ async function readLegacyCss() {
 }
 
 const [practice, practiceCss, legacyCss, boardCss, recognizedCss, spotlightCss, handoff, annotationTools, annotationDrawer, recognizedArea, spotlight, browse, themeToggle, reader, guide, rosensGuide, guideReaderTools, learningData, remoc] = await Promise.all([
-  readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../app/views/practice-view.impl.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/practice-tools.css", import.meta.url), "utf8"),
   readLegacyCss(),
   readFile(new URL("../app/board-prep.css", import.meta.url), "utf8"),
@@ -23,7 +23,7 @@ const [practice, practiceCss, legacyCss, boardCss, recognizedCss, spotlightCss, 
   readFile(new URL("../app/components/content-annotation-tools.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/annotation-drawer.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/recognized-courses-area.tsx", import.meta.url), "utf8"),
-  readFile(new URL("../app/components/global-spotlight.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../app/components/global-spotlight.impl.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/views/browse-view.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/theme-toggle.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/views/reader-view.tsx", import.meta.url), "utf8"),
@@ -35,8 +35,8 @@ const [practice, practiceCss, legacyCss, boardCss, recognizedCss, spotlightCss, 
 ]);
 const [analyticsCss, analytics, boardView] = await Promise.all([
   readFile(new URL("../app/analytics-map.css", import.meta.url), "utf8"),
-  readFile(new URL("../app/views/analytics-view.tsx", import.meta.url), "utf8"),
-  readFile(new URL("../app/views/board-prep-view.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../app/views/analytics-view.impl.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../app/views/board-prep-view.impl.tsx", import.meta.url), "utf8"),
 ]);
 const [siteCss, layout] = await Promise.all([
   readFile(new URL("../app/site.css", import.meta.url), "utf8"),

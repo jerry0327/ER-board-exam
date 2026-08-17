@@ -7,7 +7,7 @@ const app = await readFile(new URL("../app/question-bank-app.tsx", import.meta.u
 const browse = await readFile(new URL("../app/views/browse-view.tsx", import.meta.url), "utf8");
 const review = await readFile(new URL("../app/views/review-view.tsx", import.meta.url), "utf8");
 const guide = await readFile(new URL("../app/views/guide-view.tsx", import.meta.url), "utf8");
-const analytics = await readFile(new URL("../app/views/analytics-view.tsx", import.meta.url), "utf8");
+const analytics = await readFile(new URL("../app/views/analytics-view.impl.tsx", import.meta.url), "utf8");
 const css = await readLegacyCss();
 
 test("threads the existing direct-practice launcher into every study workspace", () => {

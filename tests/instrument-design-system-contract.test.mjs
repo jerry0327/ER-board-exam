@@ -30,7 +30,7 @@ const [site, layout, app, dashboard, spotlight, motion, theme, themeToggle, cssS
   readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/views/dashboard-view.tsx", import.meta.url), "utf8"),
-  readFile(new URL("../app/components/global-spotlight.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../app/components/global-spotlight.impl.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/lib/motion.ts", import.meta.url), "utf8"),
   readFile(new URL("../app/lib/theme.ts", import.meta.url), "utf8"),
   readFile(new URL("../app/components/theme-toggle.tsx", import.meta.url), "utf8"),
@@ -38,16 +38,31 @@ const [site, layout, app, dashboard, spotlight, motion, theme, themeToggle, cssS
   collectSources(appDirectory, [".ts", ".tsx"]),
 ]);
 
-test("site.css is the only runtime stylesheet entry and owns the final cascade", () => {
+test("site.css owns the eager cascade while feature-only styles stay on deferred owners", () => {
   const moduleCssImports = moduleSources.flatMap(({ path, source }) => (
     [...source.matchAll(/^\s*import\s+(?:[^"'\n]+?\s+from\s+)?["']([^"']+\.css)["'];?/gmu)]
       .map((match) => `${relative(appDirectory, path)}:${match[1]}`)
   ));
-  assert.deepEqual(moduleCssImports, ["layout.tsx:./site.css"]);
+  assert.deepEqual(moduleCssImports.sort(), [
+    "components/global-spotlight.tsx:../spotlight.css",
+    "layout.tsx:./site.css",
+    "views/analytics-view.tsx:../analytics-map.css",
+    "views/board-prep-view.tsx:../board-prep.css",
+    "views/board-prep-view.tsx:../recognized-courses.css",
+    "views/practice-view.tsx:../practice-tools.css",
+  ]);
 
   const legacyCssFiles = cssSources
     .map(({ path }) => basename(path))
-    .filter((name) => !["site.css", "katex-woff2.css"].includes(name))
+    .filter((name) => ![
+      "site.css",
+      "katex-woff2.css",
+      "analytics-map.css",
+      "board-prep.css",
+      "recognized-courses.css",
+      "practice-tools.css",
+      "spotlight.css",
+    ].includes(name))
     .sort();
   const legacyImports = [...site.matchAll(/^@import\s+"\.\/([^"]+\.css)"\s+layer\(legacy\);$/gmu)]
     .map((match) => match[1])
@@ -59,7 +74,7 @@ test("site.css is the only runtime stylesheet entry and owns the final cascade",
     site,
     /^@layer a11y, vendor, legacy, site-tokens, site-base, site-components, site-layout, site-features, site-utilities;$/mu,
   );
-  assert.match(site, /This is the only runtime stylesheet entry/u);
+  assert.match(site, /This is the core runtime stylesheet entry/u);
   for (const layer of ["tokens", "base", "components", "layout", "features", "utilities"]) {
     assert.match(site, new RegExp(`@layer site-${layer}\\s*\\{`, "u"));
   }

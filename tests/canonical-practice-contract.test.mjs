@@ -4,7 +4,7 @@ import test from "node:test";
 
 const app = await readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8");
 const dashboard = await readFile(new URL("../app/views/dashboard-view.tsx", import.meta.url), "utf8");
-const practice = await readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8");
+const practice = await readFile(new URL("../app/views/practice-view.impl.tsx", import.meta.url), "utf8");
 const review = await readFile(new URL("../app/views/review-view.tsx", import.meta.url), "utf8");
 
 test("deduplicates every cross-page concept launch before opening practice", () => {

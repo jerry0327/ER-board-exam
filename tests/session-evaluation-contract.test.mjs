@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { readLegacyCss } from "./css-test-utils.mjs";
 
-const practice = await readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8");
+const practice = await readFile(new URL("../app/views/practice-view.impl.tsx", import.meta.url), "utf8");
 const panel = await readFile(new URL("../app/components/session-evaluation-panel.tsx", import.meta.url), "utf8");
 const css = await readLegacyCss();
 

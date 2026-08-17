@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const practice = await readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8");
+const practice = await readFile(new URL("../app/views/practice-view.impl.tsx", import.meta.url), "utf8");
 const styles = await readFile(new URL("../app/practice-tools.css", import.meta.url), "utf8");
 const site = await readFile(new URL("../app/site.css", import.meta.url), "utf8");
 
 test("practice tools keep elimination and scratchpad state inside the active session", () => {
-  assert.doesNotMatch(practice, /import ["'][^"']+\.css["']/u);
-  assert.match(site, /@import "\.\/practice-tools\.css" layer\(legacy\);/u);
+  assert.match(practice, /import "\.\.\/practice-tools\.css";/u);
+  assert.doesNotMatch(site, /@import "\.\/practice-tools\.css" layer\(legacy\);/u);
   assert.match(practice, /eliminatedOptions: \{ \.\.\.currentSession\.eliminatedOptions/u);
   assert.match(practice, /scratchpads: \{ \.\.\.currentSession\.scratchpads/u);
   assert.match(practice, /只留下判斷記號，不會取消已選答案，也不影響提交與計分/u);
