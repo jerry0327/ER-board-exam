@@ -1,0 +1,30 @@
+name: Canonical CSS tokens
+on:
+  workflow_dispatch:
+  push:
+    branches: [refactor/css-legacy-retirement]
+    paths:
+      - 'scripts/canonicalize-site-css-tokens.mjs'
+      - '.github/workflows/css-token-canonicalize.yml'
+permissions:
+  contents: write
+concurrency:
+  group: canonical-css-tokens-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  canonicalize:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Canonicalize runtime CSS tokens
+        run: node scripts/canonicalize-site-css-tokens.mjs
+      - name: Verify CSS authority
+        run: node scripts/audit-css-authority.mjs
+      - name: Commit canonical token migration
+        run: |
+          rm scripts/canonicalize-site-css-tokens.mjs
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Canonicalize runtime CSS tokens'
+          git push origin HEAD:refactor/css-legacy-retirement
