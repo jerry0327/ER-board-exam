@@ -97,6 +97,13 @@ for (const file of filesUnder("app")) {
   const source = fs.readFileSync(file, "utf8");
   if (/font-family\s*:\s*[^;{}]*\bGeorgia\b[^;{}]*;/gu.test(source)) failures.push(`${file} bypasses --site-display with a direct Georgia font-family`);
 }
+if (fs.existsSync("tests")) {
+  const retiredGlobalsRead = /(?:readFile|readFileSync)\s*\(\s*(?:new URL\(\s*)?["'][^"']*app\/globals\.css["']/u;
+  for (const file of filesUnder("tests")) {
+    const source = fs.readFileSync(file, "utf8");
+    if (retiredGlobalsRead.test(source)) failures.push(`${file} still reads retired app/globals.css directly`);
+  }
+}
 const bytes = Object.fromEntries(modules.map((modulePath) => [modulePath, fs.statSync(modulePath).size]));
 console.log(JSON.stringify({ globalsRetired: !fs.existsSync("app/globals.css"), legacyAliasCount: legacyAliases.length, moduleBytes: bytes, totalMigratedBytes: Object.values(bytes).reduce((a,b)=>a+b,0) }, null, 2));
 if (failures.length) { for (const failure of failures) console.error(`CSS authority: ${failure}`); process.exit(1); }
