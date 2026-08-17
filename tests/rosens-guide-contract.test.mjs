@@ -3,12 +3,13 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { rosensBibliography, rosensCatalogStats, rosensChapters, rosensImportContract } from "../app/lib/rosens-catalog.ts";
 import { extractMarkdownOutline } from "../app/lib/markdown-heading.ts";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const hub = await readFile(new URL("../app/views/guide-hub-view.tsx", import.meta.url), "utf8");
 const reader = await readFile(new URL("../app/views/rosens-guide-view.tsx", import.meta.url), "utf8");
 const wrapper = await readFile(new URL("../app/views/learning-guide-view.tsx", import.meta.url), "utf8");
 const appShell = await readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8");
-const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+const css = await readLegacyCss();
 const siteCss = await readFile(new URL("../app/site.css", import.meta.url), "utf8");
 const loader = await readFile(new URL("../app/lib/rosens-guides.ts", import.meta.url), "utf8");
 const audioSummaries = await readFile(new URL("../app/lib/audio-summaries.ts", import.meta.url), "utf8");
