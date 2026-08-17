@@ -1,0 +1,30 @@
+name: CSS legacy migration
+on:
+  workflow_dispatch:
+  push:
+    branches: [refactor/css-legacy-retirement]
+    paths:
+      - 'scripts/migrate-globals-css.mjs'
+      - '.github/workflows/css-legacy-migrate.yml'
+permissions:
+  contents: write
+concurrency:
+  group: css-legacy-migration-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  migrate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Migrate globals.css into ordered site modules
+        run: node scripts/migrate-globals-css.mjs
+      - name: Verify CSS authority
+        run: node scripts/audit-css-authority.mjs
+      - name: Commit migration
+        run: |
+          rm scripts/migrate-globals-css.mjs .github/workflows/css-legacy-migrate.yml .github/workflows/css-legacy-audit.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Retire globals CSS into canonical site modules'
+          git push origin HEAD:refactor/css-legacy-retirement
