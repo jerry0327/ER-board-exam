@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const [focusHook, catalogLayer, reader, guide, rosens, ails, supplemental, boardTextbook, ems, guideReaderTools, css, siteCss, handoff] = await Promise.all([
   readFile(new URL("../app/hooks/use-overlay-focus-management.ts", import.meta.url), "utf8"),
@@ -13,7 +14,7 @@ const [focusHook, catalogLayer, reader, guide, rosens, ails, supplemental, board
   readFile(new URL("../app/views/board-textbook-view.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/views/ems-guide-view.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/guide-reader-tools.tsx", import.meta.url), "utf8"),
-  readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  readLegacyCss(),
   readFile(new URL("../app/site.css", import.meta.url), "utf8"),
   readFile(new URL("../AGENTS.md", import.meta.url), "utf8"),
 ]);
@@ -225,18 +226,9 @@ test("reader, guide, and mobile panels always stack above their backdrops", () =
   }
   assert.match(openPanelRule, /z-index:\s*var\(--site-z-overlay-panel\);/u);
 
-  assert.match(
-    siteCss,
-    /@media \(max-width: 1140px\)[\s\S]*?\.reader-library,\s*\.guide-library \{[^}]*z-index:\s*var\(--site-z-overlay-panel\);/u,
-  );
-  assert.match(
-    siteCss,
-    /@media \(max-width: 1140px\)[\s\S]*?\.reader-drawer-backdrop,\s*\.guide-drawer-backdrop \{[^}]*z-index:\s*var\(--site-z-overlay\);/u,
-  );
-  assert.doesNotMatch(
-    siteCss,
-    /@media \(max-width: 1140px\)[\s\S]*?z-index:\s*(?:65|70);/u,
-  );
+  assert.match(siteCss, /@media \(max-width: 1140px\)[\s\S]*?\.reader-library,\s*\.guide-library \{[^}]*z-index:\s*var\(--site-z-overlay-panel\);/u);
+  assert.match(siteCss, /@media \(max-width: 1140px\)[\s\S]*?\.reader-drawer-backdrop,\s*\.guide-drawer-backdrop \{[^}]*z-index:\s*var\(--site-z-overlay\);/u);
+  assert.doesNotMatch(siteCss, /@media \(max-width: 1140px\)[\s\S]*?z-index:\s*(?:65|70);/u);
 
   const mobilePanelRule = cssRuleMatching(siteCss, ".reader-utility-panel.mobile-open", [
     /\.guide-utility-panel\.mobile-open/u,

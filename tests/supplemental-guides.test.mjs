@@ -12,6 +12,7 @@ import {
   resolveSupplementalGuideEntry,
 } from "../app/lib/supplemental-guides.ts";
 import { rosensSupplementalSectionId, rosensSupplementalSectionKeys } from "../app/lib/supplemental-guide-ids.ts";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const tintinalliManifest = JSON.parse(await readFile(new URL("../public/guides/tintinalli/manifest.json", import.meta.url), "utf8"));
 const rosensManifest = JSON.parse(await readFile(new URL("../public/guides/rosens/supplemental-manifest.json", import.meta.url), "utf8"));
@@ -156,7 +157,7 @@ test("deduplicates manifest and Markdown requests while retrying failed catalogs
 test("the supplemental reader reuses the shared paper workspace and focus lifecycle", async () => {
   const [view, css] = await Promise.all([
     readFile(new URL("../app/views/supplemental-guide-view.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readLegacyCss(),
   ]);
 
   assert.match(view, /onSelectResource: \(resourceId: string\) => void/u);

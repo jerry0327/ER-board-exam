@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const [tintinalli, rosens, supplemental, ems, tools, progressFilter, css, siteCss, handoff] = await Promise.all([
   readFile(new URL("../app/views/guide-view.tsx", import.meta.url), "utf8"),
@@ -9,7 +10,7 @@ const [tintinalli, rosens, supplemental, ems, tools, progressFilter, css, siteCs
   readFile(new URL("../app/views/ems-guide-view.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/guide-reader-tools.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/guide-progress-filter.tsx", import.meta.url), "utf8"),
-  readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  readLegacyCss(),
   readFile(new URL("../app/site.css", import.meta.url), "utf8"),
   readFile(new URL("../AGENTS.md", import.meta.url), "utf8"),
 ]);

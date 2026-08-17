@@ -10,10 +10,11 @@ import {
   safeSpotlightResourceHref,
   searchSpotlight,
 } from "../app/lib/spotlight.ts";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const component = await readFile(new URL("../app/components/global-spotlight.tsx", import.meta.url), "utf8");
 const css = await readFile(new URL("../app/spotlight.css", import.meta.url), "utf8");
-const globalCss = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+const globalCss = await readLegacyCss();
 const siteCss = await readFile(new URL("../app/site.css", import.meta.url), "utf8");
 const app = await readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8");
 const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "utf8");
@@ -161,29 +162,14 @@ test("quick navigation is consolidated and the product search omits external res
     "\u932f\u984c\u672c",
     "\u5099\u8003\u4e2d\u5fc3",
   ]);
-  const audioResults = searchSpotlight({
-    query: "audio audiobook",
-    questions,
-    audioSummaries: audio,
-    resources: [],
-  });
+  const audioResults = searchSpotlight({ query: "audio audiobook", questions, audioSummaries: audio, resources: [] });
   assert.equal(audioResults.navigation[0]?.view, "\u5b78\u7fd2\u97f3\u6a94");
   assert.deepEqual(audioResults.resources, []);
 
-  const chapterAudioResults = searchSpotlight({
-    query: "CH.001 airway",
-    questions,
-    audioSummaries: audio,
-    resources: [],
-  });
+  const chapterAudioResults = searchSpotlight({ query: "CH.001 airway", questions, audioSummaries: audio, resources: [] });
   assert.equal(chapterAudioResults.audio[0]?.id, "rosens-001");
 
-  const documentResults = searchSpotlight({
-    query: "PDF",
-    questions,
-    learningDocuments,
-    resources: [],
-  });
+  const documentResults = searchSpotlight({ query: "PDF", questions, learningDocuments, resources: [] });
   assert.equal(documentResults.documents[0]?.id, "emergency-clinical-decision-atlas");
   assert.deepEqual(documentResults.resources, []);
 });
@@ -213,10 +199,7 @@ test("retained official resource data permits only HTTPS allowlisted hosts", () 
   for (const resource of SPOTLIGHT_OFFICIAL_RESOURCES) assert.ok(safeSpotlightResourceHref(resource.href));
   const societyNews = SPOTLIGHT_OFFICIAL_RESOURCES.find((resource) => resource.id === "tsem-announcements");
   assert.equal(societyNews?.href, "https://www.sem.org.tw/News");
-  assert.deepEqual(
-    SPOTLIGHT_OFFICIAL_RESOURCES.slice(0, 3).map((resource) => resource.id),
-    ["tsem-courses", "tsem-forms", "tsem-learning-platform"],
-  );
+  assert.deepEqual(SPOTLIGHT_OFFICIAL_RESOURCES.slice(0, 3).map((resource) => resource.id), ["tsem-courses", "tsem-forms", "tsem-learning-platform"]);
   assert.equal(safeSpotlightResourceHref("http://www.sem.org.tw/News/7/Index"), null);
   assert.equal(safeSpotlightResourceHref("https://www.sem.org.tw.evil.example/"), null);
   assert.equal(safeSpotlightResourceHref("https://user:password@www.sem.org.tw/"), null);
@@ -270,10 +253,7 @@ test("spotlight result surfaces reuse shared card and button primitives", () => 
   assert.ok(resultClassNames.every((className) => className.split(/\s+/u).includes("quiet-button")));
   assert.match(component, /className="paper-card spotlight-question-result"/u);
   assert.match(component, /className="quiet-button spotlight-practice-one"/u);
-  assert.doesNotMatch(
-    css,
-    /\.spotlight-(?:result|question-result|practice-one)(?![-\w])[^,{]*\{[^}]*(?:background(?:-color)?|border(?:-[\w-]+)?|box-shadow|color)\s*:/su,
-  );
+  assert.doesNotMatch(css, /\.spotlight-(?:result|question-result|practice-one)(?![-\w])[^,{]*\{[^}]*(?:background(?:-color)?|border(?:-[\w-]+)?|box-shadow|color)\s*:/su);
 });
 
 test("main shell integrates consolidated navigation and all search callbacks", () => {

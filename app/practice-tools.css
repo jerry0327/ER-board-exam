@@ -55,7 +55,7 @@
 }
 
 .practice-tool-title > svg {
-  color: var(--oxblood);
+  color: var(--site-primary);
   flex: 0 0 auto;
   margin-top: 2px;
 }
@@ -67,21 +67,21 @@
 }
 
 .practice-tool-title strong {
-  color: var(--ink);
-  font-family: var(--serif);
+  color: var(--site-ink);
+  font-family: var(--site-display);
   font-size: 14px;
   line-height: 1.35;
 }
 
 .practice-tool-title small {
-  color: var(--muted);
+  color: var(--site-muted);
   font-size: 12px;
   line-height: 1.55;
   margin-top: 3px;
 }
 
 .practice-tool-shortcuts {
-  color: var(--muted);
+  color: var(--site-muted);
   flex: 0 0 auto;
   font-size: 12px;
   margin: 0;
@@ -89,12 +89,12 @@
 }
 
 .practice-tool-shortcuts kbd {
-  background: var(--surface-raised);
-  border: 1px solid var(--line);
-  border-bottom-color: color-mix(in srgb, var(--line) 72%, var(--ink));
+  background: var(--site-surface-raised);
+  border: 1px solid var(--site-line);
+  border-bottom-color: color-mix(in srgb, var(--site-line) 72%, var(--site-ink));
   border-radius: 5px;
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--line) 76%, transparent);
-  color: var(--ink);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--site-line) 76%, transparent);
+  color: var(--site-ink);
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   padding: 2px 5px;
 }
@@ -107,7 +107,7 @@
 
 .practice-elimination-buttons .quiet-button {
   align-items: center;
-  color: var(--muted);
+  color: var(--site-muted);
   display: flex;
   font-size: 12px;
   gap: 8px;
@@ -118,10 +118,10 @@
 
 .practice-elimination-buttons button span {
   align-items: center;
-  background: var(--surface-muted);
-  border: 1px solid var(--line);
+  background: var(--site-surface-muted);
+  border: 1px solid var(--site-line);
   border-radius: 50%;
-  color: var(--ink);
+  color: var(--site-ink);
   display: inline-flex;
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: 12px;
@@ -132,23 +132,23 @@
 }
 
 .practice-elimination-buttons button[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--oxblood) 8%, var(--surface-raised));
-  border-color: color-mix(in srgb, var(--oxblood) 52%, var(--line));
-  color: var(--oxblood);
+  background: color-mix(in srgb, var(--site-primary) 8%, var(--site-surface-raised));
+  border-color: color-mix(in srgb, var(--site-primary) 52%, var(--site-line));
+  color: var(--site-primary);
   text-decoration: line-through;
 }
 
 .practice-elimination-buttons button[aria-pressed="true"] span {
-  background: color-mix(in srgb, var(--oxblood) 11%, var(--surface-muted));
-  border-color: color-mix(in srgb, var(--oxblood) 42%, var(--line));
-  color: var(--oxblood);
+  background: color-mix(in srgb, var(--site-primary) 11%, var(--site-surface-muted));
+  border-color: color-mix(in srgb, var(--site-primary) 42%, var(--site-line));
+  color: var(--site-primary);
 }
 
 .practice-elimination-buttons button:focus-visible,
 .practice-scratchpad-toggle:focus-visible,
 .practice-scratchpad-editor textarea:focus-visible,
 .practice-scratchpad-editor footer button:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--sage) 34%, transparent);
+  outline: 3px solid color-mix(in srgb, var(--site-success) 34%, transparent);
   outline-offset: 2px;
 }
 
@@ -162,13 +162,13 @@
 }
 
 .practice-tool-locked {
-  color: var(--muted);
+  color: var(--site-muted);
   font-size: 12px;
   margin: -3px 0 0;
 }
 
 .practice-scratchpad-tool {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--site-line);
   overflow: hidden;
 }
 
@@ -176,7 +176,7 @@
   align-items: center;
   background: transparent;
   border: 0;
-  color: var(--ink);
+  color: var(--site-ink);
   cursor: pointer;
   display: grid;
   gap: 10px;
@@ -188,11 +188,11 @@
 }
 
 .practice-scratchpad-toggle > svg:first-child {
-  color: var(--oxblood);
+  color: var(--site-primary);
 }
 
 .practice-scratchpad-toggle > svg:last-child {
-  color: var(--muted);
+  color: var(--site-muted);
   transition: transform .18s ease;
 }
 
@@ -207,19 +207,19 @@
 }
 
 .practice-scratchpad-toggle strong {
-  font-family: var(--serif);
+  font-family: var(--site-display);
   font-size: 13px;
 }
 
 .practice-scratchpad-toggle small {
-  color: var(--muted);
+  color: var(--site-muted);
   font-size: 12px;
   line-height: 1.45;
   margin-top: 3px;
 }
 
 .practice-scratchpad-editor {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--site-line);
   display: grid;
   gap: 8px;
   padding: 14px 16px 15px;
@@ -235,19 +235,19 @@
 }
 
 .practice-scratchpad-editor > p {
-  color: var(--muted);
+  color: var(--site-muted);
   font-size: 12px;
   line-height: 1.55;
 }
 
 .practice-scratchpad-editor > label {
-  color: var(--ink);
+  color: var(--site-ink);
   font-size: 12px;
   font-weight: 700;
 }
 
 .practice-scratchpad-editor textarea {
-  font: 14px/1.7 var(--sans);
+  font: 14px/1.7 var(--site-sans);
   min-height: 126px;
   padding: 11px 12px;
   resize: vertical;
@@ -261,12 +261,12 @@
 }
 
 .practice-scratchpad-editor footer small {
-  color: var(--muted);
+  color: var(--site-muted);
   font-size: 12px;
 }
 
 .practice-scratchpad-editor footer .text-action {
-  color: var(--muted);
+  color: var(--site-muted);
   font-size: 12px;
   gap: 5px;
   min-height: 44px;
@@ -274,7 +274,7 @@
 }
 
 .practice-scratchpad-editor footer button:not(:disabled):hover {
-  color: var(--oxblood);
+  color: var(--site-primary);
 }
 
 .practice-scratchpad-editor footer button:disabled {

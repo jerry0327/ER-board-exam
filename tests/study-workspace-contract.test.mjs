@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const app = await readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8");
 const practice = await readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8");
@@ -11,7 +12,7 @@ const guideApi = await readFile(new URL("../app/api/guide-progress/route.ts", im
 const annotationApi = await readFile(new URL("../app/api/annotations/route.ts", import.meta.url), "utf8");
 const annotationTools = await readFile(new URL("../app/components/content-annotation-tools.tsx", import.meta.url), "utf8");
 const migration = await readFile(new URL("../drizzle/0004_rare_black_panther.sql", import.meta.url), "utf8");
-const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+const css = await readLegacyCss();
 const siteCss = await readFile(new URL("../app/site.css", import.meta.url), "utf8");
 
 test("launches canonical daily concept ids without routing through mutable filters", () => {
@@ -52,12 +53,13 @@ test("keeps guide progress separate from shared annotations, account-scoped, add
 
 test("all primary page formats share one outer frame system", () => {
   assert.match(siteCss, /--site-max:\s*1600px/u);
-  assert.match(siteCss, /--page-max-width:\s*var\(--site-max\)/u);
-  assert.match(siteCss, /--page-inner-width:\s*var\(--site-max\)/u);
-  assert.match(css, /\.dashboard-page \{[^}]*max-width: var\(--page-max-width\)[^}]*padding: var\(--page-top\) var\(--page-gutter\) var\(--page-bottom\)/);
-  assert.match(css, /\.workspace-page \{[^}]*max-width: var\(--page-max-width\)[^}]*padding: var\(--page-top\) var\(--page-gutter\) var\(--page-bottom\)/);
-  assert.match(css, /\.reader-page \{[^}]*margin: var\(--page-top\) auto var\(--page-bottom\)[^}]*max-width: var\(--page-inner-width\)/);
-  assert.match(css, /\.guide-page \{[^}]*margin: var\(--page-top\) auto var\(--page-bottom\)[^}]*max-width: var\(--page-inner-width\)/);
-  assert.match(css, /\.practice-session-page \{ max-width: var\(--page-max-width\)/);
-  assert.match(css, /\.rest-page \{ max-width: var\(--page-max-width\)/);
+  assert.match(siteCss, /--site-gutter:\s*clamp\(/u);
+  assert.match(siteCss, /--site-page-top:\s*clamp\(/u);
+  assert.match(siteCss, /--site-page-bottom:\s*clamp\(/u);
+  assert.match(css, /\.dashboard-page \{[^}]*max-width: var\(--site-max\)[^}]*padding: var\(--site-page-top\) var\(--site-gutter\) var\(--site-page-bottom\)/);
+  assert.match(css, /\.workspace-page \{[^}]*max-width: var\(--site-max\)[^}]*padding: var\(--site-page-top\) var\(--site-gutter\) var\(--site-page-bottom\)/);
+  assert.match(css, /\.reader-page \{[^}]*margin: var\(--site-page-top\) auto var\(--site-page-bottom\)[^}]*max-width: var\(--site-max\)/);
+  assert.match(css, /\.guide-page \{[^}]*margin: var\(--site-page-top\) auto var\(--site-page-bottom\)[^}]*max-width: var\(--site-max\)/);
+  assert.match(css, /\.practice-session-page \{ max-width: var\(--site-max\)/);
+  assert.match(css, /\.rest-page \{ max-width: var\(--site-max\)/);
 });

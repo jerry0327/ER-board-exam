@@ -2,15 +2,26 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+async function readLegacyCss() {
+  const siteCss = await readFile(new URL("../app/site.css", import.meta.url), "utf8");
+  const legacyImports = [...siteCss.matchAll(/^@import\s+"\.\/([^"]+\.css)"\s+layer\(legacy\);$/gmu)]
+    .map((match) => match[1]);
+  const sources = await Promise.all(
+    legacyImports.map((file) => readFile(new URL(`../app/${file}`, import.meta.url), "utf8")),
+  );
+  return sources.join("\n");
+}
+
 const dashboard = await readFile(new URL("../app/views/dashboard-view.tsx", import.meta.url), "utf8");
 const questionSheet = await readFile(new URL("../app/components/question-sheet.tsx", import.meta.url), "utf8");
-const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+const css = await readLegacyCss();
 
 test("keeps notebook cues restrained without simulated binding holes or a page halo", () => {
   assert.doesNotMatch(dashboard, /welcome-binding|welcome-tape/u);
   assert.doesNotMatch(dashboard, /stack-tabs/u);
   assert.doesNotMatch(questionSheet, /paper-holes/u);
   assert.doesNotMatch(css, /welcome-binding|welcome-tape|paper-holes|stack-tabs/u);
+  assert.match(css, /\.site-shell \{ isolation: isolate; min-height: 100vh; position: relative; \}/u);
   assert.match(css, /\.site-shell::before \{ display: none; \}/u);
   assert.match(css, /\.study-stack::before \{ display: none; \}/u);
   assert.match(css, /\.welcome-art::before \{ display: none; \}/u);

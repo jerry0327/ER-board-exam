@@ -1,0 +1,138 @@
+/*
+ * Textbook and learning-library structural rules.
+ *
+ * Migrated from the former globals.css compatibility bucket. Keep visual
+ * decisions on canonical --site-* tokens; site.css remains the sole runtime
+ * stylesheet entry and cascade authority.
+ */
+/* ===== Textbook learning library and Rosen's 10e catalog ===== */
+.guide-hub-page {
+  background: color-mix(in srgb, var(--site-paper) 76%, var(--site-canvas));
+  border: 1px solid var(--site-line);
+  border-radius: 18px;
+  box-shadow: var(--site-shadow-low);
+  margin: var(--site-page-top) auto var(--site-page-bottom);
+  max-width: 1180px;
+  overflow: hidden;
+  padding: clamp(34px, 6vw, 76px);
+  position: relative;
+  width: calc(100% - (2 * var(--site-gutter)));
+}
+.guide-hub-page::before { background: var(--site-primary); content: ""; height: 3px; left: clamp(34px, 6vw, 76px); position: absolute; top: 0; width: 76px; }
+.guide-hub-intro { max-width: 760px; }
+.guide-hub-kicker { align-items: center; color: var(--site-primary); display: flex; font-family: var(--site-display); font-size: 12px; gap: 8px; letter-spacing: .15em; }
+.guide-hub-intro h1 { font-family: var(--site-display); font-size: clamp(34px, 5.1vw, 62px); font-weight: 600; letter-spacing: -.035em; line-height: 1.25; margin: 18px 0 16px; text-wrap: balance; }
+.guide-hub-intro > p { color: var(--site-muted); font-size: clamp(13px, 1.4vw, 16px); line-height: 1.9; margin: 0; max-width: 650px; }
+.guide-book-grid { display: grid; gap: clamp(14px, 2vw, 22px); grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: clamp(38px, 5vw, 60px); }
+.guide-book-card { --guide-book-accent: var(--site-primary); background: var(--site-paper); border: 1px solid var(--site-line); border-radius: 13px; box-shadow: 0 10px 30px rgba(53,45,34,.07); display: grid; grid-template-columns: 76px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; min-height: 382px; overflow: hidden; padding: 0; text-align: left; transition: border-color 180ms var(--site-ease), box-shadow 180ms var(--site-ease); }
+.guide-book-card.rosens { --guide-book-accent: #536b58; }
+.guide-book-card.ails { --guide-book-accent: var(--site-warning); grid-column: 1 / -1; min-height: 292px; width: 100%; }
+.guide-book-spine { align-items: center; background: var(--site-primary-fill); border-right: 1px solid color-mix(in srgb, var(--site-primary-fill) 74%, black); color: var(--site-on-primary); display: flex; flex-direction: column; grid-column: 1; grid-row: 1 / -1; justify-content: space-between; padding: 28px 12px; position: relative; }
+.guide-book-spine::after { border-left: 1px solid rgba(255,255,255,.12); border-right: 1px solid rgba(0,0,0,.16); bottom: 0; content: ""; left: 12px; position: absolute; top: 0; width: 4px; }
+.guide-book-card.rosens .guide-book-spine { background: #384841; }
+.guide-book-card.ails .guide-book-spine { background: var(--site-warning); border-right-color: color-mix(in srgb, var(--site-warning) 76%, black); color: var(--site-on-primary); }
+.guide-book-spine i { font-family: var(--site-display); font-size: 34px; font-style: normal; }
+.guide-book-spine b { font-family: var(--site-display); font-size: 13px; font-weight: 400; letter-spacing: .08em; }
+.guide-book-copy { display: flex; flex-direction: column; grid-column: 2; grid-row: 1; min-width: 0; padding: clamp(26px, 4vw, 40px); }
+.guide-book-meta { align-items: center; display: flex; flex-wrap: wrap; gap: 8px 13px; }
+.guide-book-meta em { color: var(--site-primary); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .14em; }
+.guide-book-card.rosens .guide-book-meta em { color: var(--site-success); }
+.guide-book-card.ails .guide-book-meta em { color: var(--site-warning); }
+.guide-book-meta small { color: var(--site-muted); font-family: var(--site-display); font-size: 12px; letter-spacing: .08em; }
+.guide-book-copy > h2 { font-family: var(--site-display); font-size: clamp(27px, 3vw, 38px); font-weight: 500; letter-spacing: -.02em; line-height: 1.12; margin: 24px 0 16px; }
+.guide-book-description { color: var(--site-muted); font-size: 12px; line-height: 1.8; max-width: 380px; }
+.guide-book-status { align-items: center; color: #536b58; display: flex; font-size: 12px; gap: 7px; margin-top: 20px; }
+.guide-book-status i { background: #68846e; border-radius: 50%; height: 6px; width: 6px; }
+.guide-book-status.pending { color: var(--site-muted); }
+.guide-book-status.pending i { background: var(--site-line-strong); }
+.guide-book-card.ails .guide-book-status { color: var(--site-warning); }
+.guide-book-card.ails .guide-book-status i { background: var(--site-warning); }
+.guide-book-routes { border-top: 1px solid var(--site-line); display: grid; grid-column: 2; grid-row: 2; grid-template-columns: minmax(0, 1fr) minmax(145px, 36%); }
+.guide-book-route { align-items: center; background: transparent; border: 0; color: var(--guide-book-accent); cursor: pointer; display: grid; gap: 10px; min-height: 64px; padding: 10px 16px; text-align: left; transition: background 160ms var(--site-ease); width: 100%; }
+.guide-book-route:hover { background: color-mix(in srgb, var(--guide-book-accent) 7%, transparent); }
+.guide-book-route:active { transform: none; }
+.guide-book-route:focus-visible { outline-offset: -4px; }
+.guide-book-route span, .guide-book-route small, .guide-book-route strong { display: block; min-width: 0; }
+.guide-book-route small { color: var(--site-muted); font-size: 12px; letter-spacing: .04em; }
+.guide-book-route strong { font-family: var(--site-display); font-size: 12px; font-weight: 600; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.guide-book-route-chapter { grid-template-columns: minmax(0, 1fr) 17px; }
+.guide-book-route-overview { background: color-mix(in srgb, var(--guide-book-accent) 6%, transparent); border-left: 1px solid var(--site-line); grid-template-columns: 18px minmax(0, 1fr) 16px; }
+.guide-book-route-overview > svg:first-child { color: var(--guide-book-accent); }
+.guide-book-route-overview > svg:last-child { color: var(--site-success); }
+.guide-book-routes-ails { grid-template-columns: minmax(0, 1.2fr) minmax(180px, .9fr) minmax(180px, .9fr); }
+.guide-book-route-ails-content { grid-column: 1; }
+.guide-book-route-compact { background: color-mix(in srgb, var(--guide-book-accent) 5%, transparent); border-left: 1px solid var(--site-line); gap: 7px; grid-template-columns: 16px minmax(0, 1fr) 14px; padding: 8px 13px; }
+.guide-book-route-compact > svg:first-child { color: var(--guide-book-accent); }
+.guide-book-route-compact > svg:last-child { color: var(--site-success); }
+.guide-book-route-ails-practice { grid-column: 2; }
+.guide-book-route-ails-answers { grid-column: 3; }
+.guide-hub-note { border-bottom: 1px solid var(--site-line); border-top: 1px solid var(--site-line); display: grid; gap: 0; grid-template-columns: repeat(3, 1fr); margin-top: clamp(38px, 5vw, 58px); }
+.guide-hub-note > div { align-items: center; display: flex; gap: 12px; min-height: 86px; padding: 15px clamp(10px, 2vw, 22px); }
+.guide-hub-note > div + div { border-left: 1px solid var(--site-line); }
+.guide-hub-note svg { color: var(--site-primary); flex: 0 0 auto; height: 18px; width: 18px; }
+.guide-hub-note span, .guide-hub-note strong, .guide-hub-note small { display: block; }
+.guide-hub-note strong { font-family: var(--site-display); font-size: 13px; }
+.guide-hub-note small { color: var(--site-muted); font-size: 12px; line-height: 1.5; margin-top: 3px; }
+.guide-hub-source { align-items: center; color: var(--site-muted); display: flex; flex-wrap: wrap; font-size: 12px; gap: 8px 20px; justify-content: space-between; padding-top: 18px; }
+.guide-hub-source a { color: var(--site-muted); text-underline-offset: 3px; }
+.guide-hub-source a:hover { color: var(--site-primary); }
+
+.guide-library { display: flex; flex-direction: column; }
+.guide-library > header, .guide-search, .guide-filters { flex: 0 0 auto; }
+.guide-chapter-list { flex: 1 1 auto; height: auto; min-height: 0; }
+.guide-textbook-switcher { align-items: center; background: var(--site-surface-muted); border: 1px solid var(--site-line); border-radius: 8px; display: grid; gap: 8px; grid-column: 1 / -1; grid-template-columns: 17px minmax(0, 1fr) 14px; min-height: 48px; padding: 6px 9px; text-align: left; width: 100%; }
+.guide-textbook-switcher > svg:first-child { color: var(--site-primary); }
+.guide-textbook-switcher span, .guide-textbook-switcher small, .guide-textbook-switcher strong { display: block; min-width: 0; }
+.guide-textbook-switcher small { color: var(--site-muted); font-size: 12px; }
+.guide-textbook-switcher strong { font-family: var(--site-display); font-size: 12px; font-weight: 500; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.guide-textbook-switcher:hover { background: var(--site-surface-hover); border-color: color-mix(in srgb, var(--site-primary) 30%, var(--site-line)); }
+.guide-textbook-switcher-rail { grid-column: auto; }
+
+.rosens-guide-filters { grid-template-columns: 1fr; }
+.rosens-guide-filters select:first-child { grid-column: auto; }
+.rosens-section-label { align-items: baseline; display: grid; gap: 3px; }
+.rosens-section-label span { letter-spacing: .06em; }
+.rosens-guide-page .guide-chapter-list > button > span { font-size: 12px; }
+.rosens-guide-page .guide-chapter-list > button small { font-size: 12px; }
+.rosens-chapter-header > p { max-width: 920px; }
+.rosens-import-placeholder { margin-top: 26px; overflow: hidden; position: relative; }
+.rosens-placeholder-mark { align-items: baseline; border: 1px solid var(--site-line); border-radius: 7px; color: var(--site-primary); display: flex; font-family: var(--site-display); gap: 3px; justify-content: center; min-height: 52px; min-width: 52px; padding: 10px; }
+.rosens-placeholder-mark span { font-size: 24px; }
+.rosens-placeholder-mark small { font-size: 12px; }
+.rosens-import-placeholder > p:first-of-type { margin-top: 16px; }
+.rosens-import-placeholder > p:last-of-type { margin-bottom: 18px; }
+
+@media (max-width: 1000px) {
+  .guide-hub-page { border-left: 0; border-radius: 0; border-right: 0; margin-top: 20px; padding-inline: max(22px, var(--site-gutter)); width: 100%; }
+  .guide-book-grid { grid-template-columns: 1fr; }
+  .guide-book-card { min-height: 340px; }
+  .guide-book-card.ails { grid-column: auto; min-height: 310px; }
+  .guide-hub-note { grid-template-columns: 1fr; }
+  .guide-hub-note > div + div { border-left: 0; border-top: 1px solid var(--site-line); }
+  .guide-hub-note > div { min-height: 68px; }
+  .guide-hub-source { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 600px) {
+  .guide-hub-page { margin-bottom: 74px; padding-block: 34px 30px; }
+  .guide-hub-intro h1 { font-size: clamp(31px, 10vw, 42px); }
+  .guide-hub-intro h1 br { display: none; }
+  .guide-book-card { grid-template-columns: 54px minmax(0, 1fr); min-height: 330px; }
+  .guide-book-spine { padding: 22px 8px; }
+  .guide-book-spine::after { left: 8px; }
+  .guide-book-spine i { font-size: 27px; }
+  .guide-book-copy { padding: 23px 18px; }
+  .guide-book-copy > h2 { font-size: 27px; margin-top: 20px; }
+  .guide-book-description { font-size: 12px; }
+  .guide-book-routes { grid-template-columns: minmax(0, 1fr) minmax(118px, 39%); }
+  .guide-book-route { min-height: 58px; padding: 9px 12px; }
+  .guide-book-route-overview { gap: 7px; grid-template-columns: 16px minmax(0, 1fr) 14px; }
+  .guide-book-route strong { font-size: 12px; }
+  .guide-book-routes-ails { grid-template-columns: 1fr 1fr; grid-template-rows: 58px 58px; }
+  .guide-book-route-ails-content { grid-column: 1 / -1; grid-row: 1; }
+  .guide-book-route-ails-practice { border-left: 0; border-top: 1px solid var(--site-line); grid-column: 1; grid-row: 2; }
+  .guide-book-route-ails-answers { border-top: 1px solid var(--site-line); grid-column: 2; grid-row: 2; }
+  .guide-book-route-compact { min-height: 58px; }
+  .guide-book-route strong { overflow: visible; text-overflow: clip; white-space: normal; }
+}
+/* ===== End textbook learning library ===== */

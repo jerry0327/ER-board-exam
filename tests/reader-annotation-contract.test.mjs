@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const contentToolsUrl = new URL("../app/components/content-annotation-tools.tsx", import.meta.url);
 
@@ -29,7 +30,7 @@ test("reader delegates annotations to the shared source-aware implementation", a
 test("shared annotation overlays escape sticky reading rails and keep every action visible", async () => {
   const [tools, css] = await Promise.all([
     readFile(contentToolsUrl, "utf8"),
-    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readLegacyCss(),
   ]);
   assert.match(tools, /createPortal\(overlays, document\.body\)/u);
   assert.match(tools, /selection-action-buttons/u);
@@ -85,7 +86,7 @@ test("tables and heading levels are saved and rendered as backward-compatible ma
     readFile(new URL("../app/views/notebook-view.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/hooks/use-annotations.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/api/annotations/route.ts", import.meta.url), "utf8"),
-    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readLegacyCss(),
   ]);
   assert.match(types, /AnnotationKind = "question_note" \| "highlight" \| "excerpt"/u);
   assert.match(markdown, /markdownHeadingSection\(normalized, start, end, level, headingRanges\)/u);

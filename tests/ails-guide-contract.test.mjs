@@ -12,6 +12,7 @@ import {
   migrateAilsQuestionProgress,
   parseAilsQuestionProgress,
 } from "../app/hooks/use-ails-question-progress.ts";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const app = await readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8");
 const hub = await readFile(new URL("../app/views/guide-hub-view.tsx", import.meta.url), "utf8");
@@ -21,7 +22,7 @@ const questionCenter = await readFile(new URL("../app/views/ails-question-center
 const progressHook = await readFile(new URL("../app/hooks/use-ails-question-progress.ts", import.meta.url), "utf8");
 const questionLib = await readFile(new URL("../app/lib/ails-questions.ts", import.meta.url), "utf8");
 const importer = await readFile(new URL("../scripts/import-ails-review.mjs", import.meta.url), "utf8");
-const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+const css = await readLegacyCss();
 const data = parseAilsReview(JSON.parse(await readFile(new URL("../public/data/ails/review.json", import.meta.url), "utf8")));
 
 test("presents AILS as a full learning-guide card without adding global navigation", () => {

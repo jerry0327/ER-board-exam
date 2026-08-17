@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const app = await readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8");
 const guide = await readFile(new URL("../app/views/guide-view.tsx", import.meta.url), "utf8");
@@ -8,7 +9,7 @@ const learningGuide = await readFile(new URL("../app/views/learning-guide-view.t
 const dialog = await readFile(new URL("../app/components/learning-data-dialog.tsx", import.meta.url), "utf8");
 const sheet = await readFile(new URL("../app/components/question-sheet.tsx", import.meta.url), "utf8");
 const markdown = await readFile(new URL("../app/components/markdown-content.tsx", import.meta.url), "utf8");
-const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+const css = await readLegacyCss();
 const instrument = await readFile(new URL("../app/site.css", import.meta.url), "utf8");
 const guideReaderTools = await readFile(new URL("../app/components/guide-reader-tools.tsx", import.meta.url), "utf8");
 

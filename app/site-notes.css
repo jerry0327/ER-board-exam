@@ -1,0 +1,66 @@
+/*
+ * Wrong-answer and notebook structural rules.
+ *
+ * Migrated from the former globals.css compatibility bucket. Keep visual
+ * decisions on canonical --site-* tokens; site.css remains the sole runtime
+ * stylesheet entry and cascade authority.
+ */
+/* Wrong-answer notebook */
+.review-page .page-intro { margin-bottom: 28px; }
+.review-tabs { display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr); }
+.review-tabs button { align-items: center; background: rgba(251,248,241,.58); border: 1px solid var(--site-line); border-radius: 9px; cursor: pointer; display: flex; gap: 9px; min-height: 62px; padding: 0 16px; }
+.review-tabs button svg { color: var(--site-success); }
+.review-tabs button strong { color: var(--site-primary); font-family: var(--site-display); font-size: 20px; margin-left: auto; }
+.review-tabs button.active { background: var(--site-success-soft); border-color: var(--site-success); }
+.review-tabs button.active svg { color: var(--site-primary); }
+.review-tools { align-items: center; display: flex; gap: 18px; justify-content: space-between; margin: 18px 0; }
+.review-search { align-items: center; background: rgba(255,255,255,.4); border: 1px solid var(--site-line); border-radius: 8px; display: flex; flex: 1; gap: 8px; margin: 0; max-width: 520px; min-height: 44px; padding: 0 12px; }
+.review-search input { background: transparent; border: 0; flex: 1; outline: 0; }
+.review-tools > div { align-items: center; display: flex; gap: 12px; }
+.review-tools > div > span { color: var(--site-muted); font-size: 12px; }
+.review-tools .primary-button { min-height: 44px; padding-inline: 16px; }
+.review-tools .primary-button:disabled { cursor: not-allowed; opacity: .42; transform: none; }
+.review-list { display: grid; gap: 10px; }
+.review-card { align-items: center; border-radius: 10px; display: grid; gap: 17px; grid-template-columns: auto minmax(0, 1fr) auto; padding: 20px; }
+.review-status-mark { align-items: center; background: var(--site-success-soft); border-radius: 50%; color: #5b705e; display: flex; height: 40px; justify-content: center; width: 40px; }
+.review-card-copy > span { color: var(--site-primary); font-size: 12px; }
+.review-card-copy h2 { font-family: var(--site-display); font-size: 17px; margin: 4px 0; }
+.review-card-copy p { color: var(--site-muted); display: -webkit-box; font-size: 12px; line-height: 1.55; margin: 0; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.review-card-copy small { color: var(--site-muted); display: block; font-size: 12px; margin-top: 8px; }
+.review-card-actions { align-items: center; display: flex; flex-direction: column; gap: 6px; }
+.review-card-actions .outline-button { min-height: 40px; padding: 0 13px; }
+.review-card-actions .text-action { font-size: 12px; }
+.review-load-more { align-items: center; display: flex; flex-direction: column; gap: 9px; padding: 24px 0 5px; }
+.review-load-more span { color: var(--site-muted); font-size: 12px; }
+.review-load-more .outline-button { min-height: 42px; }
+
+/* Personal notebook */
+.notebook-intro { align-items: end; display: flex; justify-content: space-between; margin-bottom: 17px; }
+.notebook-export { display: flex; gap: 8px; }
+.notebook-export .outline-button { min-height: 40px; padding: 0 13px; }
+.annotation-sync-note { color: var(--site-muted); font-size: 12px; margin: 0 0 18px; }
+.annotation-sync-note.error { color: var(--site-primary); }
+.notebook-tools { align-items: center; display: flex; gap: 13px; justify-content: space-between; margin-bottom: 18px; }
+.notebook-tools > label { align-items: center; background: rgba(255,255,255,.42); border: 1px solid var(--site-line); border-radius: 8px; display: flex; gap: 8px; min-height: 45px; padding: 0 12px; width: min(500px, 100%); }
+.notebook-tools > label svg { color: var(--site-success); }
+.notebook-tools input { background: transparent; border: 0; flex: 1; min-width: 0; outline: 0; }
+.notebook-tools > div { display: flex; gap: 5px; }
+.notebook-tools > div button { background: rgba(255,255,255,.34); border: 1px solid var(--site-line); border-radius: 99px; font-size: 12px; min-height: 36px; padding: 0 11px; }
+.notebook-tools > div button[aria-pressed="true"] { background: var(--site-success-soft); border-color: var(--site-success); color: #4d6351; }
+.notebook-list { display: grid; gap: 10px; }
+.notebook-card { align-items: start; border-radius: 10px; display: grid; gap: 16px; grid-template-columns: 40px minmax(0, 1fr) auto; padding: 20px; }
+.notebook-kind { align-items: center; background: #efe6b8; border-radius: 50%; color: #6d5b22; display: flex; height: 40px; justify-content: center; width: 40px; }
+.notebook-kind svg { height: 19px; width: 19px; }
+.notebook-card-copy > span { color: var(--site-primary); font-size: 12px; }
+.notebook-card-copy h2 { font-family: var(--site-display); font-size: 17px; margin: 4px 0 10px; }
+.notebook-card-copy blockquote { background: rgba(239,230,184,.36); border-bottom: 1px solid var(--site-line); border-top: 1px solid var(--site-line); color: #4a4c43; line-height: 1.7; margin: 0 0 10px; padding: 10px 12px; }
+.notebook-card-copy > p { line-height: 1.7; margin: 0 0 8px; white-space: pre-wrap; }
+.notebook-card-copy .empty-note { color: var(--site-muted); font-size: 12px; }
+.notebook-card-copy small { color: var(--site-muted); font-size: 12px; }
+.notebook-card-actions { align-items: flex-end; display: flex; flex-direction: column; gap: 5px; }
+.notebook-card-actions button { align-items: center; background: transparent; border: 0; color: var(--site-muted); display: flex; font-size: 12px; gap: 4px; min-height: 32px; }
+.notebook-card-actions button:hover { color: var(--site-primary); }
+.notebook-editor textarea { background: rgba(255,255,255,.55); border: 1px solid var(--site-line); border-radius: 7px; line-height: 1.6; min-height: 110px; padding: 10px; resize: vertical; width: 100%; }
+.notebook-editor > div { display: flex; gap: 6px; justify-content: flex-end; margin-top: 6px; }
+.notebook-editor button { background: transparent; border: 0; min-height: 36px; padding: 0 12px; }
+.notebook-editor .primary-button { color: white; }

@@ -1,5 +1,15 @@
 @import "./katex-woff2.css" layer(vendor);
-@import "./globals.css" layer(legacy);
+@import "./site-foundation.css" layer(legacy);
+@import "./site-learning-library.css" layer(legacy);
+@import "./site-practice.css" layer(legacy);
+@import "./site-browse.css" layer(legacy);
+@import "./site-reader.css" layer(legacy);
+@import "./site-guide.css" layer(legacy);
+@import "./site-notes.css" layer(legacy);
+@import "./site-rest.css" layer(legacy);
+@import "./site-analytics.css" layer(legacy);
+@import "./site-responsive.css" layer(legacy);
+@import "./site-interactions.css" layer(legacy);
 @import "./analytics-map.css" layer(legacy);
 @import "./board-prep.css" layer(legacy);
 @import "./recognized-courses.css" layer(legacy);
@@ -75,6 +85,8 @@
     --site-wide-max: 2160px;
     --site-reading-max: 850px;
     --site-gutter: clamp(24px, 4vw, 72px);
+    --site-page-top: clamp(36px, 4vw, 68px);
+    --site-page-bottom: clamp(90px, 9vw, 150px);
     --site-header-height: 78px;
     --site-bottom-nav-height: 0px;
     --site-z-header: 80;
@@ -98,42 +110,6 @@
     --site-ease: cubic-bezier(.2, .72, .2, 1);
     --site-grid: rgba(82, 69, 52, .028);
 
-    /* Compatibility aliases for frozen structural modules. */
-    --stone: var(--site-canvas);
-    --paper: var(--site-paper);
-    --paper-deep: var(--site-paper-soft);
-    --ink: var(--site-ink);
-    --muted: var(--site-muted);
-    --sage: var(--site-success);
-    --sage-pale: var(--site-success-soft);
-    --oxblood: var(--site-primary);
-    --oxblood-dark: var(--site-primary-strong);
-    --taupe: var(--site-line-strong);
-    --line: var(--site-line);
-    --accent-fill: var(--site-primary-fill);
-    --on-accent: var(--site-on-primary);
-    --surface-muted: var(--site-surface-muted);
-    --surface-raised: var(--site-surface-raised);
-    --surface-input: var(--site-surface-input);
-    --surface-hover: var(--site-surface-hover);
-    --warning-bg: var(--site-warning-soft);
-    --warning-text: var(--site-warning);
-    --paper-shadow: var(--site-shadow-low);
-    --paper-edge: var(--site-line);
-    --overlay-scrim: var(--site-scrim);
-    --overlay-panel-shadow: var(--site-shadow-overlay);
-    --drawer-panel-shadow: var(--site-shadow-drawer);
-    --bottom-sheet-shadow: var(--site-shadow-sheet);
-    --panel-radius: var(--site-panel-radius);
-    --page-max-width: var(--site-max);
-    --page-inner-width: var(--site-max);
-    --page-gutter: var(--site-gutter);
-    --page-top: clamp(36px, 4vw, 68px);
-    --page-bottom: clamp(90px, 9vw, 150px);
-    --motion-standard: var(--site-ease);
-    --motion-enter: var(--site-ease);
-    --serif: var(--site-display);
-    --sans: var(--site-sans);
   }
 
   html[data-theme="dark"] {
@@ -3707,12 +3683,12 @@
 
   .drawer-panel {
     border-radius: 0;
-    box-shadow: var(--drawer-panel-shadow);
+    box-shadow: var(--site-shadow-drawer);
   }
 
   .bottom-sheet-panel {
     border-radius: var(--site-overlay-radius) var(--site-overlay-radius) 0 0;
-    box-shadow: var(--bottom-sheet-shadow);
+    box-shadow: var(--site-shadow-sheet);
   }
 
   .guide-outline > button[data-level="4"],
@@ -4374,7 +4350,7 @@
   .site-drawer {
     background: var(--site-paper);
     border-left: 1px solid var(--site-line);
-    box-shadow: var(--drawer-panel-shadow);
+    box-shadow: var(--site-shadow-drawer);
     color: var(--site-ink);
     display: flex;
     flex-direction: column;

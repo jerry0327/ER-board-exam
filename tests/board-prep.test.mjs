@@ -414,7 +414,7 @@ test("view keeps evidence collapsed after completion and uses the account-backed
   assert.match(css, /\.board-prep-page\s*\{[^}]*align-content:\s*start;[^}]*grid-auto-rows:\s*max-content;/su);
   assert.match(css, /\.board-prep-intro\s*\{[^}]*grid-template-areas:\s*"copy progress"\s*"controls controls";/su);
   assert.match(css, /\.board-prep-intro\s*\{[^}]*padding:\s*0;/su);
-  assert.match(css, /\.board-prep-intro\s*\{[^}]*--board-prep-intro-muted:\s*color-mix\(in srgb, var\(--muted\)[^}]*var\(--ink\)\);/su);
+  assert.match(css, /\.board-prep-intro\s*\{[^}]*--board-prep-intro-muted:\s*color-mix\(in srgb, var\(--site-muted\)[^}]*var\(--site-ink\)\);/su);
   assert.match(css, /@media \(max-width: 720px\)[\s\S]*?\.board-prep-intro\s*\{[^}]*grid-template-areas:\s*"copy"\s*"controls"\s*"progress";/su);
   const laptopBreakpointCss = css.slice(css.indexOf("@media (max-width: 1120px)"), css.indexOf("@media (max-width: 920px)"));
   assert.doesNotMatch(laptopBreakpointCss, /\.board-prep-workspace-tabs\s*\{/u, "desktop navigation must stay on one row at common laptop widths");
@@ -443,7 +443,7 @@ test("view keeps evidence collapsed after completion and uses the account-backed
   assert.doesNotMatch(css, /\.remoc-region-tabs/u);
   assert.match(recognized, /className="recognized-tools-panel paper-card"[\s\S]*?className="recognized-transfer-row"[\s\S]*?className="recognized-filters"/u);
   assert.doesNotMatch(recognized, /className="(?:recognized-transfer-row|recognized-filters) paper-card"/u);
-  assert.match(recognizedCss, /\.recognized-filters\s*\{[^}]*border-top:\s*1px solid var\(--line\);/su);
+  assert.match(recognizedCss, /\.recognized-filters\s*\{[^}]*border-top:\s*1px solid var\(--site-line\);/su);
   assert.match(recognizedCss, /\.checklist-evidence/u);
   assert.match(recognizedCss, /\.recognized-evidence/u);
   assert.doesNotMatch(css, /@import\s+["']\.\/globals\.css/u);

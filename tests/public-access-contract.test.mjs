@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 test("anonymous visitors keep core study data in their own browser", async () => {
   const [progress, guide, annotations, boardPrep, recognized] = await Promise.all([
@@ -35,7 +36,7 @@ test("anonymous board-prep screens do not expose server-only evidence controls",
 test("public-mode copy keeps storage mechanics out of the reset flow", async () => {
   const [dialog, css, app] = await Promise.all([
     readFile(new URL("../app/components/learning-data-dialog.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readLegacyCss(),
     readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(dialog, /此瀏覽器|已同步|尚未同步/u);

@@ -2,10 +2,20 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const [practice, practiceCss, globalCss, boardCss, recognizedCss, spotlightCss, handoff, annotationTools, annotationDrawer, recognizedArea, spotlight, browse, themeToggle, reader, guide, rosensGuide, guideReaderTools, learningData, remoc] = await Promise.all([
+async function readLegacyCss() {
+  const siteCss = await readFile(new URL("../app/site.css", import.meta.url), "utf8");
+  const legacyImports = [...siteCss.matchAll(/^@import\s+"\.\/([^"]+\.css)"\s+layer\(legacy\);$/gmu)]
+    .map((match) => match[1]);
+  const sources = await Promise.all(
+    legacyImports.map((file) => readFile(new URL(`../app/${file}`, import.meta.url), "utf8")),
+  );
+  return sources.join("\n");
+}
+
+const [practice, practiceCss, legacyCss, boardCss, recognizedCss, spotlightCss, handoff, annotationTools, annotationDrawer, recognizedArea, spotlight, browse, themeToggle, reader, guide, rosensGuide, guideReaderTools, learningData, remoc] = await Promise.all([
   readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/practice-tools.css", import.meta.url), "utf8"),
-  readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  readLegacyCss(),
   readFile(new URL("../app/board-prep.css", import.meta.url), "utf8"),
   readFile(new URL("../app/recognized-courses.css", import.meta.url), "utf8"),
   readFile(new URL("../app/spotlight.css", import.meta.url), "utf8"),
@@ -38,17 +48,17 @@ test("adjacent practice tools share one paper panel instead of inventing nested 
   assert.match(practice, /className="quiet-button"[\s\S]{0,180}aria-pressed=\{eliminated\}/u);
   assert.match(practiceCss, /\.practice-question-tools\s*\{[^}]*gap:\s*0;[^}]*overflow:\s*hidden;/su);
   assert.doesNotMatch(practiceCss, /\.practice-question-tools\s*\{[^}]*(?:background|border-radius|box-shadow):/su);
-  assert.match(practiceCss, /\.practice-scratchpad-tool\s*\{[^}]*border-top:\s*1px solid var\(--line\);/su);
+  assert.match(practiceCss, /\.practice-scratchpad-tool\s*\{[^}]*border-top:\s*1px solid var\(--site-line\);/su);
   assert.doesNotMatch(practiceCss, /\.practice-elimination-tool,\s*\.practice-scratchpad-tool\s*\{[^}]*(?:background|box-shadow|border-radius):/su);
   assert.match(siteCss, /\.primary-button,\s*\.quiet-button,\s*\.outline-button,\s*\.text-action\s*\{[\s\S]*?border-radius:\s*var\(--site-radius\);/u);
   assert.match(practiceCss, /@media \(max-width: 760px\)[\s\S]*?\.practice-elimination-buttons \.quiet-button\s*\{[^}]*min-height:\s*52px;/u);
   assert.match(practiceCss, /@media \(max-width: 390px\)[\s\S]*?\.practice-elimination-buttons \.quiet-button\s*\{[^}]*font-size:\s*0;/u);
-  assert.match(practiceCss, /\.practice-scratchpad-editor footer \.text-action\s*\{[^}]*color:\s*var\(--muted\);/su);
+  assert.match(practiceCss, /\.practice-scratchpad-editor footer \.text-action\s*\{[^}]*color:\s*var\(--site-muted\);/su);
   assert.match(practiceCss, /\.practice-scratchpad-toggle:focus-visible\s*\{[^}]*outline-offset:\s*-3px;/su);
 });
 
 test("dialogs, sheets, drawers, and floating action bars use the shared overlay language", () => {
-  for (const token of ["overlay-scrim", "overlay-panel-shadow", "drawer-panel-shadow", "bottom-sheet-shadow", "panel-radius"]) {
+  for (const token of ["site-scrim", "site-shadow-overlay", "site-shadow-drawer", "site-shadow-sheet", "site-panel-radius"]) {
     assert.match(siteCss, new RegExp(`--${token}:`, "u"));
   }
   for (const selector of ["learning-data-backdrop", "practice-dialog-backdrop", "reader-modal-backdrop", "annotation-panel-backdrop", "reader-drawer-backdrop", "guide-drawer-backdrop", "mobile-reading-tools-backdrop"]) {
@@ -57,7 +67,7 @@ test("dialogs, sheets, drawers, and floating action bars use the shared overlay 
   assert.match(siteCss, /\.drawer-backdrop,[\s\S]*?\.annotation-panel-backdrop\s*\{[^}]*background:\s*var\(--site-scrim\);/u);
   assert.match(siteCss, /\.overlay-panel,\s*\.drawer-panel,\s*\.bottom-sheet-panel\s*\{[^}]*background:\s*var\(--site-paper\);/su);
   assert.match(siteCss, /\.overlay-panel\s*\{[^}]*box-shadow:\s*var\(--site-shadow-overlay\);/su);
-  assert.match(globalCss, /\.floating-action-bar\s*\{[^}]*background:\s*var\(--accent-fill\);[^}]*color:\s*var\(--on-accent\);/su);
+  assert.match(legacyCss, /\.floating-action-bar\s*\{[^}]*background:\s*var\(--site-primary-fill\);[^}]*color:\s*var\(--site-on-primary\);/su);
   assert.match(annotationTools, /className="selection-action-bar floating-action-bar"/u);
   assert.match(annotationTools, /import AnnotationDrawer from "\.\/annotation-drawer"/u);
   assert.match(reader, /import ContentAnnotationTools, \{ type ContentAnnotationSource \} from "\.\.\/components\/content-annotation-tools"/u);
@@ -80,11 +90,11 @@ test("dialogs, sheets, drawers, and floating action bars use the shared overlay 
   assert.match(learningData, /className="quiet-button"[\s\S]{0,120}>取消<\/button>/u);
   assert.match(learningData, /className=\{confirming \? "danger-button" : "primary-button"\}/u);
   assert.match(siteCss, /\.reader-utility-inner,\s*\.guide-utility-inner\s*\{[^}]*background:\s*var\(--site-paper\);[^}]*border-color:\s*var\(--site-line\);/su);
-  assert.doesNotMatch(globalCss, /\.(?:browse-selection-bar|selection-action-bar)\s*\{[^}]*border-radius:/su);
+  assert.doesNotMatch(legacyCss, /\.(?:browse-selection-bar|selection-action-bar)\s*\{[^}]*border-radius:/su);
   assert.doesNotMatch(recognizedCss, /\.recognized-selection-bar\s*\{[^}]*border-radius:/su);
-  assert.match(recognizedCss, /\.recognized-dialog::backdrop\s*\{[^}]*background:\s*var\(--overlay-scrim\);/su);
-  assert.doesNotMatch(recognizedCss, /\.recognized-dialog::backdrop\s*\{[^}]*var\(--ink\)/su);
-  assert.doesNotMatch(recognizedCss, /\.recognized-selection-bar\s*\{[^}]*background:\s*var\(--ink\)/su);
+  assert.match(recognizedCss, /\.recognized-dialog::backdrop\s*\{[^}]*background:\s*var\(--site-scrim\);/su);
+  assert.doesNotMatch(recognizedCss, /\.recognized-dialog::backdrop\s*\{[^}]*var\(--site-ink\)/su);
+  assert.doesNotMatch(recognizedCss, /\.recognized-selection-bar\s*\{[^}]*background:\s*var\(--site-ink\)/su);
   assert.match(handoff, /題庫與學習指引的筆記屬同一功能/u);
   assert.match(handoff, /必須共用同一套 annotation 資料管線、右側筆記 drawer、Markdown 預覽、筆記本匯入/u);
   assert.match(handoff, /詳解閱讀與學習指引的字級、精要／詳細選擇器、稍後、讀完、收藏、筆記、上一／下一/u);
@@ -137,8 +147,8 @@ test("analytics maps reuse shared surfaces and controls", () => {
   );
   assert.doesNotMatch(analyticsCss, /(?:background|border(?:-color)?|box-shadow|color):\s*(?:#[0-9a-f]{3,8}|rgba?\(|white\b)/iu);
   assert.doesNotMatch(analytics, /#[0-9a-f]{3,8}/iu);
-  assert.doesNotMatch(globalCss, /\.topic-map-canvas/u);
-  assert.doesNotMatch(globalCss, /\.topic-map-card\s*\{[^}]*(?:background|border(?:-[\w-]+)?|border-radius|box-shadow)\s*:/su);
+  assert.doesNotMatch(legacyCss, /\.topic-map-canvas/u);
+  assert.doesNotMatch(legacyCss, /\.topic-map-card\s*\{[^}]*(?:background|border(?:-[\w-]+)?|border-radius|box-shadow)\s*:/su);
   assert.doesNotMatch(analyticsCss, /data-theme(?:-mode)?=/u);
 });
 
@@ -147,7 +157,7 @@ test("page styles do not create fallback palettes or independent panel systems",
   assert.doesNotMatch(`${boardCss}\n${recognizedCss}`, /var\(--(?:board-prep|prep)-(?:sage|gold)/u);
   assert.doesNotMatch(spotlightCss, /var\(--[^,)]+,/u);
   assert.doesNotMatch(spotlightCss, /backdrop-filter|border-radius:\s*17px|110px/u);
-  assert.match(spotlightCss, /\.spotlight-overlay\s*\{[^}]*background:\s*var\(--overlay-scrim\);/su);
+  assert.match(spotlightCss, /\.spotlight-overlay\s*\{[^}]*background:\s*var\(--site-scrim\);/su);
   assert.match(spotlight, /className="spotlight-dialog overlay-panel"/u);
   assert.match(spotlight, /className="quiet-button spotlight-trigger"/u);
   assert.match(spotlight, /className="icon-button spotlight-close"/u);
@@ -178,14 +188,15 @@ test("page styles do not create fallback palettes or independent panel systems",
   assert.doesNotMatch(recognizedArea, /className="(?:recognized-transfer-row|recognized-filters) paper-card"/u);
   assert.doesNotMatch(`${boardCss}\n${recognizedCss}\n${spotlightCss}`, /box-shadow:\s*0\s+\d+px\s+\d+px\s+rgba/u);
   assert.doesNotMatch(`${boardCss}\n${recognizedCss}\n${spotlightCss}`, /(?:background|color):\s*(?:#[0-9a-f]{3,8}|white)\b/iu);
-  assert.doesNotMatch(globalCss, /\.raw-draft-preference\s*>\s*label\s*\{[^}]*(?:linear-gradient|translateY)/su);
+  assert.doesNotMatch(legacyCss, /\.raw-draft-preference\s*>\s*label\s*\{[^}]*(?:linear-gradient|translateY)/su);
   assert.deepEqual(
     [...layout.matchAll(/^import "([^"]+\.css)";$/gmu)].map((match) => match[1]),
     ["./site.css"],
   );
-  for (const stylesheet of ["globals", "analytics-map", "board-prep", "recognized-courses", "practice-tools", "spotlight"]) {
+  for (const stylesheet of ["analytics-map", "board-prep", "recognized-courses", "practice-tools", "spotlight"]) {
     assert.match(siteCss, new RegExp(`@import "\\./${stylesheet}\\.css" layer\\(legacy\\);`, "u"));
   }
+  assert.doesNotMatch(siteCss, /@import "\.\/globals\.css"/u);
   assert.match(
     siteCss,
     /^@layer a11y, vendor, legacy, site-tokens, site-base, site-components, site-layout, site-features, site-utilities;/mu,
@@ -212,8 +223,8 @@ test("REMOC uses one unified filter bar and leaves its visual state to site.css"
   assert.match(boardCss, /\.remoc-filter-strip\s*\{[^}]*overflow-x:\s*auto;/su);
   assert.match(siteCss, /\.remoc-filter-group\s*>\s*button\[aria-pressed="true"\]\s*\{[^}]*background:\s*color-mix\([^}]*var\(--site-success-soft\)[^}]*border-color:\s*var\(--site-success\);[^}]*color:\s*var\(--site-primary\);/su);
   assert.match(siteCss, /\.remoc-filter-group\s*>\s*\.quiet-button\s*\{[^}]*flex:\s*0 0 auto;[^}]*max-width:\s*none;[^}]*min-width:\s*max-content;[^}]*width:\s*auto;/su);
-  assert.doesNotMatch(globalCss, /^\s*\.primary-button,\s*\.quiet-button\s*\{\s*width:\s*100%;\s*\}/mu);
-  assert.match(globalCss, /\.hero-actions\s*>\s*:is\(\.primary-button,\s*\.quiet-button\)\s*\{\s*width:\s*100%;\s*\}/u);
+  assert.doesNotMatch(legacyCss, /^\s*\.primary-button,\s*\.quiet-button\s*\{\s*width:\s*100%;\s*\}/mu);
+  assert.match(legacyCss, /\.hero-actions\s*>\s*:is\(\.primary-button,\s*\.quiet-button\)\s*\{\s*width:\s*100%;\s*\}/u);
 });
 
 test("handoff keeps official links dynamic and cross-year safe", () => {
@@ -241,7 +252,7 @@ test("forms reuse the shared input primitive instead of restyling fields per pag
 });
 
 test("dense study lists use editorial rows and compound searches expose one frame", () => {
-  const allCss = `${globalCss}\n${boardCss}\n${recognizedCss}\n${spotlightCss}\n${siteCss}`;
+  const allCss = `${legacyCss}\n${boardCss}\n${recognizedCss}\n${spotlightCss}\n${siteCss}`;
 
   assert.match(siteCss, /Compound search controls expose one surface/u);
   assert.match(

@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const componentUrl = new URL("../app/components/reading-variant-selector.tsx", import.meta.url);
-const stylesUrl = new URL("../app/globals.css", import.meta.url);
 
 test("shared reading selector keeps a controlled responsive matrix and mobile two-stage flow", async () => {
   const source = await readFile(componentUrl, "utf8");
@@ -34,7 +34,7 @@ test("shared reading selector keeps a controlled responsive matrix and mobile tw
 test("desktop exposes every edition-depth combination while mobile remains compact", async () => {
   const [source, css] = await Promise.all([
     readFile(componentUrl, "utf8"),
-    readFile(stylesUrl, "utf8"),
+    readLegacyCss(),
   ]);
 
   assert.match(source, /className="reading-variant-selector__desktop-matrix"/);
@@ -66,7 +66,7 @@ test("shared reading selector exposes accessible reversible and locked states", 
 test("shared reading selector staggers complexity choices and stays one row on mobile", async () => {
   const [source, css] = await Promise.all([
     readFile(componentUrl, "utf8"),
-    readFile(stylesUrl, "utf8"),
+    readLegacyCss(),
   ]);
 
   assert.match(source, /"--index": index/);

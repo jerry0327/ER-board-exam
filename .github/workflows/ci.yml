@@ -38,6 +38,9 @@ jobs:
       - name: ESLint
         run: npm run lint
 
+      - name: CSS authority
+        run: node scripts/audit-css-authority.mjs
+
   build-contracts:
     name: Build and contracts
     needs: quality

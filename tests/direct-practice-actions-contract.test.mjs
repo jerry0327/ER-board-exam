@@ -1,13 +1,14 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const app = await readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8");
 const browse = await readFile(new URL("../app/views/browse-view.tsx", import.meta.url), "utf8");
 const review = await readFile(new URL("../app/views/review-view.tsx", import.meta.url), "utf8");
 const guide = await readFile(new URL("../app/views/guide-view.tsx", import.meta.url), "utf8");
 const analytics = await readFile(new URL("../app/views/analytics-view.tsx", import.meta.url), "utf8");
-const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+const css = await readLegacyCss();
 
 test("threads the existing direct-practice launcher into every study workspace", () => {
   assert.match(app, /<BrowseView[\s\S]{0,400}onStartQuestions=\{openPracticeIds\}/);
