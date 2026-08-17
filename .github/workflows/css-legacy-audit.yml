@@ -1,0 +1,32 @@
+name: CSS legacy audit
+on:
+  workflow_dispatch:
+  push:
+    branches: [refactor/css-legacy-retirement]
+    paths:
+      - 'app/*.css'
+      - '.github/workflows/css-legacy-audit.yml'
+concurrency:
+  group: css-legacy-audit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect legacy stylesheet
+        run: |
+          echo '== SIZE =='
+          wc -lc app/globals.css app/site.css
+          echo '== SECTION COMMENTS =='
+          grep -nE '^/\*|^ \*' app/globals.css || true
+          echo '== LEGACY ALIASES =='
+          for token in paper ink muted sage oxblood taupe line serif sans surface-muted surface-raised surface-hover panel-radius motion-standard motion-enter; do
+            printf '%-18s ' "$token"
+            grep -o -- "var(--$token)" app/globals.css | wc -l
+          done
+          echo '== LITERAL VISUALS =='
+          printf 'hex colors: '; grep -Eo '#[0-9a-fA-F]{3,8}' app/globals.css | wc -l
+          printf 'rgb/rgba: '; grep -Eo 'rgba?\([^)]*\)' app/globals.css | wc -l
+          printf 'box-shadow declarations: '; grep -Eo 'box-shadow\s*:' app/globals.css | wc -l
+          printf 'Georgia references: '; grep -o 'Georgia' app/globals.css | wc -l
