@@ -1,13 +1,14 @@
 import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
 import test from "node:test";
+import { readLegacyCss } from "./css-test-utils.mjs";
 
 const root = new URL("../", import.meta.url);
 
 test("Sites uses deployable font references and the selected favicon assets", async () => {
-  const [layout, globals, faviconIco, favicon16, favicon32, favicon48] = await Promise.all([
+  const [layout, runtimeCss, faviconIco, favicon16, favicon32, favicon48] = await Promise.all([
     readFile(new URL("app/layout.tsx", root), "utf8"),
-    readFile(new URL("app/globals.css", root), "utf8"),
+    readLegacyCss(),
     stat(new URL("public/favicon.ico", root)),
     stat(new URL("public/brand/jizhuan-rosc-icon-16.png", root)),
     stat(new URL("public/brand/jizhuan-rosc-icon-32.png", root)),
@@ -15,7 +16,7 @@ test("Sites uses deployable font references and the selected favicon assets", as
   ]);
 
   assert.doesNotMatch(layout, /next\/font/);
-  assert.doesNotMatch(globals, /font-geist/);
+  assert.doesNotMatch(runtimeCss, /font-geist/);
   assert.doesNotMatch(layout, /favicon\.svg/u);
   assert.match(layout, /jizhuan-rosc-icon-16\.png/u);
   assert.match(layout, /jizhuan-rosc-icon-32\.png/u);
