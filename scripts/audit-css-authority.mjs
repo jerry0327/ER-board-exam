@@ -61,29 +61,38 @@ function filesUnder(dir) {
   }
   return result;
 }
+function reportFailure(failure) {
+  const file = failure.match(/^([^ ]+\.(?:css|ts|tsx|js|mjs))\b/u)?.[1];
+  const message = `CSS authority: ${failure}`.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
+  if (process.env.GITHUB_ACTIONS === "true") {
+    console.error(file ? `::error file=${file}::${message}` : `::error::${message}`);
+  } else {
+    console.error(message);
+  }
+}
 const site = fs.readFileSync("app/site.css", "utf8");
 const layout = fs.readFileSync("app/layout.tsx", "utf8");
 const failures = [];
 if (fs.existsSync("app/globals.css")) failures.push("app/globals.css must remain retired");
-if (site.includes("globals.css")) failures.push("site.css must not import globals.css");
+if (site.includes("globals.css")) failures.push("app/site.css must not import globals.css");
 const layoutCssImports = [...layout.matchAll(/import\s+["']([^"']+\.css)["'];?/gu)].map((match) => match[1]);
-if (layoutCssImports.length !== 1 || layoutCssImports[0] !== "./site.css") failures.push(`RootLayout CSS entry must be only ./site.css; found: ${layoutCssImports.join(", ")}`);
+if (layoutCssImports.length !== 1 || layoutCssImports[0] !== "./site.css") failures.push(`app/layout.tsx RootLayout CSS entry must be only ./site.css; found: ${layoutCssImports.join(", ")}`);
 let previousImportIndex = -1;
 for (const modulePath of modules) {
-  if (!fs.existsSync(modulePath)) { failures.push(`Missing CSS module: ${modulePath}`); continue; }
+  if (!fs.existsSync(modulePath)) { failures.push(`${modulePath} is missing`); continue; }
   const filename = modulePath.split("/").pop();
   const importStatement = `@import "./${filename}" layer(legacy);`;
   const importIndex = site.indexOf(importStatement);
   if (importIndex < 0) {
-    failures.push(`site.css missing ordered import for ${filename}`);
+    failures.push(`app/site.css is missing ordered import for ${filename}`);
     continue;
   }
-  if (importIndex <= previousImportIndex) failures.push(`site.css legacy module order changed at ${filename}`);
+  if (importIndex <= previousImportIndex) failures.push(`app/site.css legacy module order changed at ${filename}`);
   previousImportIndex = importIndex;
 }
 const firstPostMigrationLegacyImport = site.indexOf('@import "./analytics-map.css" layer(legacy);');
-if (firstPostMigrationLegacyImport < 0) failures.push("site.css analytics-map legacy import is missing");
-else if (previousImportIndex >= firstPostMigrationLegacyImport) failures.push("Migrated site modules must remain before the existing feature legacy imports");
+if (firstPostMigrationLegacyImport < 0) failures.push("app/site.css analytics-map legacy import is missing");
+else if (previousImportIndex >= firstPostMigrationLegacyImport) failures.push("app/site.css migrated site modules must remain before the existing feature legacy imports");
 for (const file of filesUnder("app")) {
   const source = fs.readFileSync(file, "utf8");
   for (const alias of legacyAliases) {
@@ -91,7 +100,7 @@ for (const file of filesUnder("app")) {
     if (source.includes(`--${alias}:`)) failures.push(`${file} still declares retired token --${alias}`);
   }
 }
-if (!site.includes("--site-page-top:") || !site.includes("--site-page-bottom:")) failures.push("Canonical page spacing tokens are missing");
+if (!site.includes("--site-page-top:") || !site.includes("--site-page-bottom:")) failures.push("app/site.css canonical page spacing tokens are missing");
 for (const file of filesUnder("app")) {
   if (!file.endsWith(".css")) continue;
   const source = fs.readFileSync(file, "utf8");
@@ -106,4 +115,7 @@ if (fs.existsSync("tests")) {
 }
 const bytes = Object.fromEntries(modules.map((modulePath) => [modulePath, fs.statSync(modulePath).size]));
 console.log(JSON.stringify({ globalsRetired: !fs.existsSync("app/globals.css"), legacyAliasCount: legacyAliases.length, moduleBytes: bytes, totalMigratedBytes: Object.values(bytes).reduce((a,b)=>a+b,0) }, null, 2));
-if (failures.length) { for (const failure of failures) console.error(`CSS authority: ${failure}`); process.exit(1); }
+if (failures.length) {
+  for (const failure of failures) reportFailure(failure);
+  process.exit(1);
+}
