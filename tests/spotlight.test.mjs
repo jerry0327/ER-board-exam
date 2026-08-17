@@ -13,6 +13,7 @@ import {
 import { readLegacyCss } from "./css-test-utils.mjs";
 
 const component = await readFile(new URL("../app/components/global-spotlight.impl.tsx", import.meta.url), "utf8");
+const componentWrapper = await readFile(new URL("../app/components/global-spotlight.tsx", import.meta.url), "utf8");
 const css = await readFile(new URL("../app/spotlight.css", import.meta.url), "utf8");
 const globalCss = await readLegacyCss();
 const siteCss = await readFile(new URL("../app/site.css", import.meta.url), "utf8");
@@ -258,7 +259,7 @@ test("spotlight result surfaces reuse shared card and button primitives", () => 
 
 test("main shell integrates consolidated navigation and all search callbacks", () => {
   assert.match(layout, /import "\.\/site\.css";/u);
-  assert.match(component, /import "\.\.\/spotlight\.css";/u);
+  assert.match(componentWrapper, /import "\.\.\/spotlight\.css";/u);
   assert.doesNotMatch(siteCss, /@import "\.\/spotlight\.css" layer\(legacy\);/u);
   assert.match(component, /const navigationIcons: Record<NavView, LucideIcon>/u);
   assert.match(routes, /audio: "\u5b78\u7fd2\u97f3\u6a94"/u);

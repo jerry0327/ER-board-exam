@@ -3,11 +3,12 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const practice = await readFile(new URL("../app/views/practice-view.impl.tsx", import.meta.url), "utf8");
+const practiceWrapper = await readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8");
 const styles = await readFile(new URL("../app/practice-tools.css", import.meta.url), "utf8");
 const site = await readFile(new URL("../app/site.css", import.meta.url), "utf8");
 
 test("practice tools keep elimination and scratchpad state inside the active session", () => {
-  assert.match(practice, /import "\.\.\/practice-tools\.css";/u);
+  assert.match(practiceWrapper, /import "\.\.\/practice-tools\.css";/u);
   assert.doesNotMatch(site, /@import "\.\/practice-tools\.css" layer\(legacy\);/u);
   assert.match(practice, /eliminatedOptions: \{ \.\.\.currentSession\.eliminatedOptions/u);
   assert.match(practice, /scratchpads: \{ \.\.\.currentSession\.scratchpads/u);
