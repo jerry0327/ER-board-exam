@@ -1,0 +1,58 @@
+name: CSS contract diagnostics
+
+on:
+  push:
+    branches: [refactor/css-legacy-retirement]
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build verified production artifact
+        run: npm run build
+
+      - name: Capture first contract failure
+        shell: bash
+        run: |
+          set +e
+          node scripts/with-uncompressed-static-content.mjs -- node --experimental-strip-types --test tests/*.test.mjs > contract.log 2>&1
+          status=$?
+          python - <<'PY'
+          from pathlib import Path
+          lines = Path('contract.log').read_text(errors='replace').splitlines()
+          idx = next((i for i, line in enumerate(lines) if line.lstrip().startswith('not ok')), None)
+          if idx is None:
+              keys = ('ERR_ASSERTION', 'AssertionError', 'failureType', 'error:')
+              idx = next((i for i, line in enumerate(lines) if any(key in line for key in keys)), 0)
+          start = max(0, idx - 30)
+          end = min(len(lines), idx + 140)
+          excerpt = lines[start:end]
+          Path('contract-failure.log').write_text('\n'.join(excerpt) + '\n')
+          PY
+          printf '\nTEST_EXIT_CODE=%s\n' "$status" >> contract-failure.log
+          cat contract-failure.log
+          exit 0
+
+      - name: Upload compact failure log
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-failure-log
+          path: contract-failure.log
+          if-no-files-found: error
+          retention-days: 1
