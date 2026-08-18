@@ -108,7 +108,9 @@ function packResponse(
   storage: "r2" | "static" | "static-seeded",
 ) {
   const noStore = new URL(request.url).searchParams.has("__r2_probe");
-  return new Response(request.method === "HEAD" ? null : bytes, {
+  const stableBody = new Uint8Array(bytes.byteLength);
+  stableBody.set(bytes);
+  return new Response(request.method === "HEAD" ? null : stableBody.buffer, {
     headers: {
       "cache-control": noStore ? "no-store" : IMMUTABLE_PACK_CACHE,
       "content-length": String(bytes.byteLength),
