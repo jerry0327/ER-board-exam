@@ -1,9 +1,8 @@
 name: Diagnose R2 PR
 
 on:
-  push:
-    branches:
-      - agent/r2-bulk-content-compression
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
