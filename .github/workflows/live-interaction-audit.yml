@@ -1,0 +1,47 @@
+name: Live interaction audit
+
+on:
+  push:
+    branches:
+      - agent/live-interaction-audit
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: live-interaction-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: Live production interaction latency
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium QA runtime
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run live interaction audit
+        env:
+          CI_LIVE_BASE_URL: https://emergency-board-questions.jerry3627613.chatgpt.site
+          CI_LIVE_INTERACTION_OUT: qa-live-interactions.json
+        run: node scripts/ci-live-interaction-audit.mjs
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: live-interactions-${{ github.run_id }}
+          path: qa-live-interactions.json
+          if-no-files-found: warn
+          retention-days: 7
