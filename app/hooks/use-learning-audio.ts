@@ -56,6 +56,30 @@ export function useLearningAudio({
       ? "顯示音檔播放器"
       : `載入本${noun}音檔`;
 
+  useEffect(() => {
+    if (!contentReady || !source || isCurrent) return;
+
+    // The chapter payload is comparatively small, so start fetching it as soon
+    // as the visible learning content has resolved. Delay the heavyweight
+    // decoder warmup until after the next paint so it never competes with the
+    // reader's first meaningful frame. On capable devices primeSource keeps the
+    // first decoded windows ready in the Worker for a later user gesture.
+    prepareShell();
+    prefetchSource(source);
+    let timer: number | null = null;
+    const frame = window.requestAnimationFrame(() => {
+      timer = window.setTimeout(() => {
+        if (document.visibilityState !== "visible") return;
+        prepareDecoder();
+        if (!primeSource(source)) prefetchSource(source);
+      }, 240);
+    });
+    return () => {
+      window.cancelAnimationFrame(frame);
+      if (timer !== null) window.clearTimeout(timer);
+    };
+  }, [contentReady, isCurrent, prefetchSource, prepareDecoder, prepareShell, primeSource, source]);
+
   const prepare = useCallback(() => {
     if (!contentReady || !source) return;
     prepareShell();
