@@ -1,0 +1,37 @@
+name: Normalize R2 env type alias
+
+on:
+  push:
+    branches: [agent/r2-bulk-content-compression]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: agent/r2-bulk-content-compression
+      - name: Patch type alias
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('worker/content-packs.ts')
+          text = p.read_text()
+          old = 'export interface PackedStaticEnv extends ContentPackR2Env {}'
+          new = 'export type PackedStaticEnv = ContentPackR2Env;'
+          if old not in text:
+              raise SystemExit('type-alias patch anchor missing')
+          p.write_text(text.replace(old, new, 1))
+          PY
+          rm .github/workflows/fix-r2-type-alias.yml
+      - name: Commit patch
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add worker/content-packs.ts .github/workflows/fix-r2-type-alias.yml
+          git commit -m "Use a type alias for packed static env"
+          git push origin HEAD:agent/r2-bulk-content-compression
