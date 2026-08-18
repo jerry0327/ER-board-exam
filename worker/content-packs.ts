@@ -79,7 +79,7 @@ interface ResolvedEntry {
   entry: PackedEntry;
 }
 
-export interface PackedStaticEnv extends ContentPackR2Env {}
+export type PackedStaticEnv = ContentPackR2Env;
 
 function logicalStaticContentType(pathname: string) {
   const managedPath = pathname.startsWith("/data/")
