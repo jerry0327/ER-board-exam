@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - agent/final-speed-space-audit
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
