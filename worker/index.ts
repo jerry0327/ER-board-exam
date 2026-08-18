@@ -3,7 +3,7 @@ import { brotliDecompressSync } from "node:zlib";
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
 import { createPackedStaticHandler } from "./content-packs";
-import { handleContentPackOperator } from "./content-pack-r2";
+import { handleContentPackOperator } from "./content-pack-r2.ts";
 import { serveSemanticTimingSidecar } from "./semantic-subtitle-sidecars";
 import {
   applyBuildAssetCachePolicy,

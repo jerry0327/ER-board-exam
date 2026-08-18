@@ -4,7 +4,7 @@ import {
   constants as zlibConstants,
 } from "node:zlib";
 import { createHash } from "node:crypto";
-import { loadR2ContentPackBytes, type ContentPackR2Env } from "./content-pack-r2";
+import { loadR2ContentPackBytes, type ContentPackR2Env } from "./content-pack-r2.ts";
 
 const INDEX_PATH = "/content-packs/index.brp";
 const PACK_ROOT = "/content-packs/packs/";
