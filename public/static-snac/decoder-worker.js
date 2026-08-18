@@ -144,10 +144,25 @@ async function fetchModel() {
   let nextPartIndex = 0;
   const connection = self.navigator?.connection;
   const memory = self.navigator?.deviceMemory;
+  const cores = self.navigator?.hardwareConcurrency || 1;
   const constrained = connection?.saveData
     || ["slow-2g", "2g"].includes(connection?.effectiveType ?? "")
     || (typeof memory === "number" && memory < 4);
-  const concurrency = constrained ? 1 : Math.min(2, manifest.parts.length);
+  const highBandwidth = connection?.effectiveType === "4g"
+    && (typeof connection?.downlink !== "number" || connection.downlink <= 0 || connection.downlink >= 8);
+  const highCapability = highBandwidth
+    && (typeof memory !== "number" || memory >= 8)
+    && cores >= 8;
+  const mediumCapability = !constrained
+    && (typeof memory !== "number" || memory >= 4)
+    && cores >= 4;
+  const concurrency = constrained
+    ? 1
+    : highCapability
+      ? Math.min(4, manifest.parts.length)
+      : mediumCapability
+        ? Math.min(3, manifest.parts.length)
+        : Math.min(2, manifest.parts.length);
   const fetchNextPart = async () => {
     while (nextPartIndex < manifest.parts.length) {
       const part = manifest.parts[nextPartIndex];

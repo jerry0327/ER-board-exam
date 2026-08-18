@@ -64,6 +64,7 @@ const SUBTITLE_PREFERENCE_KEY = "em-board-audio-subtitles-v1";
 const AUDIO_SHELL_URLS = [
   `/static-snac/decoder-worker.js?v=${DECODER_WORKER_REVISION}`,
   "/static-snac/ort.webgpu.min.mjs?v=46988a5a025f",
+  "/static-snac/ort-wasm-simd-threaded.asyncify.wasm",
   "/static-snac/model-manifest.json?v=e713dc34ba7e",
   `/static-snac/snac-output.worklet.js?v=${OUTPUT_WORKLET_REVISION}`,
 ] as const;
@@ -297,7 +298,7 @@ function shouldSpeculativelyWarmAudio() {
   if (document.visibilityState !== "visible") return false;
   const connection = (
     navigator as Navigator & {
-      connection?: { effectiveType?: string; saveData?: boolean };
+      connection?: { effectiveType?: string; saveData?: boolean; downlink?: number };
       deviceMemory?: number;
     }
   ).connection;
@@ -308,8 +309,20 @@ function shouldSpeculativelyWarmAudio() {
   return memory === undefined || memory >= 4;
 }
 
+function shouldSpeculativelyWarmDecoder() {
+  if (!shouldSpeculativelyWarmAudio()) return false;
+  const connection = (navigator as Navigator & {
+    connection?: { effectiveType?: string; downlink?: number };
+  }).connection;
+  if (connection?.effectiveType === "3g") return false;
+  if (typeof connection?.downlink === "number" && connection.downlink > 0 && connection.downlink < 5) {
+    return false;
+  }
+  return true;
+}
+
 function shouldPredecodeAudio() {
-  if (!shouldSpeculativelyWarmAudio() || !("gpu" in navigator)) return false;
+  if (!shouldSpeculativelyWarmDecoder() || !("gpu" in navigator)) return false;
   const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
   if (memory !== undefined && memory < 6) return false;
   if (memory === undefined && window.matchMedia("(pointer: coarse)").matches) return false;
@@ -1508,7 +1521,7 @@ export default function AudioPlayerProvider({ children }: { children: ReactNode 
   }
 
   const preparePlayer = useCallback(() => {
-    if (!shouldSpeculativelyWarmAudio()) return;
+    if (!shouldSpeculativelyWarmDecoder()) return;
     clearDecoderRetentionTimer();
     prepareShell();
     if (decoderWarmRequestedRef.current) return;

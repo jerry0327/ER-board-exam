@@ -398,6 +398,7 @@ function QuestionBankAppContent() {
   const guideResourceProgress = useGuideResourceProgress();
   const audioPlayer = useAudioPlayer();
   const prepareAudioShell = audioPlayer.prepareShell;
+  const prepareAudioDecoder = audioPlayer.prepare;
   const ensureFullQuestionBank = useCallback(() => {
     if (fullQuestionIndexReadyRef.current) return Promise.resolve();
     if (fullQuestionLoadRef.current) return fullQuestionLoadRef.current;
@@ -431,6 +432,28 @@ function QuestionBankAppContent() {
   useEffect(() => {
     prepareAudioForRoute(activeNav, activeNav === "詳解閱讀" ? requestedQuestionId : null);
   }, [activeNav, prepareAudioForRoute, requestedQuestionId]);
+
+  useEffect(() => {
+    let frame: number | null = null;
+    let timer: number | null = null;
+    let cancelled = false;
+    const schedule = () => {
+      if (cancelled) return;
+      frame = window.requestAnimationFrame(() => {
+        timer = window.setTimeout(() => {
+          if (!cancelled && document.visibilityState === "visible") prepareAudioDecoder();
+        }, 900);
+      });
+    };
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", schedule);
+      if (frame !== null) window.cancelAnimationFrame(frame);
+      if (timer !== null) window.clearTimeout(timer);
+    };
+  }, [prepareAudioDecoder]);
 
   useEffect(() => {
     const targets = relatedRouteViews[activeNav];
