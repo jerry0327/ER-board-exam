@@ -9,6 +9,8 @@ const OBJECT_PATH = "/_ops/content-packs/object";
 const MAX_INDEX_RAW_BYTES = 4 * 1024 * 1024;
 const MAX_PACK_COMPRESSED_BYTES = 33 * 1024 * 1024;
 const SAFE_PACK = /^[a-f0-9]{64}\.brp$/u;
+const READ_THROUGH_PATH = /^\/content-packs\/packs\/([a-f0-9]{64}\.brp)$/u;
+const IMMUTABLE_PACK_CACHE = "public, max-age=31536000, immutable";
 
 type PackRow = [name: string, rawBytes: number, sha256: string];
 
@@ -45,6 +47,14 @@ async function loadPackRows(requestUrl: string, env: ContentPackR2Env) {
   return new Map(rows.map((row) => [row[0], row]));
 }
 
+function validR2Metadata(object: R2Object, name: string, expectedSha256: string) {
+  return object.key === `${R2_NAMESPACE}${name}`
+    && object.size > 0
+    && object.size <= MAX_PACK_COMPRESSED_BYTES
+    && object.customMetadata?.schema === R2_SCHEMA
+    && object.customMetadata?.sha256 === expectedSha256;
+}
+
 export async function loadR2ContentPackBytes(
   requestUrl: string,
   env: ContentPackR2Env,
@@ -54,8 +64,7 @@ export async function loadR2ContentPackBytes(
   if (!env.BUCKET || !SAFE_PACK.test(name) || name !== `${expectedSha256}.brp`) return null;
   try {
     const object = await env.BUCKET.get(`${R2_NAMESPACE}${name}`);
-    if (!object || object.size > MAX_PACK_COMPRESSED_BYTES) return null;
-    if (object.customMetadata?.schema !== R2_SCHEMA || object.customMetadata?.sha256 !== expectedSha256) return null;
+    if (!object || !validR2Metadata(object, name, expectedSha256)) return null;
     const bytes = new Uint8Array(await object.arrayBuffer());
     if (bytes.byteLength !== object.size || await sha256Hex(bytes) !== expectedSha256) return null;
     return bytes;
@@ -84,16 +93,113 @@ async function operatorTokenMatches(request: Request, env: ContentPackR2Env) {
 
 async function verifiedStaticPack(request: Request, env: ContentPackR2Env, name: string, expectedSha256: string) {
   const response = await env.ASSETS.fetch(new Request(new URL(`${PACK_ROOT}${name}`, request.url), {
-    headers: { "accept-encoding": "identity" },
+    headers: { "accept-encoding": "identity", "cache-control": "no-store" },
   }));
   if (!response.ok) return null;
   const bytes = new Uint8Array(await response.arrayBuffer());
-  if (bytes.byteLength > MAX_PACK_COMPRESSED_BYTES || await sha256Hex(bytes) !== expectedSha256) return null;
+  if (bytes.byteLength < 1 || bytes.byteLength > MAX_PACK_COMPRESSED_BYTES || await sha256Hex(bytes) !== expectedSha256) return null;
   return bytes;
+}
+
+function packResponse(
+  request: Request,
+  bytes: Uint8Array,
+  expectedSha256: string,
+  storage: "r2" | "static" | "static-seeded",
+) {
+  const noStore = new URL(request.url).searchParams.has("__r2_probe");
+  const stableBody = new Uint8Array(bytes.byteLength);
+  stableBody.set(bytes);
+  return new Response(request.method === "HEAD" ? null : stableBody.buffer, {
+    headers: {
+      "cache-control": noStore ? "no-store" : IMMUTABLE_PACK_CACHE,
+      "content-length": String(bytes.byteLength),
+      "content-type": "application/octet-stream",
+      "x-content-pack-sha256": expectedSha256,
+      "x-content-pack-storage": storage,
+      "x-content-type-options": "nosniff",
+    },
+  });
+}
+
+/**
+ * Deterministic, bounded R2 read-through for immutable content-pack blobs.
+ *
+ * This is intentionally not an unauthenticated general-purpose write API:
+ * callers cannot supply keys or bytes. The requested filename must be present
+ * in the current packaged content index, the source bytes are read only from
+ * ASSETS, and SHA-256 must match the hash-bound filename before any R2 write.
+ * A missing or corrupt R2 object is therefore safely self-healed from the
+ * exact deployment artifact that already serves users today.
+ */
+export async function handleContentPackReadThrough(request: Request, env: ContentPackR2Env) {
+  if (request.method !== "GET" && request.method !== "HEAD") return null;
+  const pathname = new URL(request.url).pathname;
+  const match = READ_THROUGH_PATH.exec(pathname);
+  if (!match) return null;
+  const name = match[1];
+
+  let packs: Map<string, PackRow>;
+  try {
+    packs = await loadPackRows(request.url, env);
+  } catch {
+    return new Response(null, {
+      status: 503,
+      headers: { "cache-control": "no-store", "retry-after": "30" },
+    });
+  }
+  const row = packs.get(name);
+  if (!row) return new Response(null, { status: 404, headers: { "cache-control": "no-store" } });
+
+  if (request.method === "GET") {
+    const r2Bytes = await loadR2ContentPackBytes(request.url, env, row[0], row[2]);
+    if (r2Bytes) return packResponse(request, r2Bytes, row[2], "r2");
+  } else if (env.BUCKET) {
+    try {
+      const object = await env.BUCKET.head(`${R2_NAMESPACE}${name}`);
+      if (object && validR2Metadata(object, name, row[2])) {
+        const headers = new Headers({
+          "cache-control": new URL(request.url).searchParams.has("__r2_probe") ? "no-store" : IMMUTABLE_PACK_CACHE,
+          "content-length": String(object.size),
+          "content-type": "application/octet-stream",
+          "x-content-pack-sha256": row[2],
+          "x-content-pack-storage": "r2",
+          "x-content-type-options": "nosniff",
+        });
+        return new Response(null, { headers });
+      }
+    } catch {
+      // Fall back to the packaged blob below.
+    }
+  }
+
+  const staticBytes = await verifiedStaticPack(request, env, row[0], row[2]);
+  if (!staticBytes) {
+    return new Response(null, {
+      status: 503,
+      headers: { "cache-control": "no-store", "retry-after": "30", "x-content-pack-storage": "unavailable" },
+    });
+  }
+
+  let storage: "static" | "static-seeded" = "static";
+  if (request.method === "GET" && env.BUCKET) {
+    try {
+      await env.BUCKET.put(`${R2_NAMESPACE}${name}`, staticBytes, {
+        httpMetadata: { contentType: "application/octet-stream" },
+        customMetadata: { schema: R2_SCHEMA, sha256: row[2] },
+      });
+      storage = "static-seeded";
+    } catch {
+      // Serving the already-verified static blob is still safe; migration
+      // tooling treats plain "static" as a failed seed and will not mark R2 complete.
+    }
+  }
+  return packResponse(request, staticBytes, row[2], storage);
 }
 
 export async function handleContentPackOperator(request: Request, env: ContentPackR2Env) {
   const url = new URL(request.url);
+  if (READ_THROUGH_PATH.test(url.pathname)) return handleContentPackReadThrough(request, env);
   if (url.pathname !== SEED_PATH && url.pathname !== OBJECT_PATH) return null;
   if (!await operatorTokenMatches(request, env)) return new Response(null, { status: 404, headers: { "cache-control": "no-store" } });
   if (!env.BUCKET) return Response.json({ error: "Managed object storage is unavailable." }, { status: 503 });
@@ -126,7 +232,7 @@ export async function handleContentPackOperator(request: Request, env: ContentPa
   const row = packs.get(name);
   if (!row) return new Response(null, { status: 404 });
   const object = request.method === "HEAD" ? await env.BUCKET.head(`${R2_NAMESPACE}${name}`) : await env.BUCKET.get(`${R2_NAMESPACE}${name}`);
-  if (!object || object.customMetadata?.schema !== R2_SCHEMA || object.customMetadata?.sha256 !== row[2]) return Response.json({ error: "R2 object missing or invalid." }, { status: 503 });
+  if (!object || !validR2Metadata(object, name, row[2])) return Response.json({ error: "R2 object missing or invalid." }, { status: 503 });
   const headers = new Headers({
     "cache-control": "no-store",
     "content-length": String(object.size),
