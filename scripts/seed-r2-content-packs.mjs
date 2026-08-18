@@ -14,8 +14,16 @@ if (!baseArg || !token || token.length < 32) throw new Error("Usage: MANAGED_AUD
 const origin = new URL(baseArg).origin;
 const indexBytes = await fs.readFile(path.join(projectRoot, "public/content-packs/index.brp"));
 const indexSha256 = createHash("sha256").update(indexBytes).digest("hex");
-const index = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(brotliDecompressSync(indexBytes))) as { p: [string, number, string][] };
-const packs = index.p.map(([name, rawBytes, sha256]) => ({ name, rawBytes, sha256 }));
+const index = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(brotliDecompressSync(indexBytes)));
+if (!index || !Array.isArray(index.p)) throw new Error("Content-pack index does not contain a valid pack list.");
+const packs = index.p.map((row, indexNumber) => {
+  if (!Array.isArray(row) || row.length !== 3) throw new Error(`Invalid content-pack row ${indexNumber}.`);
+  const [name, rawBytes, sha256] = row;
+  if (typeof name !== "string" || typeof sha256 !== "string" || name !== `${sha256}.brp` || !Number.isSafeInteger(rawBytes) || rawBytes <= 0) {
+    throw new Error(`Invalid content-pack identity ${indexNumber}.`);
+  }
+  return { name, rawBytes, sha256 };
+});
 const authorization = `Bearer ${token}`;
 
 if (!verifyOnly) {
@@ -33,8 +41,8 @@ if (!verifyOnly) {
   }
 }
 
-for (let index = 0; index < packs.length; index += 1) {
-  const pack = packs[index];
+for (let indexNumber = 0; indexNumber < packs.length; indexNumber += 1) {
+  const pack = packs[indexNumber];
   const url = new URL("/_ops/content-packs/object", origin);
   url.searchParams.set("name", pack.name);
   const response = await fetch(url, { headers: { authorization, "accept-encoding": "identity", "cache-control": "no-store" } });
@@ -44,7 +52,7 @@ for (let index = 0; index < packs.length; index += 1) {
   if (response.headers.get("x-content-pack-storage") !== "r2-operator" || response.headers.get("x-content-pack-sha256") !== pack.sha256 || digest !== pack.sha256) {
     throw new Error(`R2 verification mismatch: ${pack.name}`);
   }
-  if ((index + 1) % 25 === 0 || index + 1 === packs.length) console.log(`Verified ${index + 1}/${packs.length} content packs.`);
+  if ((indexNumber + 1) % 25 === 0 || indexNumber + 1 === packs.length) console.log(`Verified ${indexNumber + 1}/${packs.length} content packs.`);
 }
 
 const marker = {
