@@ -1,0 +1,73 @@
+name: Deep performance audit
+
+on:
+  push:
+    branches:
+      - agent/performance-deep-audit
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deep-performance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: Production Chromium performance audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium QA runtime
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Build verified production artifact
+        run: npm run build
+
+      - name: Start production server
+        run: |
+          npm run start -- --host 127.0.0.1 --port 4173 > /tmp/em-board-perf.log 2>&1 &
+          echo $! > /tmp/em-board-perf.pid
+          for i in $(seq 1 120); do
+            if curl --fail --silent http://127.0.0.1:4173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/em-board-perf.log
+          exit 1
+
+      - name: Run deep performance benchmark
+        env:
+          CI_PERF_BASE_URL: http://127.0.0.1:4173
+          CI_PERF_OUT_DIR: qa-deep-performance
+          CI_PERF_BUILD_ROOT: dist/client
+        run: node scripts/ci-deep-performance-audit.mjs
+
+      - name: Print server log on failure
+        if: failure()
+        run: tail -n 300 /tmp/em-board-perf.log || true
+
+      - name: Upload performance evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: deep-performance-${{ github.run_id }}
+          path: qa-deep-performance
+          if-no-files-found: warn
+          retention-days: 7
