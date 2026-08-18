@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - agent/performance-deep-audit
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
