@@ -4,6 +4,7 @@ import {
   constants as zlibConstants,
 } from "node:zlib";
 import { createHash } from "node:crypto";
+import { loadR2ContentPackBytes, type ContentPackR2Env } from "./content-pack-r2";
 
 const INDEX_PATH = "/content-packs/index.brp";
 const PACK_ROOT = "/content-packs/packs/";
@@ -78,11 +79,7 @@ interface ResolvedEntry {
   entry: PackedEntry;
 }
 
-export interface PackedStaticEnv {
-  ASSETS: {
-    fetch(request: Request): Promise<Response>;
-  };
-}
+export interface PackedStaticEnv extends ContentPackR2Env {}
 
 function logicalStaticContentType(pathname: string) {
   const managedPath = pathname.startsWith("/data/")
@@ -507,12 +504,13 @@ export function createPackedStaticHandler() {
     packNumber: number,
   ) => {
     const [name, , expectedSha256] = index.packs[packNumber];
-    const bytes = await fetchAssetBytes(
+    const staticBytes = await fetchAssetBytes(
       env,
       requestUrl,
       `${PACK_ROOT}${name}`,
       MAX_PACK_COMPRESSED_BYTES,
     );
+    const bytes = staticBytes ?? await loadR2ContentPackBytes(requestUrl, env, name, expectedSha256);
     if (bytes && sha256Hex(bytes) !== expectedSha256) {
       throw new Error(`Packed content digest mismatch: ${name}`);
     }

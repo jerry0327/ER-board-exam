@@ -51,7 +51,10 @@
     "standardize:source-guide-heading-numbers": "node scripts/standardize-source-guide-heading-numbers.mjs",
     "validate:artifact": "bash scripts/validate-artifact.sh",
     "lint": "bash scripts/sites-env.sh -- eslint . --ignore-pattern dist --ignore-pattern .next",
-    "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate"
+    "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate",
+    "compress:section-title-locales": "node scripts/compress-section-title-locales.mjs",
+    "audit:section-title-locales": "node scripts/audit-section-title-locales-compression.mjs",
+    "seed:content-packs-r2": "node scripts/seed-r2-content-packs.mjs"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",

@@ -24,6 +24,8 @@ node "${script_dir}/generate-managed-audio-manifest.mjs"
 node "${script_dir}/audit-audio-runtime.mjs"
 node "${script_dir}/compress-learning-documents.mjs"
 node "${script_dir}/audit-learning-documents.mjs"
+node "${script_dir}/compress-section-title-locales.mjs"
+node "${script_dir}/audit-section-title-locales-compression.mjs"
 node "${script_dir}/guard-static-index.mjs"
 node --experimental-strip-types "${script_dir}/guard-subtitle-deployment-readiness.mjs"
 
@@ -41,6 +43,8 @@ node "${script_dir}/audit-compressed-static.mjs" \
 node "${script_dir}/audit-built-snac-route.mjs"
 node "${script_dir}/prune-r2-managed-assets.mjs" \
   --root "${SITES_PROJECT_ROOT}/dist/client"
+node "${script_dir}/prune-section-title-locales.mjs" "${SITES_PROJECT_ROOT}/dist/client/subtitles-title-locales"
+node "${script_dir}/prune-r2-content-packs.mjs" "${SITES_PROJECT_ROOT}/dist/client"
 node "${script_dir}/guard-deployment-audio-boundary.mjs" \
   --root "${SITES_PROJECT_ROOT}/dist/client"
 node "${script_dir}/audit-built-r2-audio-route.mjs"
