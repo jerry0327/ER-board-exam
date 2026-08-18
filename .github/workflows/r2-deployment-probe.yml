@@ -1,0 +1,25 @@
+name: Probe deployed R2 content route
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Probe one immutable pack with HEAD
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://emergency-board-questions.jerry3627613.chatgpt.site/content-packs/packs/012112ad374936e8fafb22b39a570bcd7947117a51e7ecdba6e86e981f70342d.brp?__r2_probe=diagnostic'
+          curl --fail-with-body --silent --show-error --location --head \
+            --header 'Cache-Control: no-store' \
+            --header 'Accept-Encoding: identity' \
+            "$url" | tee /tmp/r2-probe-headers.txt
+          grep -i '^x-content-pack-storage:' /tmp/r2-probe-headers.txt
+          grep -i '^x-content-pack-sha256: 012112ad374936e8fafb22b39a570bcd7947117a51e7ecdba6e86e981f70342d' /tmp/r2-probe-headers.txt
