@@ -1,0 +1,45 @@
+name: Apply performance candidate
+
+on:
+  push:
+    branches:
+      - agent/performance-deep-audit
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-performance-candidate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/performance-deep-audit
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+
+      - name: Apply candidate patch
+        run: node scripts/apply-performance-candidate.mjs
+
+      - name: Commit candidate patch
+        run: |
+          if git diff --quiet; then
+            echo "No patch changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/components/audio-player-provider.tsx app/question-bank-app.tsx public/static-snac/decoder-worker.js
+          git commit -m "Apply performance candidate optimizations"
+          git push origin HEAD:agent/performance-deep-audit
