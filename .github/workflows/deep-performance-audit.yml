@@ -42,6 +42,12 @@ jobs:
       - name: Build verified production artifact
         run: npm run build
 
+      - name: Measure deployment artifact
+        env:
+          CI_ARTIFACT_ROOT: dist
+          CI_ARTIFACT_OUT: qa-artifact-audit.json
+        run: node scripts/ci-artifact-audit.mjs
+
       - name: Start Cloudflare production preview
         run: |
           npx vite preview --host 127.0.0.1 --port 4173 > /tmp/em-board-perf.log 2>&1 &
@@ -71,7 +77,9 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: deep-performance-preview-${{ github.run_id }}
-          path: qa-deep-performance-preview
+          path: |
+            qa-deep-performance-preview
+            qa-artifact-audit.json
           if-no-files-found: warn
           retention-days: 7
 
