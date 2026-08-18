@@ -1,0 +1,39 @@
+name: Final speed and space audit
+
+on:
+  push:
+    branches:
+      - agent/final-speed-space-audit
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: final-speed-space-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  footprint:
+    name: Production deployment footprint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - name: Build verified production artifact
+        run: npm run build
+      - name: Measure deployment footprint
+        run: node scripts/ci-deployment-footprint-audit.mjs dist qa-deployment-footprint.json
+      - name: Validate deployable artifact
+        run: npm run validate:artifact
+      - name: Upload footprint evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: deployment-footprint-${{ github.run_id }}
+          path: qa-deployment-footprint.json
+          retention-days: 7
