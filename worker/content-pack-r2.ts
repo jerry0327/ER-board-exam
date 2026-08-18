@@ -197,6 +197,7 @@ export async function handleContentPackReadThrough(request: Request, env: Conten
 
 export async function handleContentPackOperator(request: Request, env: ContentPackR2Env) {
   const url = new URL(request.url);
+  if (READ_THROUGH_PATH.test(url.pathname)) return handleContentPackReadThrough(request, env);
   if (url.pathname !== SEED_PATH && url.pathname !== OBJECT_PATH) return null;
   if (!await operatorTokenMatches(request, env)) return new Response(null, { status: 404, headers: { "cache-control": "no-store" } });
   if (!env.BUCKET) return Response.json({ error: "Managed object storage is unavailable." }, { status: 503 });
