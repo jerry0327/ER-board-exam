@@ -148,7 +148,7 @@ jobs:
 
       - name: Start production server
         run: |
-          npm run start -- --host 127.0.0.1 --port 4173 > /tmp/em-board-perf.log 2>&1 &
+          npm run start -- --hostname 127.0.0.1 --port 4173 > /tmp/em-board-perf.log 2>&1 &
           echo $! > /tmp/em-board-perf.pid
           for i in $(seq 1 120); do
             if curl --fail --silent http://127.0.0.1:4173/ >/dev/null; then
