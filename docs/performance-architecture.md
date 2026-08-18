@@ -14,6 +14,8 @@
 | 6 | 教材 reader 與內容 pack | production route chunk：學習首頁約 18 KB raw／5 KB gzip，詳解約 32 KB／10 KB，音檔約 32 KB／10 KB；正文位於 q11 content packs | 學習首頁先 render，再逐一 idle preload reader；Markdown 仍按章抓取 |
 | 7 | 視覺轉場 | 純 UI 工作，不應成為等待來源 | 只使用短 crossfade，動畫不等待網路或資料 |
 
+本次 feature CSS 延遲載入 audit 計得 105,757 bytes 的原始 stylesheet source 被移出 eager `site.css` 路徑；此數字是 source bytes，用來描述 ownership 轉移，不直接等同瀏覽器實際傳輸節省量。
+
 新增內容後應重跑 build／artifact audit 並更新實際數字；不要用舊數字替新瓶頸下結論。
 
 ## 2. Render-first 順序
