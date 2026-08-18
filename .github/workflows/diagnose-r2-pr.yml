@@ -1,0 +1,45 @@
+name: Diagnose R2 PR
+
+on:
+  push:
+    branches:
+      - agent/r2-bulk-content-compression
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: npm
+      - run: npm ci
+      - name: Run diagnostics without short-circuiting
+        shell: bash
+        run: |
+          set +e
+          : > qa-r2-diagnostics.txt
+          run_check() {
+            echo "===== $1 =====" >> qa-r2-diagnostics.txt
+            shift
+            "$@" >> qa-r2-diagnostics.txt 2>&1
+            code=$?
+            echo "EXIT_CODE=$code" >> qa-r2-diagnostics.txt
+            echo >> qa-r2-diagnostics.txt
+          }
+          run_check TYPESCRIPT npx tsc --noEmit
+          run_check ESLINT npm run lint
+          run_check CONTRACT node --experimental-strip-types --test tests/r2-content-pack-contract.test.mjs
+          run_check BUILD npm run build
+          cat qa-r2-diagnostics.txt
+          exit 0
+      - uses: actions/upload-artifact@v6
+        with:
+          name: r2-pr-diagnostics-${{ github.run_id }}
+          path: qa-r2-diagnostics.txt
+          retention-days: 3
