@@ -109,7 +109,7 @@ test("live course payload accepts only bounded official data", () => {
 
 test("board prep keeps course family tabs and REMOC region selection as two controlled route levels", async () => {
   const [view, component, css, appRoute] = await Promise.all([
-    readFile(new URL("../app/views/board-prep-view.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/views/board-prep-view.impl.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/board-prep-remoc.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/board-prep.css", import.meta.url), "utf8"),
     readFile(new URL("../app/lib/app-route.ts", import.meta.url), "utf8"),

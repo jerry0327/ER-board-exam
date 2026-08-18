@@ -10,7 +10,7 @@ test("settings and both reading surfaces share independent explanation edition a
     readFile(new URL("../app/components/learning-data-dialog.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/question-sheet.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/views/reader-view.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/views/practice-view.impl.tsx", import.meta.url), "utf8"),
   ]);
   assert.match(hook, /em-board-explanation-pack-v2/);
   assert.match(hook, /return "original"/);

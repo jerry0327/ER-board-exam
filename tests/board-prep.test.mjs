@@ -245,7 +245,7 @@ test("certificate validation only allows bounded PDF, JPG, and PNG files", () =>
 
 test("board prep is controlled by the canonical deep route and keeps recent courses in two levels", async () => {
   const [view, app, route, instrument] = await Promise.all([
-    readFile(new URL("../app/views/board-prep-view.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/views/board-prep-view.impl.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/question-bank-app.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/lib/app-route.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/site.css", import.meta.url), "utf8"),
@@ -290,7 +290,7 @@ test("board prep is controlled by the canonical deep route and keeps recent cour
 
 test("view keeps evidence collapsed after completion and uses the account-backed evidence API", async () => {
   const [view, recognized, hook, attachments, evidenceRoute, css, recognizedCss, siteCss] = await Promise.all([
-    readFile(new URL("../app/views/board-prep-view.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/views/board-prep-view.impl.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/recognized-courses-area.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/hooks/use-board-prep.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/lib/board-prep-attachments.ts", import.meta.url), "utf8"),

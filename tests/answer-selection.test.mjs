@@ -145,6 +145,6 @@ test("answer option double-clicks end cleared without submitting and expose togg
 });
 
 test("held answer shortcuts cannot oscillate between selected and cleared", async () => {
-  const practice = await readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8");
+  const practice = await readFile(new URL("../app/views/practice-view.impl.tsx", import.meta.url), "utf8");
   assert.match(practice, /else \{\s*if \(!event\.repeat\) updateAnswer\(key\);\s*\}/u);
 });

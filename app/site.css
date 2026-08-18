@@ -10,20 +10,16 @@
 @import "./site-analytics.css" layer(legacy);
 @import "./site-responsive.css" layer(legacy);
 @import "./site-interactions.css" layer(legacy);
-@import "./analytics-map.css" layer(legacy);
-@import "./board-prep.css" layer(legacy);
-@import "./recognized-courses.css" layer(legacy);
-@import "./practice-tools.css" layer(legacy);
-@import "./spotlight.css" layer(legacy);
 
 @layer a11y, vendor, legacy, site-tokens, site-base, site-components, site-layout, site-features, site-utilities;
 
 /*
  * Unified site visual system
  * --------------------------
- * This is the only runtime stylesheet entry and the only place where visual
- * tokens or component appearance may be changed. Imported feature sheets are
- * frozen structural compatibility modules inside the legacy cascade layer.
+ * This is the core runtime stylesheet entry and the authority for shared visual
+ * tokens and component appearance. Large feature-only compatibility sheets are
+ * imported by their lazy client owners so unrelated routes do not download them.
+ * Those deferred sheets remain inside the legacy cascade layer.
  */
 
 @layer site-tokens {

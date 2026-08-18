@@ -22,7 +22,7 @@ test("derives REMOC deadline warnings without changing registration eligibility"
 
 test("society and REMOC cards share the same status badge contract", async () => {
   const [view, remoc, css] = await Promise.all([
-    readFile(new URL("../app/views/board-prep-view.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/views/board-prep-view.impl.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/board-prep-remoc.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/board-prep.css", import.meta.url), "utf8"),
   ]);

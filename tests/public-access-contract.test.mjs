@@ -24,7 +24,7 @@ test("anonymous visitors keep core study data in their own browser", async () =>
 
 test("anonymous board-prep screens do not expose server-only evidence controls", async () => {
   const [view, recognized, boardPrep] = await Promise.all([
-    readFile(new URL("../app/views/board-prep-view.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/views/board-prep-view.impl.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/recognized-courses-area.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/hooks/use-board-prep.ts", import.meta.url), "utf8"),
   ]);

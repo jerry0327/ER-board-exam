@@ -13,7 +13,7 @@ async function readLegacyCss() {
 }
 
 const [practice, practiceCss, legacyCss, boardCss, recognizedCss, spotlightCss, handoff, annotationTools, annotationDrawer, recognizedArea, spotlight, browse, themeToggle, reader, guide, rosensGuide, guideReaderTools, learningData, remoc] = await Promise.all([
-  readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../app/views/practice-view.impl.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/practice-tools.css", import.meta.url), "utf8"),
   readLegacyCss(),
   readFile(new URL("../app/board-prep.css", import.meta.url), "utf8"),
@@ -23,7 +23,7 @@ const [practice, practiceCss, legacyCss, boardCss, recognizedCss, spotlightCss, 
   readFile(new URL("../app/components/content-annotation-tools.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/annotation-drawer.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/recognized-courses-area.tsx", import.meta.url), "utf8"),
-  readFile(new URL("../app/components/global-spotlight.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../app/components/global-spotlight.impl.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/views/browse-view.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/components/theme-toggle.tsx", import.meta.url), "utf8"),
   readFile(new URL("../app/views/reader-view.tsx", import.meta.url), "utf8"),
@@ -35,8 +35,8 @@ const [practice, practiceCss, legacyCss, boardCss, recognizedCss, spotlightCss, 
 ]);
 const [analyticsCss, analytics, boardView] = await Promise.all([
   readFile(new URL("../app/analytics-map.css", import.meta.url), "utf8"),
-  readFile(new URL("../app/views/analytics-view.tsx", import.meta.url), "utf8"),
-  readFile(new URL("../app/views/board-prep-view.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../app/views/analytics-view.impl.tsx", import.meta.url), "utf8"),
+  readFile(new URL("../app/views/board-prep-view.impl.tsx", import.meta.url), "utf8"),
 ]);
 const [siteCss, layout] = await Promise.all([
   readFile(new URL("../app/site.css", import.meta.url), "utf8"),
@@ -194,7 +194,7 @@ test("page styles do not create fallback palettes or independent panel systems",
     ["./site.css"],
   );
   for (const stylesheet of ["analytics-map", "board-prep", "recognized-courses", "practice-tools", "spotlight"]) {
-    assert.match(siteCss, new RegExp(`@import "\\./${stylesheet}\\.css" layer\\(legacy\\);`, "u"));
+    assert.doesNotMatch(siteCss, new RegExp(`@import "\\./${stylesheet}\\.css" layer\\(legacy\\);`, "u"));
   }
   assert.doesNotMatch(siteCss, /@import "\.\/globals\.css"/u);
   assert.match(
@@ -202,7 +202,7 @@ test("page styles do not create fallback palettes or independent panel systems",
     /^@layer a11y, vendor, legacy, site-tokens, site-base, site-components, site-layout, site-features, site-utilities;/mu,
   );
   assert.match(siteCss, /Unified site visual system/u);
-  assert.match(siteCss, /only runtime stylesheet entry and the only place where visual[\s\S]*tokens or component appearance may be changed/u);
+  assert.match(siteCss, /core runtime stylesheet entry and the authority for shared visual[\s\S]*feature-only compatibility sheets are[\s\S]*imported by their lazy client owners/u);
   assert.doesNotMatch(`${layout}\n${siteCss}`, /(?:museum|instrument|redesign|override|v\d+)\.css/iu);
   assert.match(siteCss, /:root\s*\{[\s\S]*?--site-canvas:\s*#f1ede4;[\s\S]*?--site-paper:\s*#fbf8f1;[\s\S]*?--site-primary:\s*#792f32;[\s\S]*?--site-success:\s*#839483;/u);
   assert.match(siteCss, /html\[data-theme="dark"\]\s*\{[\s\S]*?--site-canvas:\s*#121714;[\s\S]*?--site-paper:\s*#1b221e;[\s\S]*?--site-primary:\s*#e19a9f;/u);

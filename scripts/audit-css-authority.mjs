@@ -90,9 +90,21 @@ for (const modulePath of modules) {
   if (importIndex <= previousImportIndex) failures.push(`app/site.css legacy module order changed at ${filename}`);
   previousImportIndex = importIndex;
 }
-const firstPostMigrationLegacyImport = site.indexOf('@import "./analytics-map.css" layer(legacy);');
-if (firstPostMigrationLegacyImport < 0) failures.push("app/site.css analytics-map legacy import is missing");
-else if (previousImportIndex >= firstPostMigrationLegacyImport) failures.push("app/site.css migrated site modules must remain before the existing feature legacy imports");
+const deferredFeatureCss = [
+  ["app/analytics-map.css", "app/views/analytics-view.tsx", "../analytics-map.css"],
+  ["app/board-prep.css", "app/views/board-prep-view.tsx", "../board-prep.css"],
+  ["app/recognized-courses.css", "app/views/board-prep-view.tsx", "../recognized-courses.css"],
+  ["app/practice-tools.css", "app/views/practice-view.tsx", "../practice-tools.css"],
+  ["app/spotlight.css", "app/components/global-spotlight.tsx", "../spotlight.css"],
+];
+for (const [cssPath, ownerPath, ownerImport] of deferredFeatureCss) {
+  const filename = cssPath.split("/").pop();
+  if (site.includes(`@import "./${filename}"`)) failures.push(`app/site.css must not eagerly import deferred feature CSS ${filename}`);
+  if (!fs.existsSync(cssPath)) { failures.push(`${cssPath} is missing`); continue; }
+  if (!fs.existsSync(ownerPath)) { failures.push(`${ownerPath} is missing`); continue; }
+  const owner = fs.readFileSync(ownerPath, "utf8");
+  if (!owner.includes(`import "${ownerImport}";`)) failures.push(`${ownerPath} must own deferred CSS import ${ownerImport}`);
+}
 for (const file of filesUnder("app")) {
   const source = fs.readFileSync(file, "utf8");
   for (const alias of legacyAliases) {
@@ -114,7 +126,15 @@ if (fs.existsSync("tests")) {
   }
 }
 const bytes = Object.fromEntries(modules.map((modulePath) => [modulePath, fs.statSync(modulePath).size]));
-console.log(JSON.stringify({ globalsRetired: !fs.existsSync("app/globals.css"), legacyAliasCount: legacyAliases.length, moduleBytes: bytes, totalMigratedBytes: Object.values(bytes).reduce((a,b)=>a+b,0) }, null, 2));
+const deferredBytes = Object.fromEntries(deferredFeatureCss.map(([cssPath]) => [cssPath, fs.statSync(cssPath).size]));
+console.log(JSON.stringify({
+  globalsRetired: !fs.existsSync("app/globals.css"),
+  legacyAliasCount: legacyAliases.length,
+  moduleBytes: bytes,
+  totalMigratedBytes: Object.values(bytes).reduce((a,b)=>a+b,0),
+  deferredFeatureBytes: deferredBytes,
+  totalDeferredFeatureBytes: Object.values(deferredBytes).reduce((a,b)=>a+b,0),
+}, null, 2));
 if (failures.length) {
   for (const failure of failures) reportFailure(failure);
   process.exit(1);

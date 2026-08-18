@@ -14,7 +14,7 @@ import {
   writeActivePracticeSession,
 } from "../app/lib/practice-session.ts";
 
-const practice = await readFile(new URL("../app/views/practice-view.tsx", import.meta.url), "utf8");
+const practice = await readFile(new URL("../app/views/practice-view.impl.tsx", import.meta.url), "utf8");
 
 class MemoryStorage {
   values = new Map();
