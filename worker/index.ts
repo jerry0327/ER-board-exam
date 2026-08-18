@@ -3,6 +3,7 @@ import { brotliDecompressSync } from "node:zlib";
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
 import { createPackedStaticHandler } from "./content-packs";
+import { handleContentPackOperator } from "./content-pack-r2.ts";
 import { serveSemanticTimingSidecar } from "./semantic-subtitle-sidecars";
 import {
   applyBuildAssetCachePolicy,
@@ -166,7 +167,8 @@ function logicalStaticContentType(pathname: string) {
   const managedPath = pathname.startsWith("/data/")
     || pathname.startsWith("/guides/")
     || pathname.startsWith("/subtitles/")
-    || pathname.startsWith("/subtitles-runtime/");
+    || pathname.startsWith("/subtitles-runtime/")
+    || pathname.startsWith("/subtitles-title-locales/");
   if (!managedPath) return null;
   if (pathname.endsWith(".json")) return "application/json; charset=utf-8";
   if (pathname.endsWith(".md")) return "text/markdown; charset=utf-8";
@@ -689,6 +691,9 @@ const worker = {
 
     const managedAudioOperator = await handleManagedAudioOperator(request, env);
     if (managedAudioOperator) return managedAudioOperator;
+
+    const contentPackOperator = await handleContentPackOperator(request, env);
+    if (contentPackOperator) return contentPackOperator;
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];

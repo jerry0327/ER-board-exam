@@ -45,3 +45,7 @@ next-env.d.ts
 /outputs/
 /work/
 __pycache__/
+
+# generated deployment compression sidecars
+/public/subtitles-title-locales/*.json.br
+/public/subtitles-title-locales/bundles/*.json.br
