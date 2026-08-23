@@ -18,8 +18,9 @@ node "${script_dir}/audit-section-title-locales-compression.mjs"
 node "${script_dir}/guard-static-index.mjs"
 node --experimental-strip-types "${script_dir}/guard-subtitle-deployment-readiness.mjs"
 
-echo "Running Vercel-targeted vinext/Nitro build..."
-NITRO_PRESET=vercel "${SITES_PROJECT_ROOT}/node_modules/.bin/vite" build
+echo "Running Vercel-targeted vinext/Nitro build with the complete logical content database expanded..."
+node "${script_dir}/with-uncompressed-static-content.mjs" -- \
+  bash -lc 'NITRO_PRESET=vercel "$SITES_PROJECT_ROOT/node_modules/.bin/vite" build && node "$SITES_PROJECT_ROOT/scripts/validate-vercel-static.mjs"'
 
 node "${script_dir}/guard-static-index.mjs"
 node "${script_dir}/audit-compressed-static.mjs"
