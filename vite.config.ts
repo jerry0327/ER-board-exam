@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import vinext from "vinext";
 import { defineConfig } from "vite";
 import hostingConfig from "./.openai/hosting.json";
@@ -11,6 +12,9 @@ const isVercelBuild =
   process.env.VERCEL === "1" ||
   Boolean(process.env.VERCEL_ENV) ||
   process.env.NITRO_PRESET === "vercel";
+const vercelCloudflareWorkersShim = fileURLToPath(
+  new URL("./build/vercel-cloudflare-workers-shim.ts", import.meta.url),
+);
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
@@ -76,6 +80,11 @@ export default defineConfig(async () => {
     const { nitro } = await import("nitro/vite");
     return {
       ...shared,
+      resolve: {
+        alias: {
+          "cloudflare:workers": vercelCloudflareWorkersShim,
+        },
+      },
       plugins: [vinext(), sites(), nitro({ preset: "vercel" })],
     };
   }
