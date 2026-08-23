@@ -7,6 +7,10 @@ const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
 
 const { d1, r2 } = hostingConfig;
+const isVercelBuild =
+  process.env.VERCEL === "1" ||
+  Boolean(process.env.VERCEL_ENV) ||
+  process.env.NITRO_PRESET === "vercel";
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
@@ -47,10 +51,7 @@ export default defineConfig(async () => {
   process.env.WRANGLER_LOG_PATH ??= ".wrangler/logs";
   process.env.MINIFLARE_REGISTRY_PATH ??= ".wrangler/registry";
 
-  // Wrangler snapshots its log path while the Cloudflare plugin is imported.
-  const { cloudflare } = await import("@cloudflare/vite-plugin");
-
-  return {
+  const shared = {
     server: {
       host: "0.0.0.0",
       allowedHosts: ["terminal.local"],
@@ -69,6 +70,21 @@ export default defineConfig(async () => {
         ...(isCodexSeatbeltSandbox ? { useFsEvents: false, usePolling: true } : {}),
       },
     },
+  };
+
+  if (isVercelBuild) {
+    const { nitro } = await import("nitro/vite");
+    return {
+      ...shared,
+      plugins: [vinext(), sites(), nitro({ preset: "vercel" })],
+    };
+  }
+
+  // Wrangler snapshots its log path while the Cloudflare plugin is imported.
+  const { cloudflare } = await import("@cloudflare/vite-plugin");
+
+  return {
+    ...shared,
     plugins: [
       vinext(),
       sites(),
