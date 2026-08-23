@@ -4,12 +4,66 @@
   "buildCommand": "npm run build:vercel",
   "rewrites": [
     {
-      "source": "/audio/snac/:path*",
-      "destination": "https://emergency-board-questions.jerry3627613.chatgpt.site/audio/snac/:path*"
+      "source": "/audio/snac/catalog.json",
+      "destination": "/audio/snac/catalog.json.brp"
     },
     {
-      "source": "/static-snac/:path*",
-      "destination": "https://emergency-board-questions.jerry3627613.chatgpt.site/static-snac/:path*"
+      "source": "/audio/snac/releases/:revision/:file.snac.json",
+      "destination": "/audio/snac/releases/:revision/:file.snac.json.brp"
+    },
+    {
+      "source": "/audio/snac/releases/:revision/:file.snac",
+      "destination": "/audio/snac/releases/:revision/:file.snac.brp"
+    },
+    {
+      "source": "/static-snac/ort-wasm-simd-threaded.asyncify.wasm",
+      "destination": "/static-snac/ort-wasm-simd-threaded.asyncify.wasm.brp"
+    },
+    {
+      "source": "/static-snac/model/:part",
+      "destination": "/static-snac/model/:part.brp"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/audio/snac/catalog.json",
+      "headers": [
+        { "key": "Content-Encoding", "value": "br" },
+        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
+        { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/audio/snac/releases/:revision/:file.snac.json",
+      "headers": [
+        { "key": "Content-Encoding", "value": "br" },
+        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/audio/snac/releases/:revision/:file.snac",
+      "headers": [
+        { "key": "Content-Encoding", "value": "br" },
+        { "key": "Content-Type", "value": "application/octet-stream" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/static-snac/ort-wasm-simd-threaded.asyncify.wasm",
+      "headers": [
+        { "key": "Content-Encoding", "value": "br" },
+        { "key": "Content-Type", "value": "application/wasm" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/static-snac/model/:part",
+      "headers": [
+        { "key": "Content-Encoding", "value": "br" },
+        { "key": "Content-Type", "value": "application/octet-stream" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
     }
   ]
 }
