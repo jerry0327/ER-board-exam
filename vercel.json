@@ -1,5 +1,15 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "npm run build:vercel"
+  "buildCommand": "npm run build:vercel",
+  "rewrites": [
+    {
+      "source": "/audio/snac/:path*",
+      "destination": "https://emergency-board-questions.jerry3627613.chatgpt.site/audio/snac/:path*"
+    },
+    {
+      "source": "/static-snac/:path*",
+      "destination": "https://emergency-board-questions.jerry3627613.chatgpt.site/static-snac/:path*"
+    }
+  ]
 }
